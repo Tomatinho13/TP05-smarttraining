@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Rafaela
  */
-@Path("servicos")
+@Path("")
 public class TesteWS {
     
     @GET
