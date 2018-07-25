@@ -21,3 +21,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/Camada de Controlador/SmartTraining - Controller/nbproject/private/
+/Camada de Modelo/SmartTraining - Modelo/nbproject/private/
+/Camada de Modelo/SmartTraining - Modelo/build/
