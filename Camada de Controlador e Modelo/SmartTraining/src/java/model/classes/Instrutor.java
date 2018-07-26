@@ -1,4 +1,5 @@
 package model.classes;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ public class Instrutor extends Usuario {
         
     }
 
-    public Instrutor(String codCREF, String codCpf, String nomUsuario, char idtTipoUsuario, String txtSenha, String desEmail, Date datNascimento) {
+    public Instrutor(String codCREF, String codCpf, String nomUsuario, char idtTipoUsuario, String txtSenha, String desEmail, LocalDate datNascimento) {
         super(codCpf, nomUsuario, idtTipoUsuario, txtSenha, desEmail, datNascimento);
         this.codCREF = codCREF;
     } 

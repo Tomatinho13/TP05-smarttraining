@@ -1,4 +1,5 @@
 package model.classes;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,14 +13,14 @@ public class Usuario {
     protected char idtTipoUsuario;
     protected String txtSenha;
     protected String desEmail;
-    protected Date datNascimento;
+    protected LocalDate datNascimento;
 
     public Usuario(){
             
     }
     
     public Usuario(String codCpf, String nomUsuario, char idtTipoUsuario, 
-                   String txtSenha, String desEmail, Date datNascimento){
+                   String txtSenha, String desEmail, LocalDate datNascimento){
         this.codCpf = codCpf;
         this.nomUsuario = nomUsuario;
         this.idtTipoUsuario = idtTipoUsuario;
@@ -68,11 +69,11 @@ public class Usuario {
         return desEmail;
     }
 
-    public void setDatNascimento(Date datNascimento) {
+    public void setDatNascimento(LocalDate datNascimento) {
         this.datNascimento = datNascimento;
     }
 
-    public Date getDatNascimento() {
+    public LocalDate getDatNascimento() {
         return datNascimento;
     }   
 }
