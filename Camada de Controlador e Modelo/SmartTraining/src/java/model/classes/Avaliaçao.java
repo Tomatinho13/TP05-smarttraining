@@ -1,6 +1,5 @@
 package model.classes;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -9,7 +8,7 @@ import java.util.Date;
 
 public class Avaliaçao {
     private String codCpfAluno;
-    private Date datAvaliaçao;
+    private LocalDate datAvaliaçao;
     private String codCpfInstrutor;
     private boolean idtRecencia;
     private double peso;
@@ -33,7 +32,7 @@ public class Avaliaçao {
 
     }
     
-    public Avaliaçao(String codCpfAluno, Date datAvaliaçao, String codCpfInstrutor,
+    public Avaliaçao(String codCpfAluno, LocalDate datAvaliaçao, String codCpfInstrutor,
                      boolean idtRecencia, double peso, double qtdGordura){
        this.codCpfAluno = codCpfAluno;
        this.datAvaliaçao = datAvaliaçao;
@@ -43,7 +42,7 @@ public class Avaliaçao {
        this.qtdGordura = qtdGordura;   
     }
 
-    public Avaliaçao(String codCpfAluno, Date datAvaliaçao, String codCpfInstrutor, boolean idtRecencia, double peso, double qtdGordura, double tamanhoPescoço, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double tamanhoQuadril, double tamanhoBraçoEsquerdo, double tamanhoBraçoDireito, double tamanhoAntebraçoEsquerdo, double tamanhoAntebraçoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita) {
+    public Avaliaçao(String codCpfAluno, LocalDate datAvaliaçao, String codCpfInstrutor, boolean idtRecencia, double peso, double qtdGordura, double tamanhoPescoço, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double tamanhoQuadril, double tamanhoBraçoEsquerdo, double tamanhoBraçoDireito, double tamanhoAntebraçoEsquerdo, double tamanhoAntebraçoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita) {
         this.codCpfAluno = codCpfAluno;
         this.datAvaliaçao = datAvaliaçao;
         this.codCpfInstrutor = codCpfInstrutor;
@@ -74,11 +73,11 @@ public class Avaliaçao {
         this.codCpfAluno = codCpfAluno;
     }
 
-    public Date getDatAvaliaçao() {
+    public LocalDate getDatAvaliaçao() {
         return datAvaliaçao;
     }
 
-    public void setDatAvaliaçao(Date datAvaliaçao) {
+    public void setDatAvaliaçao(LocalDate datAvaliaçao) {
         this.datAvaliaçao = datAvaliaçao;
     }
 

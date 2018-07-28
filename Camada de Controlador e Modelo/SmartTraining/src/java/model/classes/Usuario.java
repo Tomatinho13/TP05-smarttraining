@@ -1,6 +1,5 @@
 package model.classes;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  *
