@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="model.classes.Avaliaçao" %>
+<%@page import="model.classes.Avaliacao" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,14 +30,16 @@
             <ul>
                 <%
                     List listaAvaliacoes = (List) request.getAttribute("avaliacoes");
-                    Avaliaçao avaliacao;
+                    Avaliacao avaliacao = new Avaliacao();
 
                     for (int i = 0; i < listaAvaliacoes.size(); i++) {
-                        avaliacao = new Avaliaçao();
                         avaliacao = listaAvaliacoes.get(i);
                 %>
                 <li>
-                    Data: <%= avaliacao.getDatAvaliaçao() %>
+                    Data: <%= avaliacao.getDatAvaliacao() %>
+                    <jsp:forward page="MostrarAvaliacao.jsp">
+                        <jsp:param name="avaliacao" value="<%= avaliacao %>" />
+                    </jsp:forward>
                 </li>
                 <%
                     }

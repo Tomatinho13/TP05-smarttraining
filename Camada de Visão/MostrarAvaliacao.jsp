@@ -4,7 +4,7 @@
     Author     : Felipe
 --%>
 
-<%@page import="model.classes.Avaliaçao" %>
+<%@page import="model.classes.Avaliacao" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -38,9 +38,10 @@
                     <td>Tamanho da panturrilha esquerda:</td>
                     <td>Tamanho da panturrilha direita:</td>
                 </tr>
-                <%-- Inicializar Avaliacao --%>
+
                 <%
-                  Avaliaçao avaliacao;
+                    Avaliacao avaliacao = new Avaliacao();
+                    avaliacao = request.getParameter("avaliacao");
                 %>
 
                 <tr>
@@ -63,7 +64,9 @@
                 </tr>
             </table>
 
-            <button type="button" name="voltar">Voltar</button>
+            <form action="ListaAvaliacoes.jsp">
+                <input type="submit" name="Voltar" value="Voltar">
+            </form>
         </div>
     </body>
 </html>
