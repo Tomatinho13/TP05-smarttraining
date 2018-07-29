@@ -6,59 +6,59 @@ import java.time.LocalDate;
  * @author Tomatinho
  */
 
-public class Avaliaçao {
+public class Avaliacao {
     private String codCpfAluno;
-    private LocalDate datAvaliaçao;
+    private LocalDate datAvaliacao;
     private String codCpfInstrutor;
     private boolean idtRecencia;
     private double peso;
-    private double qtdGordura;
-    private double tamanhoPescoço;
+    private double percentualGordura;
+    private double massaGorda;
+    private double tamanhoPescoco;
     private double tamanhoOmbro;
     private double tamanhoTorax;
     private double tamanhoAbdomen;
     private double tamanhoCintura;
-    private double tamanhoQuadril;
-    private double tamanhoBraçoEsquerdo;
-    private double tamanhoBraçoDireito;
-    private double tamanhoAntebraçoEsquerdo;
-    private double tamanhoAntebraçoDireito;
+    private double tamanhoBracoEsquerdo;
+    private double tamanhoBracoDireito;
+    private double tamanhoAntebracoEsquerdo;
+    private double tamanhoAntebracoDireito;
     private double tamanhoCoxaEsquerda;
     private double tamanhoCoxaDireita;
     private double tamanhoPanturrilhaEsquerda;
     private double tamanhoPanturrilhaDireita;
     
-    public Avaliaçao(){
+    public Avaliacao(){
 
     }
     
-    public Avaliaçao(String codCpfAluno, LocalDate datAvaliaçao, String codCpfInstrutor,
-                     boolean idtRecencia, double peso, double qtdGordura){
+    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor,
+                     boolean idtRecencia, double peso, double percentualGordura){
        this.codCpfAluno = codCpfAluno;
-       this.datAvaliaçao = datAvaliaçao;
+       this.datAvaliacao = datAvaliacao;
        this.codCpfInstrutor = codCpfInstrutor;
        this.idtRecencia = idtRecencia;
        this.peso = peso;
-       this.qtdGordura = qtdGordura;   
+       this.percentualGordura = percentualGordura;   
     }
 
-    public Avaliaçao(String codCpfAluno, LocalDate datAvaliaçao, String codCpfInstrutor, boolean idtRecencia, double peso, double qtdGordura, double tamanhoPescoço, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double tamanhoQuadril, double tamanhoBraçoEsquerdo, double tamanhoBraçoDireito, double tamanhoAntebraçoEsquerdo, double tamanhoAntebraçoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita) {
+    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double massaGorda, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita) {
         this.codCpfAluno = codCpfAluno;
-        this.datAvaliaçao = datAvaliaçao;
+        this.datAvaliacao = datAvaliacao;
         this.codCpfInstrutor = codCpfInstrutor;
         this.idtRecencia = idtRecencia;
         this.peso = peso;
-        this.qtdGordura = qtdGordura;
-        this.tamanhoPescoço = tamanhoPescoço;
+        this.percentualGordura = percentualGordura;
+        this.tamanhoPescoco = tamanhoPescoco;
         this.tamanhoOmbro = tamanhoOmbro;
         this.tamanhoTorax = tamanhoTorax;
         this.tamanhoAbdomen = tamanhoAbdomen;
         this.tamanhoCintura = tamanhoCintura;
-        this.tamanhoQuadril = tamanhoQuadril;
-        this.tamanhoBraçoEsquerdo = tamanhoBraçoEsquerdo;
-        this.tamanhoBraçoDireito = tamanhoBraçoDireito;
-        this.tamanhoAntebraçoEsquerdo = tamanhoAntebraçoEsquerdo;
-        this.tamanhoAntebraçoDireito = tamanhoAntebraçoDireito;
+        this.massaGorda = massaGorda;
+        this.tamanhoBracoEsquerdo = tamanhoBracoEsquerdo;
+        this.tamanhoBracoDireito = tamanhoBracoDireito;
+        this.tamanhoAntebracoEsquerdo = tamanhoAntebracoEsquerdo;
+        this.tamanhoAntebracoDireito = tamanhoAntebracoDireito;
         this.tamanhoCoxaEsquerda = tamanhoCoxaEsquerda;
         this.tamanhoCoxaDireita = tamanhoCoxaDireita;
         this.tamanhoPanturrilhaEsquerda = tamanhoPanturrilhaEsquerda;
@@ -73,12 +73,12 @@ public class Avaliaçao {
         this.codCpfAluno = codCpfAluno;
     }
 
-    public LocalDate getDatAvaliaçao() {
-        return datAvaliaçao;
+    public LocalDate getDatAvaliacao() {
+        return datAvaliacao;
     }
 
-    public void setDatAvaliaçao(LocalDate datAvaliaçao) {
-        this.datAvaliaçao = datAvaliaçao;
+    public void setDatAvaliacao(LocalDate datAvaliacao) {
+        this.datAvaliacao = datAvaliacao;
     }
 
     public String getCodCpfInstrutor() {
@@ -105,20 +105,20 @@ public class Avaliaçao {
         this.peso = peso;
     }
 
-    public double getQtdGordura() {
-        return qtdGordura;
+    public double getPercentualGordura() {
+        return percentualGordura;
     }
 
-    public void setQtdGordura(double qtdGordura) {
-        this.qtdGordura = qtdGordura;
+    public void setPercentualGordura(double percentualGordura) {
+        this.percentualGordura = percentualGordura;
     }
 
-    public double getTamanhoPescoço() {
-        return tamanhoPescoço;
+    public double getTamanhoPescoco() {
+        return tamanhoPescoco;
     }
 
-    public void setTamanhoPescoço(double tamanhoPescoço) {
-        this.tamanhoPescoço = tamanhoPescoço;
+    public void setTamanhoPescoco(double tamanhoPescoco) {
+        this.tamanhoPescoco = tamanhoPescoco;
     }
 
     public double getTamanhoOmbro() {
@@ -153,44 +153,44 @@ public class Avaliaçao {
         this.tamanhoCintura = tamanhoCintura;
     }
 
-    public double getTamanhoQuadril() {
-        return tamanhoQuadril;
+    public double getMassaGorda() {
+        return massaGorda;
     }
 
-    public void setTamanhoQuadril(double tamanhoQuadril) {
-        this.tamanhoQuadril = tamanhoQuadril;
+    public void setMassaGorda(double massaGorda) {
+        this.massaGorda = massaGorda;
     }
 
-    public double getTamanhoBraçoEsquerdo() {
-        return tamanhoBraçoEsquerdo;
+    public double getTamanhoBracoEsquerdo() {
+        return tamanhoBracoEsquerdo;
     }
 
-    public void setTamanhoBraçoEsquerdo(double tamanhoBraçoEsquerdo) {
-        this.tamanhoBraçoEsquerdo = tamanhoBraçoEsquerdo;
+    public void setTamanhoBracoEsquerdo(double tamanhoBracoEsquerdo) {
+        this.tamanhoBracoEsquerdo = tamanhoBracoEsquerdo;
     }
 
-    public double getTamanhoBraçoDireito() {
-        return tamanhoBraçoDireito;
+    public double getTamanhoBracoDireito() {
+        return tamanhoBracoDireito;
     }
 
-    public void setTamanhoBraçoDireito(double tamanhoBraçoDireito) {
-        this.tamanhoBraçoDireito = tamanhoBraçoDireito;
+    public void setTamanhoBracoDireito(double tamanhoBracoDireito) {
+        this.tamanhoBracoDireito = tamanhoBracoDireito;
     }
 
-    public double getTamanhoAntebraçoEsquerdo() {
-        return tamanhoAntebraçoEsquerdo;
+    public double getTamanhoAntebracoEsquerdo() {
+        return tamanhoAntebracoEsquerdo;
     }
 
-    public void setTamanhoAntebraçoEsquerdo(double tamanhoAntebraçoEsquerdo) {
-        this.tamanhoAntebraçoEsquerdo = tamanhoAntebraçoEsquerdo;
+    public void setTamanhoAntebracoEsquerdo(double tamanhoAntebracoEsquerdo) {
+        this.tamanhoAntebracoEsquerdo = tamanhoAntebracoEsquerdo;
     }
 
-    public double getTamanhoAntebraçoDireito() {
-        return tamanhoAntebraçoDireito;
+    public double getTamanhoAntebracoDireito() {
+        return tamanhoAntebracoDireito;
     }
 
-    public void setTamanhoAntebraçoDireito(double tamanhoAntebraçoDireito) {
-        this.tamanhoAntebraçoDireito = tamanhoAntebraçoDireito;
+    public void setTamanhoAntebracoDireito(double tamanhoAntebracoDireito) {
+        this.tamanhoAntebracoDireito = tamanhoAntebracoDireito;
     }
 
     public double getTamanhoCoxaEsquerda() {

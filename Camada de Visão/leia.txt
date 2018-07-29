@@ -1,1 +1,0 @@
-Só adicionei esse arquivo para conseguir commitar a pasta. Assim que criar o projeto, Felipe (provavelmente né), pode excluir esse txt.
