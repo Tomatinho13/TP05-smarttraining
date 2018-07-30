@@ -1,86 +1,67 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.classes.Instrutor;
+import model.dao.InstrutorDao;
 
-/**
- *
- * @author melog
- */
 public class InstrutorServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet InstrutorServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet InstrutorServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        InstrutorDao instrutorDao = new InstrutorDao();
+        Gson gson = new Gson();
+        String cpf = request.getParameter("cpf");
+        try {
+            if(instrutorDao.getInstrutor(cpf)==null){
+                response.sendError(404);
+            }
+            else{
+                response.setContentType("application/json");
+                response.getWriter().write(gson.toJson(instrutorDao.getInstrutor(cpf)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InstrutorServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        InstrutorDao instrutorDao = new InstrutorDao();
+        Gson gson = new Gson();
+        try {
+            instrutorDao.postInstrutor(gson.fromJson(request.getReader(), Instrutor.class));
+        } catch (SQLException ex) {
+            Logger.getLogger(InstrutorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.setStatus(200);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        InstrutorDao instrutorDao = new InstrutorDao();
+        Gson gson = new Gson();
+        try {
+            instrutorDao.putInstrutor(gson.fromJson(request.getReader(), Instrutor.class));
+        } catch (SQLException ex) {
+            Logger.getLogger(InstrutorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.setStatus(200);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        InstrutorDao instrutorDao = new InstrutorDao();
+        Gson gson = new Gson();
+        instrutorDao.deleteInstrutor(gson.fromJson(request.getReader(), Instrutor.class));
+        response.setStatus(200);
+    }
 
 }

@@ -60,11 +60,7 @@ public class AlunoServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlunoDao alunoDao = new AlunoDao();
         Gson gson = new Gson();
-        try {
-            alunoDao.deleteAluno(gson.fromJson(request.getReader(), Usuario.class));
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        alunoDao.deleteAluno(gson.fromJson(request.getReader(), Usuario.class));
         response.setStatus(200);
     }
 

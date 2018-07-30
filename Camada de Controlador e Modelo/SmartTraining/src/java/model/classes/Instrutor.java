@@ -7,22 +7,22 @@ import java.time.LocalDate;
  */
 
 public class Instrutor extends Usuario {
-    private String codCREF;
+    private String nroCref;
 
     public Instrutor(){
         
     }
 
-    public Instrutor(String codCREF, String codCpf, String nomUsuario, char idtTipoUsuario, String txtSenha, String desEmail, LocalDate datNascimento) {
+    public Instrutor(String nroCref, String codCpf, String nomUsuario, char idtTipoUsuario, String txtSenha, String desEmail, LocalDate datNascimento) {
         super(codCpf, nomUsuario, idtTipoUsuario, txtSenha, desEmail, datNascimento);
-        this.codCREF = codCREF;
+        this.nroCref = nroCref;
     } 
     
     public void setCodCREF(String codCREF) {
-        this.codCREF = codCREF;
+        this.nroCref = codCREF;
     }
 
     public String getCodCREF() {
-        return codCREF;
+        return nroCref;
     }
 }
