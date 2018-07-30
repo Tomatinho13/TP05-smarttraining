@@ -50,6 +50,14 @@ public class AlunoDao {
         stmt.executeQuery(sql);
         conn.close();
     }
+
+    public void deleteAluno(Usuario fromJson) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void putAluno(Usuario fromJson) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

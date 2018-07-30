@@ -8,7 +8,6 @@ package controller.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author melog
  */
-@WebServlet(name = "ServletTeste", urlPatterns = {"/ServletTeste"})
-public class ServletTeste extends HttpServlet {
+public class MusculoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +35,10 @@ public class ServletTeste extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletTeste</title>");            
+            out.println("<title>Servlet MusculoServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletTeste at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet MusculoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
