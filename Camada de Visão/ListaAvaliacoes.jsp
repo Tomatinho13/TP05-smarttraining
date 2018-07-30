@@ -26,8 +26,8 @@
             <br>
             <h2>Lista de Avaliações:</h2>
             <br>
-            <%-- Colocar o CSS aqui ainda --%>
-            <ul>
+
+            <ul class="list-group">
                 <%
                     List listaAvaliacoes = (List) request.getAttribute("avaliacoes");
                     Avaliacao avaliacao = new Avaliacao();
@@ -35,7 +35,7 @@
                     for (int i = 0; i < listaAvaliacoes.size(); i++) {
                         avaliacao = listaAvaliacoes.get(i);
                 %>
-                <li>
+                <li class="list-group-item">
                     Data: <%= avaliacao.getDatAvaliacao() %>
                     <jsp:forward page="MostrarAvaliacao.jsp">
                         <jsp:param name="avaliacao" value="<%= avaliacao %>" />

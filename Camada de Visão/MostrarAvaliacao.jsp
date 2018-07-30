@@ -11,6 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <title>Avaliação</title>
     </head>
     <body>
@@ -19,7 +20,7 @@
             <h2>Avaliação</h2>
             <br>
 
-            <table>
+            <table class="table table-hover">
                 <tr>
                     <td>Peso:</td>
                     <td>Percentual de gordura:</td>
