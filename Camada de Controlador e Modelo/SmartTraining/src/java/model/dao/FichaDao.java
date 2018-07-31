@@ -3,14 +3,13 @@ package model.dao;
 import com.google.gson.Gson;
 import java.sql.*;
 import model.classes.Ficha;
-import model.classes.Ficha;
 
 
 public class FichaDao {
     private Ficha ficha;
-    private Connection conn;
+    private final Connection conn;
     private String sql;
-    private Gson gson;
+    private final Gson gson;
     
     public FichaDao(){
         conn = ConectaBd.conecta();
@@ -42,7 +41,7 @@ public class FichaDao {
     
     public void postFicha(Ficha ficha) throws SQLException{
         this.ficha = ficha;
-        sql = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
+        sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, ficha.getCodCpfAluno());
         stmt.setString(2, String.valueOf(ficha.getNroFicha()));
@@ -56,7 +55,6 @@ public class FichaDao {
     }
 
     public void deleteFicha(String cpf, int nroFicha) throws SQLException {
-        this.ficha = ficha;
         sql = "DELETE FROM \"Ficha\" "
                     + "WHERE cod_cpf='"+cpf+"' AND nro_ficha='"+nroFicha+"';" +
               "DELETE FROM \"Treino\" "
@@ -71,7 +69,7 @@ public class FichaDao {
         conn.close();
     }
 
-    public void putFicha(String cpf, int nroFicha) throws SQLException {
+    public void putFicha(Ficha ficha) throws SQLException {
         this.ficha = ficha;
         sql = "UPDATE \"Ficha\" "
                 + "SET cod_cpf_instrutor=?, "

@@ -7,9 +7,9 @@ import model.classes.Usuario;
 
 public class AlunoDao {
     private Usuario aluno;
-    private Connection conn;
+    private final Connection conn;
     private String sql;
-    private Gson gson;
+    private final Gson gson;
     
     public AlunoDao(){
         conn = ConectaBd.conecta();
@@ -41,7 +41,7 @@ public class AlunoDao {
     
     public void postAluno(Usuario aluno) throws SQLException{
         this.aluno = aluno;
-        sql = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
+        sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, aluno.getCodCpf());
         stmt.setString(2, aluno.getNomUsuario());
@@ -56,19 +56,19 @@ public class AlunoDao {
 
     public void deleteAluno(String cpf) throws SQLException {
         sql = "DELETE FROM \"Usuario\" "
-                    + "WHERE cod_cpf='"+cpf+"';\n" +
+                    + "WHERE cod_cpf='"+cpf+"';" +
               "DELETE FROM \"Aluno\" "
-                    + "WHERE cod_cpf='"+cpf+"';\n" +
+                    + "WHERE cod_cpf='"+cpf+"';" +
               "DELETE FROM \"Ficha\" "
-                    + "WHERE cod_cpf='"+cpf+"';\n" +
+                    + "WHERE cod_cpf='"+cpf+"';" +
               "DELETE FROM \"Treino\" "
-                    + "WHERE cod_cpf='"+cpf+"';\n" +
+                    + "WHERE cod_cpf='"+cpf+"';" +
               "DELETE FROM \"TreinoExercicio\" "
-                    + "WHERE cod_cpf='"+cpf+"';\n" +
+                    + "WHERE cod_cpf='"+cpf+"';" +
               "DELETE FROM \"DiaTreino\" "
-                    + "WHERE cod_cpf='"+cpf+"';\n" +
+                    + "WHERE cod_cpf='"+cpf+"';" +
               "DELETE FROM \"Avaliacao\" "
-                    + "WHERE cod_cpf='"+cpf+"';\n" +
+                    + "WHERE cod_cpf='"+cpf+"';" +
               "DELETE FROM \"ObjetivoAvaliacao\" "
                     + "WHERE cod_cpf='"+cpf+"';";
         

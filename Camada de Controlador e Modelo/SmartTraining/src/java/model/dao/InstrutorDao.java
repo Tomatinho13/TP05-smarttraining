@@ -7,9 +7,9 @@ import model.classes.Instrutor;
 
 public class InstrutorDao {
     private Instrutor instrutor;
-    private Connection conn;
+    private final Connection conn;
     private String sql;
-    private Gson gson;
+    private final Gson gson;
     
     public InstrutorDao(){
         conn = ConectaBd.conecta();

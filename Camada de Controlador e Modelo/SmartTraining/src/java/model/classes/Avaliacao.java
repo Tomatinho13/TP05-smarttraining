@@ -13,12 +13,12 @@ public class Avaliacao {
     private boolean idtRecencia;
     private double peso;
     private double percentualGordura;
-    private double massaGorda;
     private double tamanhoPescoco;
     private double tamanhoOmbro;
     private double tamanhoTorax;
     private double tamanhoAbdomen;
     private double tamanhoCintura;
+    private double tamanhoQuadril;
     private double tamanhoBracoEsquerdo;
     private double tamanhoBracoDireito;
     private double tamanhoAntebracoEsquerdo;
@@ -42,7 +42,7 @@ public class Avaliacao {
        this.percentualGordura = percentualGordura;   
     }
 
-    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double massaGorda, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita) {
+    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double tamanhoQuadril, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita) {
         this.codCpfAluno = codCpfAluno;
         this.datAvaliacao = datAvaliacao;
         this.codCpfInstrutor = codCpfInstrutor;
@@ -54,7 +54,7 @@ public class Avaliacao {
         this.tamanhoTorax = tamanhoTorax;
         this.tamanhoAbdomen = tamanhoAbdomen;
         this.tamanhoCintura = tamanhoCintura;
-        this.massaGorda = massaGorda;
+        this.tamanhoQuadril = tamanhoQuadril;
         this.tamanhoBracoEsquerdo = tamanhoBracoEsquerdo;
         this.tamanhoBracoDireito = tamanhoBracoDireito;
         this.tamanhoAntebracoEsquerdo = tamanhoAntebracoEsquerdo;
@@ -89,7 +89,7 @@ public class Avaliacao {
         this.codCpfInstrutor = codCpfInstrutor;
     }
 
-    public boolean isIdtRecencia() {
+    public boolean getIdtRecencia() {
         return idtRecencia;
     }
 
@@ -153,12 +153,12 @@ public class Avaliacao {
         this.tamanhoCintura = tamanhoCintura;
     }
 
-    public double getMassaGorda() {
-        return massaGorda;
+    public double getTamanhoQuadril() {
+        return tamanhoQuadril;
     }
 
-    public void setMassaGorda(double massaGorda) {
-        this.massaGorda = massaGorda;
+    public void setTamanhoQuadril(double tamanhoQuadril) {
+        this.tamanhoQuadril = tamanhoQuadril;
     }
 
     public double getTamanhoBracoEsquerdo() {
