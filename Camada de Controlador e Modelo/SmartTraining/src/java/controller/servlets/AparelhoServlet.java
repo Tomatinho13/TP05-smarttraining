@@ -66,11 +66,7 @@ public class AparelhoServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AparelhoDao aparelhoDao = new AparelhoDao();
         Gson gson = new Gson();
-        try {
-            aparelhoDao.deleteAparelho(gson.fromJson(request.getReader(), Aparelho.class));
-        } catch (SQLException ex) {
-            Logger.getLogger(AparelhoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        aparelhoDao.deleteAparelho(gson.fromJson(request.getReader(), Aparelho.class));
         response.setStatus(200);
     }
 

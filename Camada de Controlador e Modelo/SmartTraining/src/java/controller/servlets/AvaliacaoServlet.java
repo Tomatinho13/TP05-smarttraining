@@ -3,6 +3,7 @@ package controller.servlets;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,11 +67,9 @@ public class AvaliacaoServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
         Gson gson = new Gson();
-        try {
-            avaliacaoDao.deleteAvaliacao(gson.fromJson(request.getReader(), Avaliacao.class));
-        } catch (SQLException ex) {
-            Logger.getLogger(AvaliacaoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String numero = request.getParameter("nroAvaliacao");
+        
+        avaliacaoDao.deleteAvaliacao(gson.fromJson(request.getReader(), Avaliacao.class), numero);
         response.setStatus(200);
     }
 
