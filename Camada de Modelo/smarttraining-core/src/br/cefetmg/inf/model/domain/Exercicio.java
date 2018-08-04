@@ -7,16 +7,16 @@ package br.cefetmg.inf.model.domain;
 
 public class Exercicio {
     private int codExercicio;
-    private String descriçaoExercicio;
+    private String descricaoExercicio;
     private String nomeExercicio;
 
     public Exercicio() {
         
     }
 
-    public Exercicio(int codExercicio, String descriçaoExercicio, String nomeExercicio) {
+    public Exercicio(int codExercicio, String descricaoExercicio, String nomeExercicio) {
         this.codExercicio = codExercicio;
-        this.descriçaoExercicio = descriçaoExercicio;
+        this.descricaoExercicio = descricaoExercicio;
         this.nomeExercicio = nomeExercicio;
     }
 
@@ -28,12 +28,12 @@ public class Exercicio {
         this.codExercicio = codExercicio;
     }
 
-    public String getDescriçaoExercicio() {
-        return descriçaoExercicio;
+    public String getDescricaoExercicio() {
+        return descricaoExercicio;
     }
 
-    public void setDescriçaoExercicio(String descriçaoExercicio) {
-        this.descriçaoExercicio = descriçaoExercicio;
+    public void setDescricaoExercicio(String descricaoExercicio) {
+        this.descricaoExercicio = descricaoExercicio;
     }
 
     public String getNomeExercicio() {

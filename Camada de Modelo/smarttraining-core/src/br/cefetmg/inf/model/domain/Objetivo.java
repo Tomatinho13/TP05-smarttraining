@@ -13,10 +13,10 @@ public class Objetivo {
     public Objetivo() {
     }
 
-    public Objetivo(int nroSequenciaObjetivo, String nome, String descriçao) {
+    public Objetivo(int nroSequenciaObjetivo, String nome, String descricao) {
         this.codObjetivo = nroSequenciaObjetivo;
         this.nomObjetivo = nome;
-        this.desObjetivo = descriçao;
+        this.desObjetivo = descricao;
     }
 
     public int getCodObjetivo() {

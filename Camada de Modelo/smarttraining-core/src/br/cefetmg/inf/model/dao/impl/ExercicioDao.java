@@ -80,7 +80,7 @@ public class ExercicioDao implements IExercicioDao {
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, exercicio.getNomeExercicio());
-        stmt.setString(2, exercicio.getDescriçaoExercicio());
+        stmt.setString(2, exercicio.getDescricaoExercicio());
         stmt.setString(3, exercicio.getNomeExercicio());
         stmt.setString(4, seqMusculo);
 
@@ -96,7 +96,7 @@ public class ExercicioDao implements IExercicioDao {
                 + "WHERE cod_exercicio = '" + exercicio.getCodExercicio() + "'";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, exercicio.getNomeExercicio());
-        stmt.setString(2, exercicio.getDescriçaoExercicio());
+        stmt.setString(2, exercicio.getDescricaoExercicio());
 
         stmt.executeQuery(sql);
 

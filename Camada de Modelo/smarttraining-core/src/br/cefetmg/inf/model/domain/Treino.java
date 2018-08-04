@@ -11,17 +11,17 @@ public class Treino {
     private String codCpfAluno;
     private int nroFicha;
     private int nroTreino;
-    private String descriçaoTreino;
+    private String descricaoTreino;
     private ArrayList<Atividade> atividades;
 
     public Treino() {
     }
 
-    public Treino(String codCpfAluno, int nroFicha, int nroTreino, String descriçaoTreino, ArrayList<Atividade> atividades) {
+    public Treino(String codCpfAluno, int nroFicha, int nroTreino, String descricaoTreino, ArrayList<Atividade> atividades) {
         this.codCpfAluno = codCpfAluno;
         this.nroFicha = nroFicha;
         this.nroTreino = nroTreino;
-        this.descriçaoTreino = descriçaoTreino;
+        this.descricaoTreino = descricaoTreino;
         this.atividades = new ArrayList<>(atividades);
     }
 
@@ -49,12 +49,12 @@ public class Treino {
         this.nroTreino = nroTreino;
     }
 
-    public String getDescriçaoTreino() {
-        return descriçaoTreino;
+    public String getDescricaoTreino() {
+        return descricaoTreino;
     }
 
-    public void setDescriçaoTreino(String descriçaoTreino) {
-        this.descriçaoTreino = descriçaoTreino;
+    public void setDescricaoTreino(String descricaoTreino) {
+        this.descricaoTreino = descricaoTreino;
     }
 
     public ArrayList<Atividade> getAtividades() {

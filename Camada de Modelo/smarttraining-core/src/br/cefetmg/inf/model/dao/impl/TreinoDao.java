@@ -102,7 +102,7 @@ public class TreinoDao implements ITreinoDao {
         stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Ficha\" WHERE \"cod_cpf\"='" + treino.getCodCpfAluno() + "'");
         stmt.setString(2, "SELECT \"nro_ficha\" FROM \"Ficha\" WHERE \"nro_ficha\"='" + treino.getNroFicha() + "'");
         stmt.setString(3, String.valueOf(treino.getNroTreino()));
-        stmt.setString(4, treino.getDescriçaoTreino());
+        stmt.setString(4, treino.getDescricaoTreino());
 
         stmt.executeQuery(sql);
 
@@ -114,7 +114,7 @@ public class TreinoDao implements ITreinoDao {
                 + "SET des_treino=?";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, treino.getDescriçaoTreino());
+        stmt.setString(1, treino.getDescricaoTreino());
 
         stmt.executeQuery(sql);
 
