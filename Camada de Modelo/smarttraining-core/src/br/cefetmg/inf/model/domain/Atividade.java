@@ -6,51 +6,80 @@ package br.cefetmg.inf.model.domain;
  */
 
 public class Atividade {
-    private Exercicio exercicio;
-    private int peso;
-    private int series;
-    private int repeticoes;
+    private AparelhoExercicio aparelhoExercicio;
+    private String codCpf;
+    private int nroFicha;
+    private int nroTreino;
+    private int qtdPeso;
+    private int nroSeries;
+    private int nroRepeticoes;
 
     public Atividade() {
     }
 
-    public Atividade(Exercicio exercicio, int peso, int series, int repeticoes) {
-        this.exercicio = exercicio;
-        this.peso = peso;
-        this.series = series;
-        this.repeticoes = repeticoes;
+    public Atividade(AparelhoExercicio aparelhoExercicio, String cpf, int nroFicha, int nroTreino, int peso, int series, int repeticoes) {
+        this.aparelhoExercicio = aparelhoExercicio;
+        this.codCpf = cpf;
+        this.nroFicha = nroFicha;
+        this.nroTreino = nroTreino;
+        this.qtdPeso = peso;
+        this.nroSeries = series;
+        this.nroRepeticoes = repeticoes;
     }
 
-    public Exercicio getExercicio() {
-        return exercicio;
+    public AparelhoExercicio getAparelhoExercicio() {
+        return aparelhoExercicio;
     }
 
-    public void setExercicio(Exercicio exercicio) {
-        this.exercicio = exercicio;
+    public void setAparelhoExercicio(AparelhoExercicio aparelhoExercicio) {
+        this.aparelhoExercicio = aparelhoExercicio;
     }
 
-    public int getPeso() {
-        return peso;
+    public String getCodCpf() {
+        return codCpf;
     }
 
-    public void setPeso(int peso) {
-        this.peso = peso;
+    public void setCodCpf(String codCpf) {
+        this.codCpf = codCpf;
     }
 
-    public int getSeries() {
-        return series;
+    public int getNroFicha() {
+        return nroFicha;
     }
 
-    public void setSeries(int series) {
-        this.series = series;
+    public void setNroFicha(int nroFicha) {
+        this.nroFicha = nroFicha;
     }
 
-    public int getRepeticoes() {
-        return repeticoes;
+    public int getNroTreino() {
+        return nroTreino;
     }
 
-    public void setRepeticoes(int repeticoes) {
-        this.repeticoes = repeticoes;
+    public void setNroTreino(int nroTreino) {
+        this.nroTreino = nroTreino;
     }
-    
+
+    public int getQtdPeso() {
+        return qtdPeso;
+    }
+
+    public void setQtdPeso(int qtdPeso) {
+        this.qtdPeso = qtdPeso;
+    }
+
+    public int getNroSeries() {
+        return nroSeries;
+    }
+
+    public void setNroSeries(int nroSeries) {
+        this.nroSeries = nroSeries;
+    }
+
+    public int getNroRepeticoes() {
+        return nroRepeticoes;
+    }
+
+    public void setNroRepeticoes(int nroRepeticoes) {
+        this.nroRepeticoes = nroRepeticoes;
+    }
 }

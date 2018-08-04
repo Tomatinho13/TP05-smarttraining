@@ -1,5 +1,6 @@
 package br.cefetmg.inf.model.domain;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,17 +14,19 @@ public class Ficha {
     private LocalDate dataFicha;
     private LocalDate dataPrevistaTroca;
     private char idtTreino;
+    ArrayList<Treino> listaTreino;
 
     public Ficha() {
     }
 
-    public Ficha(String codCpfAluno, int nroFicha, String codCpfInstrutor, LocalDate dataFicha, LocalDate dataPrevistaTroca, char idtTreino) {
+    public Ficha(String codCpfAluno, int nroFicha, String codCpfInstrutor, LocalDate dataFicha, LocalDate dataPrevistaTroca, char idtTreino, ArrayList<Treino> listaTreino) {
         this.codCpfAluno = codCpfAluno;
         this.nroFicha = nroFicha;
         this.codCpfInstrutor = codCpfInstrutor;
         this.dataFicha = dataFicha;
         this.dataPrevistaTroca = dataPrevistaTroca;
         this.idtTreino = idtTreino;
+        this.listaTreino = new ArrayList<>(listaTreino);
     }
     
     public String getCodCpfAluno() {
@@ -73,6 +76,12 @@ public class Ficha {
     public void setIdtTreino(char idtTreino) {
         this.idtTreino = idtTreino;
     }
-    
-    
+
+    public ArrayList<Treino> getListaTreino() {
+        return listaTreino;
+    }
+
+    public void setListaTreino(ArrayList<Treino> listaTreino) {
+        this.listaTreino = new ArrayList<>(listaTreino);
+    }
 }

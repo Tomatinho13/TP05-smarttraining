@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.model.dao;
+
+import br.cefetmg.inf.model.domain.Usuario;
+import java.sql.SQLException;
 
 /**
  *
- * @author Aluno
+ * @author Jamalz
  */
 public interface IAlunoDao {
-    
+    public Usuario getAluno(String cpf) throws SQLException;
+    public void postAluno(Usuario aluno)throws SQLException;
+    public void putAluno(Usuario aluno) throws SQLException;
+    public void deleteAluno(String cpf) throws SQLException;
 }

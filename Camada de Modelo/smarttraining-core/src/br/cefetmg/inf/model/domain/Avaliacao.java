@@ -1,5 +1,6 @@
 package br.cefetmg.inf.model.domain;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,22 +28,24 @@ public class Avaliacao {
     private double tamanhoCoxaDireita;
     private double tamanhoPanturrilhaEsquerda;
     private double tamanhoPanturrilhaDireita;
+    private ArrayList<Objetivo> listaObjetivos;
     
     public Avaliacao(){
 
     }
     
     public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor,
-                     boolean idtRecencia, double peso, double percentualGordura){
+                     boolean idtRecencia, double peso, double percentualGordura, ArrayList<Objetivo> listaObjetivos){
        this.codCpfAluno = codCpfAluno;
        this.datAvaliacao = datAvaliacao;
        this.codCpfInstrutor = codCpfInstrutor;
        this.idtRecencia = idtRecencia;
        this.peso = peso;
-       this.percentualGordura = percentualGordura;   
+       this.percentualGordura = percentualGordura;
+       this.listaObjetivos = new ArrayList<>(listaObjetivos);
     }
 
-    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double tamanhoQuadril, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita) {
+    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double tamanhoQuadril, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita, ArrayList<Objetivo> listaObjetivos) {
         this.codCpfAluno = codCpfAluno;
         this.datAvaliacao = datAvaliacao;
         this.codCpfInstrutor = codCpfInstrutor;
@@ -63,6 +66,7 @@ public class Avaliacao {
         this.tamanhoCoxaDireita = tamanhoCoxaDireita;
         this.tamanhoPanturrilhaEsquerda = tamanhoPanturrilhaEsquerda;
         this.tamanhoPanturrilhaDireita = tamanhoPanturrilhaDireita;
+        this.listaObjetivos = new ArrayList<>(listaObjetivos);
     }
     
     public String getCodCpfAluno() {
@@ -223,5 +227,13 @@ public class Avaliacao {
 
     public void setTamanhoPanturrilhaDireita(double tamanhoPanturrilhaDireita) {
         this.tamanhoPanturrilhaDireita = tamanhoPanturrilhaDireita;
-    }    
+    }
+
+    public ArrayList<Objetivo> getListaObjetivos() {
+        return listaObjetivos;
+    }
+
+    public void setListaObjetivos(ArrayList<Objetivo> listaObjetivos) {
+        this.listaObjetivos = listaObjetivos;
+    }
 }

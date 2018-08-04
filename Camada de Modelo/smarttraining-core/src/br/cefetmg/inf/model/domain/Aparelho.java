@@ -6,7 +6,7 @@ package br.cefetmg.inf.model.domain;
  */
 
 public class Aparelho {
-    private int codAparelho;
+    private int nroAparelho;
     private String nomAparelho;
 
     public Aparelho() {
@@ -14,16 +14,16 @@ public class Aparelho {
     }
 
     public Aparelho(int codAparelho, String nomAparelho) {
-        this.codAparelho = codAparelho;
+        this.nroAparelho = codAparelho;
         this.nomAparelho = nomAparelho;
     }
     
-    public int getCodAparelho() {
-        return codAparelho;
+    public int getNroAparelho() {
+        return nroAparelho;
     }
 
-    public void setCodAparelho(int codAparelho) {
-        this.codAparelho = codAparelho;
+    public void setNroAparelho(int nroAparelho) {
+        this.nroAparelho = nroAparelho;
     }
 
     public String getNomAparelho() {

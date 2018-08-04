@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.model.dao;
+
+import br.cefetmg.inf.model.domain.Instrutor;
+import java.sql.SQLException;
 
 /**
  *
- * @author Aluno
+ * @author Jamalz
  */
 public interface IInstrutorDao {
-    
+    public Instrutor getInstrutor(String cpf) throws SQLException;
+    public void postInstrutor(Instrutor instrutor) throws SQLException;
+    public void putInstrutor(Instrutor instrutor) throws SQLException;
+    public void deleteInstrutor(String cpf) throws SQLException;
 }

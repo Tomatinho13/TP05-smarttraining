@@ -1,31 +1,37 @@
 package br.cefetmg.inf.model.dao.impl;
 
+import br.cefetmg.inf.model.dao.IAvaliacaoDao;
 import br.cefetmg.inf.model.db.ConectaBd;
 import com.google.gson.Gson;
 import java.sql.*;
 import java.time.LocalDate;
 import br.cefetmg.inf.model.domain.Avaliacao;
+import java.util.ArrayList;
 
+public class AvaliacaoDao implements IAvaliacaoDao {
 
-public class AvaliacaoDao {
     private Avaliacao avaliacao;
     private final Connection conn;
     private String sql;
     private final Gson gson;
-    
-    public AvaliacaoDao(){
+    private final ObjetivoDao objetivoDao;
+
+    public AvaliacaoDao() {
         conn = ConectaBd.conecta();
         gson = new Gson();
+        objetivoDao = new ObjetivoDao();
     }
-    
-    public Avaliacao getAvaliacao(String cpf) throws SQLException{
+
+    @Override
+    public ArrayList<Avaliacao> getListaAvaliacao(String cpf) throws SQLException {
+        ArrayList<Avaliacao> listaAvaliacao = new ArrayList<>();
         sql = "SELECT * "
                 + "FROM \"Avaliacao\" "
-                + "WHERE cod_cpf = '"+cpf+"'";
-        
+                + "WHERE cod_cpf = '" + cpf + "'";
+
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
-        if(resultado.next()){
+        while (resultado.next()) {
             avaliacao = new Avaliacao(cpf,
                     resultado.getDate("dat_avaliacao").toLocalDate(),
                     resultado.getString("cod_cpf_instrutor"),
@@ -45,23 +51,25 @@ public class AvaliacaoDao {
                     Double.parseDouble(resultado.getString("tam_coxaEsq")),
                     Double.parseDouble(resultado.getString("tam_coxaDir")),
                     Double.parseDouble(resultado.getString("tam_panturrilhaEsq")),
-                    Double.parseDouble(resultado.getString("tam_panturrilhaDir")));
-                    
+                    Double.parseDouble(resultado.getString("tam_panturrilhaDir")),
+                    objetivoDao.getAvaliacaoObjetivos(cpf, resultado.getDate("dat_avaliacao").toLocalDate()));
+            listaAvaliacao.add(avaliacao);
         }
-        else{
-            conn.close();
+
+        if (listaAvaliacao.isEmpty()) {
             return null;
         }
-        conn.close();
-        return avaliacao;
+
+        return listaAvaliacao;
     }
-    
-    public void postAvaliacao(Avaliacao avaliacao) throws SQLException{
+
+    @Override
+    public void postAvaliacao(Avaliacao avaliacao) throws SQLException {
         sql = "INSERT INTO \"Avaliacao\" VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='"+avaliacao.getCodCpfAluno()+"'");
+        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfAluno() + "'");
         stmt.setString(2, avaliacao.getDatAvaliacao().toString());
-        stmt.setString(3, "SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='"+avaliacao.getCodCpfInstrutor()+"'");
+        stmt.setString(3, "SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfInstrutor() + "'");
         stmt.setString(4, String.valueOf(avaliacao.getIdtRecencia()));
         stmt.setString(5, String.valueOf(avaliacao.getPeso()));
         stmt.setString(6, String.valueOf(avaliacao.getPercentualGordura()));
@@ -79,22 +87,28 @@ public class AvaliacaoDao {
         stmt.setString(18, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
         stmt.setString(19, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
         stmt.setString(20, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-        
         stmt.executeQuery(sql);
-        conn.close();
+
+        sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES (?, ?, ?)";
+
+        stmt = conn.prepareStatement(sql);
+
+        stmt.setString(1, "(SELECT dat_avaliacao FROM \"Avaliacao\" "
+                + "WHERE cod_cpf='" + avaliacao.getCodCpfAluno() + "' "
+                + "AND dat_avaliacao='" + avaliacao.getDatAvaliacao().toString() + "')");
+        stmt.setString(2, "(SELECT cod_cpf FROM \"Avaliacao\" "
+                + "WHERE cod_cpf='" + avaliacao.getCodCpfAluno() + "' "
+                + "AND dat_avaliacao='" + avaliacao.getDatAvaliacao().toString() + "')");
+
+        for (int i = 0; i < avaliacao.getListaObjetivos().size(); i++) {
+            stmt.setString(3, "(SELECT cod_objetivo FROM \"Objetivo\" "
+                    + "WHERE cod_objetivo='" + avaliacao.getListaObjetivos().get(i).getCodObjetivo() + "')");
+            stmt.executeQuery(sql);
+        }
+
     }
 
-    public void deleteAvaliacao(String cpf, LocalDate datAvaliacao) throws SQLException {
-        sql = "DELETE FROM \"Avaliacao\" "
-                    + "WHERE cod_cpf='"+cpf+"' AND dat_avaliacao='"+datAvaliacao.toString()+"';" +
-              "DELETE FROM \"Treino\" "
-                    + "WHERE cod_cpf='"+cpf+"' AND dat_avaliacao='"+datAvaliacao.toString()+"';";
-        
-        Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
-        conn.close();
-    }
-
+    @Override
     public void putAvaliacao(Avaliacao avaliacao) throws SQLException {
         sql = "UPDATE \"Avaliacao\" "
                 + "SET cod_cpf_instrutor=?, "
@@ -118,7 +132,7 @@ public class AvaliacaoDao {
                 + "WHERE cod_cpf=?"
                 + "AND dat_avaliacao=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='"+avaliacao.getCodCpfInstrutor()+"'");
+        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfInstrutor() + "'");
         stmt.setString(2, String.valueOf(avaliacao.getIdtRecencia()));
         stmt.setString(3, String.valueOf(avaliacao.getPeso()));
         stmt.setString(4, String.valueOf(avaliacao.getPercentualGordura()));
@@ -138,9 +152,18 @@ public class AvaliacaoDao {
         stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
         stmt.setString(19, avaliacao.getCodCpfAluno());
         stmt.setString(20, avaliacao.getDatAvaliacao().toString());
-        
+
         stmt.executeQuery(sql);
-        conn.close();    }
-    
-    
+
+    }
+
+    @Override
+    public void deleteAvaliacao(String cpf, LocalDate datAvaliacao) throws SQLException {
+        sql = "DELETE FROM \"Avaliacao\" "
+                + "WHERE cod_cpf='" + cpf + "' AND dat_avaliacao='" + datAvaliacao.toString() + "';";
+
+        Statement stmt = conn.createStatement();
+        stmt.executeQuery(sql);
+
+    }
 }

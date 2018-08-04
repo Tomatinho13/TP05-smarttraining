@@ -1,14 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.model.dao;
+
+import br.cefetmg.inf.model.domain.Aparelho;
+import br.cefetmg.inf.model.domain.Exercicio;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
- * @author Aluno
+ * @author Jamalz
  */
 public interface IAparelhoDao {
-    
+    public Aparelho getAparelho(String codAparelho) throws SQLException;
+    public ArrayList<Aparelho> getListaAparelhos() throws SQLException;
+    public ArrayList<Exercicio> getListaExercicios(int nroAparelho) throws SQLException;
+    public void postAparelho(Aparelho aparelho) throws SQLException;
+    public void putAparelho(Aparelho aparelho) throws SQLException;
+    public void deleteAparelho(String codAparelho) throws SQLException;
 }

@@ -8,9 +8,9 @@ import java.util.ArrayList;
  */
 
 public class Musculo {
-    private int nroSequenciaMusculo;
-    private int nroSequenciaRegiaoCorporal;
-    private String nomeMusculo;
+    private int codMusculo;
+    private int codRegiaoCorporal;
+    private String nomMusculo;
     private String caminhoImagem; 
     private ArrayList<Exercicio> listaExercicios;
 
@@ -19,35 +19,35 @@ public class Musculo {
 
     
     public Musculo(int nroSequenciaMusculo, int nroSequenciaRegiaoCorporal, String nomeMusculo, String caminhoImagem, ArrayList<Exercicio> listaExercicios) {
-        this.nroSequenciaMusculo = nroSequenciaMusculo;
-        this.nroSequenciaRegiaoCorporal = nroSequenciaRegiaoCorporal;
-        this.nomeMusculo = nomeMusculo;
+        this.codMusculo = nroSequenciaMusculo;
+        this.codRegiaoCorporal = nroSequenciaRegiaoCorporal;
+        this.nomMusculo = nomeMusculo;
         this.caminhoImagem = caminhoImagem;
         this.listaExercicios = new ArrayList<>(listaExercicios);
     }
     
-    public int getNroSequenciaMusculo() {
-        return nroSequenciaMusculo;
+    public int getCodMusculo() {
+        return codMusculo;
     }
 
-    public void setNroSequenciaMusculo(int nroSequenciaMusculo) {
-        this.nroSequenciaMusculo = nroSequenciaMusculo;
+    public void setCodMusculo(int codMusculo) {
+        this.codMusculo = codMusculo;
     }
 
-    public int getNroSequenciaRegiaoCorporal() {
-        return nroSequenciaRegiaoCorporal;
+    public int getCodRegiaoCorporal() {
+        return codRegiaoCorporal;
     }
 
-    public void setNroSequenciaRegiaoCorporal(int nroSequenciaRegiaoCorporal) {
-        this.nroSequenciaRegiaoCorporal = nroSequenciaRegiaoCorporal;
+    public void setCodRegiaoCorporal(int codRegiaoCorporal) {
+        this.codRegiaoCorporal = codRegiaoCorporal;
     }
 
-    public String getNomeMusculo() {
-        return nomeMusculo;
+    public String getNomMusculo() {
+        return nomMusculo;
     }
 
-    public void setNomeMusculo(String nomeMusculo) {
-        this.nomeMusculo = nomeMusculo;
+    public void setNomMusculo(String nomMusculo) {
+        this.nomMusculo = nomMusculo;
     }
 
     public String getCaminhoImagem() {
