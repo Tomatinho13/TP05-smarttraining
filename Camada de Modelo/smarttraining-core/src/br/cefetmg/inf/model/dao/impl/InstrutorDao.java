@@ -19,8 +19,8 @@ public class InstrutorDao {
     
     public Instrutor getInstrutor(String cpf) throws SQLException{
         sql = "SELECT * "
-                + "FROM \"Usuario\" A "
-                + "JOIN \"Instrutor\" B "
+                + "FROM \"Usuario\""
+                + "JOIN \"Instrutor\""
                 + "USING(cod_cpf) "
                 + "GROUP BY cod_cpf, nro_cref "
                 + "HAVING cod_cpf='"+cpf+"'";

@@ -1,5 +1,7 @@
 package br.cefetmg.inf.model.domain;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Tomatinho
@@ -10,17 +12,20 @@ public class Musculo {
     private int nroSequenciaRegiaoCorporal;
     private String nomeMusculo;
     private String caminhoImagem; 
+    private ArrayList<Exercicio> listaExercicios;
 
     public Musculo() {
     }
 
-    public Musculo(int nroSequenciaMusculo, int nroSequenciaRegiaoCorporal, String nomeMusculo, String caminhoImagem) {
+    
+    public Musculo(int nroSequenciaMusculo, int nroSequenciaRegiaoCorporal, String nomeMusculo, String caminhoImagem, ArrayList<Exercicio> listaExercicios) {
         this.nroSequenciaMusculo = nroSequenciaMusculo;
         this.nroSequenciaRegiaoCorporal = nroSequenciaRegiaoCorporal;
         this.nomeMusculo = nomeMusculo;
         this.caminhoImagem = caminhoImagem;
+        this.listaExercicios = new ArrayList<>(listaExercicios);
     }
-
+    
     public int getNroSequenciaMusculo() {
         return nroSequenciaMusculo;
     }
@@ -52,5 +57,12 @@ public class Musculo {
     public void setCaminhoImagem(String caminhoImagem) {
         this.caminhoImagem = caminhoImagem;
     }
-     
+
+    public ArrayList<Exercicio> getListaExercicios() {
+        return listaExercicios;
+    }
+
+    public void setListaExercicios(ArrayList<Exercicio> listaExercicios) {
+        this.listaExercicios = listaExercicios;
+    }
 }

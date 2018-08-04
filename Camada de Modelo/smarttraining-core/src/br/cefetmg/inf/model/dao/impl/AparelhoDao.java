@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.sql.*;
 import java.util.ArrayList;
 import br.cefetmg.inf.model.domain.Aparelho;
+import br.cefetmg.inf.model.domain.Exercicio;
 
 
 public class AparelhoDao {
@@ -40,6 +41,7 @@ public class AparelhoDao {
     public void postAparelho(Aparelho aparelho) throws SQLException{
         this.aparelho = aparelho;
         sql = "INSERT INTO \"Aparelho\" VALUES (?,?)";
+        
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, String.valueOf(aparelho.getCodAparelho()));
         stmt.setString(2, aparelho.getNomAparelho());
@@ -71,7 +73,29 @@ public class AparelhoDao {
         
         Statement stmt = conn.createStatement();
         stmt.executeQuery(sql);
-        conn.close();    }
+        conn.close();    
+    }
+    
+    public ArrayList<Exercicio> getAparelhoExercicios(int numAparelho) throws SQLException{
+        ArrayList<Exercicio> listaExercicios = new ArrayList<>();
+        
+        sql ="SELECT * FROM Exercicio WHERE cod_exercicio IN(" +
+                "SELECT cod_exercicio FROM MusculoExercicio WHERE cod_musculo IN(" +
+                    "SELECT cod_musculo from Musculo where cod_aparelho='"+numAparelho+"'))";
+        
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        
+        while(resultado.next()){
+            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), resultado.getString("nom_exercicio"), resultado.getString("des_exercicio")));
+        }
+        if(listaExercicios.isEmpty()){
+            conn.close();
+            return null;
+        }
+        conn.close();
+        return listaExercicios;
+    }
     
     
 }

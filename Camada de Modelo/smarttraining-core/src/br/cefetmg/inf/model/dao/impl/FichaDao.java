@@ -41,12 +41,11 @@ public class FichaDao {
     }
     
     public void postFicha(Ficha ficha) throws SQLException{
-        this.ficha = ficha;
         sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, ficha.getCodCpfAluno());
+        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='"+ficha.getCodCpfAluno()+"'");
         stmt.setString(2, String.valueOf(ficha.getNroFicha()));
-        stmt.setString(3, ficha.getCodCpfInstrutor());
+        stmt.setString(3, "SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='"+ficha.getCodCpfInstrutor()+"'");
         stmt.setString(4, ficha.getDataFicha().toString());
         stmt.setString(5, ficha.getDataPrevistaTroca().toString());
         stmt.setString(6, String.valueOf(ficha.getIdtTreino()));
@@ -71,7 +70,6 @@ public class FichaDao {
     }
 
     public void putFicha(Ficha ficha) throws SQLException {
-        this.ficha = ficha;
         sql = "UPDATE \"Ficha\" "
                 + "SET cod_cpf_instrutor=?, "
                 + "dat_ficha=?, "

@@ -57,12 +57,11 @@ public class AvaliacaoDao {
     }
     
     public void postAvaliacao(Avaliacao avaliacao) throws SQLException{
-        this.avaliacao = avaliacao;
         sql = "INSERT INTO \"Avaliacao\" VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, avaliacao.getCodCpfAluno());
+        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='"+avaliacao.getCodCpfAluno()+"'");
         stmt.setString(2, avaliacao.getDatAvaliacao().toString());
-        stmt.setString(3, avaliacao.getCodCpfInstrutor());
+        stmt.setString(3, "SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='"+avaliacao.getCodCpfInstrutor()+"'");
         stmt.setString(4, String.valueOf(avaliacao.getIdtRecencia()));
         stmt.setString(5, String.valueOf(avaliacao.getPeso()));
         stmt.setString(6, String.valueOf(avaliacao.getPercentualGordura()));
@@ -97,7 +96,6 @@ public class AvaliacaoDao {
     }
 
     public void putAvaliacao(Avaliacao avaliacao) throws SQLException {
-        this.avaliacao = avaliacao;
         sql = "UPDATE \"Avaliacao\" "
                 + "SET cod_cpf_instrutor=?, "
                 + "idt_recencia=?, "
@@ -120,7 +118,7 @@ public class AvaliacaoDao {
                 + "WHERE cod_cpf=?"
                 + "AND dat_avaliacao=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, avaliacao.getCodCpfInstrutor());
+        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='"+avaliacao.getCodCpfInstrutor()+"'");
         stmt.setString(2, String.valueOf(avaliacao.getIdtRecencia()));
         stmt.setString(3, String.valueOf(avaliacao.getPeso()));
         stmt.setString(4, String.valueOf(avaliacao.getPercentualGordura()));
