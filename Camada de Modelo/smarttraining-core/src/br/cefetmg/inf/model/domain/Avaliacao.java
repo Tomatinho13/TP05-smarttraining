@@ -19,6 +19,7 @@ public class Avaliacao {
     private double tamanhoTorax;
     private double tamanhoAbdomen;
     private double tamanhoCintura;
+    private double tamanhoQuadril;
     private double massaGorda;
     private double tamanhoBracoEsquerdo;
     private double tamanhoBracoDireito;
@@ -45,7 +46,12 @@ public class Avaliacao {
        this.listaObjetivos = new ArrayList<>(listaObjetivos);
     }
 
-    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, double tamanhoCintura, double massaGorda, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita, ArrayList<Objetivo> listaObjetivos) {
+    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, 
+            double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, 
+            double tamanhoCintura, double massaGorda, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, 
+            double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, 
+            double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita, 
+            ArrayList<Objetivo> listaObjetivos, double tamanhoQuadril) {
         this.codCpfAluno = codCpfAluno;
         this.datAvaliacao = datAvaliacao;
         this.codCpfInstrutor = codCpfInstrutor;
@@ -67,6 +73,15 @@ public class Avaliacao {
         this.tamanhoPanturrilhaEsquerda = tamanhoPanturrilhaEsquerda;
         this.tamanhoPanturrilhaDireita = tamanhoPanturrilhaDireita;
         this.listaObjetivos = new ArrayList<>(listaObjetivos);
+        this.tamanhoQuadril = tamanhoQuadril;
+    }
+
+    public double getTamanhoQuadril() {
+        return tamanhoQuadril;
+    }
+
+    public void setTamanhoQuadril(double tamanhoQuadril) {
+        this.tamanhoQuadril = tamanhoQuadril;
     }
     
     public String getCodCpfAluno() {

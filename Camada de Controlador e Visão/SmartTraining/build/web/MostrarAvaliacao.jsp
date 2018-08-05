@@ -59,6 +59,10 @@
                     <td> <%=avaliacao.getTamanhoCintura() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do quadril:</td>
+                    <td> <%=avaliacao.getTamanhoQuadril() %> </td>
+                </tr>
+                <tr>
                     <td>Tamanho do braço esquerdo:</td>
                     <td> <%=avaliacao.getTamanhoBracoEsquerdo() %> </td>
                 </tr>
