@@ -1,9 +1,10 @@
 <%--
     Document   : MostrarFicha
     Created on : 30/07/2018, 16:39:43
-    Author     : Celio
+    Author     : Felipe/Matheus
 --%>
 
+<%@page import="br.cefetmg.inf.model.domain.Atividade"%>
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.inf.model.domain.Ficha" %>
 <%@page import="br.cefetmg.inf.model.domain.Treino" %>
@@ -24,16 +25,12 @@
 
             <%
                 Ficha ficha = new Ficha();
-                Treino treino = new Treino();
-                Exercicio exercicio = new Exercicio();
 
-                ficha = request.getParameter("ficha");
+                ficha =(Ficha) request.getAttribute("ficha");
                 request.setAttribute("ficha", ficha);
 
-                List <Treino> listaTreinos = (List) request.getAttribute("treinos");
 
-                for (int i = 0; i < listaTreinos.size(); i++) {
-                    treino = listaTreinos.get(i);
+                for (Treino treino : ficha.getListaTreino()) {
             %>
 
             <h3>Treino <%= treino.getNroTreino() %> </h3>
@@ -48,19 +45,14 @@
                 </tr>
 
             <%
-                request.setAttribute("treino", treino);
-                List <Exercicio> listaExercicios = (List) request.getAttribute("exercicios");
-
-                    for (int j = 0; j < listaExercicios.size(); j++) {
-                        exercicio = listaExercicios.get(j);
-                        request.setAttribute("exercicio", exercicio);
+                    for (Atividade atividade : treino.getAtividades()) {
             %>
                 <tr>
-                    <td> <%= request.getAttribute("numeroAparelho") %> </td>
-                    <td> <%= exercicio.getNomeExercicio() %> </td>
-                    <td> <%= request.getAttribute("numeroSeries") %></td>
-                    <td> <%= request.getAttribute("numeroRepeticoes") %></td>
-                    <td> <%= request.getAttribute("peso") %></td>
+                    <td> <%= atividade.getAparelhoExercicio() %> </td>
+                    <td> <%= atividade.getAparelhoExercicio().getExercicio() %> </td>
+                    <td> <%= atividade.getNroSeries() %></td>
+                    <td> <%= atividade.getNroRepeticoes() %></td>
+                    <td> <%= atividade.getQtdPeso() %></td>
                 </tr>
             <%
                    }
