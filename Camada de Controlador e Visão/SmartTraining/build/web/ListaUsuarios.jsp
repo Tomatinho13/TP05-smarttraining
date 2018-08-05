@@ -33,9 +33,9 @@
                         usuario = listaUsuarios.get(i);
                 %>
                 <li>
-                    <jsp:forward page="MostrarUsuario.jsp">
-                        <jsp:param name="usuario" value="<%= usuario %>" />
-                    </jsp:forward>
+                    <a href="/controller/servletweb?acao=MostrarUsuario&cpf=<%= usuario.getCodCpf() %>"> 
+                        <%= usuario.getNomUsuario() %> 
+                    </a>
                 </li>
                 <%
                     }
