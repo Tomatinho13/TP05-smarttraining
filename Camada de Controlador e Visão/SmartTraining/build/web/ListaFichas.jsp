@@ -36,10 +36,9 @@
                         ficha = listaFichas.get(i);
                 %>
                 <li class="list-group-item">
-                    Data: <%= ficha.getDataFicha() %>
-                    <jsp:forward page="MostrarFicha.jsp">
-                        <jsp:param name="ficha" value="<%= ficha %>" />
-                    </jsp:forward>
+                    <a href="/controller/servletweb?acao=MostrarFicha&numero=<%= ficha.getDataFicha() %>"> 
+                        Data: <%= ficha.getDataFicha() %> 
+                    </a>
                 </li>
 
                 <%
