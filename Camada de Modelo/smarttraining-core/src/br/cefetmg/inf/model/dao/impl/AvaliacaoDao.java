@@ -37,18 +37,14 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                     resultado.getString("cod_cpf_instrutor"),
                     resultado.getBoolean("idt_recencia"),
                     Double.parseDouble(resultado.getString("qtd_peso")),
-                    Double.parseDouble(resultado.getString("qtd_massaGorda")),
                     Double.parseDouble(resultado.getString("qtd_percGordura")),
                     Double.parseDouble(resultado.getString("tam_pescoco")),
                     Double.parseDouble(resultado.getString("tam_ombro")),
                     Double.parseDouble(resultado.getString("tam_torax")),
                     Double.parseDouble(resultado.getString("tam_abdomen")),
                     Double.parseDouble(resultado.getString("tam_cintura")),
-<<<<<<< HEAD
-=======
                     Double.parseDouble(resultado.getString("tam_quadril")),
                     Double.parseDouble(resultado.getString("qtd_massaGorda")),
->>>>>>> bd685878433505726c5a36fba7b6e964f6572e16
                     Double.parseDouble(resultado.getString("tam_bracoEsq")),
                     Double.parseDouble(resultado.getString("tam_bracoDir")),
                     Double.parseDouble(resultado.getString("tam_antebracoEsq")),
@@ -57,8 +53,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                     Double.parseDouble(resultado.getString("tam_coxaDir")),
                     Double.parseDouble(resultado.getString("tam_panturrilhaEsq")),
                     Double.parseDouble(resultado.getString("tam_panturrilhaDir")),
-                    objetivoDao.getAvaliacaoObjetivos(codCpf, resultado.getDate("dat_avaliacao").toLocalDate()),
-                    Double.parseDouble(resultado.getString("tam_quadril")));
+                    objetivoDao.getAvaliacaoObjetivos(codCpf, resultado.getDate("dat_avaliacao").toLocalDate()));
             listaAvaliacao.add(avaliacao);
         }
 
@@ -85,17 +80,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.setString(10, String.valueOf(avaliacao.getTamanhoAbdomen()));
         stmt.setString(11, String.valueOf(avaliacao.getTamanhoCintura()));
         stmt.setString(12, String.valueOf(avaliacao.getTamanhoQuadril()));
-<<<<<<< HEAD
-        stmt.setString(13, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
-        stmt.setString(14, String.valueOf(avaliacao.getTamanhoBracoDireito()));
-        stmt.setString(15, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
-        stmt.setString(16, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
-        stmt.setString(17, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
-        stmt.setString(18, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
-        stmt.setString(19, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
-        stmt.setString(20, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-        stmt.setString(21, String.valueOf(avaliacao.getMassaGorda()));
-=======
         stmt.setString(13, String.valueOf(avaliacao.getMassaGorda()));
         stmt.setString(14, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
         stmt.setString(15, String.valueOf(avaliacao.getTamanhoBracoDireito()));
@@ -105,7 +89,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.setString(19, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
         stmt.setString(20, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
         stmt.setString(21, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
->>>>>>> bd685878433505726c5a36fba7b6e964f6572e16
         stmt.executeQuery(sql);
 
         sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES (?, ?, ?)";
@@ -140,11 +123,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "tam_abdomen=? "
                 + "tam_cintura=? "
                 + "tam_quadril=? "
-<<<<<<< HEAD
                 + "qtd_massaGorda=?"
-=======
-                + "qtd_massaGorda=? "
->>>>>>> bd685878433505726c5a36fba7b6e964f6572e16
                 + "tam_bracoEsq=? "
                 + "tam_bracoDir=? "
                 + "tam_antebracoEsq=? "
@@ -166,17 +145,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.setString(8, String.valueOf(avaliacao.getTamanhoAbdomen()));
         stmt.setString(9, String.valueOf(avaliacao.getTamanhoCintura()));
         stmt.setString(10, String.valueOf(avaliacao.getTamanhoQuadril()));
-<<<<<<< HEAD
-        stmt.setString(11, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
-        stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoDireito()));
-        stmt.setString(13, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
-        stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
-        stmt.setString(15, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
-        stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
-        stmt.setString(17, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
-        stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-        stmt.setString(19, String.valueOf(avaliacao.getMassaGorda()));
-=======
         stmt.setString(11, String.valueOf(avaliacao.getMassaGorda()));
         stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
         stmt.setString(13, String.valueOf(avaliacao.getTamanhoBracoDireito()));
@@ -186,7 +154,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.setString(17, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
         stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
         stmt.setString(19, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
->>>>>>> bd685878433505726c5a36fba7b6e964f6572e16
         stmt.setString(20, avaliacao.getCodCpfAluno());
         stmt.setString(21, avaliacao.getDatAvaliacao().toString());
 
