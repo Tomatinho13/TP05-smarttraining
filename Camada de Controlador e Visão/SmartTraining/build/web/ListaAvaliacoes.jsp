@@ -36,10 +36,9 @@
                         avaliacao = listaAvaliacoes.get(i);
                 %>
                 <li class="list-group-item">
-                    Data: <%= avaliacao.getDatAvaliacao() %>
-                    <jsp:forward page="MostrarAvaliacao.jsp">
-                        <jsp:param name="avaliacao" value="<%= avaliacao %>" />
-                    </jsp:forward>
+                    <a href="/controller/servletweb?acao=MostrarAvaliacao&data=<%= avaliacao.getDatAvaliacao() %>"> 
+                        Data: <%= avaliacao.getDatAvaliacao() %> 
+                    </a>
                 </li>
                 <%
                     }
