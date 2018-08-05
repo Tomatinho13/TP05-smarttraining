@@ -8,7 +8,7 @@ import br.cefetmg.inf.model.services.impl.ManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import javax.servlet.http.HttpServletRequest;
 
-public class fazerLogin{
+public class FazerLogin{
 
     public static String execute(HttpServletRequest request) {
         String jsp = "";

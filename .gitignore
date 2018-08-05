@@ -26,3 +26,6 @@ hs_err_pid*
 /Camada de Modelo/SmartTraining - Modelo/build/
 /Camada de Controlador e Modelo/SmartTraining/build/
 /Camada de Modelo/smarttraining-core/build/
+/Camada de Controlador e Visão/SmartTraining/nbproject/private/
+/Camada de Controlador e Visão/SmartTraining/build/
+/Camada de Modelo/smarttraining-core/nbproject/private/

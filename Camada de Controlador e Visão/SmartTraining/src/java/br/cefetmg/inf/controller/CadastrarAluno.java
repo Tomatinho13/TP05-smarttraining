@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
-public class cadastrarAluno {
+public class CadastrarAluno {
 
     public static String execute(HttpServletRequest request) {
         String jsp = "";
@@ -33,7 +33,7 @@ public class cadastrarAluno {
         try {
             manterAluno.cadastrar(aluno);
         } catch (SQLException ex) {
-            Logger.getLogger(cadastrarAluno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
         jsp = "/LoginUsuario.jsp";
         return jsp;
