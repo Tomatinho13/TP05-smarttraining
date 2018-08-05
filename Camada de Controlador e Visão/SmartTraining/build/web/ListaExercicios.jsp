@@ -32,7 +32,7 @@
                 <%
                     Musculo musculo = new Musculo();
                     Exercicio exercicio = new Exercicio();
-                    List <Musculo> listaMusculos = (List) request.getAttribute("musculos");
+                    List<Musculo> listaMusculos = (List) request.getAttribute("musculos");
 
                     for(int i=0; i<listaMusculos.size(); i++){
                         musculo = listaMusculos.get(i);
@@ -41,9 +41,9 @@
                 <li>
                     <ul class="list-group">
                         <%
-                                request.setAttribute("nomeMusculo", musculo.getNomMusculo());
-                                List <Exercicio> listaExercicios = (List) request.getAttribute("exercicios");
-
+                                List<Exercicio> listaExercicios;
+                                listaExercicios = musculo.getListaExercicios();
+                            
                                 for(int j=0; j<listaExercicios.size(); j++){
                                     exercicio = listaExercicios.get(j);
                         %>
