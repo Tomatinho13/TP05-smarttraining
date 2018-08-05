@@ -1,4 +1,6 @@
 
+<%@page import="br.cefetmg.inf.model.domain.Exercicio"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,9 +15,25 @@
         <div class="container">
             <br>
             <h2 class="h2">SmartTraining - Remover Exercicio</h2>
-            <form action="RemoverExercicioServlet" method="post">
-                <label for="nomeExercicio">Escreva o nome do exercicio que deseja remover:</label><br>
-                <input type="text" name="nomeExercicio" class="form-control" size="40"><br>
+            <form action="ServletWeb" method="post">
+                <input type="hidden" name="acao" value="RemoverExercicio">
+                
+                <h4>Selecione o exercício que deseja remover:</h4>
+                <select>
+                    <%
+                        Exercicio exercicio = new Exercicio();
+                        List<Exercicio> listaExercicios = (List) request.getAttribute("exercicios");
+                        for(int i=0; i<listaExercicios.size(); i++){
+                            exercicio = listaExercicios.get(i);
+                    %>
+                    
+                    <option value=" <%= exercicio.getNomeExercicio() %> "><%= exercicio.getNomeExercicio() %></option>
+                    
+                    <%
+                        }
+                    %>
+                </select>
+                
                 <input type="submit" name="removerExercicio" class="btn btn-primary" value="Remover">
             </form>  
         </div>

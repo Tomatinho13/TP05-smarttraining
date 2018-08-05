@@ -4,6 +4,8 @@
     Author     : Matheus
 --%>
 
+<%@page import="br.cefetmg.inf.model.domain.Usuario"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,9 +20,25 @@
         <div class="container">
             <br>
             <h2 class="h2">SmartTraining - Remover usuario</h2>
-            <form action="RemoverUsuarioServlet" method="post">
-                <label for="nomeUsuario">Escreva o nome do usuario que deseja remover:</label><br>
-                <input type="text" name="nomeUsuario" class="form-control"><br>
+            <form action="ServletWeb" method="post">
+                <input type="hidden" name="acao" value="RemoverUsuario">
+                
+                <h4>Selecione o usuário que deseja remover:</h4>
+                <select>
+                    <%
+                        Usuario usuario = new Usuario();
+                        List<Usuario> listaUsuarios = (List) request.getAttribute("usuarios");
+                        for(int i=0; i<listaUsuarios.size(); i++){
+                            usuario = listaUsuarios.get(i);
+                    %>
+                    
+                    <option value=" <%= usuario.getCodCpf() %> "><%= usuario.getNomUsuario() %></option>
+                    
+                    <%
+                        }
+                    %>
+                </select>
+                
                 <input type="submit" name="removerUsuario" class="btn btn-primary" value="Remover">
             </form>  
         </div>

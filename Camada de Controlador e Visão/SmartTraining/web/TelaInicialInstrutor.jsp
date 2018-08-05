@@ -15,15 +15,6 @@
 </head>
 <body>
     <div class="container">
-            <a href="MostrarFicha.jsp">
-                <button class="btn btn-primary">Mostrar Ficha</button>
-            </a>
-            <a href="ListaExercicios.jsp">
-                <button class="btn btn-primary">Mostrar Exercícios</button>
-            </a>
-            <a href="MostrarAvaliacao.jsp">
-                <button class="btn btn-primary">Mostrar Avaliações</button>
-            </a>
     </div>
 </body>
 </html>
