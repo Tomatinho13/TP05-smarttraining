@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public interface IManterExercicio {
     public Exercicio pesquisarPorCodigo(int codExercicio) throws SQLException;
+    public Exercicio pesquisarPorNome(String nomeExercicio) throws SQLException;
     public AparelhoExercicio pesquisarAparelhoExercicio(int codExercicio, int nroAparelho) throws SQLException;
     public ArrayList<Exercicio> pesquisarPorRegiao(String nomeRegiao) throws SQLException;
     public ArrayList<Exercicio> pesquisarPorMusculo(int codMusculo) throws SQLException;

@@ -22,6 +22,12 @@ public class ManterExercicio implements IManterExercicio {
         Exercicio resultado = exercicioDao.getExercicio(codExercicio);
         return resultado;
     }
+       
+    @Override
+    public Exercicio pesquisarPorNome(String nomeExercicio) throws SQLException {
+        Exercicio exercicio = exercicioDao.getExercicio(nomeExercicio);
+        return exercicio;
+    }
     
     @Override
     public AparelhoExercicio pesquisarAparelhoExercicio(int codExercicio, int nroAparelho) throws SQLException{
