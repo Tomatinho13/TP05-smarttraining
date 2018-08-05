@@ -27,8 +27,6 @@
                 Ficha ficha = new Ficha();
 
                 ficha =(Ficha) request.getAttribute("ficha");
-                request.setAttribute("ficha", ficha);
-
 
                 for (Treino treino : ficha.getListaTreino()) {
             %>

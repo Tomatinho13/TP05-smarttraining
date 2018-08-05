@@ -21,106 +21,73 @@
             <br>
 
             <table class="table table-hover">
-                <tr>
-                    <td>Peso:</td>
-                </tr>
-                <tr>
-                    <td>Percentual de gordura:</td>
-                </tr>
-                <tr>
-                    <td>Massa gorda:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho do pescoço:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho do ombro:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho do torax:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho do abdômen:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho da cintura:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho do braço esquerdo:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho do braço direito:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho do antebraço esquerdo:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho do antebraço direito:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho da coxa esquerda:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho da coxa direita:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho da panturrilha esquerda:</td>
-                </tr>
-                <tr>
-                    <td>Tamanho da panturrilha direita:</td>
-                </tr>
-
                 <%
                     Avaliacao avaliacao = new Avaliacao();
-                    avaliacao = request.getParameter("avaliacao");
+                    avaliacao = (Avaliacao) request.getAttribute("avaliacao");
                 %>
-
+                
                 <tr>
+                    <td>Peso:</td>
                     <td> <%=avaliacao.getPeso() %> </td>
                 </tr>
                 <tr>
+                    <td>Percentual de gordura:</td>
                     <td> <%=avaliacao.getPercentualGordura() %> </td>
                 </tr>
                 <tr>
+                    <td>Massa gorda:</td>
                     <td> <%=avaliacao.getMassaGorda() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do pescoço:</td>
                     <td> <%=avaliacao.getTamanhoPescoco() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do ombro:</td>
                     <td> <%=avaliacao.getTamanhoOmbro() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do torax:</td>
                     <td> <%=avaliacao.getTamanhoTorax() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do abdômen:</td>
                     <td> <%=avaliacao.getTamanhoAbdomen() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho da cintura:</td>
                     <td> <%=avaliacao.getTamanhoCintura() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do braço esquerdo:</td>
                     <td> <%=avaliacao.getTamanhoBracoEsquerdo() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do braço direito:</td>
                     <td> <%=avaliacao.getTamanhoBracoDireito() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do antebraço esquerdo:</td>
                     <td> <%=avaliacao.getTamanhoAntebracoEsquerdo() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho do antebraço direito:</td>
                     <td> <%=avaliacao.getTamanhoAntebracoDireito() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho da coxa esquerda:</td>
                     <td> <%=avaliacao.getTamanhoCoxaEsquerda() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho da coxa direita:</td>
                     <td> <%=avaliacao.getTamanhoCoxaDireita() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho da panturrilha esquerda:</td>
                     <td> <%=avaliacao.getTamanhoPanturrilhaEsquerda() %> </td>
                 </tr>
                 <tr>
+                    <td>Tamanho da panturrilha direita:</td>
                     <td> <%=avaliacao.getTamanhoPanturrilhaDireita() %> </td>
                 </tr>
             </table>
