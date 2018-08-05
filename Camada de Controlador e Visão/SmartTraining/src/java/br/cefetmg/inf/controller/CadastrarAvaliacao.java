@@ -61,7 +61,7 @@ public class CadastrarAvaliacao {
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarAvaliacao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jsp = "/MostrarAvaliacao.jsp";
+        jsp = "/TelaInicialInstrutor.jsp";
         return jsp;
     }
 }

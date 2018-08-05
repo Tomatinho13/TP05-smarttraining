@@ -6,6 +6,7 @@ import br.cefetmg.inf.model.dao.impl.MusculoDao;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterMusculo;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ManterMusculo implements IManterMusculo {
 
@@ -19,6 +20,12 @@ public class ManterMusculo implements IManterMusculo {
     public Musculo pesquisarPorCodigo(int codMusculo) throws SQLException{
         Musculo resultado = musculoDao.getMusculo(codMusculo);
         return resultado;
+    }
+       
+    @Override
+    public ArrayList <Musculo> listarTodos() throws SQLException {
+        ArrayList <Musculo> listaMusculos = musculoDao.listarTodos();
+        return listaMusculos;
     }
     
     @Override
@@ -35,4 +42,6 @@ public class ManterMusculo implements IManterMusculo {
     public void excluir(int codMusculo) throws SQLException{
         musculoDao.deleteMusculo(codMusculo);
     }     
+
+
 }

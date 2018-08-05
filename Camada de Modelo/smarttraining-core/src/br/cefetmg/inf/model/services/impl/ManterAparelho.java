@@ -19,6 +19,12 @@ public class ManterAparelho implements IManterAparelho {
         Aparelho resultado = aparelhoDao.getAparelho(nroAparelho);
         return resultado;
     }
+    
+    @Override
+    public Aparelho pesquisar(String nomAparelho) throws SQLException{
+        Aparelho resultado = aparelhoDao.getAparelho(nomAparelho);
+        return resultado;
+    }
 
     @Override
     public void cadastrar(Aparelho aparelho) throws SQLException {

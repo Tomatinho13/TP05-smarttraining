@@ -6,7 +6,9 @@ import java.sql.SQLException;
 public interface IManterAparelho {
 
     public Aparelho pesquisar(int nroAparelho) throws SQLException;
-
+    
+    public Aparelho pesquisar(String nomAparelho) throws SQLException;
+    
     public void cadastrar(Aparelho aparelho) throws SQLException;
 
     public void alterar(Aparelho aparelho) throws SQLException;

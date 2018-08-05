@@ -42,6 +42,24 @@ public class AparelhoDao implements IAparelhoDao {
     }
 
     @Override
+    public Aparelho getAparelho(String nomAparelho) throws SQLException {
+        sql = "SELECT * "
+                + "FROM \"Aparelho\" "
+                + "WHERE nom_aparelho = '" + nomAparelho + "'";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+
+        if (resultado.next()) {
+            aparelho = new Aparelho(resultado.getInt("nro_aparelho"), nomAparelho);
+        } else {
+            return null;
+        }
+
+        return aparelho;
+    }
+                   
+    @Override
     public ArrayList<Aparelho> getListaAparelhos() throws SQLException {
         sql = "SELECT * "
                 + "FROM \"Aparelho\" ";

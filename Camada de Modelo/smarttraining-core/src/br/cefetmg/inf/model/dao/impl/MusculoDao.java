@@ -86,4 +86,28 @@ public class MusculoDao implements IMusculoDao {
         stmt.executeQuery(sql);
 
     }
+
+    @Override
+    public ArrayList<Musculo> listarTodos() throws SQLException {
+        ArrayList <Musculo> listaMusculos = new ArrayList<>();
+        
+        sql = "SELECT * FROM \"Musculo\" order by nom_musculo";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        while (resultado.next()) {
+            musculo = new Musculo(resultado.getInt("cod_musculo"),
+                    resultado.getInt("cod_regCorp"),
+                    resultado.getString("nom_musculo"),
+                    resultado.getString("img_musculo"), 
+                    (ArrayList<Exercicio>) resultado.getArray("listaExercicios"));
+            listaMusculos.add(musculo);
+        }
+
+        if (musculo != null) {
+            return null;
+        }
+        return listaMusculos;
+
+    }
 }

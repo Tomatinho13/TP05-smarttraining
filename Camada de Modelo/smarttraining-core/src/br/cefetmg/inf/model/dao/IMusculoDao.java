@@ -2,6 +2,7 @@ package br.cefetmg.inf.model.dao;
 
 import br.cefetmg.inf.model.domain.Musculo;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,4 +13,5 @@ public interface IMusculoDao {
     public void postMusculo(Musculo musculo) throws SQLException;
     public void putMusculo(Musculo musculo) throws SQLException;
     public void deleteMusculo(int codMusculo) throws SQLException;
+    public ArrayList <Musculo> listarTodos() throws SQLException;
 }

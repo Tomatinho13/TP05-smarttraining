@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public interface IAparelhoDao {
     public Aparelho getAparelho(int codAparelho) throws SQLException;
+    public Aparelho getAparelho(String nomAparelho) throws SQLException;
     public ArrayList<Aparelho> getListaAparelhos() throws SQLException;
     public ArrayList<Exercicio> getListaExercicios(int nroAparelho) throws SQLException;
     public void postAparelho(Aparelho aparelho) throws SQLException;
