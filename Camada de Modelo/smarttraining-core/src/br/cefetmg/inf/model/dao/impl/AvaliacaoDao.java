@@ -23,16 +23,16 @@ public class AvaliacaoDao implements IAvaliacaoDao {
     }
 
     @Override
-    public ArrayList<Avaliacao> getListaAvaliacao(String cpf) throws SQLException {
+    public ArrayList<Avaliacao> getListaAvaliacao(String codCpf) throws SQLException {
         ArrayList<Avaliacao> listaAvaliacao = new ArrayList<>();
         sql = "SELECT * "
                 + "FROM \"Avaliacao\" "
-                + "WHERE cod_cpf = '" + cpf + "'";
+                + "WHERE cod_cpf = '" + codCpf + "'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
         while (resultado.next()) {
-            avaliacao = new Avaliacao(cpf,
+            avaliacao = new Avaliacao(codCpf,
                     resultado.getDate("dat_avaliacao").toLocalDate(),
                     resultado.getString("cod_cpf_instrutor"),
                     resultado.getBoolean("idt_recencia"),
@@ -52,7 +52,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                     Double.parseDouble(resultado.getString("tam_coxaDir")),
                     Double.parseDouble(resultado.getString("tam_panturrilhaEsq")),
                     Double.parseDouble(resultado.getString("tam_panturrilhaDir")),
-                    objetivoDao.getAvaliacaoObjetivos(cpf, resultado.getDate("dat_avaliacao").toLocalDate()));
+                    objetivoDao.getAvaliacaoObjetivos(codCpf, resultado.getDate("dat_avaliacao").toLocalDate()));
             listaAvaliacao.add(avaliacao);
         }
 

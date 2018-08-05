@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.model.services;
 
-/**
- *
- * @author Aluno
- */
-public interface IManterObjetivo {
-    
+
+import br.cefetmg.inf.model.domain.Objetivo;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public interface IManterObjetivo{
+    public Objetivo pesquisarPorCodigo(int codObjetivo) throws SQLException;
+    public ArrayList<Objetivo> pesquisarPorAvaliacao(String codCpf, LocalDate dataAvaliacao) throws SQLException;
+    public void cadastrar(Objetivo objetivo) throws SQLException;
+    public void alterar(Objetivo objetivo) throws SQLException;
+    public void excluir(int codRegiao) throws SQLException;
 }

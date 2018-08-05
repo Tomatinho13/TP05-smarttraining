@@ -19,15 +19,15 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public Usuario getAluno(String cpf) throws SQLException {
+    public Usuario getAluno(String codCpf) throws SQLException {
         sql = "SELECT * "
                 + "FROM \"Usuario\" "
-                + "WHERE cod_cpf = '" + cpf + "'";
+                + "WHERE cod_cpf = '" + codCpf + "'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
         if (resultado.next()) {
-            aluno = new Usuario(cpf,
+            aluno = new Usuario(codCpf,
                     resultado.getString("nom_usuario"),
                     resultado.getString("idt_tipo_usuario").charAt(0),
                     resultado.getString("txt_senha"),
@@ -83,9 +83,9 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public void deleteAluno(String cpf) throws SQLException {
+    public void deleteAluno(String codCpf) throws SQLException {
         sql = "DELETE FROM \"Usuario\" "
-                + "WHERE cod_cpf='" + cpf + "'";
+                + "WHERE cod_cpf='" + codCpf + "'";
 
         Statement stmt = conn.createStatement();
         stmt.executeQuery(sql);

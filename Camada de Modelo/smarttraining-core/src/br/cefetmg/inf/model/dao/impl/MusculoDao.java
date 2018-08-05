@@ -22,7 +22,7 @@ public class MusculoDao implements IMusculoDao {
     }
 
     @Override
-    public Musculo getMusculo(String codMusculo) throws SQLException {
+    public Musculo getMusculo(int codMusculo) throws SQLException {
         ArrayList<Exercicio> listaExercicios = new ArrayList<>();
         sql = "SELECT * FROM \"Exercicio\" WHERE cod_exercicio IN("
                 + "SELECT cod_exercicio FROM \"MusculoExercicio\" WHERE cod_musculo IN("
@@ -46,27 +46,6 @@ public class MusculoDao implements IMusculoDao {
             return null;
         }
         return musculo;
-    }
-
-    @Override
-    public ArrayList<Exercicio> getMusculoExercicios(String codMusculo) throws SQLException {
-        ArrayList<Exercicio> listaExercicios = new ArrayList<>();
-
-        sql = "SELECT * FROM \"Exercicio\" WHERE cod_exercicio IN("
-                + "SELECT cod_exercicio FROM \"MusculoExercicio\" WHERE cod_musculo = '" + codMusculo + "')";
-
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-
-        while (resultado.next()) {
-            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), resultado.getString("nom_exercicio"), resultado.getString("des_exercicio")));
-        }
-        if (listaExercicios.isEmpty()) {
-
-            return null;
-        }
-
-        return listaExercicios;
     }
 
     @Override
@@ -100,7 +79,7 @@ public class MusculoDao implements IMusculoDao {
     }
 
     @Override
-    public void deleteMusculo(String codMusculo) throws SQLException {
+    public void deleteMusculo(int codMusculo) throws SQLException {
         sql = "DELETE FROM \"Musculo\" WHERE cod_musculo = '" + codMusculo + "'";
 
         Statement stmt = conn.createStatement();

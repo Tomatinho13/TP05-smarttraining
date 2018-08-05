@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.model.services;
 
-/**
- *
- * @author Aluno
- */
+import br.cefetmg.inf.model.domain.Usuario;
+import java.sql.SQLException;
+
 public interface IManterAluno {
-    
+
+    public Usuario pesquisarPorCpf(String codCpf) throws SQLException;
+
+    public void cadastrar(Usuario aluno) throws SQLException;
+
+    public void alterar(Usuario aluno) throws SQLException;
+
+    public void excluir(String codCpf) throws SQLException;
 }

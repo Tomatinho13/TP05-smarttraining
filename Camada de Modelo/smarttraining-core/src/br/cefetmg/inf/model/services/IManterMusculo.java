@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.model.services;
 
-/**
- *
- * @author Aluno
- */
+import br.cefetmg.inf.model.domain.Musculo;
+import java.sql.SQLException;
+
 public interface IManterMusculo {
-    
+
+    public Musculo pesquisarPorCodigo(int codMusculo) throws SQLException;
+
+    public void cadastrar(Musculo musculo) throws SQLException;
+
+    public void alterar(Musculo musculo) throws SQLException;
+
+    public void excluir(int codMusculo) throws SQLException;
 }

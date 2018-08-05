@@ -15,9 +15,8 @@ import java.util.ArrayList;
  * @author Aluno
  */
 public interface IRegiaoCorporalDao {
-    public RegiaoCorporal getRegiaoCorporal(String codRegiao) throws SQLException;
-    public ArrayList<Exercicio> getRegiaoExercicios(String nomRegiao) throws SQLException;
-    public void postRegiaoCorporal(RegiaoCorporal regiao, String seqMusculo) throws SQLException;
+    public RegiaoCorporal getRegiaoCorporal(int codRegiao) throws SQLException;
+    public void postRegiaoCorporal(RegiaoCorporal regiao, int codMusculo) throws SQLException;
     public void putRegiaoCorporal(RegiaoCorporal regiao) throws SQLException;
-    public void deleteRegiaoCorporal(String codRegiaoCorporal) throws SQLException;
+    public void deleteRegiaoCorporal(int codRegiaoCorporal) throws SQLException;
 }

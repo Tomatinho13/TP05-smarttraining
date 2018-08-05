@@ -95,7 +95,7 @@ public class ObjetivoDao implements IObjetivoDao {
     }
 
     @Override
-    public void deleteAluno(int codObjetivo) throws SQLException {
+    public void deleteObjetivo(int codObjetivo) throws SQLException {
         sql = "DELETE FROM \"Objetivo\" "
                 + "WHERE cod_objetivo='" + codObjetivo + "'";
 

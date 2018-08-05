@@ -23,7 +23,7 @@ public class ExercicioDao implements IExercicioDao {
     }
 
     @Override
-    public Exercicio getExercicio(String codExercicio) throws SQLException {
+    public Exercicio getExercicio(int codExercicio) throws SQLException {
         sql = "SELECT * "
                 + "FROM \"Exercicio\""
                 + "WHERE cod_exercicio = '" + codExercicio + "'";
@@ -32,7 +32,7 @@ public class ExercicioDao implements IExercicioDao {
         ResultSet resultado = stmt.executeQuery(sql);
 
         if (resultado.next()) {
-            exercicio = new Exercicio(Integer.parseInt(codExercicio),
+            exercicio = new Exercicio(codExercicio,
                     resultado.getString("nom_exercicio"),
                     resultado.getString("des_exercicio"));
         } else {
@@ -68,21 +68,69 @@ public class ExercicioDao implements IExercicioDao {
 
         return aparelhoExercicio;
     }
+    
+    @Override
+    public ArrayList<Exercicio> getRegiaoExercicios(String nomRegiao) throws SQLException {
+        ArrayList<Exercicio> listaExercicios = new ArrayList<>();
+        sql = "SELECT * FROM \"Exercicio\" "
+                + "WHERE cod_exercicio in ("
+                + "SELECT cod_exercicio FROM \"MusculoExercicio\" "
+                + "WHERE cod_musculo IN ("
+                + "SELECT cod_musculo FROM \"Musculo\" "
+                + "WHERE \"cod_regCorp\" IN ("
+                + "SELECT \"cod_regCorp\" FROM \"RegiaoCorporal\" "
+                + "WHERE \"nom_regCorp\" = '" + nomRegiao + "')))";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        while (resultado.next()) {
+            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"),
+                    resultado.getString("nom_regiao"),
+                    resultado.getString("des_regiao")));
+        }
+        if (listaExercicios.isEmpty()) {
+
+            return null;
+        }
+
+        return listaExercicios;
+    }
+    
+    @Override
+    public ArrayList<Exercicio> getMusculoExercicios(int codMusculo) throws SQLException {
+        ArrayList<Exercicio> listaExercicios = new ArrayList<>();
+
+        sql = "SELECT * FROM \"Exercicio\" WHERE cod_exercicio IN("
+                + "SELECT cod_exercicio FROM \"MusculoExercicio\" WHERE cod_musculo = '" + codMusculo + "')";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+
+        while (resultado.next()) {
+            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), resultado.getString("nom_exercicio"), resultado.getString("des_exercicio")));
+        }
+        if (listaExercicios.isEmpty()) {
+
+            return null;
+        }
+
+        return listaExercicios;
+    }
 
     @Override
-    public void postExercicio(Exercicio exercicio, String seqMusculo) throws SQLException {
+    public void postExercicio(Exercicio exercicio, int codMusculo) throws SQLException {
         sql = "INSERT INTO \"Exercicio\" (nom_exercicio, des_exercicio) VALUES (?, ?);"
                 + "INSERT INTO \"MusculoExercicio\" VALUES"
                 + "               ((SELECT cod_exercicio FROM \"Exercicio\" "
                 + "WHERE nomExercicio=?),"
-                + "               (SELECT seq_musculo FROM \"Musculo\" "
-                + "WHERE seq_musculo=?))";
+                + "               (SELECT cod_musculo FROM \"Musculo\" "
+                + "WHERE cod_musculo=?))";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, exercicio.getNomeExercicio());
         stmt.setString(2, exercicio.getDescricaoExercicio());
         stmt.setString(3, exercicio.getNomeExercicio());
-        stmt.setString(4, seqMusculo);
+        stmt.setString(4, String.valueOf(codMusculo));
 
         stmt.executeQuery(sql);
 
@@ -103,12 +151,12 @@ public class ExercicioDao implements IExercicioDao {
     }
 
     @Override
-    public void deleteExercicio(String cod_exercicio) throws SQLException {
+    public void deleteExercicio(int codExercicio) throws SQLException {
         sql = "DELETE FROM \"Exercicio\" "
                 + "WHERE cod_exercicio=?";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, cod_exercicio);
+        stmt.setString(1, String.valueOf(codExercicio));
 
         stmt.executeQuery(sql);
 

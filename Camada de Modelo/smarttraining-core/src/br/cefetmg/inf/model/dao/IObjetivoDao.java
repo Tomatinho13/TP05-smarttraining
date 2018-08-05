@@ -13,6 +13,6 @@ public interface IObjetivoDao {
     public ArrayList<Objetivo> getAvaliacaoObjetivos(String codCpf, LocalDate nroAvaliacao) throws SQLException;
     public void postObjetivo(Objetivo objetivo) throws SQLException;
     public void putObjetivo(Objetivo objetivo) throws SQLException;
-    public void deleteAluno(int codObjetivo) throws SQLException;
+    public void deleteObjetivo(int codObjetivo) throws SQLException;
     public Objetivo getObjetivo(int codObjetivo) throws SQLException;
 }

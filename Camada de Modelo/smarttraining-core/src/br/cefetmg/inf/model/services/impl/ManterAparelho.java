@@ -1,14 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.model.services.impl;
 
-/**
- *
- * @author Aluno
- */
-public class ManterAparelho {
-    
+import br.cefetmg.inf.model.dao.IAparelhoDao;
+import br.cefetmg.inf.model.dao.impl.AparelhoDao;
+import br.cefetmg.inf.model.domain.Aparelho;
+import br.cefetmg.inf.model.services.IManterAparelho;
+import java.sql.SQLException;
+
+public class ManterAparelho implements IManterAparelho {
+
+    private IAparelhoDao aparelhoDao;
+
+    public ManterAparelho() {
+        aparelhoDao = new AparelhoDao();
+    }
+
+    @Override
+    public Aparelho pesquisar(int nroAparelho) throws SQLException {
+        Aparelho resultado = aparelhoDao.getAparelho(nroAparelho);
+        return resultado;
+    }
+
+    @Override
+    public void cadastrar(Aparelho aparelho) throws SQLException {
+        aparelhoDao.postAparelho(aparelho);
+    }
+
+    @Override
+    public void alterar(Aparelho aparelho) throws SQLException {
+        aparelhoDao.putAparelho(aparelho);
+    }
+
+    @Override
+    public void excluir(int nroAparelho) throws SQLException {
+        aparelhoDao.deleteAparelho(nroAparelho);
+    }
 }

@@ -22,16 +22,16 @@ public class AparelhoDao implements IAparelhoDao {
     }
 
     @Override
-    public Aparelho getAparelho(String codAparelho) throws SQLException {
+    public Aparelho getAparelho(int nroAparelho) throws SQLException {
         sql = "SELECT * "
                 + "FROM \"Aparelho\" "
-                + "WHERE nro_aparelho = '" + codAparelho + "'";
+                + "WHERE nro_aparelho = '" + nroAparelho + "'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
 
         if (resultado.next()) {
-            aparelho = new Aparelho(Integer.parseInt(codAparelho),
+            aparelho = new Aparelho(nroAparelho,
                     resultado.getString("nom_aparelho"));
         } else {
 
@@ -107,7 +107,7 @@ public class AparelhoDao implements IAparelhoDao {
     }
 
     @Override
-    public void deleteAparelho(String nroAparelho) throws SQLException {
+    public void deleteAparelho(int nroAparelho) throws SQLException {
         sql = "DELETE FROM \"Aparelho\" "
                 + "WHERE nro_aparelho='" + nroAparelho + "'";
 

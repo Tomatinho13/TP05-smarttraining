@@ -1,14 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.model.services;
 
-/**
- *
- * @author Aluno
- */
+import br.cefetmg.inf.model.domain.AparelhoExercicio;
+import br.cefetmg.inf.model.domain.Exercicio;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+
 public interface IManterExercicio {
-    
+    public Exercicio pesquisarPorCodigo(int codExercicio) throws SQLException;
+    public AparelhoExercicio pesquisarAparelhoExercicio(int codExercicio, int nroAparelho) throws SQLException;
+    public ArrayList<Exercicio> pesquisarPorRegiao(String nomeRegiao) throws SQLException;
+    public ArrayList<Exercicio> pesquisarPorMusculo(int codMusculo) throws SQLException;
+    public void cadastrar(Exercicio exercicio, int codMusculo) throws SQLException;
+    public void alterar(Exercicio exercicio) throws SQLException;
+    public void excluir(int codExercicio) throws SQLException;
 }
