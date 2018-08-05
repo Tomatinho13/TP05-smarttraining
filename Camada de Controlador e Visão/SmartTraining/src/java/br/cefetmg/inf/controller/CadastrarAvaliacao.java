@@ -55,7 +55,7 @@ public class CadastrarAvaliacao {
         avaliacao.setTamanhoPanturrilhaDireita(tamanhoPanturrilhaDireita);
         avaliacao.setTamanhoPanturrilhaEsquerda(tamanhoPanturrilhaEsquerda);
         
-
+        
         try {
             manterAvaliacao.cadastrar(avaliacao);
         } catch (SQLException ex) {

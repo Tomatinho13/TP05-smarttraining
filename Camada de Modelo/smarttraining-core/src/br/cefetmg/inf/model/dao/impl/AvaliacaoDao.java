@@ -37,13 +37,13 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                     resultado.getString("cod_cpf_instrutor"),
                     resultado.getBoolean("idt_recencia"),
                     Double.parseDouble(resultado.getString("qtd_peso")),
-                    Double.parseDouble(resultado.getString("qtd_gordura")),
+                    Double.parseDouble(resultado.getString("qtd_massaGorda")),
+                    Double.parseDouble(resultado.getString("qtd_percGordura")),
                     Double.parseDouble(resultado.getString("tam_pescoco")),
                     Double.parseDouble(resultado.getString("tam_ombro")),
                     Double.parseDouble(resultado.getString("tam_torax")),
                     Double.parseDouble(resultado.getString("tam_abdomen")),
                     Double.parseDouble(resultado.getString("tam_cintura")),
-                    Double.parseDouble(resultado.getString("tam_quadril")),
                     Double.parseDouble(resultado.getString("tam_bracoEsq")),
                     Double.parseDouble(resultado.getString("tam_bracoDir")),
                     Double.parseDouble(resultado.getString("tam_antebracoEsq")),
@@ -52,7 +52,8 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                     Double.parseDouble(resultado.getString("tam_coxaDir")),
                     Double.parseDouble(resultado.getString("tam_panturrilhaEsq")),
                     Double.parseDouble(resultado.getString("tam_panturrilhaDir")),
-                    objetivoDao.getAvaliacaoObjetivos(codCpf, resultado.getDate("dat_avaliacao").toLocalDate()));
+                    objetivoDao.getAvaliacaoObjetivos(codCpf, resultado.getDate("dat_avaliacao").toLocalDate()),
+                    Double.parseDouble(resultado.getString("tam_quadril")));
             listaAvaliacao.add(avaliacao);
         }
 
@@ -87,6 +88,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.setString(18, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
         stmt.setString(19, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
         stmt.setString(20, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
+        stmt.setString(21, String.valueOf(avaliacao.getMassaGorda()));
         stmt.executeQuery(sql);
 
         sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES (?, ?, ?)";
@@ -121,6 +123,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "tam_abdomen=? "
                 + "tam_cintura=? "
                 + "tam_quadril=? "
+                + "qtd_massaGorda=?"
                 + "tam_bracoEsq=? "
                 + "tam_bracoDir=? "
                 + "tam_antebracoEsq=? "
@@ -150,8 +153,9 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
         stmt.setString(17, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
         stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-        stmt.setString(19, avaliacao.getCodCpfAluno());
-        stmt.setString(20, avaliacao.getDatAvaliacao().toString());
+        stmt.setString(19, String.valueOf(avaliacao.getMassaGorda()));
+        stmt.setString(20, avaliacao.getCodCpfAluno());
+        stmt.setString(21, avaliacao.getDatAvaliacao().toString());
 
         stmt.executeQuery(sql);
 

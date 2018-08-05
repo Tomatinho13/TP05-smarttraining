@@ -161,4 +161,22 @@ public class ExercicioDao implements IExercicioDao {
         stmt.executeQuery(sql);
 
     }
+
+    @Override
+    public Exercicio getExercicio(String nomeExercicio) throws SQLException {
+        sql = "SELECT * "
+                + "FROM \"Exercicio\""
+                + "WHERE nom_exercicio = '" + nomeExercicio + "'";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+
+        if (resultado.next()) {
+            exercicio = new Exercicio(resultado.getInt("cod_exercicio"),nomeExercicio, 
+                                      resultado.getString("des_exercicio"));
+        } else {
+            return null;
+        }
+        return exercicio;
+    }
 }

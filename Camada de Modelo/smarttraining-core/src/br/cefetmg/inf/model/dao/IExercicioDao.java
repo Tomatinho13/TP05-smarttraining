@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public interface IExercicioDao {
     public Exercicio getExercicio(int codExercicio) throws SQLException;
+    public Exercicio getExercicio (String nomeExercicio) throws SQLException;
     public AparelhoExercicio getAparelhoExercicio(int codExercicio, int nroAparelho) throws SQLException;
     public ArrayList<Exercicio> getRegiaoExercicios(String nomRegiao) throws SQLException;
     public ArrayList<Exercicio> getMusculoExercicios(int codMusculo) throws SQLException;
