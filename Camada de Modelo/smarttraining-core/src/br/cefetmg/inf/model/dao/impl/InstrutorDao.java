@@ -25,7 +25,7 @@ public class InstrutorDao implements IInstrutorDao {
                 + "JOIN \"Instrutor\""
                 + "USING(cod_cpf) "
                 + "GROUP BY cod_cpf, nro_cref "
-                + "HAVING cod_cpf='" + cpf + "'";
+                + "HAVING cod_cpf='" + cpf + "' AND idt_tipo_usuario = 'I'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);

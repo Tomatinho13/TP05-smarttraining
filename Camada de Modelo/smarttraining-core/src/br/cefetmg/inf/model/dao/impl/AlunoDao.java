@@ -22,7 +22,7 @@ public class AlunoDao implements IAlunoDao {
     public Usuario getAluno(String codCpf) throws SQLException {
         sql = "SELECT * "
                 + "FROM \"Usuario\" "
-                + "WHERE cod_cpf = '" + codCpf + "'";
+                + "WHERE cod_cpf = '" + codCpf + "' AND idt_tipo_usuario = 'A'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
