@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="model.classes.Ficha" %>
-<%@page import="model.classes.Treino" %>
-<%@page import="model.classes.Exercicio" %>
+<%@page import="br.cefetmg.inf.model.domain.Ficha" %>
+<%@page import="br.cefetmg.inf.model.domain.Treino" %>
+<%@page import="br.cefetmg.inf.model.domain.Exercicio" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,7 @@
                 ficha = request.getParameter("ficha");
                 request.setAttribute("ficha", ficha);
 
-                List listaTreinos = (List) request.getAttribute("treinos");
+                List <Treino> listaTreinos = (List) request.getAttribute("treinos");
 
                 for (int i = 0; i < listaTreinos.size(); i++) {
                     treino = listaTreinos.get(i);
@@ -49,7 +49,7 @@
 
             <%
                 request.setAttribute("treino", treino);
-                List listaExercicios = (List) request.getAttribute("exercicios");
+                List <Exercicio> listaExercicios = (List) request.getAttribute("exercicios");
 
                     for (int j = 0; j < listaExercicios.size(); j++) {
                         exercicio = listaExercicios.get(j);

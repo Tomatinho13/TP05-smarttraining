@@ -4,7 +4,7 @@
     Author     : Matheus
 --%>
 <%@page import="java.util.List"%>
-<%@page import="model.classes.Usuario" %>
+<%@page import="br.cefetmg.inf.model.domain.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -1,84 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>AlunoServlet</servlet-name>
-        <servlet-class>controller.servlets.AlunoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AparelhoServlet</servlet-name>
-        <servlet-class>controller.servlets.AparelhoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AvaliacaoServlet</servlet-name>
-        <servlet-class>controller.servlets.AvaliacaoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ExercicioServlet</servlet-name>
-        <servlet-class>controller.servlets.ExercicioServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>FichaServlet</servlet-name>
-        <servlet-class>controller.servlets.FichaServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>InstrutorServlet</servlet-name>
-        <servlet-class>controller.servlets.InstrutorServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>MusculoServlet</servlet-name>
-        <servlet-class>controller.servlets.MusculoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ObjetivoServlet</servlet-name>
-        <servlet-class>controller.servlets.ObjetivoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RegiaoCorporalServlet</servlet-name>
-        <servlet-class>controller.servlets.RegiaoCorporalServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TreinoServlet</servlet-name>
-        <servlet-class>controller.servlets.TreinoServlet</servlet-class>
+        <servlet-name>ServletWeb</servlet-name>
+        <servlet-class>.ServletWeb</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AlunoServlet</servlet-name>
-        <url-pattern>/aluno</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AparelhoServlet</servlet-name>
-        <url-pattern>/aparelho</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AvaliacaoServlet</servlet-name>
-        <url-pattern>/avaliacao</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ExercicioServlet</servlet-name>
-        <url-pattern>/exercicio</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FichaServlet</servlet-name>
-        <url-pattern>/ficha</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>InstrutorServlet</servlet-name>
-        <url-pattern>/instrutor</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>MusculoServlet</servlet-name>
-        <url-pattern>/musculo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ObjetivoServlet</servlet-name>
-        <url-pattern>/objetivo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RegiaoCorporalServlet</servlet-name>
-        <url-pattern>/regiaoCorporal</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TreinoServlet</servlet-name>
-        <url-pattern>/treino</url-pattern>
+        <servlet-name>ServletWeb</servlet-name>
+        <url-pattern>/servletweb</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

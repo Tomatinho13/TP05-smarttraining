@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="model.classes.Ficha" %>
+<%@page import="br.cefetmg.inf.model.domain.Ficha" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,7 @@
             <ul class="list-group">
                 <%
                     Ficha ficha = new Ficha();
-                    List listaFichas = (List) request.getAttribute("fichas");
+                    List <Ficha> listaFichas = (List) request.getAttribute("fichas");
 
                     for(int i=0; i<listaFichas.size(); i++){
                         ficha = listaFichas.get(i);

@@ -4,7 +4,7 @@
     Author     : Felipe
 --%>
 
-<%@page import="model.classes.Avaliacao" %>
+<%@page import="br.cefetmg.inf.model.domain.Avaliacao" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -106,10 +106,10 @@
                     <td> <%=avaliacao.getTamanhoBracoDireito() %> </td>
                 </tr>
                 <tr>
-                    <td> <%=avaliacao.getTamanhoAnteBracoEsquerdo() %> </td>
+                    <td> <%=avaliacao.getTamanhoAntebracoEsquerdo() %> </td>
                 </tr>
                 <tr>
-                    <td> <%=avaliacao.getTamanhoAnteBracoDireito() %> </td>
+                    <td> <%=avaliacao.getTamanhoAntebracoDireito() %> </td>
                 </tr>
                 <tr>
                     <td> <%=avaliacao.getTamanhoCoxaEsquerda() %> </td>

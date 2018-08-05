@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="model.classes.Musculo" %>
-<%@page import="model.classes.Exercicio" %>
+<%@page import="br.cefetmg.inf.model.domain.Musculo" %>
+<%@page import="br.cefetmg.inf.model.domain.Exercicio" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,17 +32,17 @@
                 <%
                     Musculo musculo = new Musculo();
                     Exercicio exercicio = new Exercicio();
-                    List listaMusculos = (List) request.getAttribute("musculos");
+                    List <Musculo> listaMusculos = (List) request.getAttribute("musculos");
 
                     for(int i=0; i<listaMusculos.size(); i++){
                         musculo = listaMusculos.get(i);
                 %>
-                <li class="list-group-item"> <h3> <%= musculo.getNomeMusculo() %> </h3> </li>
+                <li class="list-group-item"> <h3> <%= musculo.getNomMusculo() %> </h3> </li>
                 <li>
                     <ul class="list-group">
                         <%
-                                request.setAttribute("nomeMusculo", musculo.getNomeMusculo());
-                                List listaExercicios = (List) request.getAttribute("exercicios");
+                                request.setAttribute("nomeMusculo", musculo.getNomMusculo());
+                                List <Exercicio> listaExercicios = (List) request.getAttribute("exercicios");
 
                                 for(int j=0; j<listaExercicios.size(); j++){
                                     exercicio = listaExercicios.get(j);
