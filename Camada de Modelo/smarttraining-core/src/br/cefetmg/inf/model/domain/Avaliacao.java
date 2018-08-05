@@ -48,10 +48,9 @@ public class Avaliacao {
 
     public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, 
             double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, 
-            double tamanhoCintura, double massaGorda, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, 
-            double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, 
-            double tamanhoCoxaDireita, double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita, 
-            ArrayList<Objetivo> listaObjetivos, double tamanhoQuadril) {
+            double tamanhoCintura, double tamanhoQuadril, double massaGorda, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, 
+            double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, 
+            double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita, ArrayList<Objetivo> listaObjetivos) {
         this.codCpfAluno = codCpfAluno;
         this.datAvaliacao = datAvaliacao;
         this.codCpfInstrutor = codCpfInstrutor;
@@ -63,6 +62,7 @@ public class Avaliacao {
         this.tamanhoTorax = tamanhoTorax;
         this.tamanhoAbdomen = tamanhoAbdomen;
         this.tamanhoCintura = tamanhoCintura;
+        this.tamanhoQuadril = tamanhoQuadril;
         this.massaGorda = massaGorda;
         this.tamanhoBracoEsquerdo = tamanhoBracoEsquerdo;
         this.tamanhoBracoDireito = tamanhoBracoDireito;
@@ -72,8 +72,7 @@ public class Avaliacao {
         this.tamanhoCoxaDireita = tamanhoCoxaDireita;
         this.tamanhoPanturrilhaEsquerda = tamanhoPanturrilhaEsquerda;
         this.tamanhoPanturrilhaDireita = tamanhoPanturrilhaDireita;
-        this.listaObjetivos = new ArrayList<>(listaObjetivos);
-        this.tamanhoQuadril = tamanhoQuadril;
+        this.listaObjetivos = listaObjetivos;
     }
 
     public double getTamanhoQuadril() {
