@@ -15,11 +15,13 @@ public class CadastrarAvaliacao {
         String jsp = "";
         double peso = Double.parseDouble(request.getParameter("peso"));
         double percentualGordura = Double.parseDouble(request.getParameter("percentualGordura"));
+        double massaGorda = Double.parseDouble(request.getParameter("massaGorda"));
         double tamanhoPescoco = Double.parseDouble(request.getParameter("tamanhoPescoco"));
         double tamanhoOmbro = Double.parseDouble(request.getParameter("tamanhoOmbro"));
         double tamanhoTorax = Double.parseDouble(request.getParameter("tamanhoTorax"));
         double tamanhoAbdomen = Double.parseDouble(request.getParameter("tamanhoAbdomen"));
         double tamanhoCintura = Double.parseDouble(request.getParameter("tamanhoCintura"));
+        double tamanhoQuadril = Double.parseDouble(request.getParameter("tamanhoQuadril"));
         double tamanhoBracoDireito = Double.parseDouble(request.getParameter("tamanhoBracoDireito"));
         double tamanhoBracoEsquerdo = Double.parseDouble(request.getParameter("tamanhoBracoEsquerdo"));
         double tamanhoAntebracoDireito = Double.parseDouble(request.getParameter("tamanhoAnteBracoDireito"));
@@ -32,23 +34,26 @@ public class CadastrarAvaliacao {
         Avaliacao avaliacao = new Avaliacao();
         IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
         LocalDate dataAvaliacao = LocalDate.now();
+        request.getAttribute("cod_cpf");
         
         //Erro: O cpf do aluno não vem pelo request porque ele foi selecionado antes. Como pegá-lo?
-        avaliacao.setCodCpfAluno();
+        avaliacao.setCodCpfAluno((String) request.getAttribute("codCpfAluno"));
         avaliacao.setDatAvaliacao(dataAvaliacao);
         //Erro: O código do instrutor não vem pelo request, mas ele está logado no sistema. Como pegá-lo?
-        avaliacao.setCodCpfInstrutor();
+        avaliacao.setCodCpfInstrutor((String) request.getAttribute("codCpfInstrutor"));
         avaliacao.setIdtRecencia(true);
         //Erro: A lista de objetivos não vem pelo request.
-        avaliacao.setListaObjetivos();
+        //avaliacao.setListaObjetivos();
         
         avaliacao.setPeso(peso);
         avaliacao.setPercentualGordura(percentualGordura);
+        avaliacao.setMassaGorda(massaGorda);
         avaliacao.setTamanhoPescoco(tamanhoPescoco);
         avaliacao.setTamanhoOmbro(tamanhoOmbro);
         avaliacao.setTamanhoTorax(tamanhoTorax);
         avaliacao.setTamanhoAbdomen(tamanhoAbdomen);
         avaliacao.setTamanhoCintura(tamanhoCintura);
+        avaliacao.setTamanhoQuadril(tamanhoQuadril);
         avaliacao.setTamanhoBracoDireito(tamanhoBracoDireito);
         avaliacao.setTamanhoBracoEsquerdo(tamanhoBracoEsquerdo);
         avaliacao.setTamanhoAntebracoDireito(tamanhoAntebracoDireito);
@@ -64,7 +69,7 @@ public class CadastrarAvaliacao {
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarAvaliacao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jsp = "/TelaInicialInstrutor.jsp";
+        jsp = "/TelaInicialAluno.jsp";
         return jsp;
     }
 }

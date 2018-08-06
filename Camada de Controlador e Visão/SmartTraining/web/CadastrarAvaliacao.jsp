@@ -4,6 +4,8 @@
     Author     : Felipe
 --%>
 
+<%@page import="br.cefetmg.inf.model.domain.Instrutor"%>
+<%@page import="br.cefetmg.inf.model.domain.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +24,18 @@
 
     <form action="ServletWeb" method="post">
         <input type="hidden" name="acao" value="CadastrarAvaliacao">
+        <%
+            Usuario usuario = (Usuario) request.getAttribute("usuario");
+            Instrutor instrutor = (Instrutor) session.getAttribute("instrutor");
+        %>
         
+        <input type = "hidden" name = "codCpfAluno" value="
+               <%= request.setAttribute("codCpfAluno", usuario.getCodCpf()) %>" 
+        />
+        <input type = "hidden" name = "codCpfInstrutor" value="
+               <%= request.setAttribute("codCpfInstrutor", instrutor.getCodCpf() %>"
+        />
+
         <label for="peso" class="form">Peso: </label>
         <input type="number" name="peso" class="form-control" max="300" min="0">
         <br>
@@ -54,7 +67,11 @@
         <label for="tamanhoCintura" class="form">Tamanho da cintura: </label>
         <input type="number" name="tamanhoCintura" class="form-control" max="10000" min="0">
         <br>
-
+        
+        <label for="tamanhoQuadril" class="form">Tamanho do quadril: </label>
+        <input type="number" name="tamanhoQuadril" class="form-control" max="10000" min="0">
+        <br>
+               
         <label for="tamanhoBracoEsquerdo" class="form">Tamanho do braço esquerdo: </label>
         <input type="number" name="tamanhoBracoEsquerdo" class="form-control" max="10000" min="0">
         <br>
