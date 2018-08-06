@@ -22,12 +22,12 @@ public class FazerLogin{
             Usuario usuario = manterAluno.pesquisarPorCpf(cpf);
             Instrutor instrutor;
             if(usuario.getTxtSenha()==senha){
-                jsp=MostrarFichas.execute(request); //ainda nao implementado
+                jsp="TelaInicialAluno.jsp"; //ainda nao implementado
             }
             else{
                 instrutor = manterInstrutor.pesquisarPorCpf(cpf);
                 if(usuario.getTxtSenha()==senha){
-                    jsp=MostrarFichas.execute(request); //ainda nao implementado
+                    jsp="TelaInicialAluno.jsp"; //ainda nao implementado
                 }
                 jsp="/erro.jsp";
             }
