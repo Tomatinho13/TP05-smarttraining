@@ -103,4 +103,21 @@ public class ObjetivoDao implements IObjetivoDao {
         stmt.executeQuery(sql);
 
     }
+
+    @Override
+    public Objetivo getObjetivo(String nome) throws SQLException {
+        sql = "SELECT * FROM \"Objetivo\" "
+                + "WHERE nom_objetivo='" + nome + "'";
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+
+        if (resultado.next()) {
+            objetivo = new Objetivo(resultado.getInt("cod_objetivo"),
+                    nome,
+                    resultado.getString("des_objetivo"));
+        } else {
+            return null;
+        }
+        return objetivo;
+    }
 }

@@ -4,6 +4,7 @@
     Author     : Felipe
 --%>
 
+<%@page import="br.cefetmg.inf.model.domain.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.inf.model.domain.Avaliacao" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +19,15 @@
                 list-style-type: none;
             }
         </style>
-
+        
+        <%
+            Usuario usuario = (Usuario) request.getAttribute("usuario");
+        %>
+        
+        <input type = "hidden" name = "codCpfAluno" value="
+               <%= request.setAttribute("codCpfAluno", usuario.getCodCpf()) %>" 
+        />
+        
         <title>Lista de Avaliacoes</title>
     </head>
     <body>

@@ -10,7 +10,7 @@
 		<br>
 		<h2>SmartTraining</h2>
 		<br>
-		<form>	
+                <form>
 			<label for="username" class="form">Nome de usuário: </label>
 			<input type="text" name="username" class="form-control">
 			<br>

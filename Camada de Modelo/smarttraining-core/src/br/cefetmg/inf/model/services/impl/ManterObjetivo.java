@@ -22,6 +22,12 @@ public class ManterObjetivo implements IManterObjetivo {
         Objetivo resultado = objetivoDao.getObjetivo(codObjetivo);
         return resultado;
     }
+        
+    @Override
+    public Objetivo pesquisarPorNome(String nome) throws SQLException {
+        Objetivo objetivo = objetivoDao.getObjetivo(nome);
+        return objetivo;
+    }
     
     @Override
     public ArrayList<Objetivo> pesquisarPorAvaliacao(String codCpf, LocalDate dataAvaliacao) throws SQLException {

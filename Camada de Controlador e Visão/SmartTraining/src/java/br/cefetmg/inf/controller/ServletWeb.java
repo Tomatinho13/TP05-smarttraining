@@ -30,6 +30,8 @@ public class ServletWeb extends HttpServlet {
             jsp = ListarAvaliacoes.execute(request);
         else if (acao.equals("ListarExercicios"))
             jsp = ListarExercicios.execute(request);
+        else if (acao.equals("ListarFichas"))
+            jsp = ListarFichas.execute(request);
         else if (acao.equals("ListarUsuarios"))
             jsp = ListarUsuarios.execute(request);
         else if (acao.equals("RemoverExercicio"))

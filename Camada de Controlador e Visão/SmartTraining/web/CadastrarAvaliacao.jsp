@@ -114,7 +114,7 @@
                 objetivo = listaObjetivos.get(i);
         %>
 
-        <input type="checkbox" name="aparelho" value="<%= objetivo.getNomObjetivo() %>">
+        <input type="checkbox" name="objetivo" value="<%= objetivo.getNomObjetivo() %>">
 
         <%
             }

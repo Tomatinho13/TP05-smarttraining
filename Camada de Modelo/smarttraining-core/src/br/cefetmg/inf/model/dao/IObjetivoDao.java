@@ -15,4 +15,5 @@ public interface IObjetivoDao {
     public void putObjetivo(Objetivo objetivo) throws SQLException;
     public void deleteObjetivo(int codObjetivo) throws SQLException;
     public Objetivo getObjetivo(int codObjetivo) throws SQLException;
+    public Objetivo getObjetivo(String nome) throws SQLException;
 }

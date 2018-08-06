@@ -1,10 +1,14 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Avaliacao;
+import br.cefetmg.inf.model.domain.Objetivo;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
+import br.cefetmg.inf.model.services.IManterObjetivo;
 import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
+import br.cefetmg.inf.model.services.impl.ManterObjetivo;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -34,17 +38,27 @@ public class CadastrarAvaliacao {
         Avaliacao avaliacao = new Avaliacao();
         IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
         LocalDate dataAvaliacao = LocalDate.now();
-        request.getAttribute("cod_cpf");
         
-        //Erro: O cpf do aluno não vem pelo request porque ele foi selecionado antes. Como pegá-lo?
         avaliacao.setCodCpfAluno((String) request.getAttribute("codCpfAluno"));
         avaliacao.setDatAvaliacao(dataAvaliacao);
-        //Erro: O código do instrutor não vem pelo request, mas ele está logado no sistema. Como pegá-lo?
         avaliacao.setCodCpfInstrutor((String) request.getAttribute("codCpfInstrutor"));
         avaliacao.setIdtRecencia(true);
-        //Erro: A lista de objetivos não vem pelo request.
-        //avaliacao.setListaObjetivos();
+       
+        String objetivos[] = request.getParameterValues("objetivo");
+        ArrayList <Objetivo> listaObjetivos = new ArrayList<>();
+        IManterObjetivo manterObjetivo = new ManterObjetivo();
+        Objetivo obj = new Objetivo();
         
+         for (String objetivo : objetivos) {
+            try {
+               obj = manterObjetivo.pesquisarPorNome(objetivo);
+               listaObjetivos.add(obj);
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastrarAvaliacao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+         
+        avaliacao.setListaObjetivos(listaObjetivos);     
         avaliacao.setPeso(peso);
         avaliacao.setPercentualGordura(percentualGordura);
         avaliacao.setMassaGorda(massaGorda);

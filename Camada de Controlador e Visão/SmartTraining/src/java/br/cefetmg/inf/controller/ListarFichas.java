@@ -12,8 +12,8 @@ public class ListarFichas {
         
          try {
             IManterFicha manterFicha = new ManterFicha();
-            //Erro: falta o código cpf para o retorno da lista de fichas. Mesmo problema do cadastro de avaliações.
-            ArrayList<Ficha> listaFichas = manterFicha.pesquisarPorAluno();
+            String codCpfAluno = (String) request.getAttribute("codCpfAluno");
+            ArrayList<Ficha> listaFichas = manterFicha.pesquisarPorAluno(codCpfAluno);
             
             if (listaFichas != null) {
                 request.setAttribute("listaFichas", listaFichas);

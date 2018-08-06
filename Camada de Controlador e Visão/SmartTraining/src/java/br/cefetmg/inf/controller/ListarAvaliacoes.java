@@ -12,8 +12,8 @@ public class ListarAvaliacoes {
         
          try {
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            //Erro: O cpf do aluno não vem pelo request porque ele foi selecionado antes. Como pegá-lo?
-            ArrayList <Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno();
+            String codCpfAluno = (String) request.getAttribute("codCpfAluno");
+            ArrayList <Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(codCpfAluno);
             
             if (listaAvaliacoes != null) {
                 request.setAttribute("listaAvaliacoes", listaAvaliacoes);
