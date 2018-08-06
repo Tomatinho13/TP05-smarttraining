@@ -35,7 +35,11 @@
                 </select>
                 
                 <input type="submit" name="removerExercicio" class="btn btn-primary" value="Remover">
-            </form>  
+            </form>
+                
+            <form action="TelaInicialAluno.jsp">
+                <input type="submit" value="Voltar">
+            </form>
         </div>
     </body>
 </html>

@@ -4,6 +4,8 @@
     Author     : Felipe
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="br.cefetmg.inf.model.domain.Objetivo"%>
 <%@page import="br.cefetmg.inf.model.domain.Instrutor"%>
 <%@page import="br.cefetmg.inf.model.domain.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -103,9 +105,26 @@
         <label for="tamanhoPanturrilhaDireita" class="form">Tamanho da panturrilha direita: </label>
         <input type="number" name="tamanhoPanturrilhaDireita" class="form-control" max="10000" min="0">
         <br>
+        
+        <%
+            Objetivo objetivo = new Objetivo();
+            List<Objetivo> listaObjetivos = (List) request.getAttribute("objetivos");
+
+            for(int i=0; i<listaObjetivos.size(); i++){
+                objetivo = listaObjetivos.get(i);
+        %>
+
+        <input type="checkbox" name="aparelho" value="<%= objetivo.getNomObjetivo() %>">
+
+        <%
+            }
+        %>
 
         <input type="submit" name="Cadastrar" class="btn btn-primary" value="Cadastrar">
-        <input type="button" name="Voltar" class="btn btn-primary" value="Voltar">
+    </form>
+    
+    <form action="TelaInicialAluno.jsp">
+        <input type="submit" value="Voltar">
     </form>
     
     </div>

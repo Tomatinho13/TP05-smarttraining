@@ -43,6 +43,10 @@
             </ul>
 
         </div>
+        <br>
+        <form action="TelaInicialAluno.jsp">
+            <input type="submit" value="Voltar">
+        </form>
     </body>
 </html>
 
