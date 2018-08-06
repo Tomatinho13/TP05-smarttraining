@@ -33,10 +33,13 @@ public class CadastrarAvaliacao {
         IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
         LocalDate dataAvaliacao = LocalDate.now();
         
+        //Erro: O cpf do aluno não vem pelo request porque ele foi selecionado antes. Como pegá-lo?
         avaliacao.setCodCpfAluno();
         avaliacao.setDatAvaliacao(dataAvaliacao);
+        //Erro: O código do instrutor não vem pelo request, mas ele está logado no sistema. Como pegá-lo?
         avaliacao.setCodCpfInstrutor();
         avaliacao.setIdtRecencia(true);
+        //Erro: A lista de objetivos não vem pelo request.
         avaliacao.setListaObjetivos();
         
         avaliacao.setPeso(peso);
