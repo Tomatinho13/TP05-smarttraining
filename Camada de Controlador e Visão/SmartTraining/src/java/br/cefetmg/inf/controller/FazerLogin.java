@@ -28,8 +28,9 @@ public class FazerLogin{
                 instrutor = manterInstrutor.pesquisarPorCpf(cpf);
                 if(usuario.getTxtSenha()==senha){
                     jsp="TelaInicialAluno.jsp"; //ainda nao implementado
+                }else{
+                   jsp="/erro.jsp"; 
                 }
-                jsp="/erro.jsp";
             }
         }
         catch(Exception e){
