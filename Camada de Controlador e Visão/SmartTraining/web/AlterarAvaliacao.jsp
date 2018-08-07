@@ -15,12 +15,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-        <title>JSP Page</title>
+        <title>Alterar avaliação</title>
     </head>
     <body>
         <div class="container">
         <br>
-        <h2>Inserção de Avaliação</h2>
+        <h2>Alteração de Avaliação</h2>
         <p>*Medidas de peso em Kg e de medida em Cm.</p>
         <br>
 
