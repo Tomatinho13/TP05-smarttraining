@@ -8,48 +8,48 @@
 </head>
 <body>
 	<div class="container">
-		<br>
-		<h2>SmartTraining - Cadastrar</h2>
-		<br>
-                <form action="ServletWeb" method="post">
-                    <input type="hidden" name="acao" value="CadastrarAluno">
-                    
-                    <label for="nome">Nome: </label>
-                    <input type="text" name="nome" class="form-control">
-                    <br>
+            <br>
+            <h2>SmartTraining - Cadastrar</h2>
+            <br>
+            <form action="ServletWeb" method="post">
+                <input type="hidden" name="acao" value="CadastrarAluno">
 
-                    <label for="senha">Senha:</label>
-                    <input type="password" name="senha" class="form-control">
-                    <br>
+                <label for="nome">Nome: </label>
+                <input type="text" name="nome" class="form-control">
+                <br>
 
-                    <label for="senhaRepetida">Repita a senha:</label>
-                    <input type="password" name="senhaRepetida" class="form-control">
-                    <br>
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" class="form-control">
+                <br>
 
-                    <label for="cpf">CPF: </label>
-                    <input type="text" name="cpf" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)" class="form-control">
-                    <br>
+                <label for="senhaRepetida">Repita a senha:</label>
+                <input type="password" name="senhaRepetida" class="form-control">
+                <br>
 
-                    <label for="email">Email: </label>
-                    <input type="email" name="email" class="form-control">
-                    <br>
+                <label for="cpf">CPF: </label>
+                <input type="text" name="cpf" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)" class="form-control">
+                <br>
 
-                    <label for="datNasc">Data de Nascimento: </label>
-                    <input type="date" name="datNasc" class="form-control">
-                    <br>
+                <label for="email">Email: </label>
+                <input type="email" name="email" class="form-control">
+                <br>
 
-                    Você é um:<br>
-                    <input type="radio" name="tipoConta" value="instrutor" id="radioInst">Instrutor<br>
-                    <input type="radio" name="tipoConta" value="aluno" id="radioAl">Aluno<br><br>
+                <label for="datNasc">Data de Nascimento: </label>
+                <input type="date" name="datNasc" class="form-control">
+                <br>
 
-                    <label for="cref">CREF: </label>
-                    <input type="text" name="cref" class="form-control" id="cref" disabled>
-                    <br>
+                Você é um:<br>
+                <input type="radio" name="tipoConta" value="instrutor" id="radioInst">Instrutor<br>
+                <input type="radio" name="tipoConta" value="aluno" id="radioAl">Aluno<br><br>
 
-                    <input type="submit" name="Cadastrar" class="btn btn-primary" value="Cadastrar">
-                    <input type="submit" name="login" class="btn btn-primary" value="Login">
+                <label for="cref">CREF: </label>
+                <input type="text" name="cref" class="form-control" id="cref" disabled>
+                <br>
 
-		</form>
+                <input type="submit" name="Cadastrar" class="btn btn-primary" value="Cadastrar">
+                <input type="submit" name="login" class="btn btn-primary" value="Login">
+
+            </form>
 	</div><br>
 
 	<script>
