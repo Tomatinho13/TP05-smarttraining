@@ -20,8 +20,8 @@
 			<br>
 
 			<input type="submit" name="login" class="btn btn-primary" value="Login">
-			<input type="submit" name="cadastrar" class="btn btn-primary" value="Cadastrar">
 		</form>
+                <a href="CadastrarUsuario.jsp" class="btn btn-primary">Cadastrar</a>
 	</div>
 </body>
 </html>
