@@ -47,9 +47,8 @@
 
                 <input type="submit" name="criarExercicio" class="btn btn-primary" value="Remover">
             </form>  
-        <form action="TelaInicialAluno.jsp">
-            <input type="submit" value="Voltar">
-        </form>
+        
+            <a href="TelaInicialAluno.jsp" class="btn btn-primary"> Voltar </a>
         </div>
     </body>
 </html>

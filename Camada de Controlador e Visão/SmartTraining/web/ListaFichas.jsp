@@ -55,9 +55,8 @@
                 %>
             </ul>
         </div>
-        <br>    
-        <form action="TelaInicialAluno.jsp">
-            <input type="submit" value="Voltar">
-        </form>
+        <br>
+        
+        <a href="TelaInicialAluno.jsp" class="btn btn-primary">Voltar</a>
     </body>
 </html>

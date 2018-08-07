@@ -24,9 +24,7 @@
             Descrição <%= exercicio.getDescricaoExercicio()%><br>
             
             
-            <form action="Listaexercicios.jsp">
-                <input type="submit" name="Voltar" value="Voltar">
-            </form>
+            <a href="ListaExercicios.jsp" class="btn btn-primary">Voltar</a>
         </div>
     </body>
 </html>

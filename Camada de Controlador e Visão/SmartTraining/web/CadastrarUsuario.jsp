@@ -47,10 +47,10 @@
                 <br>
 
                 <input type="submit" name="Cadastrar" class="btn btn-primary" value="Cadastrar">
-                <input type="submit" name="login" class="btn btn-primary" value="Login">
-
             </form>
 	</div><br>
+        
+        <a href="LoginUsuario.jsp" class="btn btn-primary">Voltar</a>
 
 	<script>
 		let instrutorEl = document.getElementById('radioInst');

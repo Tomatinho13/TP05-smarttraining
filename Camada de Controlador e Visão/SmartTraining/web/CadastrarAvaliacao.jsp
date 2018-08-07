@@ -123,9 +123,7 @@
         <input type="submit" name="Cadastrar" class="btn btn-primary" value="Cadastrar">
     </form>
     
-    <form action="TelaInicialAluno.jsp">
-        <input type="submit" value="Voltar">
-    </form>
+    <a href="TelaInicialAluno.jsp" class="btn btn-primary">Voltar</a>
     
     </div>
     <br>

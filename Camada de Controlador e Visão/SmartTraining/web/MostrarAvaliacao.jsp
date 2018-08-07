@@ -95,10 +95,8 @@
                     <td> <%=avaliacao.getTamanhoPanturrilhaDireita() %> </td>
                 </tr>
             </table>
-
-            <form action="ListaAvaliacoes.jsp">
-                <input type="submit" name="Voltar" value="Voltar">
-            </form>
         </div>
+                
+        <a href="ListaAvaliacoes.jsp" class="btn btn-primary">Voltar</a>
     </body>
 </html>

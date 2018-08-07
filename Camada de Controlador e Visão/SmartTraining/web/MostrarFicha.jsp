@@ -57,9 +57,8 @@
                 }
             %>
             </table>
-            <form action="ListaFichas.jsp">
-                <input type="submit" name="Voltar" value="Voltar">
-            </form>
+            
+            <a href="ListaFichas.jsp" class="btn btn-primary">Voltar</a>
         </div>
     </body>
 </html>
