@@ -47,7 +47,12 @@
                                 for(int j=0; j<listaExercicios.size(); j++){
                                     exercicio = listaExercicios.get(j);
                         %>
-                        <li class="list-group-item"> <%= exercicio.getNomeExercicio() %> </li>
+                        <li class="list-group-item"> 
+                            <%= exercicio.getNomeExercicio() %>
+                            <a href="/controller/servletweb?acao=AlterarExercicio&cod=<%= exercicio.getCodExercicio() %>"> 
+                                Alterar 
+                            </a>
+                        </li>
                         <%
                                 }
                         %>
@@ -59,8 +64,9 @@
             </ul>
         </div>
         <br>
-        <form action="TelaInicialAluno.jsp">
-            <input type="submit" value="Voltar">
-        </form>
+        
+        <a href="TelaInicialAluno.jsp" class="btn btn-primary">
+            Voltar
+        </a>
     </body>
 </html>

@@ -33,8 +33,11 @@
                         usuario = listaUsuarios.get(i);
                 %>
                 <li>
-                    <a href="/controller/servletweb?acao=MostrarUsuario&cpf=<%= usuario.getCodCpf() %>"> 
-                        <%= usuario.getNomUsuario() %> 
+                    <a href="/controller/servletweb?acao=MostrarUsuario&cod=<%= usuario.getCodCpf() %>"> 
+                        Ver <%= usuario.getNomUsuario() %> 
+                    </a>
+                    <a href="/controller/servletweb?acao=AlterarUsuario&cod=<%= usuario.getCodCpf() %>">
+                        Alterar
                     </a>
                 </li>
                 <%
@@ -44,9 +47,10 @@
 
         </div>
         <br>
-        <form action="TelaInicialAluno.jsp">
-            <input type="submit" value="Voltar">
-        </form>
+        
+        <a href="TelaInicialAluno.jsp" class="btn btn-primary">
+            Voltar
+        </a>
     </body>
 </html>
 

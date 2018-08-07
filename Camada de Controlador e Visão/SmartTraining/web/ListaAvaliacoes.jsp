@@ -45,8 +45,11 @@
                         avaliacao = listaAvaliacoes.get(i);
                 %>
                 <li class="list-group-item">
-                    <a href="/controller/servletweb?acao=MostrarAvaliacao&data=<%= avaliacao.getDatAvaliacao() %>"> 
-                        Data: <%= avaliacao.getDatAvaliacao() %> 
+                    <a href="/controller/servletweb?acao=MostrarAvaliacao&data=<%= avaliacao.getDatAvaliacao() %>" class="btn btn-primary"> 
+                        Ver avaliação
+                    </a>
+                    <a href="/controller/servletweb?acao=AlterarAvaliacao&data=<%= avaliacao.getDatAvaliacao() %>" class="btn btn-primary">
+                        Alterar avaliação
                     </a>
                 </li>
                 <%
@@ -56,8 +59,7 @@
 
         </div>
         <br>
-        <form action="TelaInicialAluno.jsp">
-            <input type="submit" value="Voltar">
-        </form>
+        
+        <a href="TelaInicialAluno.jsp" class="btn btn-primary"> Voltar </a>
     </body>
 </html>
