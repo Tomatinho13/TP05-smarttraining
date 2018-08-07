@@ -45,10 +45,10 @@
                         avaliacao = listaAvaliacoes.get(i);
                 %>
                 <li class="list-group-item">
-                    <a href="/controller/servletweb?acao=MostrarAvaliacao&data=<%= avaliacao.getDatAvaliacao() %>" class="btn btn-primary"> 
+                    <a href="/controller/servletweb?acao=MostrarAvaliacao&dataAvaliacao=<%= avaliacao.getDatAvaliacao() %>" class="btn btn-primary"> 
                         Ver avaliação
                     </a>
-                    <a href="/controller/servletweb?acao=AlterarAvaliacao&data=<%= avaliacao.getDatAvaliacao() %>" class="btn btn-primary">
+                    <a href="/controller/servletweb?acao=AlterarAvaliacao&dataAvaliacao=<%= avaliacao.getDatAvaliacao() %>" class="btn btn-primary">
                         Alterar avaliação
                     </a>
                 </li>

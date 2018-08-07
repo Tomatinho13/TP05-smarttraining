@@ -45,7 +45,7 @@
                         ficha = listaFichas.get(i);
                 %>
                 <li class="list-group-item">
-                    <a href="/controller/servletweb?acao=MostrarFicha&numero=<%= ficha.getDataFicha() %>"> 
+                    <a href="/controller/servletweb?acao=MostrarFicha&nroFicha=<%= ficha.getNroFicha() %>"> 
                         Data: <%= ficha.getDataFicha() %> 
                     </a>
                 </li>

@@ -33,11 +33,17 @@
                         usuario = listaUsuarios.get(i);
                 %>
                 <li>
-                    <a href="/controller/servletweb?acao=MostrarUsuario&cod=<%= usuario.getCodCpf() %>"> 
+                    <a href="/controller/servletweb?acao=MostrarUsuario&codUsuario=<%= usuario.getCodCpf() %>"> 
                         Ver <%= usuario.getNomUsuario() %> 
                     </a>
-                    <a href="/controller/servletweb?acao=AlterarUsuario&cod=<%= usuario.getCodCpf() %>">
+                    <a href="/controller/servletweb?acao=AlterarUsuario&codUsuario=<%= usuario.getCodCpf() %>">
                         Alterar
+                    </a>
+                    <a href="/controller/servletweb?acao=ListaAvaliacoes&codUsuario=<%= usuario.getCodCpf() %>">
+                        Ver Avaliacoes
+                    </a>
+                    <a href="/controller/servletweb?acao=ListaFichas&codUsuario=<%= usuario.getCodCpf() %>">
+                        Ver Fichas
                     </a>
                 </li>
                 <%
