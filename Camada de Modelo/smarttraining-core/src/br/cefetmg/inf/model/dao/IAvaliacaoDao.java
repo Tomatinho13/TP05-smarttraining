@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public interface IAvaliacaoDao {
     public ArrayList<Avaliacao> getListaAvaliacao(String codCpf) throws SQLException;
+    public Avaliacao getAvaliacao(String cpf, LocalDate data) throws SQLException;
     public void postAvaliacao(Avaliacao avaliacao) throws SQLException;
     public void putAvaliacao(Avaliacao avaliacao) throws SQLException;
     public void deleteAvaliacao(String codCpf, LocalDate dataAvaliacao) throws SQLException;

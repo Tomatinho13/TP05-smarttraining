@@ -170,4 +170,43 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.executeQuery(sql);
 
     }
+
+    @Override
+    public Avaliacao getAvaliacao(String cpf, LocalDate data) throws SQLException {
+               sql = "SELECT * "
+                + "FROM \"Avaliacao\" "
+                + "WHERE cod_cpf = '" + cpf + "' AND dat_avaliacao = '" + data + "'";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        if (resultado.next()) {
+            avaliacao = new Avaliacao(cpf,
+                    data,
+                    resultado.getString("cod_cpf_instrutor"),
+                    resultado.getBoolean("idt_recencia"),
+                    Double.parseDouble(resultado.getString("qtd_peso")),
+                    Double.parseDouble(resultado.getString("qtd_percGordura")),
+                    Double.parseDouble(resultado.getString("tam_pescoco")),
+                    Double.parseDouble(resultado.getString("tam_ombro")),
+                    Double.parseDouble(resultado.getString("tam_torax")),
+                    Double.parseDouble(resultado.getString("tam_abdomen")),
+                    Double.parseDouble(resultado.getString("tam_cintura")),
+                    Double.parseDouble(resultado.getString("tam_quadril")),
+                    Double.parseDouble(resultado.getString("qtd_massaGorda")),
+                    Double.parseDouble(resultado.getString("tam_bracoEsq")),
+                    Double.parseDouble(resultado.getString("tam_bracoDir")),
+                    Double.parseDouble(resultado.getString("tam_antebracoEsq")),
+                    Double.parseDouble(resultado.getString("tam_antebracoDir")),
+                    Double.parseDouble(resultado.getString("tam_coxaEsq")),
+                    Double.parseDouble(resultado.getString("tam_coxaDir")),
+                    Double.parseDouble(resultado.getString("tam_panturrilhaEsq")),
+                    Double.parseDouble(resultado.getString("tam_panturrilhaDir")),
+                    objetivoDao.getAvaliacaoObjetivos(cpf, resultado.getDate("dat_avaliacao").toLocalDate()));
+        } else {
+
+            return null;
+        }
+
+        return avaliacao; 
+    }
 }

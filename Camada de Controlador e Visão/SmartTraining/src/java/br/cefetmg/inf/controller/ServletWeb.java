@@ -18,6 +18,12 @@ public class ServletWeb extends HttpServlet {
         
         if(acao.equals("Logar"))
             jsp = FazerLogin.execute(request);
+        else if (acao.equals("AlterarAvaliacao"))
+            jsp = AlterarAvaliacao.execute(request);
+        else if (acao.equals("AlterarExercicio"))
+            jsp = AlterarExercicio.execute(request);
+        else if (acao.equals("AlterarUsuario"))
+            jsp = AlterarUsuario.execute(request);
         else if (acao.equals("CadastrarAluno"))
             jsp = CadastrarAluno.execute(request);
         else if (acao.equals("CadastrarInstrutor"))

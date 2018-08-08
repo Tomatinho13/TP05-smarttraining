@@ -10,8 +10,9 @@
 		<br>
 		<h2>SmartTraining</h2>
 		<br>
-                <form>
-			<label for="username" class="form">Nome de usu√°rio: </label>
+                <form action="ServletWeb" method="post">
+                    <input type="hidden" name="acao" value="Logar">
+			<label for="username" class="form">Nome de usu·rio: </label>
 			<input type="text" name="username" class="form-control">
 			<br>
 

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public interface IManterAvaliacao {
 
     public ArrayList<Avaliacao> pesquisarPorAluno(String codCpf) throws SQLException;
+    
+    public Avaliacao pesquisarPorAluno(String codCpf, LocalDate data) throws SQLException;
 
     public void cadastrar(Avaliacao avaliacao) throws SQLException;
 

@@ -36,6 +36,9 @@
             <input type = "hidden" name = "codCpfAluno" value="
                    <%= request.setAttribute("codCpfAluno", usuario.getCodCpf()) %>" 
             />
+            <input type = "hidden" name = "dataAvaliacao" value="
+                   <%= request.setAttribute("dataAvaliacao", avaliacao.getDatAvaliacao()) %>" 
+            />
             <input type = "hidden" name = "codCpfInstrutor" value="
                    <%= request.setAttribute("codCpfInstrutor", instrutor.getCodCpf() %>"
             />

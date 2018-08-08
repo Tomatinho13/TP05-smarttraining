@@ -24,6 +24,12 @@ public class ManterAvaliacao implements IManterAvaliacao {
     }
     
     @Override
+    public Avaliacao pesquisarPorAluno(String codCpf, LocalDate data) throws SQLException {
+        Avaliacao resultado = avaliacaoDao.getAvaliacao(codCpf, data);
+        return resultado;
+    }
+    
+    @Override
     public void cadastrar(Avaliacao avaliacao) throws SQLException{
         avaliacaoDao.postAvaliacao(avaliacao);
     }
