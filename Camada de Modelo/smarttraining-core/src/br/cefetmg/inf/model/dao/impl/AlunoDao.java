@@ -93,7 +93,7 @@ public class AlunoDao implements IAlunoDao {
                 + "idt_tipo_usuario=?, "
                 + "txt_senha=?, "
                 + "des_email=?, "
-                + "dat_nascimento=? "
+                + "dat_nascimento=CAST(? as date) "
                 + "WHERE cod_cpf=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, aluno.getNomUsuario());

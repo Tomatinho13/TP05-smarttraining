@@ -15,7 +15,7 @@ public class ListarFichas implements Controller {
 
         try {
             IManterFicha manterFicha = new ManterFicha();
-            String codCpfAluno = (String) request.getAttribute("codCpfAluno");
+            String codCpfAluno = (String) request.getAttribute("codCpfAluno").toString().replaceAll("[^0-9]", "");
             ArrayList<Ficha> listaFichas = manterFicha.pesquisarPorAluno(codCpfAluno);
 
             if (listaFichas != null) {

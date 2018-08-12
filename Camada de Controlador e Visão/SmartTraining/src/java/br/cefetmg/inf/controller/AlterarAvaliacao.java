@@ -13,7 +13,7 @@ public class AlterarAvaliacao implements Controller{
     public String execute(HttpServletRequest request) {
         String jsp;
         try {
-            String cpf = request.getParameter("codCpfAluno");
+            String cpf = request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
             LocalDate data = LocalDate.parse(request.getParameter("dataAvaliacao"));
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
             Avaliacao avaliacao = manterAvaliacao.pesquisarPorAluno(cpf, data);

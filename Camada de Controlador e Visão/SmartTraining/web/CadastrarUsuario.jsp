@@ -12,7 +12,7 @@
             <h2>SmartTraining - Cadastrar</h2>
             <br>
             <form action="servletweb" method="post">
-                <input type="hidden" name="acao" value="CadastrarAluno">
+                <input type="hidden" name="acao" value="CadastrarAluno" id="acao">
 
                 <label for="nome">Nome: </label>
                 <input type="text" name="nome" class="form-control">
@@ -72,8 +72,10 @@
 		function isInstrutor(){
 			if(instrutorEl.checked){
 				document.getElementById('cref').removeAttribute("disabled","");
+                                document.getElementById('acao').value = "CadastrarInstrutor"
 			}else{
 				document.getElementById('cref').setAttribute("disabled","");
+                                document.getElementById('acao').value = "CadastrarAluno"
 			}
 		}
 	</script>

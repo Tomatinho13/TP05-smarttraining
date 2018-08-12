@@ -22,17 +22,15 @@ public class FazerLogin implements Controller{
             IManterAluno manterAluno = new ManterAluno();
             IManterInstrutor manterInstrutor = new ManterInstrutor();
             Usuario usuario = manterAluno.pesquisarPorCpf(cpf);
-            Instrutor instrutor;
-            if(usuario.getTxtSenha().equals(senha)){
-                jsp="TelaInicialAluno.jsp";
+            Instrutor instrutor = manterInstrutor.pesquisarPorCpf(cpf);
+            if(usuario != null && usuario.getTxtSenha().equals(senha)){
+                    jsp="TelaInicialAluno.jsp";
+            }
+            else if(instrutor!= null && instrutor.getTxtSenha().equals(senha)){
+                jsp="TelaInicialInstrutor.jsp";
             }
             else{
-                instrutor = manterInstrutor.pesquisarPorCpf(cpf);
-                if(usuario.getTxtSenha().equals(senha)){
-                    jsp="TelaInicialAluno.jsp"; //ainda nao implementado
-                }else{
-                   jsp="/erro.jsp"; 
-                }
+                jsp="erro.jsp";
             }
         }
         catch(SQLException e){

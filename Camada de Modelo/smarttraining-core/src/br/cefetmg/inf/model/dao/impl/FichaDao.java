@@ -74,7 +74,7 @@ public class FichaDao implements IFichaDao {
 
     @Override
     public void postFicha(Ficha ficha) throws SQLException {
-        sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,?,?,?)";
+        sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,CAST(? as date),CAST(? as date),?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + ficha.getCodCpfAluno() + "')");
         stmt.setString(2, String.valueOf(ficha.getNroFicha()));
@@ -91,8 +91,8 @@ public class FichaDao implements IFichaDao {
     public void putFicha(Ficha ficha) throws SQLException {
         sql = "UPDATE \"Ficha\" "
                 + "SET cod_cpf_instrutor=?, "
-                + "dat_ficha=?, "
-                + "dat_prevista_troca=?, "
+                + "dat_ficha=CAST(? as date), "
+                + "dat_prevista_troca=CAST(? as date), "
                 + "idt_treino=? "
                 + "WHERE cod_cpf=?"
                 + "AND nro_ficha=?";

@@ -50,7 +50,7 @@ public class DiaTreinoDao implements IDiaTreinoDao {
     @Override
     public void postDiaTreino(DiaTreino diaTreino) throws SQLException {
         atividade = diaTreino.getAtividade();
-        sql = "INSERT INTO \"DiaTreino\" VALUES (?,?,?,?,?,?)";
+        sql = "INSERT INTO \"DiaTreino\" VALUES (?,?,?,?,?,CAST(? as date))";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, "(SELECT \"cod_exercicio\" FROM \"TreinoExercicio\" "
                 + "WHERE cod_cpf='" + atividade.getCodCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"

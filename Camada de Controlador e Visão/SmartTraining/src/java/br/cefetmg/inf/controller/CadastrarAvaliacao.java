@@ -40,9 +40,9 @@ public class CadastrarAvaliacao implements Controller {
         IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
         LocalDate dataAvaliacao = LocalDate.now();
 
-        avaliacao.setCodCpfAluno((String) request.getAttribute("codCpfAluno"));
+        avaliacao.setCodCpfAluno(request.getAttribute("codCpfAluno").toString().replaceAll("[^0-9]", ""));
         avaliacao.setDatAvaliacao(dataAvaliacao);
-        avaliacao.setCodCpfInstrutor((String) request.getAttribute("codCpfInstrutor"));
+        avaliacao.setCodCpfInstrutor(request.getAttribute("codCpfInstrutor").toString().replaceAll("[^0-9]", ""));
         avaliacao.setIdtRecencia(true);
 
         String objetivos[] = request.getParameterValues("objetivo");

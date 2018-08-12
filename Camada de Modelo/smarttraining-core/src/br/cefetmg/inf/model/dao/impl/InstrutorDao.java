@@ -48,7 +48,7 @@ public class InstrutorDao implements IInstrutorDao {
     @Override
     public void postInstrutor(Instrutor instrutor) throws SQLException {
         this.instrutor = instrutor;
-        sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,?)"
+        sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,CAST(? as date)); "
                 + "INSERT INTO \"Instrutor\" "
                 + "VALUES((SELECT cod_cpf FROM \"Usuario\" "
                 + "WHERE cod_cpf = '" + instrutor.getCodCpf() + "'), '" + instrutor.getCodCREF() + "')";
@@ -60,7 +60,7 @@ public class InstrutorDao implements IInstrutorDao {
         stmt.setString(5, instrutor.getDesEmail());
         stmt.setString(6, String.valueOf(instrutor.getDatNascimento()));
 
-        stmt.executeQuery(sql);
+        stmt.executeUpdate();
 
     }
 
@@ -72,7 +72,7 @@ public class InstrutorDao implements IInstrutorDao {
                 + "idt_tipo_usuario=?, "
                 + "txt_senha=?, "
                 + "des_email=?, "
-                + "dat_nascimento=? "
+                + "dat_nascimento=CAST(? as date) "
                 + "WHERE cod_cpf=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, instrutor.getNomUsuario());

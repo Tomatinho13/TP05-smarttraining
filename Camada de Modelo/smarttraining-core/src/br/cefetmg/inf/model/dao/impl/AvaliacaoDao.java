@@ -66,7 +66,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
 
     @Override
     public void postAvaliacao(Avaliacao avaliacao) throws SQLException {
-        sql = "INSERT INTO \"Avaliacao\" VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        sql = "INSERT INTO \"Avaliacao\" VALUES (?,CAST(? as date),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfAluno() + "'");
         stmt.setString(2, avaliacao.getDatAvaliacao().toString());

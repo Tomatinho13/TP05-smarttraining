@@ -15,7 +15,7 @@ public class ListarAvaliacoes implements Controller{
         
          try {
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            String codCpfAluno = (String) request.getAttribute("codCpfAluno");
+            String codCpfAluno = request.getAttribute("codCpfAluno").toString().replaceAll("[^0-9]", "");
             ArrayList <Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(codCpfAluno);
             
             if (listaAvaliacoes != null) {

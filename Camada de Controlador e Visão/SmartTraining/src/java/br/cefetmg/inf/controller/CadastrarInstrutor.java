@@ -14,7 +14,7 @@ public class CadastrarInstrutor implements Controller{
      @Override
      public String execute(HttpServletRequest request) {
         String jsp;
-        String cpf =  request.getParameter("cpf");
+        String cpf =  request.getParameter("cpf").replaceAll("[^0-9]", "");
         String nome = request.getParameter("nome");
         char idtTipoUsuario = 'I';
         String senha = request.getParameter("senha");

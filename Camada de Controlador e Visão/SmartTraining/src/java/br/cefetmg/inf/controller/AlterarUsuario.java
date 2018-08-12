@@ -12,7 +12,7 @@ public class AlterarUsuario implements Controller{
     public String execute(HttpServletRequest request) {
         String jsp;
         try {
-            String cpf = request.getParameter("cpf");
+            String cpf = request.getParameter("cpf").replaceAll("[^0-9]", "");
             IManterAluno manterUsuario = new ManterAluno();
             Usuario usuario = manterUsuario.pesquisarPorCpf(cpf);
             if(usuario!=null){    
