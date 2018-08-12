@@ -13,10 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
-public class CadastrarAvaliacao {
-    
-     public static String execute(HttpServletRequest request) {
-        String jsp = "";
+public class CadastrarAvaliacao implements Controller {
+
+    @Override
+    public String execute(HttpServletRequest request) {
+        String jsp;
         double peso = Double.parseDouble(request.getParameter("peso"));
         double percentualGordura = Double.parseDouble(request.getParameter("percentualGordura"));
         double massaGorda = Double.parseDouble(request.getParameter("massaGorda"));
@@ -38,27 +39,27 @@ public class CadastrarAvaliacao {
         Avaliacao avaliacao = new Avaliacao();
         IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
         LocalDate dataAvaliacao = LocalDate.now();
-        
+
         avaliacao.setCodCpfAluno((String) request.getAttribute("codCpfAluno"));
         avaliacao.setDatAvaliacao(dataAvaliacao);
         avaliacao.setCodCpfInstrutor((String) request.getAttribute("codCpfInstrutor"));
         avaliacao.setIdtRecencia(true);
-       
+
         String objetivos[] = request.getParameterValues("objetivo");
-        ArrayList <Objetivo> listaObjetivos = new ArrayList<>();
+        ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
         IManterObjetivo manterObjetivo = new ManterObjetivo();
-        Objetivo obj = new Objetivo();
-        
-         for (String objetivo : objetivos) {
+        Objetivo obj;
+
+        for (String objetivo : objetivos) {
             try {
-               obj = manterObjetivo.pesquisarPorNome(objetivo);
-               listaObjetivos.add(obj);
+                obj = manterObjetivo.pesquisarPorNome(objetivo);
+                listaObjetivos.add(obj);
             } catch (SQLException ex) {
                 Logger.getLogger(CadastrarAvaliacao.class.getName()).log(Level.SEVERE, null, ex);
             }
-         }
-         
-        avaliacao.setListaObjetivos(listaObjetivos);     
+        }
+
+        avaliacao.setListaObjetivos(listaObjetivos);
         avaliacao.setPeso(peso);
         avaliacao.setPercentualGordura(percentualGordura);
         avaliacao.setMassaGorda(massaGorda);
@@ -76,8 +77,7 @@ public class CadastrarAvaliacao {
         avaliacao.setTamanhoCoxaEsquerda(tamanhoCoxaEsquerda);
         avaliacao.setTamanhoPanturrilhaDireita(tamanhoPanturrilhaDireita);
         avaliacao.setTamanhoPanturrilhaEsquerda(tamanhoPanturrilhaEsquerda);
-        
-        
+
         try {
             manterAvaliacao.cadastrar(avaliacao);
         } catch (SQLException ex) {
@@ -87,4 +87,3 @@ public class CadastrarAvaliacao {
         return jsp;
     }
 }
-

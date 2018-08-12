@@ -19,7 +19,7 @@
             <br>
             <h2>SmartTraining - Alterar dados</h2>
             <br>
-            <form action="ServletWeb" method="post">
+            <form action="servletweb" method="post">
                 <input type="hidden" name="acao" value="AlterarUsuario">
                 
                 <%

@@ -9,10 +9,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
-public class CadastrarInstrutor {
+public class CadastrarInstrutor implements Controller{
     
-     public static String execute(HttpServletRequest request) {
-        String jsp = "";
+     @Override
+     public String execute(HttpServletRequest request) {
+        String jsp;
         String cpf =  request.getParameter("cpf");
         String nome = request.getParameter("nome");
         char idtTipoUsuario = 'I';

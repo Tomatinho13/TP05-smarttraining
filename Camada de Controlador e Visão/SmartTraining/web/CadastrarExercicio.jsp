@@ -20,7 +20,7 @@
         <div class="container">
             <br>
             <h2 class="h2">SmartTraining - Criar Exercicio</h2>
-            <form action="ServletWeb" method="post">
+            <form action="servletweb" method="post">
                 <input type="hidden" name="acao" value="CadastrarExercicio">
                 
                 <label for="nomeExercicio">Nome do novo exercicio:</label><br>

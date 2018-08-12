@@ -11,7 +11,7 @@
             <br>
             <h2>SmartTraining - Cadastrar</h2>
             <br>
-            <form action="ServletWeb" method="post">
+            <form action="servletweb" method="post">
                 <input type="hidden" name="acao" value="CadastrarAluno">
 
                 <label for="nome">Nome: </label>

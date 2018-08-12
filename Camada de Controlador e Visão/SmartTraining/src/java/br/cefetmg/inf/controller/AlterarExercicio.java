@@ -3,12 +3,14 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
-public class AlterarExercicio {
+public class AlterarExercicio implements Controller{
 
-    public static String execute(HttpServletRequest request) {
-        String jsp = "";
+    @Override
+    public String execute(HttpServletRequest request) {
+        String jsp;
         try {
             String nome = request.getParameter("nome");
             IManterExercicio manterExercicio = new ManterExercicio();
@@ -21,8 +23,7 @@ public class AlterarExercicio {
                 request.setAttribute("erro", erro);
                 jsp = "/erro.jsp";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             jsp = "";
         }
         return jsp;

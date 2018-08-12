@@ -3,12 +3,14 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterAluno;
+import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
-public class AlterarUsuario {
+public class AlterarUsuario implements Controller{
 
-    public static String execute(HttpServletRequest request) {
-        String jsp = "";
+    @Override
+    public String execute(HttpServletRequest request) {
+        String jsp;
         try {
             String cpf = request.getParameter("cpf");
             IManterAluno manterUsuario = new ManterAluno();
@@ -21,8 +23,7 @@ public class AlterarUsuario {
                 request.setAttribute("erro", erro);
                 jsp = "/erro.jsp";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             jsp = "";
         }
         return jsp;

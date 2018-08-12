@@ -9,16 +9,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
-public class CadastrarAluno {
+public class CadastrarAluno implements Controller {
 
-    public static String execute(HttpServletRequest request) {
-        String jsp = "";
-        String cpf =  request.getParameter("cpf");
+    @Override
+    public String execute(HttpServletRequest request) {
+        String jsp;
+        String cpf = request.getParameter("cpf").replaceAll("[^0-9]", "");
         String nome = request.getParameter("nome");
         char idtTipoUsuario = 'A';
         String senha = request.getParameter("senha");
         String email = request.getParameter("email");
-        LocalDate nascimento = LocalDate.parse(request.getParameter("nascimento"));
+        LocalDate nascimento = LocalDate.parse(request.getParameter("datNasc"));
 
         Usuario aluno = new Usuario();
 

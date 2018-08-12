@@ -24,7 +24,7 @@
     <p>*Medidas de peso em Kg e de medida em Cm.</p>
     <br>
 
-    <form action="ServletWeb" method="post">
+    <form action="servletweb" method="post">
         <input type="hidden" name="acao" value="CadastrarAvaliacao">
         <%
             Usuario usuario = (Usuario) request.getAttribute("usuario");

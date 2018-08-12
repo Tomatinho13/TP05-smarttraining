@@ -3,12 +3,15 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Avaliacao;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
 import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class ListarAvaliacoes {
-    public static String execute(HttpServletRequest request) {
-        String jsp = "";
+public class ListarAvaliacoes implements Controller{
+    
+    @Override
+    public String execute(HttpServletRequest request) {
+        String jsp;
         
          try {
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
@@ -24,8 +27,7 @@ public class ListarAvaliacoes {
                 jsp = "/erro.jsp";
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             jsp = "";
         }
         return jsp;

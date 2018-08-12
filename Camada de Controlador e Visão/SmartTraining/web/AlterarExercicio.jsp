@@ -26,7 +26,7 @@
                 Exercicio exercicio = (Exercicio) request.getAttribute("exercicio");
             %>
             
-            <form action="ServletWeb" method="post">
+            <form action="servletweb" method="post">
                 <input type="hidden" name="acao" value="AlterarExercicio">
                 
                 <label for="nomeExercicio">Nome do exercicio:</label><br>

@@ -3,17 +3,20 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterAluno;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class ListarUsuarios {
-    public static String execute(HttpServletRequest request) {
-        String jsp = "";
-        
-         try {
+public class ListarUsuarios implements Controller {
+
+    @Override
+    public String execute(HttpServletRequest request) {
+        String jsp;
+
+        try {
             IManterAluno manterUsuario = new ManterAluno();
             ArrayList<Usuario> listaUsuarios = manterUsuario.pesquisarTodos();
-            
+
             if (listaUsuarios != null) {
                 request.setAttribute("listaUsuarios", listaUsuarios);
                 jsp = "/ListaUsuarios.jsp";
@@ -23,8 +26,7 @@ public class ListarUsuarios {
                 jsp = "/erro.jsp";
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             jsp = "";
         }
         return jsp;

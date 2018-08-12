@@ -10,10 +10,10 @@
 		<br>
 		<h2>SmartTraining</h2>
 		<br>
-                <form action="ServletWeb" method="post">
+                <form action="servletweb" method="post">
                     <input type="hidden" name="acao" value="Logar">
-			<label for="username" class="form">Nome de usuário: </label>
-			<input type="text" name="username" class="form-control">
+			<label for="codCpf" class="form">CPF: </label>
+                        <input type="text" name="cpf" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)" class="form-control">
 			<br>
 
 			<label for="senha" class="form">Senha:</label>
@@ -24,5 +24,18 @@
 		</form>
                 <a href="CadastrarUsuario.jsp" class="btn btn-primary">Cadastrar</a>
 	</div>
+    <script>
+        function formatar(mascara, documento){
+		  var i = documento.value.length;
+		  var saida = mascara.substring(0,1);
+		  var texto = mascara.substring(i);
+		  
+		  if (texto.substring(0,1) !== saida){
+		            documento.value += texto.substring(0,1);
+		  }
+		  
+		}
+
+    </script>
 </body>
 </html>

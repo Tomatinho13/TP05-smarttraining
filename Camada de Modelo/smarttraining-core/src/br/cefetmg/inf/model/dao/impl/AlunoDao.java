@@ -69,7 +69,7 @@ public class AlunoDao implements IAlunoDao {
     @Override
     public void postAluno(Usuario aluno) throws SQLException {
         this.aluno = aluno;
-        sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,?);"
+        sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,CAST(? as date));"
                 + "INSERT INTO \"Aluno\" "
                 + "VALUES((SELECT cod_cpf FROM \"Usuario\" "
                 + "WHERE cod_cpf = '" + aluno.getCodCpf() + "'))";
@@ -81,7 +81,7 @@ public class AlunoDao implements IAlunoDao {
         stmt.setString(5, aluno.getDesEmail());
         stmt.setString(6, String.valueOf(aluno.getDatNascimento()));
 
-        stmt.executeQuery(sql);
+        stmt.executeUpdate();
 
     }
 
@@ -103,7 +103,7 @@ public class AlunoDao implements IAlunoDao {
         stmt.setString(5, String.valueOf(aluno.getDatNascimento()));
         stmt.setString(6, aluno.getCodCpf());
 
-        stmt.executeQuery(sql);
+        stmt.executeUpdate();
 
     }
 
@@ -113,7 +113,7 @@ public class AlunoDao implements IAlunoDao {
                 + "WHERE cod_cpf='" + codCpf + "'";
 
         Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
+        stmt.executeUpdate(sql);
 
     }
 

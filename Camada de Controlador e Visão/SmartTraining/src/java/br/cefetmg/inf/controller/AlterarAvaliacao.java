@@ -3,13 +3,15 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Avaliacao;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
 import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 
-public class AlterarAvaliacao {
+public class AlterarAvaliacao implements Controller{
 
-    public static String execute(HttpServletRequest request) {
-        String jsp = "";
+    @Override
+    public String execute(HttpServletRequest request) {
+        String jsp;
         try {
             String cpf = request.getParameter("codCpfAluno");
             LocalDate data = LocalDate.parse(request.getParameter("dataAvaliacao"));
@@ -23,8 +25,7 @@ public class AlterarAvaliacao {
                 request.setAttribute("erro", erro);
                 jsp = "/erro.jsp";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             jsp = "";
         }
         return jsp;
