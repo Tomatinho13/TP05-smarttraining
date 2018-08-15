@@ -15,30 +15,18 @@
 </head>
 <body>
     <div class="container">
-        <form action="servletweb" id="form">
-            <input type="hidden" name="acao" id="acao">
-            <input type="submit" class="btn btn-primary" value="Mostrar Exercicios" onclick="listarExercicios()">
-            <input type="submit" class="btn btn-primary" value="Remover Exercicios" onclick="removerExercicios()">
-            <input type="submit" class="btn btn-primary" value="Remover Usuario" onclick="removerUsuario()">
-            <input type="submit" class="btn btn-primary" value="Listar Usuarios" onclick="cadastrarAvaliacao()">
-        </form>
+        <a class="btn btn-primary" href="/servletweb?acao=ListarExercicios">
+            Listar Exercicios
+        </a>
+        <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverExercicio">
+            Remover Exercicio
+        </a>
+        <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverUsuario">
+            Remover Usuario
+        </a>
+        <a class="btn btn-primary" href="/servletweb?acao=ListarUsuarios">
+            Listar Usuarios
+        </a>
     </div>
-    <script>
-        function listarExercicios(){
-            document.getElementById("acao").value="ListarExercicios"
-        }
-        
-        function removerExercicios(){
-            document.getElementById("acao").value="TelaRemoverExercicio"
-        }
-        
-        function removerUsuario(){
-            document.getElementById("acao").value="TelaRemoverUsuario"
-        }
-        
-        function cadastrarAvaliacao(){
-            document.getElementById("acao").value="ListarUsuarios";
-        }
-    </script>
 </body>
 </html>
