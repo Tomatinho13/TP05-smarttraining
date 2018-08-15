@@ -34,29 +34,29 @@
                     Exercicio exercicio = new Exercicio();
                     List<Musculo> listaMusculos = (List) request.getAttribute("musculos");
 
-                    for(int i=0; i<listaMusculos.size(); i++){
+                    for (int i = 0; i < listaMusculos.size(); i++) {
                         musculo = listaMusculos.get(i);
                 %>
-                <li class="list-group-item"> <h3> <%= musculo.getNomMusculo() %> </h3> </li>
+                <li class="list-group-item"> <h3> <%= musculo.getNomMusculo()%> </h3> </li>
                 <li>
                     <ul class="list-group">
                         <%
-                                List<Exercicio> listaExercicios;
-                                listaExercicios = musculo.getListaExercicios();
-                            
-                                for(int j=0; j<listaExercicios.size(); j++){
-                                    exercicio = listaExercicios.get(j);
+                            List<Exercicio> listaExercicios;
+                            listaExercicios = musculo.getListaExercicios();
+
+                            for (int j = 0; j < listaExercicios.size(); j++) {
+                                exercicio = listaExercicios.get(j);
                         %>
                         <li class="list-group-item"> 
-                            <a href="/controller/servletweb?acao=MostrarExercicio&codExercicio=<%= exercicio.getCodExercicio() %>">
-                                <%= exercicio.getNomeExercicio() %>
+                            <a href="/controller/servletweb?acao=MostrarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>">
+                                <%= exercicio.getNomeExercicio()%>
                             </a>
-                            <a href="/controller/servletweb?acao=AlterarExercicio&codExercicio=<%= exercicio.getCodExercicio() %>"> 
+                            <a href="/controller/servletweb?acao=AlterarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>"> 
                                 Alterar 
                             </a>
                         </li>
                         <%
-                                }
+                            }
                         %>
                     </ul>
                 </li>
@@ -64,11 +64,15 @@
                     }
                 %>
             </ul>
+            <a class="btn btn-primary" onclick="voltar()">
+                Voltar
+            </a>
         </div>
         <br>
-        
-        <a href="TelaInicialAluno.jsp" class="btn btn-primary">
-            Voltar
-        </a>
+        <script>
+            function voltar() {
+                window.history.back();
+            }
+        </script>
     </body>
 </html>

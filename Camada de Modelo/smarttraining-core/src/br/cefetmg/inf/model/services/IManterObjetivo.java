@@ -12,6 +12,8 @@ public interface IManterObjetivo {
     public Objetivo pesquisarPorNome(String nome) throws SQLException;
 
     public ArrayList<Objetivo> pesquisarPorAvaliacao(String codCpf, LocalDate dataAvaliacao) throws SQLException;
+    
+    public ArrayList<Objetivo> pesquisarTodos() throws SQLException;
 
     public void cadastrar(Objetivo objetivo) throws SQLException;
 

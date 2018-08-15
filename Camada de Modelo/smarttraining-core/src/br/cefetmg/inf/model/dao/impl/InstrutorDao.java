@@ -64,10 +64,6 @@ public class InstrutorDao implements IInstrutorDao {
                     resultado.getString("des_email"),
                     resultado.getDate("dat_nascimento").toLocalDate()));
         }
-        if (listaInstrutores.isEmpty()) {
-
-            return null;
-        }
 
         return listaInstrutores;
     }

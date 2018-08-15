@@ -13,7 +13,7 @@ public class ServletWeb extends HttpServlet {
     private String jsp;
     private final HashMap<String, Controller> controllers;
 
-    public ServletWeb() {
+    public ServletWeb() {        
         controllers = new HashMap<>();
         controllers.put("Logar", new FazerLogin());
         controllers.put("AlterarAvaliacao", new AlterarAvaliacao());
@@ -31,11 +31,11 @@ public class ServletWeb extends HttpServlet {
         controllers.put("RemoverUsuario", new RemoverUsuario());
         controllers.put("TelaRemoverUsuario", new TelaRemoverUsuario());
         controllers.put("TelaRemoverExercicio", new TelaRemoverExercicio());
+        controllers.put("TelaCadastrarAvaliacao", new TelaCadastrarAvaliacao());
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
 
         Controller controller = determinaController(request);

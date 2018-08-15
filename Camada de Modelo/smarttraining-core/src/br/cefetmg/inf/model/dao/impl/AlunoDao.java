@@ -81,9 +81,6 @@ public class AlunoDao implements IAlunoDao {
                     resultado.getString("des_email"),
                     resultado.getDate("dat_nascimento").toLocalDate()));
         }
-        if (listaUsuarios.isEmpty()) {
-            return null;
-        }
 
         return listaUsuarios;
     }

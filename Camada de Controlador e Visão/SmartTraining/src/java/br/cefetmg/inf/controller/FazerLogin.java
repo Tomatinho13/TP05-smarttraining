@@ -8,12 +8,14 @@ import br.cefetmg.inf.model.services.impl.ManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class FazerLogin implements Controller{
 
     @Override
     public  String execute(HttpServletRequest request) {
         String jsp;
+        HttpSession sessao = request.getSession();
         try{
 
             String cpf =  request.getParameter("cpf").replaceAll("[^0-9]", "");
@@ -24,9 +26,11 @@ public class FazerLogin implements Controller{
             Usuario usuario = manterAluno.pesquisarPorCpf(cpf);
             Instrutor instrutor = manterInstrutor.pesquisarPorCpf(cpf);
             if(usuario != null && usuario.getTxtSenha().equals(senha)){
-                    jsp="TelaInicialAluno.jsp";
+                sessao.setAttribute("usuario", usuario);
+                jsp="TelaInicialAluno.jsp";
             }
             else if(instrutor!= null && instrutor.getTxtSenha().equals(senha)){
+                sessao.setAttribute("usuario", instrutor);
                 jsp="TelaInicialInstrutor.jsp";
             }
             else{

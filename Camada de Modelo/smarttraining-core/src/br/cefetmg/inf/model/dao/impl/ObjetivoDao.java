@@ -67,6 +67,23 @@ public class ObjetivoDao implements IObjetivoDao {
     }
 
     @Override
+    public ArrayList<Objetivo> getListaObjetivos() throws SQLException {
+        ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
+        sql = "SELECT * "
+                + "FROM \"Objetivo\" ";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        while (resultado.next()) {
+            listaObjetivos.add(new Objetivo(resultado.getInt("cod_objetivo"),
+                    resultado.getString("nom_objetivo"),
+                    resultado.getString("des_objetivo")));
+        }
+
+        return listaObjetivos;
+    }
+
+    @Override
     public void postObjetivo(Objetivo objetivo) throws SQLException {
         sql = "INSERT INTO \"Objetivo\" VALUES (?,?,?);";
 

@@ -17,27 +17,35 @@
             <h2 class="h2">SmartTraining - Remover Exercicio</h2>
             <form action="ServletWeb" method="post">
                 <input type="hidden" name="acao" value="RemoverExercicio">
-                
+
                 <h4>Selecione o exercício que deseja remover:</h4>
                 <select>
                     <%
                         Exercicio exercicio = new Exercicio();
                         List<Exercicio> listaExercicios = (List) request.getAttribute("exercicios");
-                        for(int i=0; i<listaExercicios.size(); i++){
+                        for (int i = 0; i < listaExercicios.size(); i++) {
                             exercicio = listaExercicios.get(i);
                     %>
-                    
-                    <option value=" <%= exercicio.getNomeExercicio() %> "><%= exercicio.getNomeExercicio() %></option>
-                    
+
+                    <option value=" <%= exercicio.getNomeExercicio()%> "><%= exercicio.getNomeExercicio()%></option>
+
                     <%
                         }
                     %>
                 </select>
-                
+
                 <input type="submit" name="removerExercicio" class="btn btn-primary" value="Remover">
             </form>
-                
-            <a href="TelaInicialAluno.jsp" class="btn btn-primary">Voltar</a>
+
+            <a class="btn btn-primary" onclick="voltar()">
+                Voltar
+            </a>
+
         </div>
+        <script>
+            function voltar() {
+                window.history.back();
+            }
+        </script>
     </body>
 </html>

@@ -23,16 +23,9 @@ public class TelaRemoverUsuario implements Controller {
             ArrayList<Instrutor> listaInstrutores = manterInstrutor.pesquisarTodos();
             ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
-            if (listaAlunos==null) {
-                if (listaInstrutores==null) {
-                    jsp = "erro.jsp";
-                }
-            } else if (listaInstrutores==null) {
-                listaUsuarios.addAll(listaAlunos);
-            } else {
-                listaUsuarios.addAll(listaAlunos);
-                listaUsuarios.addAll(listaInstrutores);
-            }
+            listaUsuarios.addAll(listaAlunos);
+            listaUsuarios.addAll(listaInstrutores);
+            
             request.setAttribute("usuarios", listaUsuarios);
         } catch (SQLException ex) {
             jsp = "erro.jsp";

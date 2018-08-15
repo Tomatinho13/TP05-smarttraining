@@ -42,7 +42,14 @@
                 <input type="submit" class="btn btn-primary" value="Remover">
             </form>  
                 
-            <a href="TelaInicialAluno.jsp" class="btn btn-primary">Voltar</a>
+            <a class="btn btn-primary" onclick="voltar()">
+                Voltar
+            </a>
         </div>
+        <script>
+            function voltar() {
+               window.history.back();
+            }
+        </script>
     </body>
 </html>
