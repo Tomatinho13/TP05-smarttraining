@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ManterFicha implements IManterFicha {
 
-    private IFichaDao fichaDao;
+    private final IFichaDao fichaDao;
     
     public ManterFicha() {
         fichaDao = new FichaDao();

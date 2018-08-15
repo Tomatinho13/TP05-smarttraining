@@ -6,10 +6,11 @@ import br.cefetmg.inf.model.dao.impl.InstrutorDao;
 import br.cefetmg.inf.model.domain.Instrutor;
 import br.cefetmg.inf.model.services.IManterInstrutor;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ManterInstrutor implements IManterInstrutor {
 
-    private IInstrutorDao instrutorDao;
+    private final IInstrutorDao instrutorDao;
     
     public ManterInstrutor() {
         instrutorDao = new InstrutorDao();
@@ -19,6 +20,12 @@ public class ManterInstrutor implements IManterInstrutor {
     public Instrutor pesquisarPorCpf(String codCpf) throws SQLException{
         Instrutor resultado = instrutorDao.getInstrutor(codCpf);
         return resultado;
+    }
+    
+    @Override
+    public ArrayList<Instrutor> pesquisarTodos() throws SQLException {
+        ArrayList<Instrutor> listaInstrutores = instrutorDao.getListaInstrutores();
+        return listaInstrutores;
     }
     
     @Override

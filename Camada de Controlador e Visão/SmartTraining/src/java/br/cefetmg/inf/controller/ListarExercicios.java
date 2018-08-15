@@ -27,24 +27,12 @@ public class ListarExercicios implements Controller {
             ArrayList<Musculo> listaMusculos = manterMusculo.listarTodos();
 
             if (listaMusculos != null) {
-                request.setAttribute("listaMusculos", listaMusculos);
+                request.setAttribute("musculos", listaMusculos);
                 jsp = "/ListaExercicios.jsp";
             } else {
                 String erro = "Nao existem musculos registrados no banco de dados!";
                 request.setAttribute("erro", erro);
                 jsp = "/erro.jsp";
-            }
-
-            for (Musculo musculo : listaMusculos) {
-                ArrayList<Exercicio> listaExercicios = manterExercicio.pesquisarPorMusculo(musculo.getCodMusculo());
-                if (listaExercicios != null) {
-                    request.setAttribute("listaExercicios", listaExercicios);
-                    jsp = "/ListaExercicios.jsp";
-                } else {
-                    String erro = "Nao existem exercícios para esse musculo!";
-                    request.setAttribute("erro", erro);
-                    jsp = "/erro.jsp";
-                }
             }
 
         } catch (SQLException e) {

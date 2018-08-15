@@ -5,6 +5,7 @@ import br.cefetmg.inf.model.db.ConectaBd;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Instrutor;
+import java.util.ArrayList;
 
 public class InstrutorDao implements IInstrutorDao {
 
@@ -43,6 +44,32 @@ public class InstrutorDao implements IInstrutorDao {
         }
 
         return instrutor;
+    }
+    
+    @Override
+    public ArrayList<Instrutor> getListaInstrutores() throws SQLException {
+        ArrayList <Instrutor> listaInstrutores = new ArrayList<>();
+        sql = "SELECT * "
+                + "FROM \"Usuario\" "
+                + "JOIN \"Instrutor\" USING(cod_cpf) ";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        while (resultado.next()) {
+            listaInstrutores.add(new Instrutor(resultado.getString("nro_cref"),
+                    resultado.getString("cod_cpf"),
+                    resultado.getString("nom_usuario"),
+                    resultado.getString("idt_tipo_usuario").charAt(0),
+                    resultado.getString("txt_senha"),
+                    resultado.getString("des_email"),
+                    resultado.getDate("dat_nascimento").toLocalDate()));
+        }
+        if (listaInstrutores.isEmpty()) {
+
+            return null;
+        }
+
+        return listaInstrutores;
     }
 
     @Override

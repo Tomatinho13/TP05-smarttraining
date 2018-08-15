@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface IAlunoDao {
     public Usuario getAluno(String codCpf) throws SQLException;
     public Usuario getAlunoPeloNome (String nome) throws SQLException;
-    public ArrayList <Usuario> listarTodos () throws SQLException;
+    public ArrayList <Usuario> getListaAlunos () throws SQLException;
     public void postAluno(Usuario aluno)throws SQLException;
     public void putAluno(Usuario aluno) throws SQLException;
     public void deleteAluno(String codCpf) throws SQLException;

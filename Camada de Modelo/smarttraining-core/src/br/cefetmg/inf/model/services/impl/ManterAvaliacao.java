@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ManterAvaliacao implements IManterAvaliacao {
 
-    private IAvaliacaoDao avaliacaoDao;
+    private final IAvaliacaoDao avaliacaoDao;
     
     public ManterAvaliacao() {
         avaliacaoDao = new AvaliacaoDao();

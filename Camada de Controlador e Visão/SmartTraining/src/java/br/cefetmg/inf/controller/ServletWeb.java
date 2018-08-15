@@ -29,6 +29,8 @@ public class ServletWeb extends HttpServlet {
         controllers.put("ListarUsuarios", new ListarUsuarios());
         controllers.put("RemoverExercicio", new RemoverExercicio());
         controllers.put("RemoverUsuario", new RemoverUsuario());
+        controllers.put("TelaRemoverUsuario", new TelaRemoverUsuario());
+        controllers.put("TelaRemoverExercicio", new TelaRemoverExercicio());
     }
 
     @Override

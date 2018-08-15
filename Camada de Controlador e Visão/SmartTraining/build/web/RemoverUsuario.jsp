@@ -20,11 +20,11 @@
         <div class="container">
             <br>
             <h2 class="h2">SmartTraining - Remover usuario</h2>
-            <form action="ServletWeb" method="post">
+            <form action="servletweb" method="delete">
                 <input type="hidden" name="acao" value="RemoverUsuario">
                 
                 <h4>Selecione o usuário que deseja remover:</h4>
-                <select>
+                <select name="usuario">
                     <%
                         Usuario usuario = new Usuario();
                         List<Usuario> listaUsuarios = (List) request.getAttribute("usuarios");
@@ -39,7 +39,7 @@
                     %>
                 </select>
                 
-                <input type="submit" name="removerUsuario" class="btn btn-primary" value="Remover">
+                <input type="submit" class="btn btn-primary" value="Remover">
             </form>  
                 
             <a href="TelaInicialAluno.jsp" class="btn btn-primary">Voltar</a>

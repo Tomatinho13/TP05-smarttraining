@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class ManterAparelho implements IManterAparelho {
 
-    private IAparelhoDao aparelhoDao;
+    private final IAparelhoDao aparelhoDao;
 
     public ManterAparelho() {
         aparelhoDao = new AparelhoDao();

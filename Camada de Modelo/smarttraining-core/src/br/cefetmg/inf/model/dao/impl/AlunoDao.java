@@ -5,7 +5,6 @@ import br.cefetmg.inf.model.db.ConectaBd;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Usuario;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AlunoDao implements IAlunoDao {
@@ -42,7 +41,7 @@ public class AlunoDao implements IAlunoDao {
 
         return aluno;
     }
-    
+
     @Override
     public Usuario getAlunoPeloNome(String nome) throws SQLException {
         sql = "SELECT * "
@@ -64,6 +63,29 @@ public class AlunoDao implements IAlunoDao {
         }
 
         return aluno;
+    }
+
+    @Override
+    public ArrayList<Usuario> getListaAlunos() throws SQLException {
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+        sql = "SELECT * "
+                + "FROM \"Usuario\" ";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        while (resultado.next()) {
+            listaUsuarios.add(new Usuario(resultado.getString("cod_cpf"),
+                    resultado.getString("nom_usuario"),
+                    resultado.getString("idt_tipo_usuario").charAt(0),
+                    resultado.getString("txt_senha"),
+                    resultado.getString("des_email"),
+                    resultado.getDate("dat_nascimento").toLocalDate()));
+        }
+        if (listaUsuarios.isEmpty()) {
+            return null;
+        }
+
+        return listaUsuarios;
     }
 
     @Override
@@ -117,27 +139,4 @@ public class AlunoDao implements IAlunoDao {
 
     }
 
-    @Override
-    public ArrayList<Usuario> listarTodos() throws SQLException {
-        ArrayList <Usuario> listaUsuarios = new ArrayList<>();
-        sql = "SELECT * "
-                + "FROM \"Usuario\" ";
-
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        while (resultado.next()) {
-            listaUsuarios.add(new Usuario(resultado.getString("cod_Cpf"),
-                    resultado.getString("nomeUsuario"), 
-                    resultado.getString("idtTipoUsuario").charAt(0), 
-                    resultado.getString("txtSenha"),
-                    resultado.getString("desEmail"),
-                    LocalDate.parse(resultado.getString("datNascimento"))));
-        }
-        if (listaUsuarios.isEmpty()) {
-
-            return null;
-        }
-
-        return listaUsuarios;
-    }
 }

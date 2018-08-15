@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ManterObjetivo implements IManterObjetivo {
 
-    private IObjetivoDao objetivoDao;
+    private final IObjetivoDao objetivoDao;
     
     public ManterObjetivo() {
         objetivoDao = new ObjetivoDao();

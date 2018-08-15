@@ -12,7 +12,6 @@ import br.cefetmg.inf.model.domain.AparelhoExercicio;
 public class ExercicioDao implements IExercicioDao {
 
     private Exercicio exercicio;
-    private ArrayList<Exercicio> listaExercicios;
     private final Connection conn;
     private String sql;
     private final Gson gson;
@@ -114,6 +113,22 @@ public class ExercicioDao implements IExercicioDao {
             return null;
         }
 
+        return listaExercicios;
+    }
+    
+    @Override
+    public ArrayList<Exercicio> getListaExercicios() throws SQLException{
+        ArrayList<Exercicio> listaExercicios = new ArrayList<>();
+        sql="SELECT * FROM \"Exercicio\"";
+        
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        
+        while(resultado.next()){
+            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), 
+            resultado.getString("nom_exercicio"), 
+            resultado.getString("des_exercicio")));
+        }
         return listaExercicios;
     }
 

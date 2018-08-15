@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ManterExercicio implements IManterExercicio {
 
-    private IExercicioDao exercicioDao;
+    private final IExercicioDao exercicioDao;
     
     public ManterExercicio() {
         exercicioDao = new ExercicioDao();
@@ -44,7 +44,13 @@ public class ManterExercicio implements IManterExercicio {
     @Override
     public ArrayList<Exercicio> pesquisarPorMusculo(int codMusculo) throws SQLException{
         ArrayList<Exercicio> resultado = new ArrayList<>(exercicioDao.getMusculoExercicios(codMusculo));
-        return resultado;       
+        return resultado;
+    }
+    
+    @Override
+    public ArrayList<Exercicio> pesquisarTodos() throws SQLException {
+        ArrayList<Exercicio> resultado = new ArrayList<>(exercicioDao.getListaExercicios());
+        return resultado;
     }
     
     @Override
@@ -60,5 +66,5 @@ public class ManterExercicio implements IManterExercicio {
     @Override
     public void excluir(int codExercicio) throws SQLException{
         exercicioDao.deleteExercicio(codExercicio);
-    }     
+    }
 }

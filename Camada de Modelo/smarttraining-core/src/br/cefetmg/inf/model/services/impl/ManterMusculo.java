@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ManterMusculo implements IManterMusculo {
 
-    private IMusculoDao musculoDao;
+    private final IMusculoDao musculoDao;
     
     public ManterMusculo() {
         musculoDao = new MusculoDao();

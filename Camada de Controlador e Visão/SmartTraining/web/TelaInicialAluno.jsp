@@ -15,17 +15,25 @@
 </head>
 <body>
     <div class="container">
-        <a href="ListaExercicios.jsp">
-            <button class="btn btn-primary">Mostrar Exercícios</button>
-        </a>
-        <a href="RemoverExercicio.jsp">
-            <button class="btn btn-primary">Remover Exercício</button>
-        </a>
-        <br>
-        
-        <a href="RemoverUsuario.jsp">
-            <button class="btn btn-primary">Remover Usuario</button>
-        </a>
+        <form action="servletweb">
+            <input type="hidden" name="acao" id="acao">
+            <input type="submit" class="btn btn-primary" value="Mostrar Exercicios" onclick="listarExercicios()">
+            <input type="submit" class="btn btn-primary" value="Remover Exercicios" onclick="removerExercicios()">
+            <input type="submit" class="btn btn-primary" value="Remover Usuario" onclick="removerUsuario()">
+        </form>
     </div>
+    <script>
+        function listarExercicios(){
+            document.getElementById("acao").value="ListarExercicios"
+        }
+        
+        function removerExercicios(){
+            document.getElementById("acao").value="TelaRemoverExercicio"
+        }
+        
+        function removerUsuario(){
+            document.getElementById("acao").value="TelaRemoverUsuario"
+        }
+    </script>
 </body>
 </html>

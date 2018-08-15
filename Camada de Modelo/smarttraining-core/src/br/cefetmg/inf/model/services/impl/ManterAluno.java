@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ManterAluno implements IManterAluno {
 
-    private IAlunoDao alunoDao;
+    private final IAlunoDao alunoDao;
 
     public ManterAluno() {
         alunoDao = new AlunoDao();
@@ -29,7 +29,7 @@ public class ManterAluno implements IManterAluno {
         
     @Override
     public ArrayList<Usuario> pesquisarTodos() throws SQLException {
-        ArrayList <Usuario> listaUsuarios = alunoDao.listarTodos();
+        ArrayList <Usuario> listaUsuarios = alunoDao.getListaAlunos();
         return listaUsuarios;
     }
     

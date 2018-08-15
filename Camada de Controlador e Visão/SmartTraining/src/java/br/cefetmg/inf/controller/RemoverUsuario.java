@@ -1,6 +1,5 @@
 package br.cefetmg.inf.controller;
 
-import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterAluno;
 import java.sql.SQLException;
@@ -13,14 +12,14 @@ public class RemoverUsuario implements Controller {
         String jsp;
 
         try {
-            String nomeUsuario = request.getParameter("nomeUsuario");
+            String codCpfUsuario = request.getParameter("usuario").replaceAll(" ", "");
 
+            
             IManterAluno manterUsuario = new ManterAluno();
 
-            Usuario usuario = manterUsuario.pesquisarPorNome(nomeUsuario);
-            manterUsuario.excluir(usuario.getCodCpf());
+            manterUsuario.excluir(codCpfUsuario);
 
-            jsp = new ListarUsuarios().execute(request);
+            jsp = new TelaRemoverUsuario().execute(request);
         } catch (SQLException e) {
             jsp = "";
         }

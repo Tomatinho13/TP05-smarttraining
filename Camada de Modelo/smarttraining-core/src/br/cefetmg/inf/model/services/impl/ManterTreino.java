@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ManterTreino implements IManterTreino {
 
-    private ITreinoDao treinoDao;
+    private final ITreinoDao treinoDao;
     
     public ManterTreino() {
         treinoDao = new TreinoDao();

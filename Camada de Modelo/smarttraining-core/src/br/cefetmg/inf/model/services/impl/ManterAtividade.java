@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class ManterAtividade implements IManterAtividade {
 
-    private IAtividadeDao atividadeDao;
+    private final IAtividadeDao atividadeDao;
 
     public ManterAtividade() {
         atividadeDao = new AtividadeDao();

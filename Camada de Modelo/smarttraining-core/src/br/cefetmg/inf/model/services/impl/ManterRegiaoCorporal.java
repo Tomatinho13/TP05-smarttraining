@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class ManterRegiaoCorporal implements IManterRegiaoCorporal {
 
-    private IRegiaoCorporalDao regiaoCorporalDao;
+    private final IRegiaoCorporalDao regiaoCorporalDao;
     
     public ManterRegiaoCorporal() {
         regiaoCorporalDao = new RegiaoCorporalDao();
