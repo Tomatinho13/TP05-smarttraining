@@ -48,8 +48,9 @@
                                 exercicio = listaExercicios.get(j);
                         %>
                         <li class="list-group-item"> 
+                            <h4><%= exercicio.getNomeExercicio()%></h4>
                             <a href="/controller/servletweb?acao=MostrarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>">
-                                <%= exercicio.getNomeExercicio()%>
+                                Ver 
                             </a>
                             <a href="/controller/servletweb?acao=AlterarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>"> 
                                 Alterar 

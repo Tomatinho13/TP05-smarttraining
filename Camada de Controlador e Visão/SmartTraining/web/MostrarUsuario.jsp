@@ -21,9 +21,9 @@
                 Usuario usuario = (Usuario) request.getAttribute("usuario");
             %>
             
-            Nome: <%= usuario.getNomUsuario() %><br>
-            Email: <%= usuario.getDesEmail()%><br>
-            Data de nascimento: <%= usuario.getDatNascimento()%><br>
+            <p>Nome: <%= usuario.getNomUsuario() %></p><br>
+            <p>Email: <%= usuario.getDesEmail()%></p><br>
+            <p>Data de nascimento: <%= usuario.getDatNascimento()%></p><br>
             
             <%  
             String tipoUsuario;
@@ -39,11 +39,9 @@
             }
             %>
             
-            Função: <%= tipoUsuario%>
+            <p>Função: <%= tipoUsuario%></p><br>
             
-            <form action="ListaUsuarios.jsp">
-                <input type="submit" name="Voltar" value="Voltar">
-            </form>
+            <a href="ListaUsuarios.jsp" class="btn btn-primary">Voltar</a>
         </div>
     </body>
 </html>

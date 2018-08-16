@@ -15,15 +15,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="servletweb" id="form">
-            <input type="hidden" name="acao" id="acao">
-            <input type="submit" class="btn btn-primary" value="Mostrar Exercicios" onclick="listarExercicios()">
-        </form>
+        <a href="/servletweb?acao=ListarExercicio">Listar exercícios</a>
     </div>
-    <script>
-        function listarExercicios(){
-            document.getElementById("acao").value="ListarExercicios"
-        }
-    </script>
 </body>
 </html>

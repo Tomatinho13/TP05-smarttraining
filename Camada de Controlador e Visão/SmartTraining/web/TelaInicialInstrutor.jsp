@@ -18,14 +18,17 @@
         <a class="btn btn-primary" href="/servletweb?acao=ListarExercicios">
             Listar Exercicios
         </a>
+        <a class="btn btn-primary" href="/servletweb?acao=CadastrarExercicio">
+            Cadastrar Exercicio
+        </a>
         <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverExercicio">
             Remover Exercicio
+        </a><br>
+        <a class="btn btn-primary" href="/servletweb?acao=ListarUsuarios">
+            Listar Usuarios
         </a>
         <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverUsuario">
             Remover Usuario
-        </a>
-        <a class="btn btn-primary" href="/servletweb?acao=ListarUsuarios">
-            Listar Usuarios
         </a>
     </div>
 </body>
