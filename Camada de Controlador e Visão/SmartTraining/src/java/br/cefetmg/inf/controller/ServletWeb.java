@@ -1,7 +1,9 @@
 package br.cefetmg.inf.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,7 @@ public class ServletWeb extends HttpServlet {
     private String jsp;
     private final HashMap<String, Controller> controllers;
 
-    public ServletWeb() {        
+    public ServletWeb() {
         controllers = new HashMap<>();
         controllers.put("Logar", new FazerLogin());
         controllers.put("AlterarAvaliacao", new AlterarAvaliacao());
@@ -40,13 +42,32 @@ public class ServletWeb extends HttpServlet {
 
         Controller controller = determinaController(request);
         jsp = controller.execute(request);
-        
+
         //Redirecionando pagina
         RequestDispatcher rd = request.getRequestDispatcher(jsp);
         rd.forward(request, response);
     }
-    
-    private Controller determinaController(HttpServletRequest request){
+
+    private Controller determinaController(HttpServletRequest request) {
         return controllers.get(request.getParameter("acao"));
+    }
+
+    private TipoView negotiateContent(HttpServletRequest request) {
+        final String cabecalhoAceita = request.getHeader("Accept");
+
+        if (cabecalhoAceita == null) {
+            return TipoView.HTML;
+        }
+
+        final List<String> tiposAceitos = Arrays.asList(cabecalhoAceita.split(","));
+
+        final int indiceJson = tiposAceitos.indexOf("text/json");
+        final int indiceHtml = tiposAceitos.indexOf("text/html");
+
+        if (indiceJson > indiceHtml) {
+            return TipoView.JSON;
+        }
+
+        return TipoView.HTML;
     }
 }

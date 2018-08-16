@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Usuario;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AlunoDao implements IAlunoDao {
 
@@ -69,7 +71,8 @@ public class AlunoDao implements IAlunoDao {
     public ArrayList<Usuario> getListaAlunos() throws SQLException {
         ArrayList<Usuario> listaUsuarios = new ArrayList<>();
         sql = "SELECT * "
-                + "FROM \"Usuario\" ";
+                + "FROM \"Usuario\" "
+                + "WHERE idt_tipo_usuario='A'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
@@ -127,12 +130,16 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public void deleteAluno(String codCpf) throws SQLException {
-        sql = "DELETE FROM \"Usuario\" "
-                + "WHERE cod_cpf='" + codCpf + "'";
-
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate(sql);
+    public void deleteAluno(String codCpf) {
+        try {
+            sql = "DELETE FROM \"Usuario\" "
+                    + "WHERE cod_cpf='" + codCpf + "'";
+            
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

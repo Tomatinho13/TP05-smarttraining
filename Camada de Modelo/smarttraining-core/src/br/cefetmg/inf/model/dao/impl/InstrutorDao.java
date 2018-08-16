@@ -51,7 +51,8 @@ public class InstrutorDao implements IInstrutorDao {
         ArrayList <Instrutor> listaInstrutores = new ArrayList<>();
         sql = "SELECT * "
                 + "FROM \"Usuario\" "
-                + "JOIN \"Instrutor\" USING(cod_cpf) ";
+                + "JOIN \"Instrutor\" USING(cod_cpf) "
+                + "WHERE idt_tipo_usuario='I'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
