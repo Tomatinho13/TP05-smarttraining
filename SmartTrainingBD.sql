@@ -1,15 +1,3 @@
-﻿/*
-Created: 19/04/2018
-Modified: 30/06/2018
-Project: SmartTraining
-Model: PostgreSQL 9.4
-Company: Augusto Carvalho
-Author: João Victor R. Melo
-Version: 1.0
-Database: PostgreSQL 9.4
-*/
-
-
 -- Create tables section -------------------------------------------------
 
 -- Table Aluno
@@ -94,7 +82,7 @@ ALTER TABLE "Ficha" ADD CONSTRAINT "Key7" PRIMARY KEY ("cod_cpf","nro_ficha")
 
 CREATE TABLE "Avaliacao"(
  "cod_cpf" Character varying(11) NOT NULL,
- "dat_avalicao" Date NOT NULL,
+ "dat_avaliacao" Date NOT NULL,
  "cod_cpf_instrutor" Character varying(11) NOT NULL,
  "idt_recencia" Boolean NOT NULL,
  "qtd_peso" Numeric(5,2) NOT NULL,
@@ -123,7 +111,7 @@ CREATE INDEX "IX_Relationship13" ON "Avaliacao" ("cod_cpf_instrutor")
 
 -- Add keys for table Avaliacao
 
-ALTER TABLE "Avaliacao" ADD CONSTRAINT "Key8" PRIMARY KEY ("cod_cpf","dat_avalicao")
+ALTER TABLE "Avaliacao" ADD CONSTRAINT "Key8" PRIMARY KEY ("cod_cpf","dat_avaliacao")
 ;
 
 -- Table Treino
@@ -144,8 +132,8 @@ ALTER TABLE "Treino" ADD CONSTRAINT "Key14" PRIMARY KEY ("cod_cpf","nro_treino",
 -- Table Musculo
 
 CREATE TABLE "Musculo"(
- "seq_musculo" Serial NOT NULL,
- "seq_regCorp" Integer,
+ "cod_musculo" Bigint NOT NULL,
+ "cod_regCorp" Bigint,
  "nom_musculo" Character varying NOT NULL,
  "img_musculo" Bigint NOT NULL
 )
@@ -153,38 +141,38 @@ CREATE TABLE "Musculo"(
 
 -- Create indexes for table Musculo
 
-CREATE INDEX "IX_Relationship20" ON "Musculo" ("seq_regCorp")
+CREATE INDEX "IX_Relationship20" ON "Musculo" ("cod_regCorp")
 ;
 
 -- Add keys for table Musculo
 
-ALTER TABLE "Musculo" ADD CONSTRAINT "Key16" PRIMARY KEY ("seq_musculo")
+ALTER TABLE "Musculo" ADD CONSTRAINT "Key16" PRIMARY KEY ("cod_musculo")
 ;
 
 -- Table RegiaoCorporal
 
 CREATE TABLE "RegiaoCorporal"(
- "seq_regCorp" Serial NOT NULL,
+ "cod_regCorp" Bigint NOT NULL,
  "nom_regCorp" Character varying NOT NULL
 )
 ;
 
 -- Add keys for table RegiaoCorporal
 
-ALTER TABLE "RegiaoCorporal" ADD CONSTRAINT "Key17" PRIMARY KEY ("seq_regCorp")
+ALTER TABLE "RegiaoCorporal" ADD CONSTRAINT "Key17" PRIMARY KEY ("cod_regCorp")
 ;
 
 -- Table MusculoExercicio
 
 CREATE TABLE "MusculoExercicio"(
  "cod_exercicio" Integer NOT NULL,
- "seq_musculo" Integer NOT NULL
+ "cod_musculo" Bigint NOT NULL
 )
 ;
 
 -- Add keys for table MusculoExercicio
 
-ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Key18" PRIMARY KEY ("cod_exercicio","seq_musculo")
+ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Key18" PRIMARY KEY ("cod_exercicio","cod_musculo")
 ;
 
 -- Table Aparelho
@@ -221,7 +209,10 @@ CREATE TABLE "TreinoExercicio"(
  "nro_treino" Smallint NOT NULL,
  "cod_exercicio" Integer NOT NULL,
  "nro_aparelho" Smallint NOT NULL,
- "nro_ficha" Integer NOT NULL
+ "nro_ficha" Integer NOT NULL,
+ "nro_series" Smallint NOT NULL,
+ "nro_repeticoes" Character varying(6) NOT NULL,
+ "qtd_peso" Integer NOT NULL
 )
 ;
 
@@ -233,7 +224,7 @@ ALTER TABLE "TreinoExercicio" ADD CONSTRAINT "Key21" PRIMARY KEY ("cod_exercicio
 -- Table Objetivo
 
 CREATE TABLE "Objetivo"(
- "seq_objetivo" Serial NOT NULL,
+ "cod_objetivo" Bigint NOT NULL,
  "nom_objetivo" Character varying NOT NULL,
  "des_objetivo" Character varying NOT NULL
 )
@@ -241,21 +232,21 @@ CREATE TABLE "Objetivo"(
 
 -- Add keys for table Objetivo
 
-ALTER TABLE "Objetivo" ADD CONSTRAINT "Key22" PRIMARY KEY ("seq_objetivo")
+ALTER TABLE "Objetivo" ADD CONSTRAINT "Key22" PRIMARY KEY ("cod_objetivo")
 ;
 
 -- Table ObjetivoAvaliacao
 
 CREATE TABLE "ObjetivoAvaliacao"(
- "dat_avalicao" Date NOT NULL,
+ "dat_avaliacao" Date NOT NULL,
  "cod_cpf" Character varying(11) NOT NULL,
- "seq_objetivo" Integer NOT NULL
+ "cod_objetivo" Bigint NOT NULL
 )
 ;
 
 -- Add keys for table ObjetivoAvaliacao
 
-ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Key23" PRIMARY KEY ("seq_objetivo","cod_cpf","dat_avalicao")
+ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Key23" PRIMARY KEY ("cod_objetivo","cod_cpf","dat_avaliacao")
 ;
 
 -- Table DiaTreino
@@ -274,7 +265,7 @@ CREATE TABLE "DiaTreino"(
 
 ALTER TABLE "DiaTreino" ADD CONSTRAINT "Key24" PRIMARY KEY ("cod_exercicio","nro_aparelho","cod_cpf","nro_treino","dat_treino","nro_ficha")
 ;
--- Create foreign keys (relationships) section ------------------------------------------------- 
+-- Create foreign keys (relationships) section -------------------------------------------------
 
 ALTER TABLE "Aluno" ADD CONSTRAINT "Relationship6" FOREIGN KEY ("cod_cpf") REFERENCES "Usuario" ("cod_cpf") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
@@ -297,13 +288,13 @@ ALTER TABLE "Avaliacao" ADD CONSTRAINT "Relationship13" FOREIGN KEY ("cod_cpf_in
 ALTER TABLE "Treino" ADD CONSTRAINT "Relationship17" FOREIGN KEY ("cod_cpf", "nro_ficha") REFERENCES "Ficha" ("cod_cpf", "nro_ficha") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "Musculo" ADD CONSTRAINT "Relationship20" FOREIGN KEY ("seq_regCorp") REFERENCES "RegiaoCorporal" ("seq_regCorp") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE "Musculo" ADD CONSTRAINT "Relationship20" FOREIGN KEY ("cod_regCorp") REFERENCES "RegiaoCorporal" ("cod_regCorp") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
 
 ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Relationship21" FOREIGN KEY ("cod_exercicio") REFERENCES "Exercicio" ("cod_exercicio") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Relationship22" FOREIGN KEY ("seq_musculo") REFERENCES "Musculo" ("seq_musculo") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Relationship22" FOREIGN KEY ("cod_musculo") REFERENCES "Musculo" ("cod_musculo") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
 
 ALTER TABLE "AparelhoExercicio" ADD CONSTRAINT "Relationship23" FOREIGN KEY ("cod_exercicio") REFERENCES "Exercicio" ("cod_exercicio") ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -318,72 +309,11 @@ ALTER TABLE "TreinoExercicio" ADD CONSTRAINT "Relationship25" FOREIGN KEY ("cod_
 ALTER TABLE "TreinoExercicio" ADD CONSTRAINT "Relationship26" FOREIGN KEY ("cod_cpf", "nro_treino", "nro_ficha") REFERENCES "Treino" ("cod_cpf", "nro_treino", "nro_ficha") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Relationship27" FOREIGN KEY ("seq_objetivo") REFERENCES "Objetivo" ("seq_objetivo") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Relationship27" FOREIGN KEY ("cod_objetivo") REFERENCES "Objetivo" ("cod_objetivo") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Relationship28" FOREIGN KEY ("cod_cpf", "dat_avalicao") REFERENCES "Avaliacao" ("cod_cpf", "dat_avalicao") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Relationship28" FOREIGN KEY ("cod_cpf", "dat_avaliacao") REFERENCES "Avaliacao" ("cod_cpf", "dat_avaliacao") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
 
 ALTER TABLE "DiaTreino" ADD CONSTRAINT "Relationship29" FOREIGN KEY ("cod_exercicio", "nro_aparelho", "cod_cpf", "nro_treino", "nro_ficha") REFERENCES "TreinoExercicio" ("cod_exercicio", "nro_aparelho", "cod_cpf", "nro_treino", "nro_ficha") ON DELETE NO ACTION ON UPDATE NO ACTION
 ;
-
-INSERT INTO "Usuario" (cod_cpf, nom_usuario,idt_tipo_usuario,txt_senha,des_email,dat_nascimento) 
-	VALUES  (12072073070, 'Waldemir', 'A', '123456', 'waldemirclemente@email.com', '12-11-1990'),
-		(22021078276, 'Juracir', 'A', '123', 'juracir@email.com', '10-03-1995'),
-		(11122233344, 'Amanda', 'A', 'abcsenha', 'Amanda@email.com', '04-04-1998'),
-		(11111111111, 'Mano', 'I', 'senhaXXX', 'ManoBrown@email.com', '01-03-1988'),
-		(98765432111, 'Trabalha', 'I', 'desisti', 'Trabalho@email.com', '28-02-1970');
-
-INSERT INTO "Instrutor" (cod_cpf, nro_cref) 
-	VALUES (11111111111, 55555), (98765432111, 44444);
-  
-INSERT INTO "Aluno" (cod_cpf) 
-	VALUES (12072073070),(22021078276),(11122233344);
-
-INSERT INTO "Exercicio" (cod_exercicio, nom_exercicio, des_exercicio) 
-	VALUES (0001, 'Abdominal Supra1', 'DescGenerica'), (0002, 'Abdominal Infra', 'DescGenerica'), 
-		   (0003, 'Abdominal Obliqua', 'DescGenerica'), (0004, 'Rosca Direta', 'DescGenerica'), (0005, 'Rosca Scott', 'DescGenerica');
-
-INSERT INTO "Aparelho" (nro_aparelho, nom_aparelho) 
-	VALUES (001, 'Colchão'), (002, 'Maquina Scott'), (003, 'Halter');
-
-INSERT INTO "AparelhoExercicio" (cod_exercicio, nro_aparelho, img_execucao) 
-	VALUES (0001, 001, 0), (0002, 001, 0), (0003,001,0), (0004, 003, 0), (0005, 002, 0);
-
-INSERT INTO "RegiaoCorporal" ("nom_regCorp") 
-	VALUES ('Abdômen'),('Braço'),('Antebraço'),('Coxa'),('Perna');
-
-INSERT INTO "Musculo" ("seq_regCorp", nom_musculo, img_musculo) 
-	VALUES (16, 'MusculoA', 0), (16, 'MusculoB', 0), (17, 'Biceps', 0), (18, 'MusculoC', 0), (19, 'MusculoD', 0), (20, 'Panturrilha', 0);
-
-INSERT INTO "MusculoExercicio" (cod_exercicio, seq_musculo)
-	VALUES (0001, 13),(0001, 14),(0002, 15),(0003, 16), (0004, 17),(0005, 18);
-    
-INSERT INTO "Objetivo" (nom_objetivo, des_objetivo)
-	VALUES ('Condicionamento', 'Ganhar resistência física'), ('Crescimento', 'Aumento de massa muscular'),
-    	   ('Estética','Questões de beleza e autoestima pessoal');
-
-INSERT INTO "Ficha" (nro_ficha, cod_cpf, cod_cpf_instrutor, dat_ficha, dat_prevista_troca, idt_treino)
-	VALUES (1, 12072073070, 11111111111, '02-08-2018', '02-12-2018', 0), (1, 22021078276, 11111111111, '02-08-2018', '02-12-2018', 0),
-    	   (2, 11122233344, 98765432111, '12-07-2018', '12-11-2018', 0);
-           
-INSERT INTO "Treino" (cod_cpf, nro_ficha, nro_treino, des_treino)
-	VALUES (12072073070, 1, 1, 'TreinoABC'), (22021078276, 1, 1, 'TreinoAB'), (11122233344, 2, 1, 'TreinoABG');
-    
-/* INSERT INTO "DiaTreino" (dat_treino, cod_exercicio, nro_aparelho, cod_cpf, nro_treino, nro_ficha)
-	VALUES ('02-08-2018', 0001, 001, 12072073070, 1, 1), ('02-08-2018', 0003, 001, 22021078276, 1, 1), ('02-08-2018', 0005, 002, 22021078276, 1, 2); */
-    
-INSERT INTO "TreinoExercicio" (cod_exercicio, nro_aparelho, cod_cpf, nro_treino, nro_ficha, nro_series, nro_repeticoes, qtd_peso)
-	VALUES (0001, 001, 12072073070, 1, 1, 3, 20, 0), (0003, 001, 22021078276, 1, 1, 4, 15, 0), (0005, 002, 22021078276, 1, 2, 3, 12, 25);
-    
-INSERT INTO "Avaliacao" ("dat_avalicao", cod_cpf, cod_cpf_instrutor, "idt_recencia","qtd_peso","qtd_gordura", "tam_pescoco", "tam_ombro", "tam_torax", 
-      "tam_abdomen", "tam_cintura", "tam_quadril", "tam_bracoEsq","tam_bracoDir","tam_antebracoEsq", "tam_antebracoDir", "tam_coxaEsq", "tam_coxaDir",
-      "tam_panturrilhaEsq","tam_panturrilhaDir")
-       VALUES ('01-04-2018', 12072073070, 11111111111, true, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
-       		  ('01-06-2018', 22021078276, 11111111111, true, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
-			  ('01-07-2018', 11122233344, 98765432111, true, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-              
-INSERT INTO "ObjetivoAvaliacao" (dat_avalicao, cod_cpf, seq_objetivo)
-	VALUES ('01-04-2018', 12072073070, 1), ('01-06-2018', 22021078276, 2), ('01-07-2018', 11122233344, 3);
-
-
