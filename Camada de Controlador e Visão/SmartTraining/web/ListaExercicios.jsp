@@ -65,15 +65,8 @@
                     }
                 %>
             </ul>
-            <a class="btn btn-primary" onclick="voltar()">
-                Voltar
-            </a>
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
-        <br>
-        <script>
-            function voltar() {
-                window.history.back();
-            }
-        </script>
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

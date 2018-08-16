@@ -15,7 +15,11 @@
 </head>
 <body>
     <div class="container">
-        <a href="/servletweb?acao=ListarExercicio">Listar exercícios</a>
+        <a href="/servletweb?acao=MostrarUsuario" class="btn btn-primary">Perfil</a><br>
+        <a href="/servletweb?acao=AlterarUsuario" class="btn btn-primary">Alterar dados</a><br>
+        <a href="/servletweb?acao=ListarAvaliacoes" class="btn btn-primary">Ver Avaliações</a><br>
+        <a href="/servletweb?acao=ListarFichas" class="btn btn-primary">Ver Fichas</a><br>
+        <a href="/servletweb?acao=ListarExercicio" class="btn btn-primary">Ver exercícios</a>
     </div>
 </body>
 </html>

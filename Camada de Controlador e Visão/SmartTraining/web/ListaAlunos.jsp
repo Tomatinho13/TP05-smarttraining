@@ -18,35 +18,32 @@
             }
         </style>
 
-        <title>Lista de Usuarios</title>
+        <title>Lista de Alunos</title>
     </head>
     <body>
         <div class="container">
             <br>
-            <h2>Lista de Usuarios:</h2>
+            <h2>Lista de Alunos:</h2>
             <br>
             <ul>
                 <%
-                    List<Usuario> listaUsuarios = (List) request.getAttribute("usuarios");
-                    Usuario usuario = new Usuario();
+                    List<Usuario> listaUsuarios = (List) request.getAttribute("alunos");
+                    Usuario aluno = new Usuario();
                     for (int i = 0; i < listaUsuarios.size(); i++) {
-                        usuario = listaUsuarios.get(i);
+                        aluno = listaUsuarios.get(i);
                 %>
                 <li>
-                    <p><%= usuario.getNomUsuario()%></p>
-                    <a href="/servletweb?acao=MostrarUsuario&codUsuario=<%= usuario.getCodCpf()%>" class="btn btn-primary"> 
+                    <h4><%= aluno.getNomUsuario()%></h4>
+                    <a href="/servletweb?acao=MostrarUsuario&codUsuario=<%= aluno.getCodCpf()%>" class="btn btn-primary"> 
                         Ver 
                     </a>
-                    <a href="/servletweb?acao=AlterarUsuario&codUsuario=<%= usuario.getCodCpf()%>" class="btn btn-primary">
-                        Alterar
-                    </a>
-                    <a href="/servletweb?acao=ListaAvaliacoes&codUsuario=<%= usuario.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=ListaAvaliacoes&codUsuario=<%= aluno.getCodCpf()%>" class="btn btn-primary">
                         Ver Avaliacoes
                     </a>
-                    <a href="/servletweb?acao=ListaFichas&codUsuario=<%= usuario.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=ListaFichas&codUsuario=<%= aluno.getCodCpf()%>" class="btn btn-primary">
                         Ver Fichas
                     </a>
-                    <a href="/servletweb?acao=TelaCadastrarAvaliacao&cpfAluno=<%= usuario.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=TelaCadastrarAvaliacao&cpfAluno=<%= aluno.getCodCpf()%>" class="btn btn-primary">
                         Cadastrar Avaliacao
                     </a>
                     <br><br>
@@ -55,16 +52,12 @@
                     }
                 %>
             </ul>
-            <a class="btn btn-primary" onclick="voltar()">
+            <button class="btn btn-primary voltar">
                 Voltar
-            </a>
+            </button>
         </div>
-        <br>
-        <script>
-            function voltar() {
-                window.history.back();
-            }
-        </script>
+        
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>
 

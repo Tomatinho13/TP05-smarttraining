@@ -40,16 +40,9 @@
                 </select>
                 
                 <input type="submit" class="btn btn-primary" value="Remover">
-            </form>  
-                
-            <a class="btn btn-primary" onclick="voltar()">
-                Voltar
-            </a>
+                <button class="btn btn-primary voltar">Voltar</button>
+            </form>
         </div>
-        <script>
-            function voltar() {
-               window.history.back();
-            }
-        </script>
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

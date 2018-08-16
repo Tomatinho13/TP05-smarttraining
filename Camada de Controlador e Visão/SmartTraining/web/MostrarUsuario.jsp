@@ -41,7 +41,9 @@
             
             <p>Função: <%= tipoUsuario%></p><br>
             
-            <a href="ListaUsuarios.jsp" class="btn btn-primary">Voltar</a>
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
+            
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

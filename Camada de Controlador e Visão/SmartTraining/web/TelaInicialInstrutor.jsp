@@ -17,16 +17,16 @@
     <div class="container">
         <a class="btn btn-primary" href="/servletweb?acao=ListarExercicios">
             Listar Exercicios
-        </a>
+        </a><br>
         <a class="btn btn-primary" href="/servletweb?acao=CadastrarExercicio">
             Cadastrar Exercicio
-        </a>
+        </a><br>
         <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverExercicio">
             Remover Exercicio
         </a><br>
         <a class="btn btn-primary" href="/servletweb?acao=ListarUsuarios">
             Listar Usuarios
-        </a>
+        </a><br>
         <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverUsuario">
             Remover Usuario
         </a>

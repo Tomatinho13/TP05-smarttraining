@@ -95,8 +95,8 @@
                     <td> <%=avaliacao.getTamanhoPanturrilhaDireita() %> </td>
                 </tr>
             </table>
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
-                
-        <a href="ListaAvaliacoes.jsp" class="btn btn-primary">Voltar</a>
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

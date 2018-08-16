@@ -35,17 +35,9 @@
                 </select>
 
                 <input type="submit" name="removerExercicio" class="btn btn-primary" value="Remover">
+                <button class="btn btn-primary voltar">Voltar</button>
             </form>
-
-            <a class="btn btn-primary" onclick="voltar()">
-                Voltar
-            </a>
-
         </div>
-        <script>
-            function voltar() {
-                window.history.back();
-            }
-        </script>
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

@@ -56,10 +56,8 @@
                     }
                 %>
             </ul>
-
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
-        <br>
-        
-        <a href="TelaInicialAluno.jsp" class="btn btn-primary"> Voltar </a>
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

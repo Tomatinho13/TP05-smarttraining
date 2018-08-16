@@ -121,19 +121,10 @@
                 %>
 
                 <input type="submit" class="btn btn-primary" value="Cadastrar">
+                <button class="btn btn-primary voltar">Voltar</button>
             </form>
-
-            <a class="btn btn-primary" onclick="voltar()">
-                Voltar
-            </a>
-
-
         </div>
         <br>
-        <script>
-            function voltar() {
-                window.history.back();
-            }
-        </script>
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

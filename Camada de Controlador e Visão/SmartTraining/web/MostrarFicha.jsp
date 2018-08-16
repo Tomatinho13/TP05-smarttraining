@@ -57,8 +57,8 @@
                 }
             %>
             </table>
-            
-            <a href="ListaFichas.jsp" class="btn btn-primary">Voltar</a>
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

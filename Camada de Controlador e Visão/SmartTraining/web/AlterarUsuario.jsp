@@ -51,9 +51,9 @@
                 <br>
 
                 <input type="submit" name="Alterar" class="btn btn-primary" value="Alterar">
+                <button class="btn btn-primary voltar">Voltar</button>
+
             </form>
-            
-            <a href="TelaInicialAluno.jsp" class="btn btn-primary">Voltar</a>
 	</div>
                 
         <script>
@@ -68,5 +68,6 @@
 		  
 		}
 	</script>
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

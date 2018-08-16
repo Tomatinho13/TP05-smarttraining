@@ -21,7 +21,7 @@
 			<br>
 
 			<input type="submit" name="login" class="btn btn-primary" value="Login">
-                        <input type="submit" name="cadastrar" class="btn btn-primary" value="Cadastro" onclick="cadastro()">
+                        <a href="CadastrarUsuario.jsp" class="btn btn-primary">Cadastrar</a>
 		</form>
 	</div>
     <script>
@@ -35,10 +35,6 @@
             }
 		  
 	}
-        function cadastro(){
-            document.getElementById("form").action="CadastrarUsuario.jsp";
-        }
-
     </script>
 </body>
 </html>
