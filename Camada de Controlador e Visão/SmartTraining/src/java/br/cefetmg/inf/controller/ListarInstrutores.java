@@ -1,35 +1,37 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Usuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class TelaRemoverUsuario implements Controller {
+public class ListarInstrutores implements Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
         String jsp;
-        try {
-            jsp = "RemoverUsuario.jsp";
 
-            ManterAluno manterAluno = new ManterAluno();
+        try {
+            jsp="ListaInstrutores.jsp";
             ManterInstrutor manterInstrutor = new ManterInstrutor();
 
-            ArrayList<Usuario> listaAlunos = manterAluno.pesquisarTodos();
             ArrayList<Usuario> listaInstrutores = manterInstrutor.pesquisarTodos();
-            ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
-            listaUsuarios.addAll(listaAlunos);
-            listaUsuarios.addAll(listaInstrutores);
+            if(listaInstrutores == null){
+                String erro="Nenhum instrutor encontrado!";
+                jsp = "erro.jsp";
+                request.setAttribute("erro", erro);
+                return jsp;
+            }
             
-            request.setAttribute("usuarios", listaUsuarios);
-        } catch (SQLException ex) {
+            request.setAttribute("instrutores", listaInstrutores);
+
+        } catch (SQLException e) {
+            String erro="Erro ao carregar lista de instrutores";
             jsp = "erro.jsp";
+            request.setAttribute("erro", erro);
         }
         return jsp;
     }
-
 }

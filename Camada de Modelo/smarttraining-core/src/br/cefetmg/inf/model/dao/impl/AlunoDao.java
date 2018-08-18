@@ -1,6 +1,6 @@
 package br.cefetmg.inf.model.dao.impl;
 
-import br.cefetmg.inf.model.dao.IAlunoDao;
+import br.cefetmg.inf.model.dao.IUsuarioDao;
 import br.cefetmg.inf.model.db.ConectaBd;
 import com.google.gson.Gson;
 import java.sql.*;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AlunoDao implements IAlunoDao {
+public class AlunoDao implements IUsuarioDao {
 
     private Usuario aluno;
     private final Connection conn;
@@ -22,7 +22,7 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public Usuario getAluno(String codCpf) throws SQLException {
+    public Usuario getUsuario(String codCpf) throws SQLException {
         sql = "SELECT * "
                 + "FROM \"Usuario\" "
                 + "WHERE cod_cpf = '" + codCpf + "' AND idt_tipo_usuario = 'A'";
@@ -45,7 +45,7 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public Usuario getAlunoPeloNome(String nome) throws SQLException {
+    public Usuario getUsuarioPeloNome(String nome) throws SQLException {
         sql = "SELECT * "
                 + "FROM \"Usuario\" "
                 + "WHERE nom_usuario = '" + nome;
@@ -68,7 +68,7 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public ArrayList<Usuario> getListaAlunos() throws SQLException {
+    public ArrayList<Usuario> getListaUsuarios() throws SQLException {
         ArrayList<Usuario> listaUsuarios = new ArrayList<>();
         sql = "SELECT * "
                 + "FROM \"Usuario\" "
@@ -89,7 +89,7 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public void postAluno(Usuario aluno) throws SQLException {
+    public void postUsuario(Usuario aluno) throws SQLException {
         this.aluno = aluno;
         sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,CAST(? as date));"
                 + "INSERT INTO \"Aluno\" "
@@ -108,7 +108,7 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public void putAluno(Usuario aluno) throws SQLException {
+    public void putUsuario(Usuario aluno) throws SQLException {
         this.aluno = aluno;
         sql = "UPDATE \"Usuario\" "
                 + "SET nom_usuario=?, "
@@ -130,7 +130,7 @@ public class AlunoDao implements IAlunoDao {
     }
 
     @Override
-    public void deleteAluno(String codCpf) {
+    public void deleteUsuario(String codCpf) {
         try {
             sql = "DELETE FROM \"Usuario\" "
                     + "WHERE cod_cpf='" + codCpf + "'";

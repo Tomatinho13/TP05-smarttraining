@@ -4,7 +4,7 @@ import br.cefetmg.inf.model.domain.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface IManterAluno {
+public interface IManterUsuario {
 
     public Usuario pesquisarPorCpf(String codCpf) throws SQLException;
 

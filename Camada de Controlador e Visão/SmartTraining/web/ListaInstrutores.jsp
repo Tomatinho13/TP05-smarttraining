@@ -11,6 +11,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        
         <title>Lista de instrutores</title>
     </head>
     <body>
@@ -27,7 +29,7 @@
                 %>
                 <li>
                     <h4><%= instrutor.getNomUsuario()%></h4>
-                    <a href="/servletweb?acao=MostrarUsuario&codUsuario=<%= instrutor.getCodCpf()%>" class="btn btn-primary"> 
+                    <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=instrutor.getCodCpf()%>" class="btn btn-primary"> 
                         Ver 
                     </a>
                     <br>

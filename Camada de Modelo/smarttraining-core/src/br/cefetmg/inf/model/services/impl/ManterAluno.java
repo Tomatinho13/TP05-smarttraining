@@ -1,15 +1,15 @@
 package br.cefetmg.inf.model.services.impl;
 
-import br.cefetmg.inf.model.dao.IAlunoDao;
+import br.cefetmg.inf.model.dao.IUsuarioDao;
 import br.cefetmg.inf.model.dao.impl.AlunoDao;
 import br.cefetmg.inf.model.domain.Usuario;
-import br.cefetmg.inf.model.services.IManterAluno;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import br.cefetmg.inf.model.services.IManterUsuario;
 
-public class ManterAluno implements IManterAluno {
+public class ManterAluno implements IManterUsuario {
 
-    private final IAlunoDao alunoDao;
+    private final IUsuarioDao alunoDao;
 
     public ManterAluno() {
         alunoDao = new AlunoDao();
@@ -17,34 +17,34 @@ public class ManterAluno implements IManterAluno {
 
     @Override
     public Usuario pesquisarPorCpf(String codCpf) throws SQLException {
-        Usuario resultado = alunoDao.getAluno(codCpf);
+        Usuario resultado = alunoDao.getUsuario(codCpf);
         return resultado;
     }
 
     @Override
     public Usuario pesquisarPorNome(String nome) throws SQLException {
-        Usuario resultado = alunoDao.getAlunoPeloNome(nome);
+        Usuario resultado = alunoDao.getUsuarioPeloNome(nome);
         return resultado;
     }
         
     @Override
     public ArrayList<Usuario> pesquisarTodos() throws SQLException {
-        ArrayList <Usuario> listaUsuarios = alunoDao.getListaAlunos();
-        return listaUsuarios;
+        ArrayList <Usuario> listaAlunos = alunoDao.getListaUsuarios();
+        return listaAlunos;
     }
     
     @Override
     public void cadastrar(Usuario aluno) throws SQLException {
-        alunoDao.postAluno(aluno);
+        alunoDao.postUsuario(aluno);
     }
 
     @Override
     public void alterar(Usuario aluno) throws SQLException {
-        alunoDao.putAluno(aluno);
+        alunoDao.putUsuario(aluno);
     }
 
     @Override
     public void excluir(String codCpf) throws SQLException {
-        alunoDao.deleteAluno(codCpf);
+        alunoDao.deleteUsuario(codCpf);
     }
 }

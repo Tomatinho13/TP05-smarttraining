@@ -1,16 +1,17 @@
 package br.cefetmg.inf.model.services.impl;
 
 
-import br.cefetmg.inf.model.dao.IInstrutorDao;
+import br.cefetmg.inf.model.dao.IUsuarioDao;
 import br.cefetmg.inf.model.dao.impl.InstrutorDao;
 import br.cefetmg.inf.model.domain.Instrutor;
-import br.cefetmg.inf.model.services.IManterInstrutor;
+import br.cefetmg.inf.model.domain.Usuario;
+import br.cefetmg.inf.model.services.IManterUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ManterInstrutor implements IManterInstrutor {
+public class ManterInstrutor implements IManterUsuario {
 
-    private final IInstrutorDao instrutorDao;
+    private final IUsuarioDao instrutorDao;
     
     public ManterInstrutor() {
         instrutorDao = new InstrutorDao();
@@ -18,28 +19,34 @@ public class ManterInstrutor implements IManterInstrutor {
     
     @Override
     public Instrutor pesquisarPorCpf(String codCpf) throws SQLException{
-        Instrutor resultado = instrutorDao.getInstrutor(codCpf);
+        Instrutor resultado = (Instrutor)instrutorDao.getUsuario(codCpf);
         return resultado;
     }
     
     @Override
-    public ArrayList<Instrutor> pesquisarTodos() throws SQLException {
-        ArrayList<Instrutor> listaInstrutores = instrutorDao.getListaInstrutores();
+    public Usuario pesquisarPorNome(String nome) throws SQLException {
+        Instrutor resultado = (Instrutor)instrutorDao.getUsuarioPeloNome(nome);
+        return resultado;
+    }
+    
+    @Override
+    public ArrayList<Usuario> pesquisarTodos() throws SQLException {
+        ArrayList<Usuario> listaInstrutores = instrutorDao.getListaUsuarios();
         return listaInstrutores;
     }
     
     @Override
-    public void cadastrar(Instrutor instrutor) throws SQLException{
-        instrutorDao.postInstrutor(instrutor);
+    public void cadastrar(Usuario instrutor) throws SQLException{
+        instrutorDao.postUsuario((Instrutor)instrutor);
     }
 
     @Override
-    public void alterar(Instrutor instrutor) throws SQLException{
-        instrutorDao.putInstrutor(instrutor);
+    public void alterar(Usuario instrutor) throws SQLException{
+        instrutorDao.putUsuario((Instrutor)instrutor);
     }
 
     @Override
     public void excluir(String codCpf) throws SQLException{
-        instrutorDao.deleteInstrutor(codCpf);
+        instrutorDao.deleteUsuario(codCpf);
     }     
 }

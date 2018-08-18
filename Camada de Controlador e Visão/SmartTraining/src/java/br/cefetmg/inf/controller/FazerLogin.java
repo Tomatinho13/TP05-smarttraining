@@ -1,14 +1,12 @@
 package br.cefetmg.inf.controller;
 
-import br.cefetmg.inf.model.domain.Instrutor;
 import br.cefetmg.inf.model.domain.Usuario;
-import br.cefetmg.inf.model.services.IManterAluno;
-import br.cefetmg.inf.model.services.IManterInstrutor;
 import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 
 public class FazerLogin implements Controller{
 
@@ -21,20 +19,29 @@ public class FazerLogin implements Controller{
             String cpf =  request.getParameter("cpf").replaceAll("[^0-9]", "");
             String senha = request.getParameter("senha");
 
-            IManterAluno manterAluno = new ManterAluno();
-            IManterInstrutor manterInstrutor = new ManterInstrutor();
-            Usuario usuario = manterAluno.pesquisarPorCpf(cpf);
-            Instrutor instrutor = manterInstrutor.pesquisarPorCpf(cpf);
-            if(usuario != null && usuario.getTxtSenha().equals(senha)){
-                sessao.setAttribute("usuario", usuario);
+            IManterUsuario manterAluno = new ManterAluno();
+            IManterUsuario manterInstrutor = new ManterInstrutor();
+            Usuario aluno = manterAluno.pesquisarPorCpf(cpf);
+            Usuario instrutor = manterInstrutor.pesquisarPorCpf(cpf);
+            
+            if(aluno != null && aluno.getTxtSenha().equals(senha)){
+                sessao.setAttribute("usuario", aluno);
                 jsp="TelaInicialAluno.jsp";
             }
             else if(instrutor!= null && instrutor.getTxtSenha().equals(senha)){
                 sessao.setAttribute("usuario", instrutor);
                 jsp="TelaInicialInstrutor.jsp";
             }
-            else{
+            else if((aluno != null && !aluno.getTxtSenha().equals(senha)) || 
+                    (instrutor!=null && !instrutor.getTxtSenha().equals(senha))){
+                String erro = "Senha Incorreta";
                 jsp="erro.jsp";
+                request.setAttribute("erro", erro);
+            }
+            else{
+                String erro="CPF incorreto";
+                jsp="erro.jsp";
+                request.setAttribute("erro", erro);
             }
         }
         catch(SQLException e){

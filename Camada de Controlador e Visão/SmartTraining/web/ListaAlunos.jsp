@@ -34,7 +34,7 @@
                 %>
                 <li>
                     <h4><%= aluno.getNomUsuario()%></h4>
-                    <a href="/servletweb?acao=MostrarUsuario&codUsuario=<%= aluno.getCodCpf()%>" class="btn btn-primary"> 
+                    <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=aluno.getCodCpf()%>" class="btn btn-primary"> 
                         Ver 
                     </a>
                     <a href="/servletweb?acao=ListaAvaliacoes&codUsuario=<%= aluno.getCodCpf()%>" class="btn btn-primary">

@@ -4,6 +4,7 @@
     Author     : mathe
 --%>
 
+<%@page import="br.cefetmg.inf.model.domain.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,11 +16,20 @@
 </head>
 <body>
     <div class="container">
-        <a href="/servletweb?acao=MostrarUsuario" class="btn btn-primary">Perfil</a><br>
-        <a href="/servletweb?acao=AlterarUsuario" class="btn btn-primary">Alterar dados</a><br>
-        <a href="/servletweb?acao=ListarAvaliacoes" class="btn btn-primary">Ver Avaliações</a><br>
-        <a href="/servletweb?acao=ListarFichas" class="btn btn-primary">Ver Fichas</a><br>
-        <a href="/servletweb?acao=ListarExercicio" class="btn btn-primary">Ver exercícios</a>
+        <%String cpf = (String)((Usuario)request.getSession().getAttribute("usuario")).getCodCpf();%>
+        <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=cpf%>"
+            class="btn btn-primary">Perfil</a><br>
+            
+        <a href="/servletweb?acao=TelaAlterarUsuario&codCpfUsuario=<%=cpf%>"
+           class="btn btn-primary">Alterar dados</a><br>
+        
+        <a href="/servletweb?acao=ListarAvaliacoes&codCpfAluno=<%=cpf%>"
+           class="btn btn-primary">Ver Avaliações</a><br>
+        
+        <a href="/servletweb?acao=ListarFichas&codCpfAluno=<%=cpf%>"
+           class="btn btn-primary">Ver Fichas</a><br>
+        
+        <a href="/servletweb?acao=ListarExercicios" class="btn btn-primary">Ver exercícios</a>
     </div>
 </body>
 </html>

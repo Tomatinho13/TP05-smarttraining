@@ -24,8 +24,11 @@
         <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverExercicio">
             Remover Exercicio
         </a><br>
-        <a class="btn btn-primary" href="/servletweb?acao=ListarUsuarios">
-            Listar Usuarios
+        <a class="btn btn-primary" href="/servletweb?acao=ListarAlunos">
+            Listar Alunos
+        </a><br>
+        <a class="btn btn-primary" href="/servletweb?acao=ListarInstrutores">
+            Listar Instrutores
         </a><br>
         <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverUsuario">
             Remover Usuario

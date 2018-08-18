@@ -1,7 +1,7 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Instrutor;
-import br.cefetmg.inf.model.services.IManterInstrutor;
+import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -9,12 +9,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
-public class CadastrarInstrutor implements Controller{
-    
-     @Override
-     public String execute(HttpServletRequest request) {
+public class CadastrarInstrutor implements Controller {
+
+    @Override
+    public String execute(HttpServletRequest request) {
         String jsp;
-        String cpf =  request.getParameter("cpf").replaceAll("[^0-9]", "");
+        String cpf = request.getParameter("cpf").replaceAll("[^0-9]", "");
         String nome = request.getParameter("nome");
         char idtTipoUsuario = 'I';
         String senha = request.getParameter("senha");
@@ -23,8 +23,8 @@ public class CadastrarInstrutor implements Controller{
         String cref = request.getParameter("cref");
 
         Instrutor instrutor = new Instrutor();
-        IManterInstrutor manterInstrutor = new ManterInstrutor();
-        
+        IManterUsuario manterInstrutor = new ManterInstrutor();
+
         instrutor.setCodCpf(cpf);
         instrutor.setNomUsuario(nome);
         instrutor.setIdtTipoUsuario(idtTipoUsuario);
@@ -38,6 +38,7 @@ public class CadastrarInstrutor implements Controller{
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarInstrutor.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         jsp = "/LoginUsuario.jsp";
         return jsp;
     }

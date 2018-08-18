@@ -28,18 +28,24 @@ public class ServletWeb extends HttpServlet {
         controllers.put("ListarAvaliacoes", new ListarAvaliacoes());
         controllers.put("ListarExercicios", new ListarExercicios());
         controllers.put("ListarFichas", new ListarFichas());
-        controllers.put("ListarUsuarios", new ListarUsuarios());
+        controllers.put("ListarAlunos", new ListarAlunos());
+        controllers.put("ListarInstrutores", new ListarInstrutores());
+        controllers.put("MostrarUsuario", new MostrarUsuario());
         controllers.put("RemoverExercicio", new RemoverExercicio());
         controllers.put("RemoverUsuario", new RemoverUsuario());
-        controllers.put("TelaRemoverUsuario", new TelaRemoverUsuario());
-        controllers.put("TelaRemoverExercicio", new TelaRemoverExercicio());
+        controllers.put("TelaAlterarUsuario", new TelaAlterarUsuario());
         controllers.put("TelaCadastrarAvaliacao", new TelaCadastrarAvaliacao());
+        controllers.put("TelaRemoverExercicio", new TelaRemoverExercicio());
+        controllers.put("TelaRemoverUsuario", new TelaRemoverUsuario());
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
+        TipoView tipoView = negotiateContent(request);
+        tipoView.visitaRequest(request);
+        
         Controller controller = determinaController(request);
         jsp = controller.execute(request);
 
