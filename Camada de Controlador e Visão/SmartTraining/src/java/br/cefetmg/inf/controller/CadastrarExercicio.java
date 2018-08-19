@@ -16,7 +16,7 @@ public class CadastrarExercicio implements Controller {
             String nomeExercicio = request.getParameter("nomeExercicio");
             String descricaoExercicio = request.getParameter("descExercicio");
 
-            Exercicio exercicio = new Exercicio(0, descricaoExercicio, nomeExercicio);
+            Exercicio exercicio = new Exercicio(0, nomeExercicio, descricaoExercicio);
 
             String[] codAparelhos = request.getParameterValues("aparelhos");
             String[] codMusculos = request.getParameterValues("musculos");

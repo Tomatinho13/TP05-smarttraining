@@ -15,11 +15,11 @@
         <div class="container">
             <br>
             <h2 class="h2">SmartTraining - Remover Exercicio</h2>
-            <form action="ServletWeb" method="post">
+            <form action="servletweb" method="post">
                 <input type="hidden" name="acao" value="RemoverExercicio">
 
                 <h4>Selecione o exercício que deseja remover:</h4>
-                <select>
+                <select name="exercicio">
                     <%
                         Exercicio exercicio = new Exercicio();
                         List<Exercicio> listaExercicios = (List) request.getAttribute("exercicios");
@@ -27,7 +27,7 @@
                             exercicio = listaExercicios.get(i);
                     %>
 
-                    <option value=" <%= exercicio.getNomeExercicio()%> "><%= exercicio.getNomeExercicio()%></option>
+                    <option value=" <%= exercicio.getCodExercicio()%> "><%= exercicio.getNomeExercicio()%></option>
 
                     <%
                         }
@@ -35,9 +35,8 @@
                 </select>
 
                 <input type="submit" name="removerExercicio" class="btn btn-primary" value="Remover">
-                <button class="btn btn-primary voltar">Voltar</button>
+                <a class="btn btn-primary voltar" href="TelaInicialInstrutor.jsp">Voltar</a>
             </form>
         </div>
-        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

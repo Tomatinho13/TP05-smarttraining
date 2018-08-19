@@ -51,7 +51,8 @@ public class ExercicioDao implements IExercicioDao {
         ResultSet resultado = stmt.executeQuery(sql);
 
         if (resultado.next()) {
-            exercicio = new Exercicio(resultado.getInt("cod_exercicio"), nomeExercicio,
+            exercicio = new Exercicio(resultado.getInt("cod_exercicio"), 
+                    nomeExercicio,
                     resultado.getString("des_exercicio"));
         }
         return exercicio;
@@ -114,7 +115,9 @@ public class ExercicioDao implements IExercicioDao {
         ResultSet resultado = stmt.executeQuery(sql);
 
         while (resultado.next()) {
-            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), resultado.getString("nom_exercicio"), resultado.getString("des_exercicio")));
+            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), 
+                    resultado.getString("nom_exercicio"), 
+                    resultado.getString("des_exercicio")));
         }
 
         return listaExercicios;
@@ -186,7 +189,7 @@ public class ExercicioDao implements IExercicioDao {
     @Override
     public void deleteExercicio(int codExercicio) throws SQLException {
         sql = "DELETE FROM \"Exercicio\" "
-                + "WHERE cod_exercicio=?";
+                + "WHERE cod_exercicio=CAST(? as integer)";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, String.valueOf(codExercicio));

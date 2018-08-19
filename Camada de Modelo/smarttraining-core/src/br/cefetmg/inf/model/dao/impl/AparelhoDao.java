@@ -86,7 +86,9 @@ public class AparelhoDao implements IAparelhoDao {
         ResultSet resultado = stmt.executeQuery(sql);
 
         while (resultado.next()) {
-            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), resultado.getString("nom_exercicio"), resultado.getString("des_exercicio")));
+            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), 
+                    resultado.getString("nom_exercicio"), 
+                    resultado.getString("des_exercicio")));
         }
         if (listaExercicios.isEmpty()) {
 

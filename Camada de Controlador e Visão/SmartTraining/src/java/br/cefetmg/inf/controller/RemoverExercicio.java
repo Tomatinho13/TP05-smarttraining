@@ -1,6 +1,5 @@
 package br.cefetmg.inf.controller;
 
-import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.impl.ManterExercicio;
 import java.sql.SQLException;
@@ -13,14 +12,13 @@ public class RemoverExercicio implements Controller {
         String jsp;
         
         try {
-            String nomeExercicio = request.getParameter("nomeExercicio");
+            int codExercicio = Integer.parseInt(request.getParameter("exercicio").trim());
 
             IManterExercicio manterExercicio = new ManterExercicio();
 
-            Exercicio exercicio = manterExercicio.pesquisarPorNome(nomeExercicio);
-            manterExercicio.excluir(exercicio.getCodExercicio());
+            manterExercicio.excluir(codExercicio);
             
-            jsp = new ListarExercicios().execute(request);
+            jsp = new TelaRemoverExercicio().execute(request);
         } catch (SQLException e) {
             e.printStackTrace(System.err);
             String erro = "Erro ao remover exercicio!";
