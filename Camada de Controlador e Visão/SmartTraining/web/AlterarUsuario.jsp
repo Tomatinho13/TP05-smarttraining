@@ -51,9 +51,8 @@
                 <br>
 
                 <input type="submit" name="Alterar" class="btn btn-primary" value="Alterar">
-                <button class="btn btn-primary voltar">Voltar</button>
-
             </form>
+            <button class="btn btn-primary voltar">Voltar</button>
 	</div>
                 
         <script>

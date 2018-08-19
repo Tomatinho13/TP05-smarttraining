@@ -121,8 +121,8 @@
                 %>
 
                 <input type="submit" class="btn btn-primary" value="Cadastrar">
-                <button class="btn btn-primary voltar">Voltar</button>
             </form>
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
         <br>
         <script src="/JavaScript/Voltar.js"></script>

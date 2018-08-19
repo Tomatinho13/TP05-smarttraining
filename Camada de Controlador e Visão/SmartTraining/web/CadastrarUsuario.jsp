@@ -47,9 +47,9 @@
                 <br>
 
                 <input type="submit" name="Cadastrar" class="btn btn-primary" value="Cadastrar">
-                <button class="btn btn-primary voltar">Voltar</button>
             </form>
-	</div><br>
+            <button class="btn btn-primary voltar">Voltar</button>
+	</div>
         
         <script src="/JavaScript/BloqueiaCampo.js"></script>
         <script src="/JavaScript/Voltar.js"></script>

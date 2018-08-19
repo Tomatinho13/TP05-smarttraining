@@ -52,9 +52,7 @@
                     }
                 %>
             </ul>
-            <button class="btn btn-primary voltar">
-                Voltar
-            </button>
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
         
         <script src="/JavaScript/Voltar.js"></script>

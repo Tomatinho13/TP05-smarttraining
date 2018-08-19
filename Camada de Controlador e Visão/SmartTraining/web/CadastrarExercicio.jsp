@@ -46,8 +46,8 @@
                 %>
 
                 <input type="submit" name="criarExercicio" class="btn btn-primary" value="Remover">
-                <button class="btn btn-primary voltar">Voltar</button>
             </form>  
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
         
         <script src="/JavaScript/Voltar.js"></script>

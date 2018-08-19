@@ -41,7 +41,9 @@
                 
                 <input type="submit" class="btn btn-primary" value="Remover">
             </form>
-            <a class="btn btn-primary voltar" href="TelaInicialInstrutor.jsp">Voltar</a>
+            <button class="btn btn-primary voltar">Voltar</button>
         </div>
+        
+        <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>
