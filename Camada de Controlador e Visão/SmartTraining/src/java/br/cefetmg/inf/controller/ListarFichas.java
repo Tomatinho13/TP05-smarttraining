@@ -28,7 +28,10 @@ public class ListarFichas implements Controller {
             }
 
         } catch (SQLException e) {
-            jsp = "";
+            e.printStackTrace(System.err);
+            String erro = "Erro ao listar fichas!";
+            request.setAttribute("erro", erro);
+            jsp = "erro.jsp";
         }
         return jsp;
     }

@@ -29,8 +29,10 @@ public class TelaAlterarUsuario implements Controller{
                 String erro = "Erro ao encontrar dados do usuario!";
                 jsp = "erro.jsp";
                 request.setAttribute("erro", erro);
+                return jsp;
             }
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            e.printStackTrace();
             String erro = "Erro ao encontrar dados do usuario";
             jsp = "erro.jsp";
             request.setAttribute("erro", erro);

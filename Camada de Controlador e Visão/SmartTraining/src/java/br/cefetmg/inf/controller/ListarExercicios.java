@@ -1,9 +1,6 @@
 package br.cefetmg.inf.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import br.cefetmg.inf.model.domain.Exercicio;
-import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterMusculo;
 import br.cefetmg.inf.model.services.impl.ManterMusculo;
@@ -21,10 +18,9 @@ public class ListarExercicios implements Controller {
         String jsp;
 
         try {
-            IManterExercicio manterExercicio = new ManterExercicio();
             IManterMusculo manterMusculo = new ManterMusculo();
 
-            ArrayList<Musculo> listaMusculos = manterMusculo.listarTodos();
+            ArrayList<Musculo> listaMusculos = manterMusculo.pesquisarTodos();
 
             if (listaMusculos != null) {
                 request.setAttribute("musculos", listaMusculos);
@@ -36,7 +32,10 @@ public class ListarExercicios implements Controller {
             }
 
         } catch (SQLException e) {
-            jsp = "";
+            e.printStackTrace(System.err);
+            String erro = "Erro ao listar exercicios!";
+            request.setAttribute("erro", erro);
+            jsp = "erro.jsp";
         }
         return jsp;
     }

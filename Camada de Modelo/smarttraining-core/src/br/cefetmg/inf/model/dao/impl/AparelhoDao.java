@@ -61,6 +61,7 @@ public class AparelhoDao implements IAparelhoDao {
                    
     @Override
     public ArrayList<Aparelho> getListaAparelhos() throws SQLException {
+        listaAparelhos = new ArrayList<>();
         sql = "SELECT * "
                 + "FROM \"Aparelho\" ";
 
@@ -69,10 +70,6 @@ public class AparelhoDao implements IAparelhoDao {
         while (resultado.next()) {
             listaAparelhos.add(new Aparelho(resultado.getInt("nro_aparelho"),
                     resultado.getString("nom_aparelho")));
-        }
-        if (listaAparelhos.isEmpty()) {
-
-            return null;
         }
 
         return listaAparelhos;
@@ -102,13 +99,13 @@ public class AparelhoDao implements IAparelhoDao {
     @Override
     public void postAparelho(Aparelho aparelho) throws SQLException {
         this.aparelho = aparelho;
-        sql = "INSERT INTO \"Aparelho\" VALUES (?,?)";
+        sql = "INSERT INTO \"Aparelho\" VALUES (CAST(? as smallint),?)";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, String.valueOf(aparelho.getNroAparelho()));
         stmt.setString(2, aparelho.getNomAparelho());
 
-        stmt.executeQuery(sql);
+        stmt.executeUpdate();
 
     }
 
@@ -120,7 +117,7 @@ public class AparelhoDao implements IAparelhoDao {
                 + "WHERE nro_aparelho='" + aparelho.getNroAparelho() + "'";
 
         Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
+        stmt.executeUpdate(sql);
 
     }
 
@@ -130,7 +127,7 @@ public class AparelhoDao implements IAparelhoDao {
                 + "WHERE nro_aparelho='" + nroAparelho + "'";
 
         Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
+        stmt.executeUpdate(sql);
 
     }
 }

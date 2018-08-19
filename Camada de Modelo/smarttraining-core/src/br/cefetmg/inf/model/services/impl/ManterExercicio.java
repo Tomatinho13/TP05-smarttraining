@@ -37,25 +37,30 @@ public class ManterExercicio implements IManterExercicio {
     
     @Override
     public ArrayList<Exercicio> pesquisarPorRegiao(String nomeRegiao) throws SQLException{
-        ArrayList<Exercicio> resultado = new ArrayList<>(exercicioDao.getRegiaoExercicios(nomeRegiao));
+        ArrayList<Exercicio> resultado = exercicioDao.getRegiaoExercicios(nomeRegiao);
         return resultado;       
     }
     
     @Override
     public ArrayList<Exercicio> pesquisarPorMusculo(int codMusculo) throws SQLException{
-        ArrayList<Exercicio> resultado = new ArrayList<>(exercicioDao.getMusculoExercicios(codMusculo));
+        ArrayList<Exercicio> resultado = exercicioDao.getMusculoExercicios(codMusculo);
         return resultado;
     }
     
     @Override
     public ArrayList<Exercicio> pesquisarTodos() throws SQLException {
-        ArrayList<Exercicio> resultado = new ArrayList<>(exercicioDao.getListaExercicios());
+        ArrayList<Exercicio> resultado = exercicioDao.getListaExercicios();
         return resultado;
     }
     
     @Override
-    public void cadastrar(Exercicio exercicio, int codMusculo) throws SQLException{
-        exercicioDao.postExercicio(exercicio, codMusculo);
+    public void cadastrar(Exercicio exercicio, String[] codMusculos) throws SQLException{
+        exercicioDao.postExercicio(exercicio, codMusculos);
+    }
+    
+    @Override
+    public void cadastrarAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException{
+        exercicioDao.postAparelhoExercicio(codExercicio, nroAparelho, caminhoImg);
     }
 
     @Override

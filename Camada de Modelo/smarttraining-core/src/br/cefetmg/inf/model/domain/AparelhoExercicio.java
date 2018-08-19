@@ -19,6 +19,9 @@ public class AparelhoExercicio {
         this.exercicio = exercicio;
         this.caminhoImagem = caminhoImagem;
     }
+    
+    public AparelhoExercicio() {
+    }
 
     public Aparelho getAparelho() {
         return aparelho;

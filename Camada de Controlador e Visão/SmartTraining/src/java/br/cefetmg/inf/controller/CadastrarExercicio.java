@@ -1,44 +1,42 @@
 package br.cefetmg.inf.controller;
 
-import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.Exercicio;
-import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterAparelho;
 import br.cefetmg.inf.model.services.impl.ManterExercicio;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class CadastrarExercicio implements Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp;
+        String jsp = "TelaInicialInstrutor.jsp";
 
         try {
             String nomeExercicio = request.getParameter("nomeExercicio");
             String descricaoExercicio = request.getParameter("descExercicio");
-            int codMusculo = Integer.parseInt(request.getParameter("codMusculo"));
 
-            String nomeAparelho = request.getParameter("nomeAparelho");
-            IManterAparelho manterAparelho = new ManterAparelho();
-            Aparelho aparelho = manterAparelho.pesquisar(nomeAparelho);
-            int numeroAparelho = aparelho.getNroAparelho();
+            Exercicio exercicio = new Exercicio(0, descricaoExercicio, nomeExercicio);
+
+            String[] codAparelhos = request.getParameterValues("aparelhos");
+            String[] codMusculos = request.getParameterValues("musculos");
 
             IManterExercicio manterExercicio = new ManterExercicio();
-            Exercicio exercicio = new Exercicio();
 
-            exercicio.setDescricaoExercicio(descricaoExercicio);
-            exercicio.setNomeExercicio(nomeExercicio);
+            manterExercicio.cadastrar(exercicio, codMusculos);
 
-            manterExercicio.cadastrar(exercicio, codMusculo);
+            exercicio = manterExercicio.pesquisarPorNome(nomeExercicio);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastrarAluno.class.getName()).log(Level.SEVERE, null, ex);
+            for (String codAparelho : codAparelhos) {
+                manterExercicio.cadastrarAparelhoExercicio(exercicio.getCodExercicio(), Integer.parseInt(codAparelho), "");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            String erro = "Erro ao cadastrar exercicio!";
+            request.setAttribute("erro", erro);
+            jsp = "erro.jsp";
         }
-        jsp = "/LoginUsuario.jsp";
         return jsp;
     }
 }

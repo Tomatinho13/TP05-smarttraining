@@ -25,10 +25,14 @@ public class ListarAvaliacoes implements Controller{
                 String erro = "Nao existe registro de avaliacao!";
                 request.setAttribute("erro", erro);
                 jsp = "/erro.jsp";
+                return jsp;
             }
 
         } catch (SQLException e) {
-            jsp = "";
+            e.printStackTrace(System.err);
+            String erro = "Erro ao listar avaliacoes!";
+            request.setAttribute("erro", erro);
+            jsp = "erro.jsp";
         }
         return jsp;
     }

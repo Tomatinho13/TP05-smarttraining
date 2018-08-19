@@ -8,7 +8,7 @@ public interface IManterMusculo {
 
     public Musculo pesquisarPorCodigo(int codMusculo) throws SQLException;
 
-    public ArrayList <Musculo> listarTodos() throws SQLException;
+    public ArrayList <Musculo> pesquisarTodos() throws SQLException;
     
     public void cadastrar(Musculo musculo) throws SQLException;
 

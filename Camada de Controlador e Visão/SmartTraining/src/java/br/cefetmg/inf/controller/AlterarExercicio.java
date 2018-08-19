@@ -24,7 +24,10 @@ public class AlterarExercicio implements Controller{
                 jsp = "/erro.jsp";
             }
         } catch (SQLException e) {
-            jsp = "";
+            e.printStackTrace(System.err);
+            String erro = "Ocorreu erro ao tentar alterar os dados do exercicio!";
+            request.setAttribute("erro", erro);
+            jsp = "/erro.jsp";
         }
         return jsp;
     }

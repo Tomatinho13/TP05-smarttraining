@@ -18,7 +18,7 @@
         <a class="btn btn-primary" href="/servletweb?acao=ListarExercicios">
             Listar Exercicios
         </a><br>
-        <a class="btn btn-primary" href="/servletweb?acao=CadastrarExercicio">
+        <a class="btn btn-primary" href="/servletweb?acao=TelaCadastrarExercicio">
             Cadastrar Exercicio
         </a><br>
         <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverExercicio">
@@ -32,6 +32,9 @@
         </a><br>
         <a class="btn btn-primary" href="/servletweb?acao=TelaRemoverUsuario">
             Remover Usuario
+        </a><br>
+        <a class="btn btn-primary" href="/CadastrarAparelho.jsp">
+            Cadastrar Aparelho
         </a>
     </div>
 </body>

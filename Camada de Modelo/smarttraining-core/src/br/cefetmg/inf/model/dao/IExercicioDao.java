@@ -16,7 +16,8 @@ public interface IExercicioDao {
     public ArrayList<Exercicio> getRegiaoExercicios(String nomRegiao) throws SQLException;
     public ArrayList<Exercicio> getMusculoExercicios(int codMusculo) throws SQLException;
     public ArrayList<Exercicio> getListaExercicios() throws SQLException;
-    public void postExercicio(Exercicio exercicio, int codMusculo) throws SQLException;
+    public void postExercicio(Exercicio exercicio, String[] codMusculos) throws SQLException;
+    public void postAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException;
     public void putExercicio(Exercicio exercicio) throws SQLException;
     public void deleteExercicio(int codExercicio) throws SQLException;
 }

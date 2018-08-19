@@ -6,12 +6,13 @@ import br.cefetmg.inf.model.domain.Exercicio;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Musculo;
+import br.cefetmg.inf.model.services.IManterExercicio;
+import br.cefetmg.inf.model.services.impl.ManterExercicio;
 import java.util.ArrayList;
 
 public class MusculoDao implements IMusculoDao {
 
     private Musculo musculo;
-    private ArrayList<Musculo> listaMusculos;
     private final Connection conn;
     private String sql;
     private final Gson gson;
@@ -41,11 +42,30 @@ public class MusculoDao implements IMusculoDao {
                     resultado.getString("img_musculo"),
                     listaExercicios);
         }
-
-        if (musculo != null) {
-            return null;
-        }
+        
         return musculo;
+    }
+
+    @Override
+    public ArrayList<Musculo> getListaMusculos() throws SQLException {
+        ArrayList<Musculo> listaMusculos = new ArrayList<>();
+        IManterExercicio manterExercicio = new ManterExercicio();
+
+        sql = "SELECT * FROM \"Musculo\" order by nom_musculo";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        while (resultado.next()) {
+            musculo = new Musculo(resultado.getInt("cod_musculo"),
+                    resultado.getInt("cod_regCorp"),
+                    resultado.getString("nom_musculo"),
+                    resultado.getString("img_musculo"),
+                    manterExercicio.pesquisarPorMusculo(resultado.getInt("cod_musculo")));
+            listaMusculos.add(musculo);
+        }
+
+        return listaMusculos;
+
     }
 
     @Override
@@ -84,30 +104,6 @@ public class MusculoDao implements IMusculoDao {
 
         Statement stmt = conn.createStatement();
         stmt.executeQuery(sql);
-
-    }
-
-    @Override
-    public ArrayList<Musculo> listarTodos() throws SQLException {
-        ArrayList <Musculo> listaMusculos = new ArrayList<>();
-        
-        sql = "SELECT * FROM \"Musculo\" order by nom_musculo";
-
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        while (resultado.next()) {
-            musculo = new Musculo(resultado.getInt("cod_musculo"),
-                    resultado.getInt("cod_regCorp"),
-                    resultado.getString("nom_musculo"),
-                    resultado.getString("img_musculo"), 
-                    (ArrayList<Exercicio>) resultado.getArray("listaExercicios"));
-            listaMusculos.add(musculo);
-        }
-
-        if (musculo != null) {
-            return null;
-        }
-        return listaMusculos;
 
     }
 }

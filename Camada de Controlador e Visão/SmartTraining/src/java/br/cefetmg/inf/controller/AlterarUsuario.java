@@ -13,28 +13,29 @@ public class AlterarUsuario implements Controller {
     @Override
     public String execute(HttpServletRequest request) {
         String jsp;
-        IManterUsuario manterUsuario;
-
-        String cpf = request.getParameter("cpf").replaceAll("[^0-9]", "");
-        Usuario usuario = new Usuario();
-
-        usuario.setCodCpf(cpf);
-        usuario.setDatNascimento(LocalDate.parse(request.getParameter("datNasc")));
-        usuario.setDesEmail(request.getParameter("email"));
-        usuario.setIdtTipoUsuario(((Usuario) request.getSession().getAttribute("usuario")).getIdtTipoUsuario());
-        usuario.setNomUsuario(request.getParameter("nome"));
-        usuario.setTxtSenha(request.getParameter("senha"));
-
-        if (usuario.getIdtTipoUsuario() == 'I') {
-            manterUsuario = new ManterInstrutor();
-        } else {
-            manterUsuario = new ManterAluno();
-        }
-
         try {
+            IManterUsuario manterUsuario;
+
+            String cpf = request.getParameter("cpf").replaceAll("[^0-9]", "");
+            Usuario usuario = new Usuario();
+
+            usuario.setCodCpf(cpf);
+            usuario.setDatNascimento(LocalDate.parse(request.getParameter("datNasc")));
+            usuario.setDesEmail(request.getParameter("email"));
+            usuario.setIdtTipoUsuario(((Usuario) request.getSession().getAttribute("usuario")).getIdtTipoUsuario());
+            usuario.setNomUsuario(request.getParameter("nome"));
+            usuario.setTxtSenha(request.getParameter("senha"));
+
+            if (usuario.getIdtTipoUsuario() == 'I') {
+                manterUsuario = new ManterInstrutor();
+            } else {
+                manterUsuario = new ManterAluno();
+            }
+
             manterUsuario.alterar(usuario);
             jsp = "TelaInicialAluno.jsp";
         } catch (SQLException e) {
+            e.printStackTrace(System.err);
             String erro = "Ocorreu erro ao tentar alterar os dados do usuario!";
             request.setAttribute("erro", erro);
             jsp = "/erro.jsp";

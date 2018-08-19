@@ -29,10 +29,11 @@ public class MostrarUsuario implements Controller{
                 jsp = "erro.jsp";
                 request.setAttribute("erro", erro);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
             String erro = "Erro ao carregar perfil!";
-            jsp = "erro.jsp";
             request.setAttribute("erro", erro);
+            jsp = "erro.jsp";
         }
         return jsp;
     }

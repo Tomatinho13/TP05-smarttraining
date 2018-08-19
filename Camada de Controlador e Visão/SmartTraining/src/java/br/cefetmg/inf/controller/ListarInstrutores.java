@@ -28,6 +28,7 @@ public class ListarInstrutores implements Controller {
             request.setAttribute("instrutores", listaInstrutores);
 
         } catch (SQLException e) {
+            e.printStackTrace(System.err);
             String erro="Erro ao carregar lista de instrutores";
             jsp = "erro.jsp";
             request.setAttribute("erro", erro);

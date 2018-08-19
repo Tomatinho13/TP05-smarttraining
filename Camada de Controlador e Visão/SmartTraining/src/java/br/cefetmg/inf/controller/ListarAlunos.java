@@ -28,6 +28,7 @@ public class ListarAlunos implements Controller {
             request.setAttribute("alunos", listaAlunos);
 
         } catch (SQLException e) {
+            e.printStackTrace(System.err);
             String erro="Erro ao carregar lista de alunos";
             jsp = "erro.jsp";
             request.setAttribute("erro", erro);

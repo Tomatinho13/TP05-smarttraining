@@ -22,7 +22,10 @@ public class RemoverExercicio implements Controller {
             
             jsp = new ListarExercicios().execute(request);
         } catch (SQLException e) {
-            jsp = "";
+            e.printStackTrace(System.err);
+            String erro = "Erro ao remover exercicio!";
+            request.setAttribute("erro", erro);
+            jsp = "erro.jsp";
         }
         return jsp;
     }

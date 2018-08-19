@@ -26,7 +26,10 @@ public class TelaRemoverUsuario implements Controller {
             listaUsuarios.addAll(listaInstrutores);
             
             request.setAttribute("usuarios", listaUsuarios);
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            String erro = "Erro ao remover usuario!";
+            request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
         return jsp;

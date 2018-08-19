@@ -5,6 +5,7 @@ import br.cefetmg.inf.model.dao.impl.AparelhoDao;
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.services.IManterAparelho;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ManterAparelho implements IManterAparelho {
 
@@ -23,6 +24,12 @@ public class ManterAparelho implements IManterAparelho {
     @Override
     public Aparelho pesquisar(String nomAparelho) throws SQLException{
         Aparelho resultado = aparelhoDao.getAparelho(nomAparelho);
+        return resultado;
+    }
+    
+    @Override
+    public ArrayList<Aparelho> pesquisarTodos() throws SQLException{
+        ArrayList<Aparelho> resultado = aparelhoDao.getListaAparelhos();
         return resultado;
     }
 

@@ -19,7 +19,9 @@ public interface IManterExercicio {
     
     public ArrayList<Exercicio> pesquisarTodos() throws SQLException;
 
-    public void cadastrar(Exercicio exercicio, int codMusculo) throws SQLException;
+    public void cadastrar(Exercicio exercicio, String[] codMusculos) throws SQLException;
+    
+    public void cadastrarAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException;
 
     public void alterar(Exercicio exercicio) throws SQLException;
 

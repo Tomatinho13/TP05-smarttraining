@@ -21,7 +21,10 @@ public class RemoverUsuario implements Controller {
 
             jsp = new TelaRemoverUsuario().execute(request);
         } catch (SQLException e) {
-            jsp = "";
+            e.printStackTrace(System.err);
+            String erro = "Erro ao remover usuario!";
+            request.setAttribute("erro", erro);
+            jsp = "erro.jsp";
         }
         return jsp;
     }

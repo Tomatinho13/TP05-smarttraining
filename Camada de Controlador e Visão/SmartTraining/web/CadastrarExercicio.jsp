@@ -4,6 +4,7 @@
     Author     : Matheus
 --%>
 
+<%@page import="br.cefetmg.inf.model.domain.Musculo"%>
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.inf.model.domain.Aparelho"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,34 +23,48 @@
             <h2 class="h2">SmartTraining - Criar Exercicio</h2>
             <form action="servletweb" method="post">
                 <input type="hidden" name="acao" value="CadastrarExercicio">
-                
+
                 <label for="nomeExercicio">Nome do novo exercicio:</label><br>
                 <input type="text" name="nomeExercicio" class="form-control" placeholder="Digite aqui..."><br>
 
                 <label for="descExercicio">Descrição do novo exercicio:</label><br>
                 <textarea name="descExercicio" class="form-control" placeholder="Digite aqui..." rows="5"></textarea><br>
-                
+
                 <h4>Aparelhos possíveis:</h4>
 
                 <%
                     Aparelho aparelho = new Aparelho();
                     List<Aparelho> listaAparelhos = (List) request.getAttribute("aparelhos");
-                    
-                    for(int i=0; i<listaAparelhos.size(); i++){
+
+                    for (int i = 0; i < listaAparelhos.size(); i++) {
                         aparelho = listaAparelhos.get(i);
                 %>
-                
-                <input type="checkbox" name="aparelho" value="<%= aparelho.getNomAparelho() %>">
-                
+
+                <input type="checkbox" name="aparelhos" value="<%= aparelho.getNroAparelho()%>"><%= aparelho.getNomAparelho()%><br>
+
+                <%
+                    }
+                %>
+                <h4>Musculos possíveis:</h4>
+                <%
+                    Musculo musculo = new Musculo();
+                    List<Musculo> listaMusculos = (List) request.getAttribute("musculos");
+
+                    for (int i = 0; i < listaMusculos.size(); i++) {
+                        musculo = listaMusculos.get(i);
+                %>
+
+                <input type="checkbox" name="musculos" value="<%= musculo.getCodMusculo()%>"><%= musculo.getNomMusculo()%><br>
+
                 <%
                     }
                 %>
 
-                <input type="submit" name="criarExercicio" class="btn btn-primary" value="Remover">
+                <input type="submit" name="criarExercicio" class="btn btn-primary" value="Cadastrar">
             </form>  
             <button class="btn btn-primary voltar">Voltar</button>
         </div>
-        
+
         <script src="/JavaScript/Voltar.js"></script>
     </body>
 </html>

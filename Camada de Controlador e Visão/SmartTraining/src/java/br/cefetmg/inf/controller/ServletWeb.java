@@ -22,6 +22,7 @@ public class ServletWeb extends HttpServlet {
         controllers.put("AlterarExercicio", new AlterarExercicio());
         controllers.put("AlterarUsuario", new AlterarUsuario());
         controllers.put("CadastrarAluno", new CadastrarAluno());
+        controllers.put("CadastrarAparelho", new CadastrarAparelho());
         controllers.put("CadastrarInstrutor", new CadastrarInstrutor());
         controllers.put("CadastrarAvaliacao", new CadastrarAvaliacao());
         controllers.put("CadastrarExercicio", new CadastrarExercicio());
@@ -35,6 +36,7 @@ public class ServletWeb extends HttpServlet {
         controllers.put("RemoverUsuario", new RemoverUsuario());
         controllers.put("TelaAlterarUsuario", new TelaAlterarUsuario());
         controllers.put("TelaCadastrarAvaliacao", new TelaCadastrarAvaliacao());
+        controllers.put("TelaCadastrarExercicio", new TelaCadastrarExercicio());
         controllers.put("TelaRemoverExercicio", new TelaRemoverExercicio());
         controllers.put("TelaRemoverUsuario", new TelaRemoverUsuario());
     }

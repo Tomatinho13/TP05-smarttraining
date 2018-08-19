@@ -23,8 +23,8 @@ public class ManterMusculo implements IManterMusculo {
     }
        
     @Override
-    public ArrayList <Musculo> listarTodos() throws SQLException {
-        ArrayList <Musculo> listaMusculos = musculoDao.listarTodos();
+    public ArrayList <Musculo> pesquisarTodos() throws SQLException {
+        ArrayList <Musculo> listaMusculos = musculoDao.getListaMusculos();
         return listaMusculos;
     }
     

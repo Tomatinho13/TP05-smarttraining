@@ -29,7 +29,10 @@ public class TelaCadastrarAvaliacao implements Controller {
             
             request.setAttribute("aluno", aluno);
             request.setAttribute("objetivos", listaObjetivos);
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            String erro = "Erro ao cadastrar avaliacao!";
+            request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
         return jsp;

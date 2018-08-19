@@ -22,7 +22,10 @@ public class TelaRemoverExercicio implements Controller {
                 jsp = "erro.jsp";
             
             request.setAttribute("exercicios", listaExercicios);
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            String erro = "Erro ao remover exercicio!";
+            request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
         return jsp;

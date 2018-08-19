@@ -23,6 +23,7 @@ public class ExercicioDao implements IExercicioDao {
 
     @Override
     public Exercicio getExercicio(int codExercicio) throws SQLException {
+        exercicio = new Exercicio();
         sql = "SELECT * "
                 + "FROM \"Exercicio\""
                 + "WHERE cod_exercicio = '" + codExercicio + "'";
@@ -34,17 +35,31 @@ public class ExercicioDao implements IExercicioDao {
             exercicio = new Exercicio(codExercicio,
                     resultado.getString("nom_exercicio"),
                     resultado.getString("des_exercicio"));
-        } else {
-
-            return null;
         }
 
+        return exercicio;
+    }
+    
+    @Override
+    public Exercicio getExercicio(String nomeExercicio) throws SQLException {
+        exercicio = new Exercicio();
+        sql = "SELECT * "
+                + "FROM \"Exercicio\""
+                + "WHERE nom_exercicio = '" + nomeExercicio + "'";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+
+        if (resultado.next()) {
+            exercicio = new Exercicio(resultado.getInt("cod_exercicio"), nomeExercicio,
+                    resultado.getString("des_exercicio"));
+        }
         return exercicio;
     }
 
     @Override
     public AparelhoExercicio getAparelhoExercicio(int codExercicio, int nroAparelho) throws SQLException {
-        AparelhoExercicio aparelhoExercicio;
+        AparelhoExercicio aparelhoExercicio = new AparelhoExercicio();
         sql = "SELECT nom_exercicio, des_exercicio, nom_aparelho, img_execucao "
                 + "FROM \"Exercicio\""
                 + "JOIN \"AparelhoExercicio\" USING (cod_exercicio)"
@@ -60,14 +75,11 @@ public class ExercicioDao implements IExercicioDao {
                     resultado.getString("nom_exercicio"),
                     resultado.getString("des_exercicio"));
             aparelhoExercicio = new AparelhoExercicio(aparelho, exercicio, resultado.getString("img_execucao"));
-        } else {
-
-            return null;
         }
 
         return aparelhoExercicio;
     }
-    
+
     @Override
     public ArrayList<Exercicio> getRegiaoExercicios(String nomRegiao) throws SQLException {
         ArrayList<Exercicio> listaExercicios = new ArrayList<>();
@@ -87,14 +99,10 @@ public class ExercicioDao implements IExercicioDao {
                     resultado.getString("nom_regiao"),
                     resultado.getString("des_regiao")));
         }
-        if (listaExercicios.isEmpty()) {
-
-            return null;
-        }
 
         return listaExercicios;
     }
-    
+
     @Override
     public ArrayList<Exercicio> getMusculoExercicios(int codMusculo) throws SQLException {
         ArrayList<Exercicio> listaExercicios = new ArrayList<>();
@@ -108,46 +116,56 @@ public class ExercicioDao implements IExercicioDao {
         while (resultado.next()) {
             listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), resultado.getString("nom_exercicio"), resultado.getString("des_exercicio")));
         }
-        if (listaExercicios.isEmpty()) {
-
-            return null;
-        }
 
         return listaExercicios;
     }
-    
+
     @Override
-    public ArrayList<Exercicio> getListaExercicios() throws SQLException{
+    public ArrayList<Exercicio> getListaExercicios() throws SQLException {
         ArrayList<Exercicio> listaExercicios = new ArrayList<>();
-        sql="SELECT * FROM \"Exercicio\"";
-        
+        sql = "SELECT * FROM \"Exercicio\"";
+
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
-        
-        while(resultado.next()){
-            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), 
-            resultado.getString("nom_exercicio"), 
-            resultado.getString("des_exercicio")));
+
+        while (resultado.next()) {
+            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"),
+                    resultado.getString("nom_exercicio"),
+                    resultado.getString("des_exercicio")));
         }
         return listaExercicios;
     }
 
     @Override
-    public void postExercicio(Exercicio exercicio, int codMusculo) throws SQLException {
-        sql = "INSERT INTO \"Exercicio\" (nom_exercicio, des_exercicio) VALUES (?, ?);"
-                + "INSERT INTO \"MusculoExercicio\" VALUES"
-                + "               ((SELECT cod_exercicio FROM \"Exercicio\" "
-                + "WHERE nomExercicio=?),"
-                + "               (SELECT cod_musculo FROM \"Musculo\" "
-                + "WHERE cod_musculo=?))";
+    public void postExercicio(Exercicio exercicio, String[] codMusculos) throws SQLException {
+        sql = "INSERT INTO \"Exercicio\" (nom_exercicio, des_exercicio) VALUES (?, ?);";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, exercicio.getNomeExercicio());
         stmt.setString(2, exercicio.getDescricaoExercicio());
-        stmt.setString(3, exercicio.getNomeExercicio());
-        stmt.setString(4, String.valueOf(codMusculo));
+        stmt.executeUpdate();
 
-        stmt.executeQuery(sql);
+        sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST(? as integer), CAST(? as bigint))";
+        for (String codMusculo : codMusculos) {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, String.valueOf(getExercicio(exercicio.getNomeExercicio()).getCodExercicio()));
+            stmt.setString(2, codMusculo);
+
+            stmt.executeUpdate();
+        }
+
+    }
+
+    @Override
+    public void postAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException {
+        sql = "INSERT INTO \"AparelhoExercicio\" VALUES (CAST(? as integer), CAST(? as integer), ?);";
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, String.valueOf(codExercicio));
+        stmt.setString(2, String.valueOf(nroAparelho));
+        stmt.setString(3, caminhoImg);
+
+        stmt.executeUpdate();
 
     }
 
@@ -161,7 +179,7 @@ public class ExercicioDao implements IExercicioDao {
         stmt.setString(1, exercicio.getNomeExercicio());
         stmt.setString(2, exercicio.getDescricaoExercicio());
 
-        stmt.executeQuery(sql);
+        stmt.executeUpdate();
 
     }
 
@@ -173,25 +191,7 @@ public class ExercicioDao implements IExercicioDao {
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, String.valueOf(codExercicio));
 
-        stmt.executeQuery(sql);
+        stmt.executeUpdate();
 
-    }
-
-    @Override
-    public Exercicio getExercicio(String nomeExercicio) throws SQLException {
-        sql = "SELECT * "
-                + "FROM \"Exercicio\""
-                + "WHERE nom_exercicio = '" + nomeExercicio + "'";
-
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-
-        if (resultado.next()) {
-            exercicio = new Exercicio(resultado.getInt("cod_exercicio"),nomeExercicio, 
-                                      resultado.getString("des_exercicio"));
-        } else {
-            return null;
-        }
-        return exercicio;
     }
 }

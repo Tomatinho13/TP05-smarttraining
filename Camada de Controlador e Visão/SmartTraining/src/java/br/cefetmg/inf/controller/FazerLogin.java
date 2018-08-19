@@ -44,8 +44,11 @@ public class FazerLogin implements Controller{
                 request.setAttribute("erro", erro);
             }
         }
-        catch(SQLException e){
-            jsp = "";
+        catch (SQLException e) {
+            e.printStackTrace(System.err);
+            String erro = "Erro ao fazer login!";
+            request.setAttribute("erro", erro);
+            jsp = "erro.jsp";
         }
         return jsp;
     }
