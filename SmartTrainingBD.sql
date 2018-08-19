@@ -1,5 +1,3 @@
--- Create tables section -------------------------------------------------
-
 -- Table Aluno
 
 CREATE TABLE "Aluno"(
@@ -86,7 +84,8 @@ CREATE TABLE "Avaliacao"(
  "cod_cpf_instrutor" Character varying(11) NOT NULL,
  "idt_recencia" Boolean NOT NULL,
  "qtd_peso" Numeric(5,2) NOT NULL,
- "qtd_gordura" Numeric(5,2) NOT NULL,
+ "qtd_massaGorda" Numeric(5,2) NOT NULL,
+ "qtd_percGordura" Numeric(5,2) NOT NULL,
  "tam_pescoco" Numeric(6,2) NOT NULL,
  "tam_ombro" Numeric(6,2) NOT NULL,
  "tam_torax" Numeric(6,2) NOT NULL,
@@ -267,53 +266,53 @@ ALTER TABLE "DiaTreino" ADD CONSTRAINT "Key24" PRIMARY KEY ("cod_exercicio","nro
 ;
 -- Create foreign keys (relationships) section -------------------------------------------------
 
-ALTER TABLE "Aluno" ADD CONSTRAINT "Relationship6" FOREIGN KEY ("cod_cpf") REFERENCES "Usuario" ("cod_cpf") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "Aluno" ADD CONSTRAINT "Relationship6" FOREIGN KEY ("cod_cpf") REFERENCES "Usuario" ("cod_cpf") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "Instrutor" ADD CONSTRAINT "Relationship7" FOREIGN KEY ("cod_cpf") REFERENCES "Usuario" ("cod_cpf") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "Instrutor" ADD CONSTRAINT "Relationship7" FOREIGN KEY ("cod_cpf") REFERENCES "Usuario" ("cod_cpf") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "Ficha" ADD CONSTRAINT "Relationship9" FOREIGN KEY ("cod_cpf") REFERENCES "Aluno" ("cod_cpf") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "Ficha" ADD CONSTRAINT "Relationship9" FOREIGN KEY ("cod_cpf") REFERENCES "Aluno" ("cod_cpf") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "Ficha" ADD CONSTRAINT "Relationship11" FOREIGN KEY ("cod_cpf_instrutor") REFERENCES "Instrutor" ("cod_cpf") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "Ficha" ADD CONSTRAINT "Relationship11" FOREIGN KEY ("cod_cpf_instrutor") REFERENCES "Instrutor" ("cod_cpf") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "Avaliacao" ADD CONSTRAINT "Relationship12" FOREIGN KEY ("cod_cpf") REFERENCES "Aluno" ("cod_cpf") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "Avaliacao" ADD CONSTRAINT "Relationship12" FOREIGN KEY ("cod_cpf") REFERENCES "Aluno" ("cod_cpf") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "Avaliacao" ADD CONSTRAINT "Relationship13" FOREIGN KEY ("cod_cpf_instrutor") REFERENCES "Instrutor" ("cod_cpf") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "Avaliacao" ADD CONSTRAINT "Relationship13" FOREIGN KEY ("cod_cpf_instrutor") REFERENCES "Instrutor" ("cod_cpf") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "Treino" ADD CONSTRAINT "Relationship17" FOREIGN KEY ("cod_cpf", "nro_ficha") REFERENCES "Ficha" ("cod_cpf", "nro_ficha") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "Treino" ADD CONSTRAINT "Relationship17" FOREIGN KEY ("cod_cpf", "nro_ficha") REFERENCES "Ficha" ("cod_cpf", "nro_ficha") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "Musculo" ADD CONSTRAINT "Relationship20" FOREIGN KEY ("cod_regCorp") REFERENCES "RegiaoCorporal" ("cod_regCorp") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "Musculo" ADD CONSTRAINT "Relationship20" FOREIGN KEY ("cod_regCorp") REFERENCES "RegiaoCorporal" ("cod_regCorp") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Relationship21" FOREIGN KEY ("cod_exercicio") REFERENCES "Exercicio" ("cod_exercicio") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Relationship21" FOREIGN KEY ("cod_exercicio") REFERENCES "Exercicio" ("cod_exercicio") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Relationship22" FOREIGN KEY ("cod_musculo") REFERENCES "Musculo" ("cod_musculo") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "MusculoExercicio" ADD CONSTRAINT "Relationship22" FOREIGN KEY ("cod_musculo") REFERENCES "Musculo" ("cod_musculo") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "AparelhoExercicio" ADD CONSTRAINT "Relationship23" FOREIGN KEY ("cod_exercicio") REFERENCES "Exercicio" ("cod_exercicio") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "AparelhoExercicio" ADD CONSTRAINT "Relationship23" FOREIGN KEY ("cod_exercicio") REFERENCES "Exercicio" ("cod_exercicio") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "AparelhoExercicio" ADD CONSTRAINT "Relationship24" FOREIGN KEY ("nro_aparelho") REFERENCES "Aparelho" ("nro_aparelho") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "AparelhoExercicio" ADD CONSTRAINT "Relationship24" FOREIGN KEY ("nro_aparelho") REFERENCES "Aparelho" ("nro_aparelho") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "TreinoExercicio" ADD CONSTRAINT "Relationship25" FOREIGN KEY ("cod_exercicio", "nro_aparelho") REFERENCES "AparelhoExercicio" ("cod_exercicio", "nro_aparelho") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "TreinoExercicio" ADD CONSTRAINT "Relationship25" FOREIGN KEY ("cod_exercicio", "nro_aparelho") REFERENCES "AparelhoExercicio" ("cod_exercicio", "nro_aparelho") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "TreinoExercicio" ADD CONSTRAINT "Relationship26" FOREIGN KEY ("cod_cpf", "nro_treino", "nro_ficha") REFERENCES "Treino" ("cod_cpf", "nro_treino", "nro_ficha") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "TreinoExercicio" ADD CONSTRAINT "Relationship26" FOREIGN KEY ("cod_cpf", "nro_treino", "nro_ficha") REFERENCES "Treino" ("cod_cpf", "nro_treino", "nro_ficha") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Relationship27" FOREIGN KEY ("cod_objetivo") REFERENCES "Objetivo" ("cod_objetivo") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Relationship27" FOREIGN KEY ("cod_objetivo") REFERENCES "Objetivo" ("cod_objetivo") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Relationship28" FOREIGN KEY ("cod_cpf", "dat_avaliacao") REFERENCES "Avaliacao" ("cod_cpf", "dat_avaliacao") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "ObjetivoAvaliacao" ADD CONSTRAINT "Relationship28" FOREIGN KEY ("cod_cpf", "dat_avaliacao") REFERENCES "Avaliacao" ("cod_cpf", "dat_avaliacao") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
 
-ALTER TABLE "DiaTreino" ADD CONSTRAINT "Relationship29" FOREIGN KEY ("cod_exercicio", "nro_aparelho", "cod_cpf", "nro_treino", "nro_ficha") REFERENCES "TreinoExercicio" ("cod_exercicio", "nro_aparelho", "cod_cpf", "nro_treino", "nro_ficha") ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE "DiaTreino" ADD CONSTRAINT "Relationship29" FOREIGN KEY ("cod_exercicio", "nro_aparelho", "cod_cpf", "nro_treino", "nro_ficha") REFERENCES "TreinoExercicio" ("cod_exercicio", "nro_aparelho", "cod_cpf", "nro_treino", "nro_ficha") ON DELETE CASCADE ON UPDATE NO ACTION
 ;
