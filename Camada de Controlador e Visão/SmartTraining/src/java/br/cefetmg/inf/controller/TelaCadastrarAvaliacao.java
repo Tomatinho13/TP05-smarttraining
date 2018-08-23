@@ -2,6 +2,8 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Objetivo;
 import br.cefetmg.inf.model.domain.Usuario;
+import br.cefetmg.inf.model.services.IManterObjetivo;
+import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.model.services.impl.ManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterObjetivo;
 import java.sql.SQLException;
@@ -15,10 +17,10 @@ public class TelaCadastrarAvaliacao implements Controller {
         String jsp;
         try {
             jsp = "CadastrarAvaliacao.jsp";
-            String cpfAluno = request.getParameter("cpfAluno").replaceAll(" ", "");
+            String cpfAluno = request.getParameter("codCpfAluno").trim();
 
-            ManterObjetivo manterObjetivo = new ManterObjetivo();
-            ManterAluno manterAluno = new ManterAluno();
+            IManterObjetivo manterObjetivo = new ManterObjetivo();
+            IManterUsuario manterAluno = new ManterAluno();
             
             Usuario aluno = manterAluno.pesquisarPorCpf(cpfAluno);
 

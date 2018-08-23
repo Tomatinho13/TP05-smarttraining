@@ -1,7 +1,10 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Avaliacao;
+import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
+import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,14 +18,17 @@ public class ListarAvaliacoes implements Controller{
         
          try {
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            String codCpfAluno = request.getAttribute("codCpfAluno").toString().replaceAll("[^0-9]", "");
-            ArrayList <Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(codCpfAluno);
+            IManterUsuario manterUsuario = new ManterAluno();
+            String codCpfAluno = request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
+            Usuario aluno = manterUsuario.pesquisarPorCpf(codCpfAluno);
+            ArrayList <Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(aluno.getCodCpf());
             
-            if (listaAvaliacoes != null) {
-                request.setAttribute("listaAvaliacoes", listaAvaliacoes);
+            if (!listaAvaliacoes.isEmpty()) {
+                request.setAttribute("avaliacoes", listaAvaliacoes);
+                request.setAttribute("aluno", aluno);
                 jsp = "/ListaAvaliacoes.jsp";
             } else {
-                String erro = "Nao existe registro de avaliacao!";
+                String erro = "Nao existe registro de avaliacoes!";
                 request.setAttribute("erro", erro);
                 jsp = "/erro.jsp";
                 return jsp;

@@ -40,8 +40,6 @@ public class DiaTreinoDao implements IDiaTreinoDao {
                 diaTreino = new DiaTreino(atividade, resultado.getDate("dat_treino").toLocalDate());
                 listaDiaTreino.add(diaTreino);
             } while (resultado.next());
-        } else {
-            return null;
         }
 
         return listaDiaTreino;

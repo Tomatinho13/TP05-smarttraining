@@ -15,7 +15,7 @@ public class CadastrarAvaliacao implements Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp = "/TelaInicialAluno.jsp";
+        String jsp = "/TelaInicialInstrutor.jsp";
         try {
             double peso = Double.parseDouble(request.getParameter("peso"));
             double percentualGordura = Double.parseDouble(request.getParameter("percentualGordura"));
@@ -39,9 +39,9 @@ public class CadastrarAvaliacao implements Controller {
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
             LocalDate dataAvaliacao = LocalDate.now();
 
-            avaliacao.setCodCpfAluno(request.getAttribute("codCpfAluno").toString().replaceAll("[^0-9]", ""));
+            avaliacao.setCodCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
             avaliacao.setDatAvaliacao(dataAvaliacao);
-            avaliacao.setCodCpfInstrutor(request.getAttribute("codCpfInstrutor").toString().replaceAll("[^0-9]", ""));
+            avaliacao.setCodCpfInstrutor(request.getParameter("codCpfInstrutor").replaceAll("[^0-9]", ""));
             avaliacao.setIdtRecencia(true);
 
             String objetivos[] = request.getParameterValues("objetivo");

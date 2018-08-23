@@ -37,13 +37,13 @@
                     <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=aluno.getCodCpf()%>" class="btn btn-primary"> 
                         Ver 
                     </a>
-                    <a href="/servletweb?acao=ListaAvaliacoes&codUsuario=<%= aluno.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=ListarAvaliacoes&codCpfAluno=<%= aluno.getCodCpf()%>" class="btn btn-primary">
                         Ver Avaliacoes
                     </a>
-                    <a href="/servletweb?acao=ListaFichas&codUsuario=<%= aluno.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=ListarFichas&codCpfAluno=<%= aluno.getCodCpf()%>" class="btn btn-primary">
                         Ver Fichas
                     </a>
-                    <a href="/servletweb?acao=TelaCadastrarAvaliacao&cpfAluno=<%= aluno.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=TelaCadastrarAvaliacao&codCpfAluno=<%= aluno.getCodCpf()%>" class="btn btn-primary">
                         Cadastrar Avaliacao
                     </a>
                     <br><br>

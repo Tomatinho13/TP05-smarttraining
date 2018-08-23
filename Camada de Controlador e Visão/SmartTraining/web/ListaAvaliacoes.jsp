@@ -4,8 +4,8 @@
     Author     : Felipe
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="br.cefetmg.inf.model.domain.Usuario"%>
-<%@page import="java.util.List"%>
 <%@page import="br.cefetmg.inf.model.domain.Avaliacao" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,12 +21,8 @@
         </style>
         
         <%
-            Usuario usuario = (Usuario) request.getAttribute("usuario");
+            Usuario usuario = (Usuario) request.getAttribute("aluno");
         %>
-        
-        <input type = "hidden" name = "codCpfAluno" value="
-               <%= request.setAttribute("codCpfAluno", usuario.getCodCpf()) %>" 
-        />
         
         <title>Lista de Avaliacoes</title>
     </head>
@@ -38,17 +34,18 @@
 
             <ul class="list-group">
                 <%
-                    List <Avaliacao> listaAvaliacoes = (List) request.getAttribute("avaliacoes");
+                    ArrayList <Avaliacao> listaAvaliacoes = (ArrayList) request.getAttribute("avaliacoes");
                     Avaliacao avaliacao = new Avaliacao();
 
                     for (int i = 0; i < listaAvaliacoes.size(); i++) {
                         avaliacao = listaAvaliacoes.get(i);
                 %>
                 <li class="list-group-item">
-                    <a href="/controller/servletweb?acao=MostrarAvaliacao&dataAvaliacao=<%= avaliacao.getDatAvaliacao() %>" class="btn btn-primary"> 
+                    <%=avaliacao.getDatAvaliacao()%>
+                    <a href="servletweb?acao=MostrarAvaliacao&dataAvaliacao=<%= avaliacao.getDatAvaliacao() %>&codCpfAluno=<%=usuario.getCodCpf()%>" class="btn btn-primary"> 
                         Ver avaliação
                     </a>
-                    <a href="/controller/servletweb?acao=AlterarAvaliacao&dataAvaliacao=<%= avaliacao.getDatAvaliacao() %>" class="btn btn-primary">
+                    <a href="servletweb?acao=TelaAlterarAvaliacao&dataAvaliacao=<%= avaliacao.getDatAvaliacao() %>&codCpfAluno=<%=usuario.getCodCpf()%>" class="btn btn-primary">
                         Alterar avaliação
                     </a>
                 </li>

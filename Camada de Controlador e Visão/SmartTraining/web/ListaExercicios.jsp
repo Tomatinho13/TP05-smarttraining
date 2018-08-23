@@ -49,10 +49,10 @@
                         %>
                         <li class="list-group-item"> 
                             <h4><%= exercicio.getNomeExercicio()%></h4>
-                            <a href="/controller/servletweb?acao=MostrarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>">
+                            <a href="/servletweb?acao=MostrarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>">
                                 Ver 
                             </a>
-                            <a href="/controller/servletweb?acao=AlterarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>"> 
+                            <a href="/servletweb?acao=TelaAlterarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>"> 
                                 Alterar 
                             </a>
                         </li>

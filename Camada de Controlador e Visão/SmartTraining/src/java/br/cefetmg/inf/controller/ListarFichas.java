@@ -1,7 +1,10 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Ficha;
+import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterFicha;
+import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterFicha;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,11 +18,14 @@ public class ListarFichas implements Controller {
 
         try {
             IManterFicha manterFicha = new ManterFicha();
-            String codCpfAluno = (String) request.getAttribute("codCpfAluno").toString().replaceAll("[^0-9]", "");
-            ArrayList<Ficha> listaFichas = manterFicha.pesquisarPorAluno(codCpfAluno);
+            IManterUsuario manterAluno = new ManterAluno();
+            String codCpfAluno = (String) request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
+            Usuario aluno = manterAluno.pesquisarPorCpf(codCpfAluno);
+            ArrayList<Ficha> listaFichas = manterFicha.pesquisarPorAluno(aluno.getCodCpf());
 
-            if (listaFichas != null) {
-                request.setAttribute("listaFichas", listaFichas);
+            if (!listaFichas.isEmpty()) {
+                request.setAttribute("fichas", listaFichas);
+                request.setAttribute("aluno", aluno);
                 jsp = "/ListaFichas.jsp";
             } else {
                 String erro = "Nao existe registro de ficha!";

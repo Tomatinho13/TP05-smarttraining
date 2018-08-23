@@ -21,6 +21,45 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         gson = new Gson();
         objetivoDao = new ObjetivoDao();
     }
+    
+    @Override
+    public Avaliacao getAvaliacao(String cpf, LocalDate data) throws SQLException {
+               sql = "SELECT * "
+                + "FROM \"Avaliacao\" "
+                + "WHERE cod_cpf = '" + cpf + "' AND dat_avaliacao = '" + data + "'";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        if (resultado.next()) {
+            avaliacao = new Avaliacao(cpf,
+                    data,
+                    resultado.getString("cod_cpf_instrutor"),
+                    resultado.getBoolean("idt_recencia"),
+                    Double.parseDouble(resultado.getString("qtd_peso")),
+                    Double.parseDouble(resultado.getString("qtd_percGordura")),
+                    Double.parseDouble(resultado.getString("tam_pescoco")),
+                    Double.parseDouble(resultado.getString("tam_ombro")),
+                    Double.parseDouble(resultado.getString("tam_torax")),
+                    Double.parseDouble(resultado.getString("tam_abdomen")),
+                    Double.parseDouble(resultado.getString("tam_cintura")),
+                    Double.parseDouble(resultado.getString("tam_quadril")),
+                    Double.parseDouble(resultado.getString("qtd_massaGorda")),
+                    Double.parseDouble(resultado.getString("tam_bracoEsq")),
+                    Double.parseDouble(resultado.getString("tam_bracoDir")),
+                    Double.parseDouble(resultado.getString("tam_antebracoEsq")),
+                    Double.parseDouble(resultado.getString("tam_antebracoDir")),
+                    Double.parseDouble(resultado.getString("tam_coxaEsq")),
+                    Double.parseDouble(resultado.getString("tam_coxaDir")),
+                    Double.parseDouble(resultado.getString("tam_panturrilhaEsq")),
+                    Double.parseDouble(resultado.getString("tam_panturrilhaDir")),
+                    objetivoDao.getAvaliacaoObjetivos(cpf, resultado.getDate("dat_avaliacao").toLocalDate()));
+        } else {
+
+            return null;
+        }
+
+        return avaliacao; 
+    }
 
     @Override
     public ArrayList<Avaliacao> getListaAvaliacao(String codCpf) throws SQLException {
@@ -57,55 +96,69 @@ public class AvaliacaoDao implements IAvaliacaoDao {
             listaAvaliacao.add(avaliacao);
         }
 
-        if (listaAvaliacao.isEmpty()) {
-            return null;
-        }
 
         return listaAvaliacao;
     }
 
     @Override
     public void postAvaliacao(Avaliacao avaliacao) throws SQLException {
-        sql = "INSERT INTO \"Avaliacao\" VALUES (?,CAST(? as date),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        sql = "INSERT INTO \"Avaliacao\" VALUES ("
+                + "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfAluno() + "'),"
+                + "CAST(? as date),"
+                + "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfInstrutor() + "'),"
+                + "CAST(? as boolean),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric),"
+                + "CAST(? as numeric))";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfAluno() + "'");
-        stmt.setString(2, avaliacao.getDatAvaliacao().toString());
-        stmt.setString(3, "SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfInstrutor() + "'");
-        stmt.setString(4, String.valueOf(avaliacao.getIdtRecencia()));
-        stmt.setString(5, String.valueOf(avaliacao.getPeso()));
-        stmt.setString(6, String.valueOf(avaliacao.getPercentualGordura()));
-        stmt.setString(7, String.valueOf(avaliacao.getTamanhoPescoco()));
-        stmt.setString(8, String.valueOf(avaliacao.getTamanhoOmbro()));
-        stmt.setString(9, String.valueOf(avaliacao.getTamanhoTorax()));
-        stmt.setString(10, String.valueOf(avaliacao.getTamanhoAbdomen()));
-        stmt.setString(11, String.valueOf(avaliacao.getTamanhoCintura()));
-        stmt.setString(12, String.valueOf(avaliacao.getTamanhoQuadril()));
-        stmt.setString(13, String.valueOf(avaliacao.getMassaGorda()));
-        stmt.setString(14, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
-        stmt.setString(15, String.valueOf(avaliacao.getTamanhoBracoDireito()));
-        stmt.setString(16, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
-        stmt.setString(17, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
-        stmt.setString(18, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
-        stmt.setString(19, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
-        stmt.setString(20, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
-        stmt.setString(21, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-        stmt.executeQuery(sql);
-
-        sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES (?, ?, ?)";
-
-        stmt = conn.prepareStatement(sql);
-
-        stmt.setString(1, "(SELECT dat_avaliacao FROM \"Avaliacao\" "
-                + "WHERE cod_cpf='" + avaliacao.getCodCpfAluno() + "' "
-                + "AND dat_avaliacao='" + avaliacao.getDatAvaliacao().toString() + "')");
-        stmt.setString(2, "(SELECT cod_cpf FROM \"Avaliacao\" "
-                + "WHERE cod_cpf='" + avaliacao.getCodCpfAluno() + "' "
-                + "AND dat_avaliacao='" + avaliacao.getDatAvaliacao().toString() + "')");
+        stmt.setString(1, avaliacao.getDatAvaliacao().toString());
+        stmt.setString(2, String.valueOf(avaliacao.getIdtRecencia()));
+        stmt.setString(3, String.valueOf(avaliacao.getPeso()));
+        stmt.setString(4, String.valueOf(avaliacao.getMassaGorda()));
+        stmt.setString(5, String.valueOf(avaliacao.getPercentualGordura()));
+        stmt.setString(6, String.valueOf(avaliacao.getTamanhoPescoco()));
+        stmt.setString(7, String.valueOf(avaliacao.getTamanhoOmbro()));
+        stmt.setString(8, String.valueOf(avaliacao.getTamanhoTorax()));
+        stmt.setString(9, String.valueOf(avaliacao.getTamanhoAbdomen()));
+        stmt.setString(10, String.valueOf(avaliacao.getTamanhoCintura()));
+        stmt.setString(11, String.valueOf(avaliacao.getTamanhoQuadril()));
+        stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
+        stmt.setString(13, String.valueOf(avaliacao.getTamanhoBracoDireito()));
+        stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
+        stmt.setString(15, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
+        stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
+        stmt.setString(17, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
+        stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
+        stmt.setString(19, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
+        stmt.executeUpdate();
 
         for (int i = 0; i < avaliacao.getListaObjetivos().size(); i++) {
-            stmt.setString(3, "(SELECT cod_objetivo FROM \"Objetivo\" "
-                    + "WHERE cod_objetivo='" + avaliacao.getListaObjetivos().get(i).getCodObjetivo() + "')");
-            stmt.executeQuery(sql);
+            sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES ("
+                + "CAST((SELECT dat_avaliacao FROM \"Avaliacao\" "
+                    + "WHERE cod_cpf='" + avaliacao.getCodCpfAluno() + "' "
+                    + "AND dat_avaliacao=CAST('" + avaliacao.getDatAvaliacao().toString() + "' as date)) as date),"
+                + " (SELECT cod_cpf FROM \"Avaliacao\" "
+                    + "WHERE cod_cpf='" + avaliacao.getCodCpfAluno() + "' "
+                    + "AND dat_avaliacao=CAST('" + avaliacao.getDatAvaliacao().toString() + "' as date)), "
+                + "CAST((SELECT cod_objetivo FROM \"Objetivo\" "
+                    + "WHERE cod_objetivo='" + avaliacao.getListaObjetivos().get(i).getCodObjetivo() + "') as bigint))";
+            
+            stmt = conn.prepareStatement(sql);
+            stmt.execute();
         }
 
     }
@@ -157,7 +210,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.setString(20, avaliacao.getCodCpfAluno());
         stmt.setString(21, avaliacao.getDatAvaliacao().toString());
 
-        stmt.executeQuery(sql);
+        stmt.executeUpdate();
 
     }
 
@@ -167,46 +220,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "WHERE cod_cpf='" + cpf + "' AND dat_avaliacao='" + datAvaliacao.toString() + "';";
 
         Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
+        stmt.executeUpdate(sql);
 
-    }
-
-    @Override
-    public Avaliacao getAvaliacao(String cpf, LocalDate data) throws SQLException {
-               sql = "SELECT * "
-                + "FROM \"Avaliacao\" "
-                + "WHERE cod_cpf = '" + cpf + "' AND dat_avaliacao = '" + data + "'";
-
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        if (resultado.next()) {
-            avaliacao = new Avaliacao(cpf,
-                    data,
-                    resultado.getString("cod_cpf_instrutor"),
-                    resultado.getBoolean("idt_recencia"),
-                    Double.parseDouble(resultado.getString("qtd_peso")),
-                    Double.parseDouble(resultado.getString("qtd_percGordura")),
-                    Double.parseDouble(resultado.getString("tam_pescoco")),
-                    Double.parseDouble(resultado.getString("tam_ombro")),
-                    Double.parseDouble(resultado.getString("tam_torax")),
-                    Double.parseDouble(resultado.getString("tam_abdomen")),
-                    Double.parseDouble(resultado.getString("tam_cintura")),
-                    Double.parseDouble(resultado.getString("tam_quadril")),
-                    Double.parseDouble(resultado.getString("qtd_massaGorda")),
-                    Double.parseDouble(resultado.getString("tam_bracoEsq")),
-                    Double.parseDouble(resultado.getString("tam_bracoDir")),
-                    Double.parseDouble(resultado.getString("tam_antebracoEsq")),
-                    Double.parseDouble(resultado.getString("tam_antebracoDir")),
-                    Double.parseDouble(resultado.getString("tam_coxaEsq")),
-                    Double.parseDouble(resultado.getString("tam_coxaDir")),
-                    Double.parseDouble(resultado.getString("tam_panturrilhaEsq")),
-                    Double.parseDouble(resultado.getString("tam_panturrilhaDir")),
-                    objetivoDao.getAvaliacaoObjetivos(cpf, resultado.getDate("dat_avaliacao").toLocalDate()));
-        } else {
-
-            return null;
-        }
-
-        return avaliacao; 
     }
 }

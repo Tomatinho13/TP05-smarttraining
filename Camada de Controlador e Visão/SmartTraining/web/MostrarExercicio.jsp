@@ -21,7 +21,7 @@
                 Exercicio exercicio = (Exercicio) request.getAttribute("exercicio");
             %>
             Nome: <%= exercicio.getNomeExercicio()%><br>
-            Descrição <%= exercicio.getDescricaoExercicio()%><br>
+            Descrição: <%= exercicio.getDescricaoExercicio()%><br>
             
             <button class="btn btn-primary voltar">Voltar</button>
         </div>

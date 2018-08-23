@@ -65,10 +65,6 @@ public class FichaDao implements IFichaDao {
             listaFicha.add(ficha);
         }
 
-        if (listaFicha.isEmpty()) {
-            return null;
-        }
-
         return listaFicha;
     }
 

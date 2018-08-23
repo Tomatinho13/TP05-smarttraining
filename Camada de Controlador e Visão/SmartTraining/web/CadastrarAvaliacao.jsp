@@ -114,8 +114,10 @@
                         objetivo = listaObjetivos.get(i);
                 %>
 
-                <input type="checkbox" name="objetivo" value="<%= objetivo.getNomObjetivo()%>">
-
+                <input type="checkbox" name="objetivo" value="<%= objetivo.getNomObjetivo()%>" id="<%= objetivo.getNomObjetivo()%>">
+                <label for="<%=objetivo.getNomObjetivo()%>"> <%= objetivo.getNomObjetivo()%> </label>
+                <br>
+                
                 <%
                     }
                 %>

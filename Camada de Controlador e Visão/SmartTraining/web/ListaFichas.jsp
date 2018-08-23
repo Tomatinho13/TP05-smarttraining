@@ -21,11 +21,11 @@
         </style>
         
         <%
-            Usuario usuario = (Usuario) request.getAttribute("usuario");
+            Usuario usuario = (Usuario) request.getAttribute("aluno");
         %>
         
         <input type = "hidden" name = "codCpfAluno" value="
-               <%= request.setAttribute("codCpfAluno", usuario.getCodCpf()) %>" 
+               <%= usuario.getCodCpf() %>" 
         />
         
         <title>Lista de Fichas</title>
