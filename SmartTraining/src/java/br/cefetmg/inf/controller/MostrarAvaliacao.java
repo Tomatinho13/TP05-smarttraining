@@ -17,7 +17,7 @@ public class MostrarAvaliacao implements Controller{
             String codCpfAluno = request.getParameter("codCpfAluno");
             LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            Avaliacao avaliacao = manterAvaliacao.pesquisarPorAluno(codCpfAluno, dataAvaliacao);
+            Avaliacao avaliacao = manterAvaliacao.pesquisar(codCpfAluno, dataAvaliacao);
             
             if(avaliacao!=null){
                 request.setAttribute("avaliacao", avaliacao);

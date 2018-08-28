@@ -31,7 +31,7 @@ public class TelaAlterarAvaliacao implements Controller {
 
             Usuario aluno = manterAluno.pesquisarPorCpf(codCpfAluno);
 
-            Avaliacao avaliacao = manterAvaliacao.pesquisarPorAluno(codCpfAluno, dataAvaliacao);
+            Avaliacao avaliacao = manterAvaliacao.pesquisar(codCpfAluno, dataAvaliacao);
 
             ArrayList<Objetivo> listaObjetivos = manterObjetivo.pesquisarPorAvaliacao(codCpfAluno, dataAvaliacao);
             if (avaliacao == null) {

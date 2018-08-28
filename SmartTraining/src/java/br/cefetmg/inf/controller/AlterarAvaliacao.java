@@ -16,7 +16,7 @@ public class AlterarAvaliacao implements Controller{
             String cpf = request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
             LocalDate data = LocalDate.parse(request.getParameter("dataAvaliacao"));
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            Avaliacao avaliacao = manterAvaliacao.pesquisarPorAluno(cpf, data);
+            Avaliacao avaliacao = manterAvaliacao.pesquisar(cpf, data);
             if(avaliacao!=null){    
                 request.setAttribute("avaliacao",avaliacao);
                 jsp = "/AlterarAvaliacao.jsp";
