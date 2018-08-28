@@ -1,5 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.cefetmg.inf.proxy;
 
+import br.cefetmg.inf.model.domain.Instrutor;
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.util.Pacote;
@@ -8,8 +14,11 @@ import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-public class ManterAlunoProxy implements IManterUsuario{
+/**
+ *
+ * @author felipe
+ */
+public class ManterInstrutorProxy implements IManterUsuario{
 
     @Override
     public Usuario pesquisarPorCpf(String codCpf) throws SQLException {
@@ -18,11 +27,11 @@ public class ManterAlunoProxy implements IManterUsuario{
         
         Gson gson = new Gson();
         
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_ALUNO_CPF, gson.toJson(codCpf));
+        pacoteEnviado = new Pacote(TipoOperacao.PESQ_INSTRUTOR_CPF, gson.toJson(codCpf));
         
         pacoteRecebido = cliente.request(pacoteEnviado);
-        Usuario aluno = gson.fromJson(pacoteRecebido.getDados(), Usuario.class);
-        return aluno;
+        Instrutor instrutor = gson.fromJson(pacoteRecebido.getDados(), Instrutor.class);
+        return instrutor;
     }
 
     @Override
@@ -32,11 +41,11 @@ public class ManterAlunoProxy implements IManterUsuario{
         
         Gson gson = new Gson();
         
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_ALUNO_NOME, gson.toJson(nome));
+        pacoteEnviado = new Pacote(TipoOperacao.PESQ_INSTRUTOR_NOME, gson.toJson(nome));
         
         pacoteRecebido = cliente.request(pacoteEnviado);
-        Usuario aluno = gson.fromJson(pacoteRecebido.getDados(), Usuario.class);
-        return aluno;
+        Instrutor instrutor = gson.fromJson(pacoteRecebido.getDados(), Instrutor.class);
+        return instrutor;
     }
 
     @Override
@@ -46,33 +55,33 @@ public class ManterAlunoProxy implements IManterUsuario{
         
         Gson gson = new Gson();
         
-        pacoteEnviado = new Pacote(TipoOperacao.LISTA_ALUNO, null);
+        pacoteEnviado = new Pacote(TipoOperacao.LISTA_INSTRUTOR, null);
         
         pacoteRecebido = cliente.request(pacoteEnviado);
-        ArrayList<Usuario> listaAlunos = gson.fromJson(pacoteRecebido.getDados(), ArrayList.class);
-        return listaAlunos;
+        ArrayList<Usuario> listaInstrutores = gson.fromJson(pacoteRecebido.getDados(), ArrayList.class);
+        return listaInstrutores;
     }
 
     @Override
-    public void cadastrar(Usuario aluno) throws SQLException {
+    public void cadastrar(Usuario instrutor) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         
         Gson gson = new Gson();
         
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_ALUNO, gson.toJson(aluno));
+        pacoteEnviado = new Pacote(TipoOperacao.CAD_INSTRUTOR, gson.toJson(instrutor));
         
         cliente.request(pacoteEnviado);
     }
 
     @Override
-    public void alterar(Usuario aluno) throws SQLException {
+    public void alterar(Usuario instrutor) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         
         Gson gson = new Gson();
         
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_ALUNO, gson.toJson(aluno));
+        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_INSTRUTOR, gson.toJson(instrutor));
         
         cliente.request(pacoteEnviado);
     }
@@ -84,9 +93,8 @@ public class ManterAlunoProxy implements IManterUsuario{
         
         Gson gson = new Gson();
         
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_ALUNO, gson.toJson(codCpf));
+        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_INSTRUTOR, gson.toJson(codCpf));
         
         cliente.request(pacoteEnviado);
     }
-    
 }
