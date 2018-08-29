@@ -5,6 +5,8 @@
  */
 package br.cefetmg.inf.util;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author gabriel
@@ -12,9 +14,9 @@ package br.cefetmg.inf.util;
 public class Pacote {
 
     TipoOperacao tipoOperacao;
-    String dados;
+    ArrayList<String> dados;
 
-    public Pacote(TipoOperacao tipoOperacao, String dados) {
+    public Pacote(TipoOperacao tipoOperacao, ArrayList<String> dados) {
         this.tipoOperacao = tipoOperacao;
         this.dados = dados;
     }
@@ -27,11 +29,12 @@ public class Pacote {
         this.tipoOperacao = tipoOperacao;
     }
 
-    public String getDados() {
+    public ArrayList<String> getDados() {
         return dados;
     }
 
-    public void setDados(String dados) {
+    public void setDados(ArrayList<String> dados) {
         this.dados = dados;
     }
+    
 }

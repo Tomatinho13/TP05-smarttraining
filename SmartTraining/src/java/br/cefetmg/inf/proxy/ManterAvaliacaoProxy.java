@@ -10,27 +10,44 @@ import br.cefetmg.inf.model.services.IManterAvaliacao;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author felipe
  */
-public class ManterAvaliacaoProxy implements IManterAvaliacao{
+public class ManterAvaliacaoProxy implements IManterAvaliacao {
+
+    Cliente cliente;
+
+    public ManterAvaliacaoProxy() {
+        try {
+            this.cliente = Cliente.getInstancia();
+        } catch (SocketException | UnknownHostException ex) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public ArrayList<Avaliacao> pesquisarPorAluno(String codCpf) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.LISTA_AVALIACAO_ALUNO, gson.toJson(codCpf));
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        ArrayList<Avaliacao> listaAvaliacoes = gson.fromJson(pacoteRecebido.getDados(), ArrayList.class);
+        dados.add(gson.toJson(codCpf));
+        pacoteEnviado = new Pacote(TipoOperacao.LISTA_AVALIACAO_ALUNO, dados);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        ArrayList<Avaliacao> listaAvaliacoes = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
         return listaAvaliacoes;
     }
 
@@ -38,14 +55,16 @@ public class ManterAvaliacaoProxy implements IManterAvaliacao{
     public Avaliacao pesquisar(String codCpf, LocalDate data) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        //MAIS DE UM PARAMETRO
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_AVALIACAO, gson.toJson(codCpf));
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        Avaliacao avaliacao = gson.fromJson(pacoteRecebido.getDados(), Avaliacao.class);
+        dados.add(gson.toJson(codCpf));
+        pacoteEnviado = new Pacote(TipoOperacao.PESQ_AVALIACAO, dados);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        Avaliacao avaliacao = gson.fromJson(pacoteRecebido.getDados().get(0), Avaliacao.class);
         return avaliacao;
     }
 
@@ -53,37 +72,46 @@ public class ManterAvaliacaoProxy implements IManterAvaliacao{
     public void cadastrar(Avaliacao avaliacao) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_AVALIACAO, gson.toJson(avaliacao));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(avaliacao));
+        pacoteEnviado = new Pacote(TipoOperacao.CAD_AVALIACAO, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 
     @Override
     public void alterar(Avaliacao avaliacao) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_AVALIACAO, gson.toJson(avaliacao));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(avaliacao));
+        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_AVALIACAO, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 
     @Override
     public void excluir(String codCpf, LocalDate datAvaliacao) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
         
-        //MAIS DE UM PARAMETRO
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_AVALIACAO, gson.toJson(codCpf));
+        ArrayList<String> dados = new ArrayList<>();
         
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(codCpf));
+        dados.add(gson.toJson(datAvaliacao));
+        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_AVALIACAO, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
-    
+
 }

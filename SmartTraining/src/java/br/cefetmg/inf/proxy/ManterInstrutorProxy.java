@@ -11,26 +11,43 @@ import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author felipe
  */
-public class ManterInstrutorProxy implements IManterUsuario{
+public class ManterInstrutorProxy implements IManterUsuario {
+
+    Cliente cliente;
+
+    public ManterInstrutorProxy() {
+        try {
+            this.cliente = Cliente.getInstancia();
+        } catch (SocketException | UnknownHostException ex) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public Usuario pesquisarPorCpf(String codCpf) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_INSTRUTOR_CPF, gson.toJson(codCpf));
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        Instrutor instrutor = gson.fromJson(pacoteRecebido.getDados(), Instrutor.class);
+        dados.add(gson.toJson(codCpf));
+        pacoteEnviado = new Pacote(TipoOperacao.PESQ_INSTRUTOR_CPF, dados);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        Instrutor instrutor = gson.fromJson(pacoteRecebido.getDados().get(0), Instrutor.class);
         return instrutor;
     }
 
@@ -38,13 +55,16 @@ public class ManterInstrutorProxy implements IManterUsuario{
     public Usuario pesquisarPorNome(String nome) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_INSTRUTOR_NOME, gson.toJson(nome));
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        Instrutor instrutor = gson.fromJson(pacoteRecebido.getDados(), Instrutor.class);
+        dados.add(gson.toJson(nome));
+        pacoteEnviado = new Pacote(TipoOperacao.PESQ_INSTRUTOR_NOME, dados);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        Instrutor instrutor = gson.fromJson(pacoteRecebido.getDados().get(0), Instrutor.class);
         return instrutor;
     }
 
@@ -52,13 +72,13 @@ public class ManterInstrutorProxy implements IManterUsuario{
     public ArrayList<Usuario> pesquisarTodos() throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
-        
+
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_INSTRUTOR, null);
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        ArrayList<Usuario> listaInstrutores = gson.fromJson(pacoteRecebido.getDados(), ArrayList.class);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        ArrayList<Usuario> listaInstrutores = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
         return listaInstrutores;
     }
 
@@ -66,35 +86,44 @@ public class ManterInstrutorProxy implements IManterUsuario{
     public void cadastrar(Usuario instrutor) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_INSTRUTOR, gson.toJson(instrutor));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(instrutor));
+        pacoteEnviado = new Pacote(TipoOperacao.CAD_INSTRUTOR, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 
     @Override
     public void alterar(Usuario instrutor) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_INSTRUTOR, gson.toJson(instrutor));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(instrutor));
+        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_INSTRUTOR, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 
     @Override
     public void excluir(String codCpf) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_INSTRUTOR, gson.toJson(codCpf));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(codCpf));
+        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_INSTRUTOR, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 }

@@ -10,27 +10,44 @@ import br.cefetmg.inf.model.services.IManterFicha;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author felipe
  */
-public class ManterFichaProxy implements IManterFicha{
+public class ManterFichaProxy implements IManterFicha {
+
+    Cliente cliente;
+
+    public ManterFichaProxy() {
+        try {
+            this.cliente = Cliente.getInstancia();
+        } catch (SocketException | UnknownHostException ex) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public Ficha pesquisarPorCodigo(String codCpf, int nroFicha) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        //MAIS DE UM PARAMETRO
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_FICHA, gson.toJson(codCpf));
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        Ficha ficha = gson.fromJson(pacoteRecebido.getDados(), Ficha.class);
+        dados.add(gson.toJson(codCpf));
+        dados.add(gson.toJson(nroFicha));
+        pacoteEnviado = new Pacote(TipoOperacao.PESQ_FICHA, dados);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        Ficha ficha = gson.fromJson(pacoteRecebido.getDados().get(0), Ficha.class);
         return ficha;
     }
 
@@ -38,14 +55,16 @@ public class ManterFichaProxy implements IManterFicha{
     public ArrayList<Ficha> pesquisarPorAluno(String codCpf) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        //MAIS DE UM PARAMETRO
-        pacoteEnviado = new Pacote(TipoOperacao.LISTA_FICHA_ALUNO, gson.toJson(codCpf));
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        ArrayList<Ficha> listaFichas = gson.fromJson(pacoteRecebido.getDados(), ArrayList.class);
+        dados.add(gson.toJson(codCpf));
+        pacoteEnviado = new Pacote(TipoOperacao.LISTA_FICHA_ALUNO, dados);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        ArrayList<Ficha> listaFichas = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
         return listaFichas;
     }
 
@@ -53,37 +72,46 @@ public class ManterFichaProxy implements IManterFicha{
     public void cadastrar(Ficha ficha) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_FICHA, gson.toJson(ficha));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(ficha));
+        pacoteEnviado = new Pacote(TipoOperacao.CAD_FICHA, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 
     @Override
     public void alterar(Ficha ficha) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_FICHA, gson.toJson(ficha));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(ficha));
+        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_FICHA, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 
     @Override
     public void excluir(String codCpf, int nroFicha) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        //MAIS DE UM PARAMETRO
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_FICHA, gson.toJson(nroFicha));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(codCpf));
+        dados.add(gson.toJson(nroFicha));
+        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_FICHA, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
-    
+
 }

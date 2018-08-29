@@ -10,76 +10,104 @@ import br.cefetmg.inf.model.services.IManterMusculo;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author felipe
  */
-public class ManterMusculoProxy implements IManterMusculo{
-    
+public class ManterMusculoProxy implements IManterMusculo {
+
+    Cliente cliente;
+
+    public ManterMusculoProxy() {
+        try {
+            this.cliente = Cliente.getInstancia();
+        } catch (SocketException ex) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
-    public Musculo pesquisarPorCodigo(int codMusculo) throws SQLException{
+    public Musculo pesquisarPorCodigo(int codMusculo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_MUSCULO, gson.toJson(codMusculo));
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        Musculo musculo = gson.fromJson(pacoteRecebido.getDados(), Musculo.class);
+        dados.add(gson.toJson(codMusculo));
+        pacoteEnviado = new Pacote(TipoOperacao.PESQ_MUSCULO, dados);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        Musculo musculo = gson.fromJson(pacoteRecebido.getDados().get(0), Musculo.class);
         return musculo;
     }
-    
+
     @Override
-    public ArrayList <Musculo> pesquisarTodos() throws SQLException{
+    public ArrayList<Musculo> pesquisarTodos() throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
-        
+
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_MUSCULO, null);
-        
-        pacoteRecebido = cliente.request(pacoteEnviado);
-        ArrayList<Musculo> listaMusculos = gson.fromJson(pacoteRecebido.getDados(), ArrayList.class);
+
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        ArrayList<Musculo> listaMusculos = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
         return listaMusculos;
     }
-    
+
     @Override
-    public void cadastrar(Musculo musculo) throws SQLException{
+    public void cadastrar(Musculo musculo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_MUSCULO, gson.toJson(musculo));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(musculo));
+        pacoteEnviado = new Pacote(TipoOperacao.CAD_MUSCULO, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 
     @Override
-    public void alterar(Musculo musculo) throws SQLException{
+    public void alterar(Musculo musculo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_MUSCULO, gson.toJson(musculo));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(musculo));
+        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_MUSCULO, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 
     @Override
-    public void excluir(int codMusculo) throws SQLException{
+    public void excluir(int codMusculo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
-        
+
         Gson gson = new Gson();
+
+        ArrayList<String> dados = new ArrayList<>();
         
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_MUSCULO, gson.toJson(codMusculo));
-        
-        cliente.request(pacoteEnviado);
+        dados.add(gson.toJson(codMusculo));
+        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_MUSCULO, dados);
+
+        cliente.requisicao(pacoteEnviado);
     }
 }
