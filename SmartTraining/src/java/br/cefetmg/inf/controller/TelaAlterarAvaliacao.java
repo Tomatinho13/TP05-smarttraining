@@ -5,15 +5,15 @@ import br.cefetmg.inf.model.domain.Objetivo;
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
 import br.cefetmg.inf.model.services.IManterObjetivo;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
-import br.cefetmg.inf.model.services.impl.ManterObjetivo;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
+import br.cefetmg.inf.proxy.ManterObjetivoProxy;
 
 public class TelaAlterarAvaliacao implements Controller {
 
@@ -25,9 +25,9 @@ public class TelaAlterarAvaliacao implements Controller {
             String codCpfAluno = request.getParameter("codCpfAluno").trim();
             LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
 
-            IManterUsuario manterAluno = new ManterAluno();
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            IManterObjetivo manterObjetivo = new ManterObjetivo();
+            IManterUsuario manterAluno = new ManterAlunoProxy();
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
+            IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
 
             Usuario aluno = manterAluno.pesquisarPorCpf(codCpfAluno);
 

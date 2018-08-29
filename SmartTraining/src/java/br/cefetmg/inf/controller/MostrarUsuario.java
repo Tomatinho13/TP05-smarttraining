@@ -1,11 +1,11 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Usuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterInstrutorProxy;
 
 public class MostrarUsuario implements Controller{
 
@@ -14,8 +14,8 @@ public class MostrarUsuario implements Controller{
         String jsp="MostrarUsuario.jsp";
         try {
             String cpfUsuario = request.getParameter("codCpfUsuario");
-            IManterUsuario manterAluno = new ManterAluno();
-            IManterUsuario manterInstrutor = new ManterInstrutor();
+            IManterUsuario manterAluno = new ManterAlunoProxy();
+            IManterUsuario manterInstrutor = new ManterInstrutorProxy();
             Usuario aluno  = manterAluno.pesquisarPorCpf(cpfUsuario);
             Usuario instrutor  = manterInstrutor.pesquisarPorCpf(cpfUsuario);
             if(aluno!=null){

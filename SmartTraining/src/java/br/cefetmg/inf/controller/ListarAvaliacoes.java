@@ -3,12 +3,12 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Avaliacao;
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
 
 public class ListarAvaliacoes implements Controller{
     
@@ -17,8 +17,8 @@ public class ListarAvaliacoes implements Controller{
         String jsp;
         
          try {
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            IManterUsuario manterUsuario = new ManterAluno();
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
+            IManterUsuario manterUsuario = new ManterAlunoProxy();
             String codCpfAluno = request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
             Usuario aluno = manterUsuario.pesquisarPorCpf(codCpfAluno);
             ArrayList <Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(aluno.getCodCpf());

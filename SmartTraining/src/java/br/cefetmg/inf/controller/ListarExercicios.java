@@ -3,7 +3,7 @@ package br.cefetmg.inf.controller;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.model.services.impl.ManterMusculo;
+import br.cefetmg.inf.proxy.ManterMusculoProxy;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class ListarExercicios implements Controller {
         String jsp;
 
         try {
-            IManterMusculo manterMusculo = new ManterMusculo();
+            IManterMusculo manterMusculo = new ManterMusculoProxy();
 
             ArrayList<Musculo> listaMusculos = manterMusculo.pesquisarTodos();
 

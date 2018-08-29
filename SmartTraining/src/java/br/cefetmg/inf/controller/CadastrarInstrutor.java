@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterInstrutorProxy;
 
 public class CadastrarInstrutor implements Controller {
 
@@ -23,7 +24,7 @@ public class CadastrarInstrutor implements Controller {
             String cref = request.getParameter("cref");
 
             Instrutor instrutor = new Instrutor();
-            IManterUsuario manterInstrutor = new ManterInstrutor();
+            IManterUsuario manterInstrutor = new ManterInstrutorProxy();
 
             instrutor.setCodCpf(cpf);
             instrutor.setNomUsuario(nome);

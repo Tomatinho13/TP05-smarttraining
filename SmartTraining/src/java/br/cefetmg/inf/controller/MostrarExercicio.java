@@ -2,7 +2,7 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +13,7 @@ public class MostrarExercicio implements Controller{
         String jsp="MostrarExercicio.jsp";
         try {
             int codExercicio = Integer.parseInt(request.getParameter("codExercicio"));
-            IManterExercicio manterExercicio = new ManterExercicio();
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
             Exercicio exercicio = manterExercicio.pesquisarPorCodigo(codExercicio);
             if(exercicio!=null){
                 request.setAttribute("exercicio", exercicio);

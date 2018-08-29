@@ -3,12 +3,12 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Objetivo;
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterObjetivo;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterObjetivo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterObjetivoProxy;
 
 public class TelaCadastrarAvaliacao implements Controller {
 
@@ -19,8 +19,8 @@ public class TelaCadastrarAvaliacao implements Controller {
             jsp = "CadastrarAvaliacao.jsp";
             String cpfAluno = request.getParameter("codCpfAluno").trim();
 
-            IManterObjetivo manterObjetivo = new ManterObjetivo();
-            IManterUsuario manterAluno = new ManterAluno();
+            IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
+            IManterUsuario manterAluno = new ManterAlunoProxy();
             
             Usuario aluno = manterAluno.pesquisarPorCpf(cpfAluno);
 

@@ -2,7 +2,7 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.services.IManterAparelho;
-import br.cefetmg.inf.model.services.impl.ManterAparelho;
+import br.cefetmg.inf.proxy.ManterAparelhoProxy;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +15,7 @@ public class CadastrarAparelho implements Controller {
             String nome = request.getParameter("nome");
             int numero = Integer.parseInt(request.getParameter("numero"));
 
-            IManterAparelho manterAparelho = new ManterAparelho();
+            IManterAparelho manterAparelho = new ManterAparelhoProxy();
 
             if (manterAparelho.pesquisar(numero) != null) {
                 String erro = "Numero de aparelho ja registrado";

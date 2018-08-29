@@ -6,6 +6,7 @@ import br.cefetmg.inf.model.services.IManterAvaliacao;
 import br.cefetmg.inf.model.services.IManterObjetivo;
 import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
 import br.cefetmg.inf.model.services.impl.ManterObjetivo;
+import br.cefetmg.inf.proxy.ManterObjetivoProxy;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class CadastrarAvaliacao implements Controller {
 
             String objetivos[] = request.getParameterValues("objetivo");
             ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
-            IManterObjetivo manterObjetivo = new ManterObjetivo();
+            IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
             Objetivo obj;
 
             for (String objetivo : objetivos) {

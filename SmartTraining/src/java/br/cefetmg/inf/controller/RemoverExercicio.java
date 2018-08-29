@@ -1,7 +1,7 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +14,7 @@ public class RemoverExercicio implements Controller {
         try {
             int codExercicio = Integer.parseInt(request.getParameter("exercicio").trim());
 
-            IManterExercicio manterExercicio = new ManterExercicio();
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
 
             manterExercicio.excluir(codExercicio);
             

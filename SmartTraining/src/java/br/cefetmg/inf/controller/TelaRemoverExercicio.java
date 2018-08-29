@@ -1,7 +1,8 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Exercicio;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.model.services.IManterExercicio;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ public class TelaRemoverExercicio implements Controller {
         try {
             jsp = "RemoverExercicio.jsp";
 
-            ManterExercicio manterExercicio = new ManterExercicio();
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
 
             ArrayList<Exercicio> listaExercicios = manterExercicio.pesquisarTodos();
 

@@ -2,7 +2,7 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,7 +21,7 @@ public class CadastrarExercicio implements Controller {
             String[] codAparelhos = request.getParameterValues("aparelhos");
             String[] codMusculos = request.getParameterValues("musculos");
 
-            IManterExercicio manterExercicio = new ManterExercicio();
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
 
             manterExercicio.cadastrar(exercicio, codMusculos);
 

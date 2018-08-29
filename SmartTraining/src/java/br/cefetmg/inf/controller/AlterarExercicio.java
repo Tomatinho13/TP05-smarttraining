@@ -2,7 +2,7 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ public class AlterarExercicio implements Controller {
 
             Exercicio exercicio = new Exercicio(codExercicio, nomeExercicio, descricaoExercicio);
 
-            IManterExercicio manterExercicio = new ManterExercicio();
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
 
             manterExercicio.alterar(exercicio);
             jsp = new ListarExercicios().execute(request);

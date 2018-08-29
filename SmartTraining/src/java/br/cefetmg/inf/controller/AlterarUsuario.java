@@ -1,12 +1,12 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Usuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterInstrutorProxy;
 
 public class AlterarUsuario implements Controller {
 
@@ -27,9 +27,9 @@ public class AlterarUsuario implements Controller {
             usuario.setTxtSenha(request.getParameter("senha"));
 
             if (usuario.getIdtTipoUsuario() == 'I') {
-                manterUsuario = new ManterInstrutor();
+                manterUsuario = new ManterInstrutorProxy();
             } else {
-                manterUsuario = new ManterAluno();
+                manterUsuario = new ManterAlunoProxy();
             }
 
             manterUsuario.alterar(usuario);

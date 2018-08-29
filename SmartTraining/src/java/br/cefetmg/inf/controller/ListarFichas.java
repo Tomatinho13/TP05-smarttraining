@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterFichaProxy;
 
 public class ListarFichas implements Controller {
 
@@ -17,8 +19,8 @@ public class ListarFichas implements Controller {
         String jsp;
 
         try {
-            IManterFicha manterFicha = new ManterFicha();
-            IManterUsuario manterAluno = new ManterAluno();
+            IManterFicha manterFicha = new ManterFichaProxy();
+            IManterUsuario manterAluno = new ManterAlunoProxy();
             String codCpfAluno = (String) request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
             Usuario aluno = manterAluno.pesquisarPorCpf(codCpfAluno);
             ArrayList<Ficha> listaFichas = manterFicha.pesquisarPorAluno(aluno.getCodCpf());

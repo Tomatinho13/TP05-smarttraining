@@ -7,8 +7,8 @@ import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.IManterMusculo;
 import br.cefetmg.inf.model.services.impl.ManterAparelho;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
 import br.cefetmg.inf.model.services.impl.ManterMusculo;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ public class TelaAlterarExercicio implements Controller{
         String jsp="AlterarExercicio.jsp";
         try {
             int codExercicio = Integer.parseInt(request.getParameter("codExercicio"));
-            IManterExercicio manterExercicio = new ManterExercicio();
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
             Exercicio exercicio = manterExercicio.pesquisarPorCodigo(codExercicio);
             if(exercicio!=null){
                 request.setAttribute("exercicio", exercicio);

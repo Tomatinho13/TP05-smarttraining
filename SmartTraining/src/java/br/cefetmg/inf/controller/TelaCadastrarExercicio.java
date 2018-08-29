@@ -4,8 +4,8 @@ import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.model.services.impl.ManterAparelho;
-import br.cefetmg.inf.model.services.impl.ManterMusculo;
+import br.cefetmg.inf.proxy.ManterAparelhoProxy;
+import br.cefetmg.inf.proxy.ManterMusculoProxy;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +18,8 @@ public class TelaCadastrarExercicio implements Controller {
         try {
             jsp = "CadastrarExercicio.jsp";
 
-            IManterAparelho manterAparelho = new ManterAparelho();
-            IManterMusculo manterMusculo = new ManterMusculo();
+            IManterAparelho manterAparelho = new ManterAparelhoProxy();
+            IManterMusculo manterMusculo = new ManterMusculoProxy();
 
             ArrayList<Aparelho> listaAparelhos = manterAparelho.pesquisarTodos();
             ArrayList<Musculo> listaMusculos = manterMusculo.pesquisarTodos();

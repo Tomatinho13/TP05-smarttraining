@@ -1,11 +1,11 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Usuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
 
 public class CadastrarAluno implements Controller {
 
@@ -29,7 +29,7 @@ public class CadastrarAluno implements Controller {
             aluno.setDesEmail(email);
             aluno.setDatNascimento(nascimento);
 
-            IManterUsuario manterAluno = new ManterAluno();
+            IManterUsuario manterAluno = new ManterAlunoProxy();
             manterAluno.cadastrar(aluno);
         } catch (SQLException e) {
             e.printStackTrace(System.err);

@@ -1,12 +1,12 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Usuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterInstrutorProxy;
 
 public class FazerLogin implements Controller{
 
@@ -19,8 +19,8 @@ public class FazerLogin implements Controller{
             String cpf =  request.getParameter("cpf").replaceAll("[^0-9]", "");
             String senha = request.getParameter("senha");
 
-            IManterUsuario manterAluno = new ManterAluno();
-            IManterUsuario manterInstrutor = new ManterInstrutor();
+            IManterUsuario manterAluno = new ManterAlunoProxy();
+            IManterUsuario manterInstrutor = new ManterInstrutorProxy();
             Usuario aluno = manterAluno.pesquisarPorCpf(cpf);
             Usuario instrutor = manterInstrutor.pesquisarPorCpf(cpf);
             
