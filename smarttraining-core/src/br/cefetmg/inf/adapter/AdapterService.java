@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -203,6 +204,24 @@ public class AdapterService implements Runnable {
                 break;
             }
             case LISTA_MUSCULO: {
+                ArrayList<Musculo> listaMusculos = new ArrayList<>();
+                try {
+                    listaMusculos = manterMusculo.pesquisarTodos();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(listaMusculos));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
+
+                try {
+                    enviaResposta(pacoteResposta);
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 break;
             }
             case CAD_MUSCULO: {
@@ -221,9 +240,45 @@ public class AdapterService implements Runnable {
                 break;
             }
             case LISTA_OBJETIVO_AVALIACAO: {
+                ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
+                try {
+                    listaObjetivos = manterObjetivo.pesquisarPorAvaliacao(pacote.getDados().get(0),LocalDate.parse(pacote.getDados().get(1)));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(listaObjetivos));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
+
+                try {
+                    enviaResposta(pacoteResposta);
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 break;
             }
             case LISTA_OBJETIVO: {
+                ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
+                try {
+                    listaObjetivos = manterObjetivo.pesquisarTodos();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(listaObjetivos));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
+
+                try {
+                    enviaResposta(pacoteResposta);
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 break;
             }
             case CAD_OBJETIVO: {
