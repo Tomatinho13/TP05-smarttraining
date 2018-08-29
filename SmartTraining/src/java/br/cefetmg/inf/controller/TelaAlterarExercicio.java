@@ -8,7 +8,11 @@ import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.IManterMusculo;
 import br.cefetmg.inf.model.services.impl.ManterAparelho;
 import br.cefetmg.inf.model.services.impl.ManterMusculo;
+<<<<<<< HEAD
 import br.cefetmg.inf.proxy.ManterExercicioProxy;
+=======
+import br.cefetmg.inf.proxy.ManterAparelhoProxy;
+>>>>>>> 1bf8a6a4536dbc9a13b72781446022b6ab8b7f76
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +35,7 @@ public class TelaAlterarExercicio implements Controller{
                 request.setAttribute("erro", erro);
             }
             
-            IManterAparelho manterAparelho = new ManterAparelho();
+            IManterAparelho manterAparelho = new ManterAparelhoProxy();
             ArrayList<Aparelho> listaAparelhos = manterAparelho.pesquisarTodos();
             if(!listaAparelhos.isEmpty()){
                 request.setAttribute("aparelhos", listaAparelhos);

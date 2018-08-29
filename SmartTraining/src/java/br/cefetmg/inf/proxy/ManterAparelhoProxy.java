@@ -10,6 +10,7 @@ import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -32,7 +33,7 @@ public class ManterAparelhoProxy implements IManterAparelho {
             Logger.getLogger(ManterAparelhoProxy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public Aparelho pesquisar(int nroAparelho) throws SQLException {
         Pacote pacoteEnviado;
@@ -41,7 +42,7 @@ public class ManterAparelhoProxy implements IManterAparelho {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(nroAparelho));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_APARELHO_NUM, dados);
 
@@ -58,7 +59,7 @@ public class ManterAparelhoProxy implements IManterAparelho {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(nomAparelho));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_APARELHO_NOME, dados);
 
@@ -77,7 +78,11 @@ public class ManterAparelhoProxy implements IManterAparelho {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_APARELHO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Aparelho> listaAparelhos = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
+        
+        ArrayList<Aparelho> listaAparelhos = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Aparelho>>() {
+                }.getType());
+        
         return listaAparelhos;
     }
 
@@ -89,7 +94,7 @@ public class ManterAparelhoProxy implements IManterAparelho {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(aparelho));
         pacoteEnviado = new Pacote(TipoOperacao.CAD_APARELHO, dados);
 
@@ -104,7 +109,7 @@ public class ManterAparelhoProxy implements IManterAparelho {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(aparelho));
         pacoteEnviado = new Pacote(TipoOperacao.ALTERA_APARELHO, dados);
 
@@ -119,7 +124,7 @@ public class ManterAparelhoProxy implements IManterAparelho {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(nroAparelho));
         pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_APARELHO, dados);
 
