@@ -12,16 +12,15 @@ import java.net.InetAddress;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AdapterService implements Runnable {
 
-    private InetAddress enderecoIP;
-    private int portaCliente;
-    private Pacote pacote;
-    private Gson gson;
+    private final InetAddress enderecoIP;
+    private final int portaCliente;
+    private final Pacote pacote;
+    private final Gson gson;
 
     public AdapterService(InetAddress enderecoIP, int portaCliente, Pacote pacote) {
         this.enderecoIP = enderecoIP;
@@ -52,6 +51,8 @@ public class AdapterService implements Runnable {
         IManterObjetivo manterObjetivo = new ManterObjetivo();
         IManterRegiaoCorporal manterRegiaoCorporal = new ManterRegiaoCorporal();
         IManterTreino manterTreino = new ManterTreino();
+        IManterUsuario manterAluno = new ManterAluno();
+        IManterUsuario manterInstrutor = new ManterInstrutor();
 
         switch (tipoOperacao) {
             case PESQ_APARELHO_NUM: {
@@ -190,7 +191,7 @@ public class AdapterService implements Runnable {
                 }
                 ArrayList<String> dados = new ArrayList<>();
 
-                dados.add(gson.toJson(listaAvaliacoes));
+                dados.add(gson.toJson(listaExercicios));
 
                 pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
 
@@ -353,6 +354,23 @@ public class AdapterService implements Runnable {
                 break;
             }
             case PESQ_ALUNO_CPF: {
+                Usuario aluno = new Usuario();
+                try {
+                    aluno = manterAluno.pesquisarPorCpf(gson.fromJson(pacote.getDados().get(0), String.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(aluno));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
+
+                try {
+                    enviaResposta(pacoteResposta);
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_ALUNO_NOME: {
@@ -371,12 +389,40 @@ public class AdapterService implements Runnable {
                 break;
             }
             case PESQ_INSTRUTOR_CPF: {
+                Instrutor instrutor = new Instrutor();
+                try {
+                    instrutor = (Instrutor) manterInstrutor.pesquisarPorCpf(gson.fromJson(pacote.getDados().get(0), String.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(instrutor));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
+
+                try {
+                    enviaResposta(pacoteResposta);
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_INSTRUTOR_NOME: {
                 break;
             }
             case CAD_INSTRUTOR: {
+                try {
+                    manterInstrutor.cadastrar(gson.fromJson(pacote.getDados().get(0), Instrutor.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 break;
             }
             case LISTA_INSTRUTOR: {
