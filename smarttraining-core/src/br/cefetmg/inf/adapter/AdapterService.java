@@ -162,10 +162,10 @@ public class AdapterService implements Runnable {
                 Atividade atividade = new Atividade();
                 try {
                     atividade = manterAtividade.pesquisar(gson.fromJson(pacote.getDados().get(0), String.class),
-                            gson.fromJson(pacote.getDados().get(0), int.class),
-                            gson.fromJson(pacote.getDados().get(0), int.class),
-                            gson.fromJson(pacote.getDados().get(0), int.class),
-                            gson.fromJson(pacote.getDados().get(0), int.class));
+                            gson.fromJson(pacote.getDados().get(1), int.class),
+                            gson.fromJson(pacote.getDados().get(2), int.class),
+                            gson.fromJson(pacote.getDados().get(3), int.class),
+                            gson.fromJson(pacote.getDados().get(4), int.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -228,7 +228,7 @@ public class AdapterService implements Runnable {
             case LISTA_AVALIACAO_ALUNO: {
                 ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
                 try {
-                    listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(pacote.getDados().get(0));
+                    listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(gson.fromJson(pacote.getDados().get(0), String.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -250,7 +250,7 @@ public class AdapterService implements Runnable {
                 Avaliacao avaliacao = new Avaliacao();
                 try {
                     avaliacao = manterAvaliacao.pesquisar(gson.fromJson(pacote.getDados().get(0), String.class),
-                            gson.fromJson(pacote.getDados().get(0), LocalDate.class));
+                            gson.fromJson(pacote.getDados().get(1), LocalDate.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -351,7 +351,7 @@ public class AdapterService implements Runnable {
                 AparelhoExercicio aparelhoExercicio = new AparelhoExercicio();
                 try {
                     aparelhoExercicio = manterExercicio.pesquisarAparelhoExercicio(gson.fromJson(pacote.getDados().get(0), int.class),
-                            gson.fromJson(pacote.getDados().get(0), int.class));
+                            gson.fromJson(pacote.getDados().get(1), int.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -371,7 +371,7 @@ public class AdapterService implements Runnable {
             case LISTA_EXERCICIO_REGIAO: {
                 ArrayList<Exercicio> listaExercicios = new ArrayList<>();
                 try {
-                    listaExercicios = manterExercicio.pesquisarPorRegiao(pacote.getDados().get(0));
+                    listaExercicios = manterExercicio.pesquisarPorRegiao(gson.fromJson(pacote.getDados().get(0), String.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -488,7 +488,7 @@ public class AdapterService implements Runnable {
                 Ficha ficha = new Ficha();
                 try {
                     ficha = manterFicha.pesquisarPorCodigo(gson.fromJson(pacote.getDados().get(0), String.class),
-                            gson.fromJson(pacote.getDados().get(0), int.class));
+                            gson.fromJson(pacote.getDados().get(1), int.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -688,7 +688,8 @@ public class AdapterService implements Runnable {
             case LISTA_OBJETIVO_AVALIACAO: {
                 ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
                 try {
-                    listaObjetivos = manterObjetivo.pesquisarPorAvaliacao(pacote.getDados().get(0), LocalDate.parse(pacote.getDados().get(1)));
+                    listaObjetivos = manterObjetivo.pesquisarPorAvaliacao(gson.fromJson(pacote.getDados().get(0), String.class),
+                            gson.fromJson(pacote.getDados().get(1), LocalDate.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -830,8 +831,8 @@ public class AdapterService implements Runnable {
                 Treino treino = new Treino();
                 try {
                     treino = manterTreino.pesquisarTreino(gson.fromJson(pacote.getDados().get(0), String.class),
-                            gson.fromJson(pacote.getDados().get(0), int.class),
-                            gson.fromJson(pacote.getDados().get(0), int.class));
+                            gson.fromJson(pacote.getDados().get(1), int.class),
+                            gson.fromJson(pacote.getDados().get(2), int.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -6,7 +6,7 @@ import br.cefetmg.inf.model.dao.impl.TreinoDao;
 import br.cefetmg.inf.model.domain.Treino;
 import br.cefetmg.inf.model.services.IManterTreino;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ManterTreino implements IManterTreino {
 
@@ -23,8 +23,8 @@ public class ManterTreino implements IManterTreino {
     }
     
     @Override
-    public List<Treino> pesquisarPorFicha(String cpf, int nroFicha) throws SQLException{
-        List<Treino> result = treinoDao.getFichaTreinos(cpf, nroFicha);
+    public ArrayList<Treino> pesquisarPorFicha(String cpf, int nroFicha) throws SQLException{
+        ArrayList<Treino> result = treinoDao.getFichaTreinos(cpf, nroFicha);
         return result;       
     }
     

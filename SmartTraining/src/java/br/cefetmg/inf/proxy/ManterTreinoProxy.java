@@ -14,7 +14,6 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,7 +54,7 @@ public class ManterTreinoProxy implements IManterTreino {
     }
 
     @Override
-    public List<Treino> pesquisarPorFicha(String cpf, int nroFicha) throws SQLException {
+    public ArrayList<Treino> pesquisarPorFicha(String cpf, int nroFicha) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
