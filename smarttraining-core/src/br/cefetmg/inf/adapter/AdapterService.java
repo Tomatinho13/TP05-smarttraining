@@ -120,24 +120,88 @@ public class AdapterService implements Runnable {
                 break;
             }
             case CAD_APARELHO: {
+                try {
+                    manterAparelho.cadastrar(gson.fromJson(pacote.getDados().get(1), Aparelho.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_APARELHO: {
+                try {
+                    manterAparelho.alterar(gson.fromJson(pacote.getDados().get(1), Aparelho.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_APARELHO: {
+                try {
+                    manterAparelho.excluir(gson.fromJson(pacote.getDados().get(1), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_ATIVIDADE: {
                 break;
             }
             case CAD_ATIVIDADE: {
+                try {
+                    manterAtividade.cadastrar(gson.fromJson(pacote.getDados().get(1), Atividade.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_ATIVIDADE: {
+                try {
+                    manterAtividade.alterar(gson.fromJson(pacote.getDados().get(1), Atividade.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_ATIVIDADE: {
+                try {
+                    manterAtividade.excluir(gson.fromJson(pacote.getDados().get(1), String.class),
+                            gson.fromJson(pacote.getDados().get(1), int.class),
+                            gson.fromJson(pacote.getDados().get(1), int.class),
+                            gson.fromJson(pacote.getDados().get(1), int.class),
+                            gson.fromJson(pacote.getDados().get(1), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case LISTA_AVALIACAO_ALUNO: {
@@ -165,12 +229,43 @@ public class AdapterService implements Runnable {
                 break;
             }
             case CAD_AVALIACAO: {
+                try {
+                    manterAvaliacao.cadastrar(gson.fromJson(pacote.getDados().get(1), Avaliacao.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_AVALIACAO: {
+                try {
+                    manterAvaliacao.alterar(gson.fromJson(pacote.getDados().get(1), Avaliacao.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_AVALIACAO: {
+                try {
+                    manterAvaliacao.excluir(gson.fromJson(pacote.getDados().get(1), String.class),
+                            gson.fromJson(pacote.getDados().get(1), LocalDate.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_EXERCICIO_COD: {
@@ -210,15 +305,58 @@ public class AdapterService implements Runnable {
                 break;
             }
             case CAD_EXERCICIO: {
+                try {
+                    manterExercicio.cadastrar(gson.fromJson(pacote.getDados().get(1), Exercicio.class),
+                            gson.fromJson(pacote.getDados().get(1), String[].class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case CAD_APARELHOEXERCICIO: {
+                try {
+                    manterExercicio.cadastrarAparelhoExercicio(gson.fromJson(pacote.getDados().get(1), int.class),
+                            gson.fromJson(pacote.getDados().get(1), int.class),
+                            gson.fromJson(pacote.getDados().get(1), String.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_EXERCICIO: {
+                try {
+                    manterExercicio.alterar(gson.fromJson(pacote.getDados().get(1), Exercicio.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_EXERCICIO: {
+                try {
+                    manterExercicio.excluir(gson.fromJson(pacote.getDados().get(1), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_FICHA: {
@@ -228,12 +366,43 @@ public class AdapterService implements Runnable {
                 break;
             }
             case CAD_FICHA: {
+                try {
+                    manterFicha.cadastrar(gson.fromJson(pacote.getDados().get(1), Ficha.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_FICHA: {
+                try {
+                    manterFicha.alterar(gson.fromJson(pacote.getDados().get(1), Ficha.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_FICHA: {
+                try {
+                    manterFicha.excluir(gson.fromJson(pacote.getDados().get(1), String.class),
+                            gson.fromJson(pacote.getDados().get(1), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_MUSCULO: {
@@ -261,12 +430,42 @@ public class AdapterService implements Runnable {
                 break;
             }
             case CAD_MUSCULO: {
+                try {
+                    manterMusculo.cadastrar(gson.fromJson(pacote.getDados().get(1), Musculo.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_MUSCULO: {
+                try {
+                    manterMusculo.alterar(gson.fromJson(pacote.getDados().get(1), Musculo.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_MUSCULO: {
+                try {
+                    manterMusculo.excluir(gson.fromJson(pacote.getDados().get(1), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_OBJETIVO_COD: {
@@ -318,24 +517,85 @@ public class AdapterService implements Runnable {
                 break;
             }
             case CAD_OBJETIVO: {
+                try {
+                    manterObjetivo.cadastrar(gson.fromJson(pacote.getDados().get(1), Objetivo.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_OBJETIVO: {
+                try {
+                    manterObjetivo.alterar(gson.fromJson(pacote.getDados().get(1), Objetivo.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_OBJETIVO: {
+                try {
+                    manterObjetivo.excluir(gson.fromJson(pacote.getDados().get(1), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_REGCORP: {
                 break;
             }
             case CAD_REGCORP: {
+                try {
+                    manterRegiaoCorporal.cadastrar(gson.fromJson(pacote.getDados().get(0), RegiaoCorporal.class),
+                            gson.fromJson(pacote.getDados().get(1), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_REGCORP: {
+                try {
+                    manterRegiaoCorporal.alterar(gson.fromJson(pacote.getDados().get(0), RegiaoCorporal.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_REGCORP: {
+                try {
+                    manterRegiaoCorporal.excluir(gson.fromJson(pacote.getDados().get(0), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_TREINO: {
@@ -345,12 +605,44 @@ public class AdapterService implements Runnable {
                 break;
             }
             case CAD_TREINO: {
+                try {
+                    manterTreino.cadastrar(gson.fromJson(pacote.getDados().get(0), Treino.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case ALTERA_TREINO: {
+                try {
+                    manterTreino.alterar(gson.fromJson(pacote.getDados().get(0), Treino.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_TREINO: {
+                try {
+                    manterTreino.excluir(gson.fromJson(pacote.getDados().get(0), String.class),
+                            gson.fromJson(pacote.getDados().get(1), int.class),
+                            gson.fromJson(pacote.getDados().get(2), int.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_ALUNO_CPF: {
@@ -377,15 +669,46 @@ public class AdapterService implements Runnable {
                 break;
             }
             case CAD_ALUNO: {
+                try {
+                    manterAluno.cadastrar(gson.fromJson(pacote.getDados().get(0), Usuario.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case LISTA_ALUNO: {
                 break;
             }
             case ALTERA_ALUNO: {
+                try {
+                    manterAluno.alterar(gson.fromJson(pacote.getDados().get(0), Usuario.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
+
             }
             case EXCLUI_ALUNO: {
+                try {
+                    manterAluno.excluir(gson.fromJson(pacote.getDados().get(0), String.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case PESQ_INSTRUTOR_CPF: {
@@ -429,9 +752,29 @@ public class AdapterService implements Runnable {
                 break;
             }
             case ALTERA_INSTRUTOR: {
+                try {
+                    manterInstrutor.alterar(gson.fromJson(pacote.getDados().get(0), Instrutor.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case EXCLUI_INSTRUTOR: {
+                try {
+                    manterInstrutor.excluir(gson.fromJson(pacote.getDados().get(0), String.class));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
         }
