@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Usuario;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DiaTreinoDao implements IDiaTreinoDao {
 
@@ -83,5 +85,14 @@ public class DiaTreinoDao implements IDiaTreinoDao {
         stmt.setString(6, diaTreino.getDatTreino().toString());
 
         stmt.executeQuery(sql);
+    }
+    
+    @Override
+    public void fechaConexao(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

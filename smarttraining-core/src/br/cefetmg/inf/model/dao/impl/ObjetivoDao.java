@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ObjetivoDao implements IObjetivoDao {
 
@@ -136,5 +138,14 @@ public class ObjetivoDao implements IObjetivoDao {
             return null;
         }
         return objetivo;
+    }
+    
+    @Override
+    public void fechaConexao(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

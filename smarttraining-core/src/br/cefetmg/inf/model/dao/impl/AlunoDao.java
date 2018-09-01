@@ -142,5 +142,14 @@ public class AlunoDao implements IUsuarioDao {
         }
 
     }
+    
+    @Override
+    public void fechaConexao(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

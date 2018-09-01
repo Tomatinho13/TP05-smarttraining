@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.inf.proxy;
 
 import br.cefetmg.inf.model.domain.AparelhoExercicio;
@@ -11,6 +6,7 @@ import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -99,7 +95,8 @@ public class ManterExercicioProxy implements IManterExercicio {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_EXERCICIO_REGIAO, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
+        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), 
+                new TypeToken<ArrayList<Exercicio>>() {}.getType());
         return listaExercicios;
     }
 
@@ -116,7 +113,8 @@ public class ManterExercicioProxy implements IManterExercicio {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_EXERCICIO_MUSCULO, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
+        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), 
+                new TypeToken<ArrayList<Exercicio>>() {}.getType());
         return listaExercicios;
     }
 
@@ -130,7 +128,8 @@ public class ManterExercicioProxy implements IManterExercicio {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_EXERCICIO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
+        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), 
+                new TypeToken<ArrayList<Exercicio>>() {}.getType());
         return listaExercicios;
     }
 

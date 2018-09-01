@@ -9,42 +9,53 @@ import java.util.ArrayList;
 
 public class ManterAparelho implements IManterAparelho {
 
-    private final IAparelhoDao aparelhoDao;
+    private IAparelhoDao aparelhoDao;
 
     public ManterAparelho() {
-        aparelhoDao = new AparelhoDao();
     }
 
     @Override
     public Aparelho pesquisar(int nroAparelho) throws SQLException {
+        aparelhoDao = new AparelhoDao();
         Aparelho resultado = aparelhoDao.getAparelho(nroAparelho);
+        aparelhoDao.fechaConexao();
         return resultado;
     }
     
     @Override
     public Aparelho pesquisar(String nomAparelho) throws SQLException{
+        aparelhoDao = new AparelhoDao();
         Aparelho resultado = aparelhoDao.getAparelho(nomAparelho);
+        aparelhoDao.fechaConexao();
         return resultado;
     }
     
     @Override
     public ArrayList<Aparelho> pesquisarTodos() throws SQLException{
+        aparelhoDao = new AparelhoDao();
         ArrayList<Aparelho> resultado = aparelhoDao.getListaAparelhos();
+        aparelhoDao.fechaConexao();
         return resultado;
     }
 
     @Override
     public void cadastrar(Aparelho aparelho) throws SQLException {
+        aparelhoDao = new AparelhoDao();
         aparelhoDao.postAparelho(aparelho);
+        aparelhoDao.fechaConexao();
     }
 
     @Override
     public void alterar(Aparelho aparelho) throws SQLException {
+        aparelhoDao = new AparelhoDao();
         aparelhoDao.putAparelho(aparelho);
+        aparelhoDao.fechaConexao();
     }
 
     @Override
     public void excluir(int nroAparelho) throws SQLException {
+        aparelhoDao = new AparelhoDao();
         aparelhoDao.deleteAparelho(nroAparelho);
+        aparelhoDao.fechaConexao();
     }
 }

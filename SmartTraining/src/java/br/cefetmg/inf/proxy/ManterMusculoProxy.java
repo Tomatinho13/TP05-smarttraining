@@ -10,6 +10,7 @@ import br.cefetmg.inf.model.services.IManterMusculo;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -62,7 +63,8 @@ public class ManterMusculoProxy implements IManterMusculo {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_MUSCULO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Musculo> listaMusculos = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
+        ArrayList<Musculo> listaMusculos = gson.fromJson(pacoteRecebido.getDados().get(0), 
+                new TypeToken<ArrayList<Musculo>>() {}.getType());
         return listaMusculos;
     }
 

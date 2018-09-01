@@ -7,6 +7,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import br.cefetmg.inf.model.domain.Avaliacao;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AvaliacaoDao implements IAvaliacaoDao {
 
@@ -222,5 +224,14 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(sql);
 
+    }
+    
+    @Override
+    public void fechaConexao(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -10,6 +10,7 @@ import br.cefetmg.inf.model.services.IManterObjetivo;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -82,7 +83,8 @@ public class ManterObjetivoProxy implements IManterObjetivo {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_OBJETIVO_AVALIACAO, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Objetivo> listaObjetivos = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
+        ArrayList<Objetivo> listaObjetivos = gson.fromJson(pacoteRecebido.getDados().get(0), 
+                new TypeToken<ArrayList<Objetivo>>() {}.getType());
         return listaObjetivos;
     }
 
@@ -96,7 +98,8 @@ public class ManterObjetivoProxy implements IManterObjetivo {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_OBJETIVO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Objetivo> listaObjetivos = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
+        ArrayList<Objetivo> listaObjetivos = gson.fromJson(pacoteRecebido.getDados().get(0), 
+                new TypeToken<ArrayList<Objetivo>>() {}.getType());
         return listaObjetivos;
     }
 

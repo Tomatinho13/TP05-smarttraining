@@ -9,6 +9,8 @@ import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.impl.ManterExercicio;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MusculoDao implements IMusculoDao {
 
@@ -105,5 +107,14 @@ public class MusculoDao implements IMusculoDao {
         Statement stmt = conn.createStatement();
         stmt.executeQuery(sql);
 
+    }
+    
+    @Override
+    public void fechaConexao(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

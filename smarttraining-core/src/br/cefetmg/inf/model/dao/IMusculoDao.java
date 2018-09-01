@@ -19,4 +19,6 @@ public interface IMusculoDao {
     public void putMusculo(Musculo musculo) throws SQLException;
 
     public void deleteMusculo(int codMusculo) throws SQLException;
+
+    public void fechaConexao();
 }

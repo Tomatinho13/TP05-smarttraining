@@ -10,37 +10,46 @@ import java.util.ArrayList;
 
 public class ManterMusculo implements IManterMusculo {
 
-    private final IMusculoDao musculoDao;
+    private IMusculoDao musculoDao;
     
     public ManterMusculo() {
-        musculoDao = new MusculoDao();
     }
     
     @Override
     public Musculo pesquisarPorCodigo(int codMusculo) throws SQLException{
+        musculoDao = new MusculoDao();
         Musculo resultado = musculoDao.getMusculo(codMusculo);
+        musculoDao.fechaConexao();
         return resultado;
     }
        
     @Override
     public ArrayList <Musculo> pesquisarTodos() throws SQLException {
+        musculoDao = new MusculoDao();
         ArrayList <Musculo> listaMusculos = musculoDao.getListaMusculos();
+        musculoDao.fechaConexao();
         return listaMusculos;
     }
     
     @Override
     public void cadastrar(Musculo musculo) throws SQLException{
+        musculoDao = new MusculoDao();
         musculoDao.postMusculo(musculo);
+        musculoDao.fechaConexao();
     }
 
     @Override
     public void alterar(Musculo musculo) throws SQLException{
+        musculoDao = new MusculoDao();
         musculoDao.putMusculo(musculo);
+        musculoDao.fechaConexao();
     }
 
     @Override
     public void excluir(int codMusculo) throws SQLException{
+        musculoDao = new MusculoDao();
         musculoDao.deleteMusculo(codMusculo);
+        musculoDao.fechaConexao();
     }     
 
 

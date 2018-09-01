@@ -7,6 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.domain.Atividade;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AtividadeDao implements IAtividadeDao {
 
@@ -97,5 +99,14 @@ public class AtividadeDao implements IAtividadeDao {
         Statement stmt = conn.createStatement();
         stmt.executeQuery(sql);
 
+    }
+    
+    @Override
+    public void fechaConexao(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

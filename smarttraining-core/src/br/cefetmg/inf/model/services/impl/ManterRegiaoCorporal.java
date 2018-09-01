@@ -9,30 +9,37 @@ import java.sql.SQLException;
 
 public class ManterRegiaoCorporal implements IManterRegiaoCorporal {
 
-    private final IRegiaoCorporalDao regiaoCorporalDao;
+    private IRegiaoCorporalDao regiaoCorporalDao;
     
     public ManterRegiaoCorporal() {
-        regiaoCorporalDao = new RegiaoCorporalDao();
     }
     
     @Override
     public RegiaoCorporal pesquisarRegiaoCorporal(int codRegiao) throws SQLException {
+        regiaoCorporalDao = new RegiaoCorporalDao();
         RegiaoCorporal resultado = regiaoCorporalDao.getRegiaoCorporal(codRegiao);
-        return resultado;       
+        regiaoCorporalDao.fechaConexao();
+        return resultado;
     }
     
     @Override
     public void cadastrar(RegiaoCorporal regiaoCorporal, int codMusculo) throws SQLException{
+        regiaoCorporalDao = new RegiaoCorporalDao();
         regiaoCorporalDao.postRegiaoCorporal(regiaoCorporal, codMusculo);
+        regiaoCorporalDao.fechaConexao();
     }
 
     @Override
     public void alterar(RegiaoCorporal regiaoCorporal) throws SQLException{
+        regiaoCorporalDao = new RegiaoCorporalDao();
         regiaoCorporalDao.putRegiaoCorporal(regiaoCorporal);
+        regiaoCorporalDao.fechaConexao();
     }
 
     @Override
     public void excluir(int codRegiao) throws SQLException{
+        regiaoCorporalDao = new RegiaoCorporalDao();
         regiaoCorporalDao.deleteRegiaoCorporal(codRegiao);
+        regiaoCorporalDao.fechaConexao();
     }     
 }

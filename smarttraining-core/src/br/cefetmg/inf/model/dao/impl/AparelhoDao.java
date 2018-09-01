@@ -7,6 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.Exercicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AparelhoDao implements IAparelhoDao {
 
@@ -131,5 +133,14 @@ public class AparelhoDao implements IAparelhoDao {
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(sql);
 
+    }
+    
+    @Override
+    public void fechaConexao(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

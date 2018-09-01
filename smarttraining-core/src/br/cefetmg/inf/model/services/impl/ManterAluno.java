@@ -9,42 +9,53 @@ import br.cefetmg.inf.model.services.IManterUsuario;
 
 public class ManterAluno implements IManterUsuario {
 
-    private final IUsuarioDao alunoDao;
+    private IUsuarioDao alunoDao;
 
     public ManterAluno() {
-        alunoDao = new AlunoDao();
     }
 
     @Override
     public Usuario pesquisarPorCpf(String codCpf) throws SQLException {
+        alunoDao = new AlunoDao();
         Usuario resultado = alunoDao.getUsuario(codCpf);
+        alunoDao.fechaConexao();
         return resultado;
     }
 
     @Override
     public Usuario pesquisarPorNome(String nome) throws SQLException {
+        alunoDao = new AlunoDao();
         Usuario resultado = alunoDao.getUsuarioPeloNome(nome);
+        alunoDao.fechaConexao();
         return resultado;
     }
         
     @Override
     public ArrayList<Usuario> pesquisarTodos() throws SQLException {
+        alunoDao = new AlunoDao();
         ArrayList <Usuario> listaAlunos = alunoDao.getListaUsuarios();
+        alunoDao.fechaConexao();
         return listaAlunos;
     }
     
     @Override
     public void cadastrar(Usuario aluno) throws SQLException {
+        alunoDao = new AlunoDao();
         alunoDao.postUsuario(aluno);
+        alunoDao.fechaConexao();
     }
 
     @Override
     public void alterar(Usuario aluno) throws SQLException {
+        alunoDao = new AlunoDao();
         alunoDao.putUsuario(aluno);
+        alunoDao.fechaConexao();
     }
 
     @Override
     public void excluir(String codCpf) throws SQLException {
+        alunoDao = new AlunoDao();
         alunoDao.deleteUsuario(codCpf);
+        alunoDao.fechaConexao();
     }
 }

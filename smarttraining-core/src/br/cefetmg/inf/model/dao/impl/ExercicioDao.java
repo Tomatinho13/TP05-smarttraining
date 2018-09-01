@@ -8,6 +8,8 @@ import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.dao.IExercicioDao;
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.AparelhoExercicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ExercicioDao implements IExercicioDao {
 
@@ -39,7 +41,7 @@ public class ExercicioDao implements IExercicioDao {
 
         return exercicio;
     }
-    
+
     @Override
     public Exercicio getExercicio(String nomeExercicio) throws SQLException {
         exercicio = new Exercicio();
@@ -51,7 +53,7 @@ public class ExercicioDao implements IExercicioDao {
         ResultSet resultado = stmt.executeQuery(sql);
 
         if (resultado.next()) {
-            exercicio = new Exercicio(resultado.getInt("cod_exercicio"), 
+            exercicio = new Exercicio(resultado.getInt("cod_exercicio"),
                     nomeExercicio,
                     resultado.getString("des_exercicio"));
         }
@@ -115,8 +117,8 @@ public class ExercicioDao implements IExercicioDao {
         ResultSet resultado = stmt.executeQuery(sql);
 
         while (resultado.next()) {
-            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), 
-                    resultado.getString("nom_exercicio"), 
+            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"),
+                    resultado.getString("nom_exercicio"),
                     resultado.getString("des_exercicio")));
         }
 
@@ -148,15 +150,15 @@ public class ExercicioDao implements IExercicioDao {
         stmt.setString(2, exercicio.getDescricaoExercicio());
         stmt.executeUpdate();
 
-        sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST(? as integer), CAST(? as bigint))";
+        sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST( ? as integer), CAST( ? as bigint))";
+        stmt = conn.prepareStatement(sql);
         for (String codMusculo : codMusculos) {
-            stmt = conn.prepareStatement(sql);
             stmt.setString(1, String.valueOf(getExercicio(exercicio.getNomeExercicio()).getCodExercicio()));
             stmt.setString(2, codMusculo);
 
-            stmt.executeUpdate();
+            stmt.addBatch();
         }
-
+        stmt.executeBatch();
     }
 
     @Override
@@ -196,5 +198,14 @@ public class ExercicioDao implements IExercicioDao {
 
         stmt.executeUpdate();
 
+    }
+
+    @Override
+    public void fechaConexao() {
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

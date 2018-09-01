@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import br.cefetmg.inf.model.dao.IRegiaoCorporalDao;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.domain.RegiaoCorporal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegiaoCorporalDao implements IRegiaoCorporalDao {
 
@@ -73,5 +75,14 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
 
         stmt.executeQuery(sql);
 
+    }
+    
+    @Override
+    public void fechaConexao(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

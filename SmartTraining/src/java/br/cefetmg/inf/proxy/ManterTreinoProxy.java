@@ -10,6 +10,7 @@ import br.cefetmg.inf.model.services.IManterTreino;
 import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -40,7 +41,6 @@ public class ManterTreinoProxy implements IManterTreino {
 
         Gson gson = new Gson();
 
-        //MAIS DE UM PARAMETRO
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(cpf));
@@ -67,7 +67,8 @@ public class ManterTreinoProxy implements IManterTreino {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_TREINO_FICHA, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Treino> listaTreinos = gson.fromJson(pacoteRecebido.getDados().get(0), ArrayList.class);
+        ArrayList<Treino> listaTreinos = gson.fromJson(pacoteRecebido.getDados().get(0), 
+                new TypeToken<ArrayList<Treino>>() {}.getType());
         return listaTreinos;
     }
 
