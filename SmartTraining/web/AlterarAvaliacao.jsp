@@ -29,14 +29,14 @@
 
                 <%
                     Usuario usuario = (Usuario) request.getAttribute("aluno");
-                    Instrutor instrutor = (Instrutor) request.getSession().getAttribute("usuario");
                     Avaliacao avaliacao = (Avaliacao) request.getAttribute("avaliacao");
-
-                    request.setAttribute("codCpfAluno", usuario.getCodCpf());
-                    request.setAttribute("dataAvaliacao", avaliacao.getDatAvaliacao());
-                    request.setAttribute("codCpfInstrutor", instrutor.getCodCpf());
+                    Instrutor instrutor = (Instrutor) request.getSession().getAttribute("usuario");
                 %>
-
+                
+                <input type="hidden" name="codCpfAluno" value="<%=usuario.getCodCpf()%>">
+                <input type="hidden" name="dataAvaliacao" value="<%=avaliacao.getDatAvaliacao()%>">
+                <input type="hidden" name="codCpfInstrutor" value="<%=instrutor.getCodCpf()%>">
+                
                 <label for="peso" class="form">Peso: </label>
                 <input type="number" name="peso" class="form-control" max="300" min="0" value="<%= avaliacao.getPeso()%>" >
                 <br>
@@ -104,22 +104,6 @@
                 <label for="tamanhoPanturrilhaDireita" class="form">Tamanho da panturrilha direita: </label>
                 <input type="number" name="tamanhoPanturrilhaDireita" class="form-control" max="10000" min="0" value="<%= avaliacao.getTamanhoPanturrilhaDireita()%>">
                 <br>
-
-                <%
-                    Objetivo objetivo = new Objetivo();
-                    List<Objetivo> listaObjetivos = (List) request.getAttribute("objetivos");
-
-                    for (int i = 0; i < listaObjetivos.size(); i++) {
-                        objetivo = listaObjetivos.get(i);
-                %>
-
-                <input type="checkbox" name="objetivo" value="<%= objetivo.getNomObjetivo()%>" id="<%= objetivo.getNomObjetivo()%>">
-                <label for="<%=objetivo.getNomObjetivo()%>"> <%= objetivo.getNomObjetivo()%> </label>
-                <br>
-
-                <%
-                    }
-                %>
 
                 <input type="submit" name="Alterar" class="btn btn-primary" value="Alterar">
             </form>

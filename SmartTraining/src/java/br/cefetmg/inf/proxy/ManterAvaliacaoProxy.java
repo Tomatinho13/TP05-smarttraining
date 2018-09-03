@@ -63,6 +63,7 @@ public class ManterAvaliacaoProxy implements IManterAvaliacao {
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(codCpf));
+        dados.add(gson.toJson(data));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_AVALIACAO, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);

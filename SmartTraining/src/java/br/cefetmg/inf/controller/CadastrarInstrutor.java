@@ -1,7 +1,6 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Instrutor;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
