@@ -21,14 +21,17 @@ public class TelaCadastrarAvaliacao implements Controller {
 
             IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
             IManterUsuario manterAluno = new ManterAlunoProxy();
-            
+
             Usuario aluno = manterAluno.pesquisarPorCpf(cpfAluno);
 
             ArrayList<Objetivo> listaObjetivos = manterObjetivo.pesquisarTodos();
 
-            if (listaObjetivos==null)
+            if (listaObjetivos.isEmpty()) {
+                String erro = "Nao ha objetivos cadastrados!";
+                request.setAttribute("erro", erro);
                 jsp = "erro.jsp";
-            
+            }
+
             request.setAttribute("aluno", aluno);
             request.setAttribute("objetivos", listaObjetivos);
         } catch (SQLException e) {
