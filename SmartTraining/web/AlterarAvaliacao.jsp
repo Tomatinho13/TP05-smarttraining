@@ -15,7 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-        <title>Alterar avaliação</title>
+        <title>Alterar Avaliação</title>
     </head>
     <body>
         <div class="container">
