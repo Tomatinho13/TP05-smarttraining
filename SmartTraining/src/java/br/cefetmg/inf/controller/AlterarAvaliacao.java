@@ -1,14 +1,11 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Avaliacao;
-import br.cefetmg.inf.model.domain.Objetivo;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
-import br.cefetmg.inf.model.services.IManterObjetivo;
 import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
-import br.cefetmg.inf.proxy.ManterObjetivoProxy;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 public class AlterarAvaliacao implements Controller {
@@ -17,6 +14,7 @@ public class AlterarAvaliacao implements Controller {
     public String execute(HttpServletRequest request) {
         String jsp = "/TelaInicialInstrutor.jsp";
         try {
+            LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
             double peso = Double.parseDouble(request.getParameter("peso"));
             double percentualGordura = Double.parseDouble(request.getParameter("percentualGordura"));
             double massaGorda = Double.parseDouble(request.getParameter("massaGorda"));
@@ -37,8 +35,7 @@ public class AlterarAvaliacao implements Controller {
 
             Avaliacao avaliacao = new Avaliacao();
             IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
-            LocalDate dataAvaliacao = LocalDate.now();
-
+            
             avaliacao.setCodCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
             avaliacao.setDatAvaliacao(dataAvaliacao);
             avaliacao.setCodCpfInstrutor(request.getParameter("codCpfInstrutor").replaceAll("[^0-9]", ""));

@@ -47,7 +47,7 @@
                 <br>
 
                 <label for="datNasc">Data de Nascimento: </label>
-                <input type="date" name="datNasc" class="form-control" >
+                <input type="date" name="datNasc" class="form-control" value="<%=usuario.getDatNascimento()%>">
                 <br>
 
                 <input type="submit" name="Alterar" class="btn btn-primary" value="Alterar">
