@@ -6,7 +6,7 @@ import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
-public class AlterarExercicio implements Controller {
+public class AlterarExercicio extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -29,6 +29,6 @@ public class AlterarExercicio implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

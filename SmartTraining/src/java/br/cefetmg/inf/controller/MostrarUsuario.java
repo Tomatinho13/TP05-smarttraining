@@ -7,11 +7,11 @@ import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.proxy.ManterAlunoProxy;
 import br.cefetmg.inf.proxy.ManterInstrutorProxy;
 
-public class MostrarUsuario implements Controller{
+public class MostrarUsuario extends Controller{
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp="MostrarUsuario.jsp";
+        String jsp="MostrarUsuario";
         try {
             String cpfUsuario = request.getParameter("codCpfUsuario");
             IManterUsuario manterAluno = new ManterAlunoProxy();
@@ -35,6 +35,6 @@ public class MostrarUsuario implements Controller{
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

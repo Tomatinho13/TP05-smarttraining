@@ -11,6 +11,19 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author gabriel
  */
-public interface Controller {
-    public String execute(HttpServletRequest request);
+public abstract class Controller {
+    public abstract String execute(HttpServletRequest request);
+    
+    public String defineView(HttpServletRequest request, String caminho){
+        if(request.getAttribute("tipoView").equals("json")){
+            caminho = caminho.concat("JSON.jsp");
+        }else if(request.getAttribute("tipoView").equals("html")){
+           caminho = caminho.concat(".jsp");
+        }else{
+            String erro="TipoView nao definido!";
+            caminho = "erro.jsp";
+            request.setAttribute("erro", erro);
+        }
+        return caminho;
+    }
 }

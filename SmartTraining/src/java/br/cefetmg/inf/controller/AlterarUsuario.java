@@ -8,7 +8,7 @@ import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.proxy.ManterAlunoProxy;
 import br.cefetmg.inf.proxy.ManterInstrutorProxy;
 
-public class AlterarUsuario implements Controller {
+public class AlterarUsuario extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -33,13 +33,13 @@ public class AlterarUsuario implements Controller {
             }
 
             manterUsuario.alterar(usuario);
-            jsp = "TelaInicialAluno.jsp";
+            jsp = "TelaInicialAluno";
         } catch (SQLException e) {
             e.printStackTrace(System.err);
             String erro = "Ocorreu erro ao tentar alterar os dados do usuario!";
             request.setAttribute("erro", erro);
-            jsp = "/erro.jsp";
+            jsp = "/erro";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

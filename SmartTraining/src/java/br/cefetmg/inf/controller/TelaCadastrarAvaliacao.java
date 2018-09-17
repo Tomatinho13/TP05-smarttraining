@@ -10,13 +10,13 @@ import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.proxy.ManterAlunoProxy;
 import br.cefetmg.inf.proxy.ManterObjetivoProxy;
 
-public class TelaCadastrarAvaliacao implements Controller {
+public class TelaCadastrarAvaliacao extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
         String jsp;
         try {
-            jsp = "CadastrarAvaliacao.jsp";
+            jsp = "CadastrarAvaliacao";
             String cpfAluno = request.getParameter("codCpfAluno").trim();
 
             IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
@@ -25,7 +25,7 @@ public class TelaCadastrarAvaliacao implements Controller {
             Usuario aluno = manterAluno.pesquisarPorCpf(cpfAluno);
 
             ArrayList<Objetivo> listaObjetivos = manterObjetivo.pesquisarTodos();
-
+            
             if (listaObjetivos.isEmpty()) {
                 String erro = "Nao ha objetivos cadastrados!";
                 request.setAttribute("erro", erro);
@@ -40,7 +40,7 @@ public class TelaCadastrarAvaliacao implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 
 }

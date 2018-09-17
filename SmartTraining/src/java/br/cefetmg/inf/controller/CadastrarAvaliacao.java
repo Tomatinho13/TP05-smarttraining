@@ -11,11 +11,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class CadastrarAvaliacao implements Controller {
+public class CadastrarAvaliacao extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp = "/TelaInicialInstrutor.jsp";
+        String jsp = "/TelaInicialInstrutor";
         try {
             double peso = Double.parseDouble(request.getParameter("peso"));
             double percentualGordura = Double.parseDouble(request.getParameter("percentualGordura"));
@@ -79,6 +79,6 @@ public class CadastrarAvaliacao implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

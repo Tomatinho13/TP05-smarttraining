@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Tomatinho
  */
-public class ListarExercicios implements Controller {
+public class ListarExercicios extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -24,11 +24,11 @@ public class ListarExercicios implements Controller {
 
             if (listaMusculos != null) {
                 request.setAttribute("musculos", listaMusculos);
-                jsp = "/ListaExercicios.jsp";
+                jsp = "/ListaExercicios";
             } else {
                 String erro = "Nao existem musculos registrados no banco de dados!";
                 request.setAttribute("erro", erro);
-                jsp = "/erro.jsp";
+                jsp = "/erro";
             }
 
         } catch (SQLException e) {
@@ -37,6 +37,6 @@ public class ListarExercicios implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

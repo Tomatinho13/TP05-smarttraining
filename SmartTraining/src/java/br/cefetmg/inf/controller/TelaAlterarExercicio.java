@@ -13,11 +13,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class TelaAlterarExercicio implements Controller{
+public class TelaAlterarExercicio extends Controller{
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp="AlterarExercicio.jsp";
+        String jsp="AlterarExercicio";
         try {
             int codExercicio = Integer.parseInt(request.getParameter("codExercicio"));
             IManterExercicio manterExercicio = new ManterExercicioProxy();
@@ -58,6 +58,6 @@ public class TelaAlterarExercicio implements Controller{
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

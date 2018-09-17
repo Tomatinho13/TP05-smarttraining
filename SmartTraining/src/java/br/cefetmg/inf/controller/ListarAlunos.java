@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class ListarAlunos implements Controller {
+public class ListarAlunos extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
         String jsp;
 
         try {
-            jsp="ListaAlunos.jsp";
+            jsp="ListaAlunos";
             ManterAlunoProxy manterAluno = new ManterAlunoProxy();
 
             ArrayList<Usuario> listaAlunos = manterAluno.pesquisarTodos();
@@ -22,7 +22,7 @@ public class ListarAlunos implements Controller {
                 String erro="Nenhum aluno encontrado!";
                 jsp = "erro.jsp";
                 request.setAttribute("erro", erro);
-                return jsp;
+                return defineView(request, jsp);
             }
             
             request.setAttribute("alunos", listaAlunos);
@@ -33,6 +33,6 @@ public class ListarAlunos implements Controller {
             jsp = "erro.jsp";
             request.setAttribute("erro", erro);
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

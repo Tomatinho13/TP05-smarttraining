@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class ListarInstrutores implements Controller {
+public class ListarInstrutores extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
         String jsp;
 
         try {
-            jsp="ListaInstrutores.jsp";
+            jsp="ListaInstrutores";
             IManterUsuario manterInstrutor = new ManterInstrutorProxy();
 
             ArrayList<Usuario> listaInstrutores = manterInstrutor.pesquisarTodos();
@@ -23,7 +23,7 @@ public class ListarInstrutores implements Controller {
                 String erro="Nenhum instrutor encontrado!";
                 jsp = "erro.jsp";
                 request.setAttribute("erro", erro);
-                return jsp;
+                return defineView(request, jsp);
             }
             
             request.setAttribute("instrutores", listaInstrutores);
@@ -34,6 +34,6 @@ public class ListarInstrutores implements Controller {
             jsp = "erro.jsp";
             request.setAttribute("erro", erro);
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

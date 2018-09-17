@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.proxy.ManterAlunoProxy;
 
-public class RemoverUsuario implements Controller {
+public class RemoverUsuario extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -26,6 +26,6 @@ public class RemoverUsuario implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

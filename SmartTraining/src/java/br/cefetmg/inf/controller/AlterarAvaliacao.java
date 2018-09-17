@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 
-public class AlterarAvaliacao implements Controller {
+public class AlterarAvaliacao extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp = "/TelaInicialInstrutor.jsp";
+        String jsp = "/TelaInicialInstrutor";
         try {
             LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
             double peso = Double.parseDouble(request.getParameter("peso"));
@@ -65,6 +65,6 @@ public class AlterarAvaliacao implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

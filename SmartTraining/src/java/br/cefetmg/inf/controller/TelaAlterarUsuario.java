@@ -7,7 +7,7 @@ import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.proxy.ManterAlunoProxy;
 import br.cefetmg.inf.proxy.ManterInstrutorProxy;
 
-public class TelaAlterarUsuario implements Controller{
+public class TelaAlterarUsuario extends Controller{
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -20,7 +20,7 @@ public class TelaAlterarUsuario implements Controller{
             Usuario instrutor  = manterInstrutor.pesquisarPorCpf(cpfUsuario);
             if(aluno!=null){
                 request.setAttribute("usuario", aluno);
-                jsp="AlterarUsuario.jsp";
+                jsp="AlterarUsuario";
             }
             else if(instrutor!=null){
                 request.setAttribute("usuario", instrutor);
@@ -29,7 +29,7 @@ public class TelaAlterarUsuario implements Controller{
                 String erro = "Erro ao encontrar dados do usuario!";
                 jsp = "erro.jsp";
                 request.setAttribute("erro", erro);
-                return jsp;
+                return defineView(request, jsp);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,6 +37,6 @@ public class TelaAlterarUsuario implements Controller{
             jsp = "erro.jsp";
             request.setAttribute("erro", erro);
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

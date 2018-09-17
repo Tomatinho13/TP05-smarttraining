@@ -6,11 +6,11 @@ import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
-public class MostrarExercicio implements Controller{
+public class MostrarExercicio extends Controller{
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp="MostrarExercicio.jsp";
+        String jsp="MostrarExercicio";
         try {
             int codExercicio = Integer.parseInt(request.getParameter("codExercicio"));
             IManterExercicio manterExercicio = new ManterExercicioProxy();
@@ -29,6 +29,6 @@ public class MostrarExercicio implements Controller{
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

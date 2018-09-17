@@ -15,13 +15,13 @@ import br.cefetmg.inf.proxy.ManterAlunoProxy;
 import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
 import br.cefetmg.inf.proxy.ManterObjetivoProxy;
 
-public class TelaAlterarAvaliacao implements Controller {
+public class TelaAlterarAvaliacao extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
         String jsp;
         try {
-            jsp = "AlterarAvaliacao.jsp";
+            jsp = "AlterarAvaliacao";
             String codCpfAluno = request.getParameter("codCpfAluno").trim();
             LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
 
@@ -38,13 +38,13 @@ public class TelaAlterarAvaliacao implements Controller {
                 String erro = "Avaliacao nao encontrada no sistema!";
                 request.setAttribute("erro", erro);
                 jsp = "erro.jsp";
-                return jsp;
+                return defineView(request, jsp);
             }
             else if(listaObjetivos.isEmpty()){
                 String erro = "Nao ha objetivos cadastrados no sistema!";
                 request.setAttribute("erro", erro);
                 jsp = "erro.jsp";
-                return jsp;
+                return defineView(request, jsp);
             }
 
             request.setAttribute("aluno", aluno);
@@ -56,7 +56,7 @@ public class TelaAlterarAvaliacao implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 
 }

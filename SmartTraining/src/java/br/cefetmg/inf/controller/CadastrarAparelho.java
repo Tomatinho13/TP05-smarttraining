@@ -6,11 +6,11 @@ import br.cefetmg.inf.proxy.ManterAparelhoProxy;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
-public class CadastrarAparelho implements Controller {
+public class CadastrarAparelho extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp = "TelaInicialInstrutor.jsp";
+        String jsp = "TelaInicialInstrutor";
         try {
             String nome = request.getParameter("nome");
             int numero = Integer.parseInt(request.getParameter("numero"));
@@ -21,7 +21,7 @@ public class CadastrarAparelho implements Controller {
                 String erro = "Numero de aparelho ja registrado";
                 request.setAttribute("erro", erro);
                 jsp = "erro.jsp";
-                return jsp;
+                return defineView(request, jsp);
             }
             Aparelho aparelho = new Aparelho(numero, nome);
             manterAparelho.cadastrar(aparelho);
@@ -30,8 +30,8 @@ public class CadastrarAparelho implements Controller {
             String erro = "Erro ao cadastrar aparelho";
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
-            return jsp;
+            return defineView(request, jsp);
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

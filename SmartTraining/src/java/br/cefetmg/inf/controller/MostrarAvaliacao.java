@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 
-public class MostrarAvaliacao implements Controller{
+public class MostrarAvaliacao extends Controller{
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp="MostrarAvaliacao.jsp";
+        String jsp="MostrarAvaliacao";
         try {
             String codCpfAluno = request.getParameter("codCpfAluno");
             LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
@@ -33,6 +33,6 @@ public class MostrarAvaliacao implements Controller{
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

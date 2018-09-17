@@ -10,7 +10,7 @@ import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.proxy.ManterAlunoProxy;
 import br.cefetmg.inf.proxy.ManterFichaProxy;
 
-public class ListarFichas implements Controller {
+public class ListarFichas extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -26,11 +26,11 @@ public class ListarFichas implements Controller {
             if (!listaFichas.isEmpty()) {
                 request.setAttribute("fichas", listaFichas);
                 request.setAttribute("aluno", aluno);
-                jsp = "/ListaFichas.jsp";
+                jsp = "/ListaFichas";
             } else {
                 String erro = "Nao existe registro de ficha!";
                 request.setAttribute("erro", erro);
-                jsp = "/erro.jsp";
+                jsp = "/erro";
             }
 
         } catch (SQLException e) {
@@ -39,6 +39,6 @@ public class ListarFichas implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

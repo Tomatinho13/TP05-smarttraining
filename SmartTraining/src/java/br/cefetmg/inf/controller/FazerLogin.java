@@ -8,7 +8,7 @@ import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.proxy.ManterAlunoProxy;
 import br.cefetmg.inf.proxy.ManterInstrutorProxy;
 
-public class FazerLogin implements Controller{
+public class FazerLogin extends Controller{
 
     @Override
     public  String execute(HttpServletRequest request) {
@@ -26,21 +26,21 @@ public class FazerLogin implements Controller{
             
             if(aluno != null && aluno.getTxtSenha().equals(senha)){
                 sessao.setAttribute("usuario", aluno);
-                jsp="TelaInicialAluno.jsp";
+                jsp="TelaInicialAluno";
             }
             else if(instrutor!= null && instrutor.getTxtSenha().equals(senha)){
                 sessao.setAttribute("usuario", instrutor);
-                jsp="TelaInicialInstrutor.jsp";
+                jsp="TelaInicialInstrutor";
             }
             else if((aluno != null && !aluno.getTxtSenha().equals(senha)) || 
                     (instrutor!=null && !instrutor.getTxtSenha().equals(senha))){
                 String erro = "Senha Incorreta";
-                jsp="erro.jsp";
+                jsp="erro";
                 request.setAttribute("erro", erro);
             }
             else{
                 String erro="CPF incorreto";
-                jsp="erro.jsp";
+                jsp="erro";
                 request.setAttribute("erro", erro);
             }
         }
@@ -50,6 +50,6 @@ public class FazerLogin implements Controller{
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

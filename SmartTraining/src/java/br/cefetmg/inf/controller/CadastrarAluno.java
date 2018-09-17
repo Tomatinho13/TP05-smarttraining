@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.proxy.ManterAlunoProxy;
 
-public class CadastrarAluno implements Controller {
+public class CadastrarAluno extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp = "/LoginUsuario.jsp";
+        String jsp = "/LoginUsuario";
         try {
             String cpf = request.getParameter("cpf").replaceAll("[^0-9]", "");
             String nome = request.getParameter("nome");
@@ -37,6 +37,6 @@ public class CadastrarAluno implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 }

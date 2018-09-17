@@ -33,7 +33,7 @@
                     Instrutor instrutor = (Instrutor) request.getSession().getAttribute("usuario");
                 %>
                 
-                <input type="hidden" name="codCpfAluno" value="<%=usuario.getCodCpf()%>">
+                <input type="hidden" name="codCpfAluno" value="${usuario.codCpf}">
                 <input type="hidden" name="dataAvaliacao" value="<%=avaliacao.getDatAvaliacao()%>">
                 <input type="hidden" name="codCpfInstrutor" value="<%=instrutor.getCodCpf()%>">
                 

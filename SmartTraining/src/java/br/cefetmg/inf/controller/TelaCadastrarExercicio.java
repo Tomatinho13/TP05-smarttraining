@@ -10,13 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class TelaCadastrarExercicio implements Controller {
+public class TelaCadastrarExercicio extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
         String jsp;
         try {
-            jsp = "CadastrarExercicio.jsp";
+            jsp = "CadastrarExercicio";
 
             IManterAparelho manterAparelho = new ManterAparelhoProxy();
             IManterMusculo manterMusculo = new ManterMusculoProxy();
@@ -28,12 +28,12 @@ public class TelaCadastrarExercicio implements Controller {
                 jsp = "erro.jsp";
                 String erro = "Erro ao pesquisar aparelhos!";
                 request.setAttribute("erro", erro);
-                return jsp;
+                return defineView(request, jsp);
             } else if (listaMusculos == null) {
                 jsp = "erro.jsp";
                 String erro = "Erro ao pesquisar musculos!";
                 request.setAttribute("erro", erro);
-                return jsp;
+                return defineView(request, jsp);
             }
 
             request.setAttribute("aparelhos", listaAparelhos);
@@ -45,7 +45,7 @@ public class TelaCadastrarExercicio implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 
 }

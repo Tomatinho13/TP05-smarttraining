@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
-public class TelaRemoverExercicio implements Controller {
+public class TelaRemoverExercicio extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
         String jsp;
         try {
-            jsp = "RemoverExercicio.jsp";
+            jsp = "RemoverExercicio";
 
             IManterExercicio manterExercicio = new ManterExercicioProxy();
 
@@ -29,7 +29,7 @@ public class TelaRemoverExercicio implements Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return jsp;
+        return defineView(request, jsp);
     }
 
 }
