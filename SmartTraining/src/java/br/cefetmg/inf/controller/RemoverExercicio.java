@@ -25,6 +25,6 @@ public class RemoverExercicio extends Controller {
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
         }
-        return defineView(request, jsp);
+        return jsp;
     }
 }
