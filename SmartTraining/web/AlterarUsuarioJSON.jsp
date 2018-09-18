@@ -8,17 +8,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
-<%
-    Usuario usuario = (Usuario) request.getAttribute("usuario");
-%>
 
-<json:object>
-    <json:property name="acao" value="AlterarUsuario"/>
-    <json:object name="user">
-        <json:property name="nome" value="${usuario.getNomUsuario()}"/>
-        <json:property name="senha" value="${usuario.getSenha()}"/>
-        <json:property name="cpf" value="${usuario.getCodCpf()}"/>
-        <json:property name="email" value="${usuario.getDesEmail}"/>
-        <json:property name="datNasc" value="${usuario.getDatNascimento()}"/>
-    </json:object>
+
+<json:object name="usuario">
+    <json:property name="codCpf" value="${usuario.codCpf}"/>
+    <json:property name="nomUsuario" value="${usuario.nomUsuario}"/>
+    <json:property name="idtTipoUsuario" value="${usuario.idtTipoUsuario}"/>
+    <json:property name="txtSenha" value="${usuario.txtSenha}"/>
+    <json:property name="desEmail" value="${usuario.desEmail}"/>
+    <json:property name="datNascimento" value="${usuario.datNascimento}"/>
 </json:object>
