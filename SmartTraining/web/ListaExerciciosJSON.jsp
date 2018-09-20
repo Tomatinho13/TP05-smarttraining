@@ -9,3 +9,12 @@
 <%@page contentType="text/json" pageEncoding="UTF-8"%>
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
+<json:object>
+    <json:array name="listaExercicios" var="exercicio" items="${exercicios}">
+        <json:object>
+            <json:property name="codExercicio" value="${exercicio.codExercicio}"/>
+            <json:property name="nomeExercicio" value="${exercicio.nomeExercicio}"/>
+            <json:property name="descricaoExercicio" value="${exercicio.descricaoExercicio}"/>
+        </json:object>
+    </json:array>
+</json:object>
