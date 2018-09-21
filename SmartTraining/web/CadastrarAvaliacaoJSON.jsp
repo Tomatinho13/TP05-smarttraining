@@ -8,5 +8,12 @@
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
 <json:object>
-    <json:property name="erro" value="false"/>
+    <json:property name="alunoCodCpf" value="${aluno.getCodCpf}"/>
+    <json:array>
+        <json:object>
+            <json:property name="codObjetivo" value="${objetivo.getCodCpf}"/>
+            <json:property name="desObjetivo" value="${objetivo.desObjetivo}"/>
+            <json:property name="nomObjetivo" value="${objetivo.nomObjetivo}"/>
+        </json:object>
+    </json:array>
 </json:object>
