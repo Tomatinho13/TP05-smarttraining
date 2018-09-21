@@ -25,13 +25,13 @@ public class CadastrarInstrutor extends Controller {
             Instrutor instrutor = new Instrutor();
             IManterUsuario manterInstrutor = new ManterInstrutorProxy();
 
-            instrutor.setCodCpf(cpf);
-            instrutor.setNomUsuario(nome);
-            instrutor.setIdtTipoUsuario(idtTipoUsuario);
-            instrutor.setTxtSenha(senha);
-            instrutor.setDesEmail(email);
-            instrutor.setDatNascimento(dataNascimento);
-            instrutor.setCodCREF(cref);
+            instrutor.setCpf(cpf);
+            instrutor.setNome(nome);
+            instrutor.setTipo(idtTipoUsuario);
+            instrutor.setSenha(senha);
+            instrutor.setEmail(email);
+            instrutor.setDataNascimento(dataNascimento);
+            instrutor.setNroCref(cref);
 
             manterInstrutor.cadastrar(instrutor);
         } catch (SQLException e) {

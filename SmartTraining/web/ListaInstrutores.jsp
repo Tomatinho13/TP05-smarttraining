@@ -28,8 +28,8 @@
                         instrutor = listaUsuarios.get(i);
                 %>
                 <li>
-                    <h4><%= instrutor.getNomUsuario()%></h4>
-                    <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=instrutor.getCodCpf()%>" class="btn btn-primary"> 
+                    <h4><%= instrutor.getNome()%></h4>
+                    <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=instrutor.getCpf()%>" class="btn btn-primary"> 
                         Ver 
                     </a>
                     <br>

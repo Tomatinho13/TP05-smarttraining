@@ -21,7 +21,7 @@ public class ListarAvaliacoes extends Controller {
             IManterUsuario manterUsuario = new ManterAlunoProxy();
             String codCpfAluno = request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
             Usuario aluno = manterUsuario.pesquisarPorCpf(codCpfAluno);
-            ArrayList<Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(aluno.getCodCpf());
+            ArrayList<Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(aluno.getCpf());
 
             if (!listaAvaliacoes.isEmpty()) {
                 request.setAttribute("avaliacoes", listaAvaliacoes);

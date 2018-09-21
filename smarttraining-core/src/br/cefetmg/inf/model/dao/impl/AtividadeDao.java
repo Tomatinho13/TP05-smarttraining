@@ -57,10 +57,10 @@ public class AtividadeDao implements IAtividadeDao {
         sql = "INSERT INTO \"TreinoExercicio\" VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, "(SELECT cod_cpf FROM \"Treino\" WHERE cod_cpf='" + atividade.getCodCpf() + "')");
+        stmt.setString(1, "(SELECT cod_cpf FROM \"Treino\" WHERE cod_cpf='" + atividade.getCpf() + "')");
         stmt.setString(2, "(SELECT nro_treino FROM \"Treino\" WHERE nro_treino='" + atividade.getNroTreino() + "')");
-        stmt.setString(3, String.valueOf(atividade.getAparelhoExercicio().getExercicio().getCodExercicio()));
-        stmt.setString(4, String.valueOf(atividade.getAparelhoExercicio().getAparelho().getNroAparelho()));
+        stmt.setString(3, String.valueOf(atividade.getAparelhoExercicio().getExercicio().getNumero()));
+        stmt.setString(4, String.valueOf(atividade.getAparelhoExercicio().getAparelho().getNumero()));
         stmt.setString(5, "(SELECT nro_ficha FROM \"Treino\" WHERE nro_ficha='" + atividade.getNroFicha() + "')");
         stmt.setString(6, String.valueOf(atividade.getNroSeries()));
         stmt.setString(7, String.valueOf(atividade.getNroRepeticoes()));
@@ -76,9 +76,9 @@ public class AtividadeDao implements IAtividadeDao {
                 + "SET nro_series=?, "
                 + "nro_repeticoes=?, "
                 + "qtd_peso=? "
-                + "WHERE cod_cpf='" + atividade.getCodCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "' "
-                + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getCodExercicio() + "' "
-                + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNroAparelho() + "' "
+                + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "' "
+                + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
+                + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
                 + "AND nro_ficha='" + atividade.getNroFicha() + "'";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, String.valueOf(atividade.getNroSeries()));

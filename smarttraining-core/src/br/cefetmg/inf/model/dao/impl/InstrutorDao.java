@@ -105,14 +105,14 @@ public class InstrutorDao implements IUsuarioDao {
         sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,CAST(? as date)); "
                 + "INSERT INTO \"Instrutor\" "
                 + "VALUES((SELECT cod_cpf FROM \"Usuario\" "
-                + "WHERE cod_cpf = '" + instrutor.getCodCpf() + "'), '" + this.instrutor.getCodCREF() + "')";
+                + "WHERE cod_cpf = '" + instrutor.getCpf() + "'), '" + this.instrutor.getNroCref() + "')";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, instrutor.getCodCpf());
-        stmt.setString(2, instrutor.getNomUsuario());
-        stmt.setString(3, String.valueOf(instrutor.getIdtTipoUsuario()));
-        stmt.setString(4, instrutor.getTxtSenha());
-        stmt.setString(5, instrutor.getDesEmail());
-        stmt.setString(6, String.valueOf(instrutor.getDatNascimento()));
+        stmt.setString(1, instrutor.getCpf());
+        stmt.setString(2, instrutor.getNome());
+        stmt.setString(3, String.valueOf(instrutor.getTipo()));
+        stmt.setString(4, instrutor.getSenha());
+        stmt.setString(5, instrutor.getEmail());
+        stmt.setString(6, String.valueOf(instrutor.getDataNascimento()));
 
         stmt.executeUpdate();
 
@@ -128,12 +128,12 @@ public class InstrutorDao implements IUsuarioDao {
                 + "dat_nascimento=CAST(? as date) "
                 + "WHERE cod_cpf=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, instrutor.getNomUsuario());
-        stmt.setString(2, String.valueOf(instrutor.getIdtTipoUsuario()));
-        stmt.setString(3, instrutor.getTxtSenha());
-        stmt.setString(4, instrutor.getDesEmail());
-        stmt.setString(5, String.valueOf(instrutor.getDatNascimento()));
-        stmt.setString(6, instrutor.getCodCpf());
+        stmt.setString(1, instrutor.getNome());
+        stmt.setString(2, String.valueOf(instrutor.getTipo()));
+        stmt.setString(3, instrutor.getSenha());
+        stmt.setString(4, instrutor.getEmail());
+        stmt.setString(5, String.valueOf(instrutor.getDataNascimento()));
+        stmt.setString(6, instrutor.getCpf());
 
         stmt.executeQuery(sql);
 

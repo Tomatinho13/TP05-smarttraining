@@ -39,10 +39,10 @@ public class CadastrarAvaliacao extends Controller {
             IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
             LocalDate dataAvaliacao = LocalDate.now();
 
-            avaliacao.setCodCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
-            avaliacao.setDatAvaliacao(dataAvaliacao);
-            avaliacao.setCodCpfInstrutor(request.getParameter("codCpfInstrutor").replaceAll("[^0-9]", ""));
-            avaliacao.setIdtRecencia(true);
+            avaliacao.setCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
+            avaliacao.setData(dataAvaliacao);
+            avaliacao.setCpfInstrutor(request.getParameter("codCpfInstrutor").replaceAll("[^0-9]", ""));
+            avaliacao.setRecencia(true);
 
             String objetivos[] = request.getParameterValues("objetivo");
             ArrayList<Objetivo> listaObjetivos = new ArrayList<>();

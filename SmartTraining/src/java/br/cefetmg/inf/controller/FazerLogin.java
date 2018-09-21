@@ -24,16 +24,16 @@ public class FazerLogin extends Controller{
             Usuario aluno = manterAluno.pesquisarPorCpf(cpf);
             Usuario instrutor = manterInstrutor.pesquisarPorCpf(cpf);
             
-            if(aluno != null && aluno.getTxtSenha().equals(senha)){
+            if(aluno != null && aluno.getSenha().equals(senha)){
                 sessao.setAttribute("usuario", aluno);
                 jsp="TelaInicialAluno";
             }
-            else if(instrutor!= null && instrutor.getTxtSenha().equals(senha)){
+            else if(instrutor!= null && instrutor.getSenha().equals(senha)){
                 sessao.setAttribute("usuario", instrutor);
                 jsp="TelaInicialInstrutor";
             }
-            else if((aluno != null && !aluno.getTxtSenha().equals(senha)) || 
-                    (instrutor!=null && !instrutor.getTxtSenha().equals(senha))){
+            else if((aluno != null && !aluno.getSenha().equals(senha)) || 
+                    (instrutor!=null && !instrutor.getSenha().equals(senha))){
                 String erro = "Senha Incorreta";
                 jsp="erro";
                 request.setAttribute("erro", erro);

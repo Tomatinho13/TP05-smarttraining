@@ -41,11 +41,11 @@
                         avaliacao = listaAvaliacoes.get(i);
                 %>
                 <li class="list-group-item">
-                    <%=avaliacao.getDatAvaliacao()%>
-                    <a href="servletweb?acao=MostrarAvaliacao&dataAvaliacao=<%= avaliacao.getDatAvaliacao() %>&codCpfAluno=<%=usuario.getCodCpf()%>" class="btn btn-primary"> 
+                    <%=avaliacao.getData()%>
+                    <a href="servletweb?acao=MostrarAvaliacao&dataAvaliacao=<%= avaliacao.getData() %>&codCpfAluno=<%=usuario.getCpf()%>" class="btn btn-primary"> 
                         Ver avaliação
                     </a>
-                    <a href="servletweb?acao=TelaAlterarAvaliacao&dataAvaliacao=<%= avaliacao.getDatAvaliacao() %>&codCpfAluno=<%=usuario.getCodCpf()%>" class="btn btn-primary">
+                    <a href="servletweb?acao=TelaAlterarAvaliacao&dataAvaliacao=<%= avaliacao.getData() %>&codCpfAluno=<%=usuario.getCpf()%>" class="btn btn-primary">
                         Alterar avaliação
                     </a>
                 </li>

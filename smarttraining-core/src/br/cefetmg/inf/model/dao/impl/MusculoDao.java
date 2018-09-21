@@ -76,9 +76,9 @@ public class MusculoDao implements IMusculoDao {
         sql = "INSERT INTO \"Musculo\" VALUES (?,?,?,?)";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, String.valueOf(musculo.getCodMusculo()));
+        stmt.setString(1, String.valueOf(musculo.getNumero()));
         stmt.setString(2, "(SELECT \"cod_regCorp\" FROM \"RegiaoCorporal\" WHERE \"cod_regCorp\"='" + musculo.getCodRegiaoCorporal() + "')");
-        stmt.setString(3, musculo.getNomMusculo());
+        stmt.setString(3, musculo.getNome());
         stmt.setString(4, musculo.getCaminhoImagem());
 
         stmt.executeQuery(sql);
@@ -91,9 +91,9 @@ public class MusculoDao implements IMusculoDao {
         sql = "UPDATE \"Musculo\" "
                 + "SET nom_musculo=?, "
                 + "img_musculo=? "
-                + "WHERE cod_musculo = '" + musculo.getCodMusculo() + "'";
+                + "WHERE cod_musculo = '" + musculo.getNumero() + "'";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, musculo.getNomMusculo());
+        stmt.setString(1, musculo.getNome());
         stmt.setString(2, musculo.getCaminhoImagem());
 
         stmt.executeQuery(sql);

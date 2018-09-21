@@ -27,7 +27,7 @@
                 %>
 
                 <label for="nome">Nome: </label>
-                <input type="text" name="nome" class="form-control" value="<%= usuario.getNomUsuario() %>">
+                <input type="text" name="nome" class="form-control" value="<%= usuario.getNome() %>">
                 <br>
 
                 <label for="senha">Senha:</label>
@@ -39,15 +39,15 @@
                 <br>
 
                 <label for="cpf">CPF: </label>
-                <input type="text" name="cpf" maxlength="14"  value="<%= usuario.getCodCpf() %>" OnKeyPress="formatar('###.###.###-##', this)" class="form-control">
+                <input type="text" name="cpf" maxlength="14"  value="<%= usuario.getCpf() %>" OnKeyPress="formatar('###.###.###-##', this)" class="form-control">
                 <br>
 
                 <label for="email">Email: </label>
-                <input type="email" name="email" class="form-control" value="<%= usuario.getDesEmail() %>">
+                <input type="email" name="email" class="form-control" value="<%= usuario.getEmail() %>">
                 <br>
 
                 <label for="datNasc">Data de Nascimento: </label>
-                <input type="date" name="datNasc" class="form-control" value="<%=usuario.getDatNascimento()%>">
+                <input type="date" name="datNasc" class="form-control" value="<%=usuario.getDataNascimento()%>">
                 <br>
 
                 <input type="submit" name="Alterar" class="btn btn-primary" value="Alterar">

@@ -19,14 +19,14 @@ public class AlterarUsuario extends Controller {
             String cpf = request.getParameter("cpf").replaceAll("[^0-9]", "");
             Usuario usuario = new Usuario();
 
-            usuario.setCodCpf(cpf);
-            usuario.setDatNascimento(LocalDate.parse(request.getParameter("datNasc")));
-            usuario.setDesEmail(request.getParameter("email"));
-            usuario.setIdtTipoUsuario(((Usuario) request.getSession().getAttribute("usuario")).getIdtTipoUsuario());
-            usuario.setNomUsuario(request.getParameter("nome"));
-            usuario.setTxtSenha(request.getParameter("senha"));
+            usuario.setCpf(cpf);
+            usuario.setDataNascimento(LocalDate.parse(request.getParameter("datNasc")));
+            usuario.setEmail(request.getParameter("email"));
+            usuario.setTipo(((Usuario) request.getSession().getAttribute("usuario")).getTipo());
+            usuario.setNome(request.getParameter("nome"));
+            usuario.setSenha(request.getParameter("senha"));
 
-            if (usuario.getIdtTipoUsuario() == 'I') {
+            if (usuario.getTipo() == 'I') {
                 manterUsuario = new ManterInstrutorProxy();
             } else {
                 manterUsuario = new ManterAlunoProxy();

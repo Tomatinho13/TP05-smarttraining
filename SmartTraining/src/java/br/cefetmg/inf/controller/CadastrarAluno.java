@@ -22,12 +22,12 @@ public class CadastrarAluno extends Controller {
 
             Usuario aluno = new Usuario();
 
-            aluno.setCodCpf(cpf);
-            aluno.setNomUsuario(nome);
-            aluno.setIdtTipoUsuario(idtTipoUsuario);
-            aluno.setTxtSenha(senha);
-            aluno.setDesEmail(email);
-            aluno.setDatNascimento(nascimento);
+            aluno.setCpf(cpf);
+            aluno.setNome(nome);
+            aluno.setTipo(idtTipoUsuario);
+            aluno.setSenha(senha);
+            aluno.setEmail(email);
+            aluno.setDataNascimento(nascimento);
 
             IManterUsuario manterAluno = new ManterAlunoProxy();
             manterAluno.cadastrar(aluno);

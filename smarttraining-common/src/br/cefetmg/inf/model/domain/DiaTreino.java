@@ -1,19 +1,19 @@
 package br.cefetmg.inf.model.domain;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 /**
  *
  * @author Jamalz
  */
+
 public class DiaTreino {
     private Atividade atividade;
-    private LocalDate datTreino;
+    private LocalDate dataTreino;
 
-    public DiaTreino(Atividade atividade, LocalDate datTreino) {
+    public DiaTreino(Atividade atividade, LocalDate dataTreino) {
         this.atividade = atividade;
-        this.datTreino = datTreino;
+        this.dataTreino = dataTreino;
     }
 
     public Atividade getAtividade() {
@@ -24,12 +24,12 @@ public class DiaTreino {
         this.atividade = atividade;
     }
 
-    public LocalDate getDatTreino() {
-        return datTreino;
+    public LocalDate getDataTreino() {
+        return dataTreino;
     }
 
-    public void setDatTreino(LocalDate datTreino) {
-        this.datTreino = datTreino;
+    public void setDataTreino(LocalDate dataTreino) {
+        this.dataTreino = dataTreino;
     }
      
 }

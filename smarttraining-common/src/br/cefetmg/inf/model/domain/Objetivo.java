@@ -6,40 +6,40 @@ package br.cefetmg.inf.model.domain;
  */
 
 public class Objetivo {
-    private int codObjetivo;
-    private String nomObjetivo;
-    private String desObjetivo;
+    private int codigo;
+    private String nome;
+    private String descricao;
 
     public Objetivo() {
     }
 
-    public Objetivo(int nroSequenciaObjetivo, String nome, String descricao) {
-        this.codObjetivo = nroSequenciaObjetivo;
-        this.nomObjetivo = nome;
-        this.desObjetivo = descricao;
+    public Objetivo(int codigo, String nome, String descricao) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.descricao = descricao;
     }
 
-    public int getCodObjetivo() {
-        return codObjetivo;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setCodObjetivo(int codObjetivo) {
-        this.codObjetivo = codObjetivo;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNomObjetivo() {
-        return nomObjetivo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomObjetivo(String nomObjetivo) {
-        this.nomObjetivo = nomObjetivo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getDesObjetivo() {
-        return desObjetivo;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDesObjetivo(String desObjetivo) {
-        this.desObjetivo = desObjetivo;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

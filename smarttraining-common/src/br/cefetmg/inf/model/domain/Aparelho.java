@@ -6,35 +6,30 @@ package br.cefetmg.inf.model.domain;
  */
 
 public class Aparelho {
-    private int nroAparelho;
-    private String nomAparelho;
+    private int numero;
+    private String nome;
 
     public Aparelho() {
-        
     }
 
-    public Aparelho(int codAparelho, String nomAparelho) {
-        this.nroAparelho = codAparelho;
-        this.nomAparelho = nomAparelho;
+    public Aparelho(int numero, String nome) {
+        this.numero = numero;
+        this.nome = nome;
     }
     
-    public int getNroAparelho() {
-        return nroAparelho;
-    }
-
-    public void setNroAparelho(int nroAparelho) {
-        this.nroAparelho = nroAparelho;
+    public int getNumero() {
+        return numero;
     }
 
-    public String getNomAparelho() {
-        return nomAparelho;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public void setNomAparelho(String nomAparelho) {
-        this.nomAparelho = nomAparelho;
+    public String getNome() {
+        return nome;
     }
-    
-    
-    
-    
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

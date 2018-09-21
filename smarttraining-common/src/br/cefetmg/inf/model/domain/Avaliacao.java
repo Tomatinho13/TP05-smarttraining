@@ -8,10 +8,10 @@ import java.util.ArrayList;
  */
 
 public class Avaliacao {
-    private String codCpfAluno;
-    private LocalDate datAvaliacao;
-    private String codCpfInstrutor;
-    private boolean idtRecencia;
+    private String cpfAluno;
+    private LocalDate data;
+    private String cpfInstrutor;
+    private boolean recencia;
     private double peso;
     private double percentualGordura;
     private double tamanhoPescoco;
@@ -32,29 +32,17 @@ public class Avaliacao {
     private ArrayList<Objetivo> listaObjetivos;
     
     public Avaliacao(){
-
     }
     
-    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor,
-                     boolean idtRecencia, double peso, double percentualGordura, ArrayList<Objetivo> listaObjetivos){
-       this.codCpfAluno = codCpfAluno;
-       this.datAvaliacao = datAvaliacao;
-       this.codCpfInstrutor = codCpfInstrutor;
-       this.idtRecencia = idtRecencia;
-       this.peso = peso;
-       this.percentualGordura = percentualGordura;
-       this.listaObjetivos = new ArrayList<>(listaObjetivos);
-    }
-
-    public Avaliacao(String codCpfAluno, LocalDate datAvaliacao, String codCpfInstrutor, boolean idtRecencia, double peso, 
+    public Avaliacao(String cpfAluno, LocalDate data, String cpfInstrutor, boolean recencia, double peso, 
             double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, 
             double tamanhoCintura, double tamanhoQuadril, double massaGorda, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, 
             double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, 
             double tamanhoPanturrilhaEsquerda, double tamanhoPanturrilhaDireita, ArrayList<Objetivo> listaObjetivos) {
-        this.codCpfAluno = codCpfAluno;
-        this.datAvaliacao = datAvaliacao;
-        this.codCpfInstrutor = codCpfInstrutor;
-        this.idtRecencia = idtRecencia;
+        this.cpfAluno = cpfAluno;
+        this.data = data;
+        this.cpfInstrutor = cpfInstrutor;
+        this.recencia = recencia;
         this.peso = peso;
         this.percentualGordura = percentualGordura;
         this.tamanhoPescoco = tamanhoPescoco;
@@ -83,36 +71,36 @@ public class Avaliacao {
         this.tamanhoQuadril = tamanhoQuadril;
     }
     
-    public String getCodCpfAluno() {
-        return codCpfAluno;
+    public String getCpfAluno() {
+        return cpfAluno;
     }
 
-    public void setCodCpfAluno(String codCpfAluno) {
-        this.codCpfAluno = codCpfAluno;
+    public void setCpfAluno(String cpfAluno) {
+        this.cpfAluno = cpfAluno;
     }
 
-    public LocalDate getDatAvaliacao() {
-        return datAvaliacao;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setDatAvaliacao(LocalDate datAvaliacao) {
-        this.datAvaliacao = datAvaliacao;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
-    public String getCodCpfInstrutor() {
-        return codCpfInstrutor;
+    public String getCpfInstrutor() {
+        return cpfInstrutor;
     }
 
-    public void setCodCpfInstrutor(String codCpfInstrutor) {
-        this.codCpfInstrutor = codCpfInstrutor;
+    public void setCpfInstrutor(String cpfInstrutor) {
+        this.cpfInstrutor = cpfInstrutor;
     }
 
-    public boolean getIdtRecencia() {
-        return idtRecencia;
+    public boolean getRecencia() {
+        return recencia;
     }
 
-    public void setIdtRecencia(boolean idtRecencia) {
-        this.idtRecencia = idtRecencia;
+    public void setRecencia(boolean recencia) {
+        this.recencia = recencia;
     }
 
     public double getPeso() {

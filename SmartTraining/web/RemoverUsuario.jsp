@@ -32,7 +32,7 @@
                         List<Usuario> listaUsuarios = (List) request.getAttribute("usuarios");
                         for (int i = 0; i < listaUsuarios.size(); i++) {
                             usuario = listaUsuarios.get(i);
-                            if (usuario.getCodCpf().equals(usuarioAtual.getCodCpf())) {
+                            if (usuario.getCpf().equals(usuarioAtual.getCpf())) {
                                 if (i == listaUsuarios.size() - 1) {
                                     break;
                                 }
@@ -41,7 +41,7 @@
                             }
                     %>
 
-                    <option value=" <%= usuario.getCodCpf()%> "><%= usuario.getNomUsuario()%></option>
+                    <option value=" <%= usuario.getCpf()%> "><%= usuario.getNome()%></option>
 
                     <%
                         }

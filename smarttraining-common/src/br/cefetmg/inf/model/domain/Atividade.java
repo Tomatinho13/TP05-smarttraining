@@ -7,7 +7,7 @@ package br.cefetmg.inf.model.domain;
 
 public class Atividade {
     private AparelhoExercicio aparelhoExercicio;
-    private String codCpf;
+    private String cpf;
     private int nroFicha;
     private int nroTreino;
     private int qtdPeso;
@@ -19,7 +19,7 @@ public class Atividade {
 
     public Atividade(AparelhoExercicio aparelhoExercicio, String cpf, int nroFicha, int nroTreino, int peso, int series, int repeticoes) {
         this.aparelhoExercicio = aparelhoExercicio;
-        this.codCpf = cpf;
+        this.cpf = cpf;
         this.nroFicha = nroFicha;
         this.nroTreino = nroTreino;
         this.qtdPeso = peso;
@@ -35,12 +35,12 @@ public class Atividade {
         this.aparelhoExercicio = aparelhoExercicio;
     }
 
-    public String getCodCpf() {
-        return codCpf;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCodCpf(String codCpf) {
-        this.codCpf = codCpf;
+    public void setCpf(String codCpf) {
+        this.cpf = codCpf;
     }
 
     public int getNroFicha() {

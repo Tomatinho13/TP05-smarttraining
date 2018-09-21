@@ -8,29 +8,29 @@ import java.util.ArrayList;
  */
 
 public class Treino {
-    private String codCpfAluno;
+    private String cpfAluno;
     private int nroFicha;
     private int nroTreino;
-    private String descricaoTreino;
+    private String descricao;
     private ArrayList<Atividade> atividades;
 
     public Treino() {
     }
 
-    public Treino(String codCpfAluno, int nroFicha, int nroTreino, String descricaoTreino, ArrayList<Atividade> atividades) {
-        this.codCpfAluno = codCpfAluno;
+    public Treino(String cpfAluno, int nroFicha, int nroTreino, String descricao, ArrayList<Atividade> atividades) {
+        this.cpfAluno = cpfAluno;
         this.nroFicha = nroFicha;
         this.nroTreino = nroTreino;
-        this.descricaoTreino = descricaoTreino;
+        this.descricao = descricao;
         this.atividades = new ArrayList<>(atividades);
     }
 
-    public String getCodCpfAluno() {
-        return codCpfAluno;
+    public String getCpfAluno() {
+        return cpfAluno;
     }
 
-    public void setCodCpfAluno(String codCpfAluno) {
-        this.codCpfAluno = codCpfAluno;
+    public void setCpfAluno(String cpfAluno) {
+        this.cpfAluno = cpfAluno;
     }
 
     public int getNroFicha() {
@@ -49,12 +49,12 @@ public class Treino {
         this.nroTreino = nroTreino;
     }
 
-    public String getDescricaoTreino() {
-        return descricaoTreino;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricaoTreino(String descricaoTreino) {
-        this.descricaoTreino = descricaoTreino;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public ArrayList<Atividade> getAtividades() {
@@ -64,6 +64,4 @@ public class Treino {
     public void setAtividades(ArrayList<Atividade> atividades) {
         this.atividades = new ArrayList<>(atividades);
     }
-    
-    
 }

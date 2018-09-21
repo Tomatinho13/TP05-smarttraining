@@ -8,9 +8,9 @@ import java.util.ArrayList;
  */
 
 public class Musculo {
-    private int codMusculo;
+    private int numero;
     private int codRegiaoCorporal;
-    private String nomMusculo;
+    private String nome;
     private String caminhoImagem; 
     private ArrayList<Exercicio> listaExercicios;
 
@@ -18,20 +18,20 @@ public class Musculo {
     }
 
     
-    public Musculo(int nroSequenciaMusculo, int nroSequenciaRegiaoCorporal, String nomeMusculo, String caminhoImagem, ArrayList<Exercicio> listaExercicios) {
-        this.codMusculo = nroSequenciaMusculo;
-        this.codRegiaoCorporal = nroSequenciaRegiaoCorporal;
-        this.nomMusculo = nomeMusculo;
+    public Musculo(int numero, int codRegiaoCorporal, String nome, String caminhoImagem, ArrayList<Exercicio> listaExercicios) {
+        this.numero = numero;
+        this.codRegiaoCorporal = codRegiaoCorporal;
+        this.nome = nome;
         this.caminhoImagem = caminhoImagem;
         this.listaExercicios = new ArrayList<>(listaExercicios);
     }
     
-    public int getCodMusculo() {
-        return codMusculo;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setCodMusculo(int codMusculo) {
-        this.codMusculo = codMusculo;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public int getCodRegiaoCorporal() {
@@ -42,12 +42,12 @@ public class Musculo {
         this.codRegiaoCorporal = codRegiaoCorporal;
     }
 
-    public String getNomMusculo() {
-        return nomMusculo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomMusculo(String nomMusculo) {
-        this.nomMusculo = nomMusculo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCaminhoImagem() {

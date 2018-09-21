@@ -94,14 +94,14 @@ public class AlunoDao implements IUsuarioDao {
         sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,CAST(? as date));"
                 + "INSERT INTO \"Aluno\" "
                 + "VALUES((SELECT cod_cpf FROM \"Usuario\" "
-                + "WHERE cod_cpf = '" + aluno.getCodCpf() + "'))";
+                + "WHERE cod_cpf = '" + aluno.getCpf() + "'))";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, aluno.getCodCpf());
-        stmt.setString(2, aluno.getNomUsuario());
-        stmt.setString(3, String.valueOf(aluno.getIdtTipoUsuario()));
-        stmt.setString(4, aluno.getTxtSenha());
-        stmt.setString(5, aluno.getDesEmail());
-        stmt.setString(6, String.valueOf(aluno.getDatNascimento()));
+        stmt.setString(1, aluno.getCpf());
+        stmt.setString(2, aluno.getNome());
+        stmt.setString(3, String.valueOf(aluno.getTipo()));
+        stmt.setString(4, aluno.getSenha());
+        stmt.setString(5, aluno.getEmail());
+        stmt.setString(6, String.valueOf(aluno.getDataNascimento()));
 
         stmt.executeUpdate();
 
@@ -118,12 +118,12 @@ public class AlunoDao implements IUsuarioDao {
                 + "dat_nascimento=CAST(? as date) "
                 + "WHERE cod_cpf=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, aluno.getNomUsuario());
-        stmt.setString(2, String.valueOf(aluno.getIdtTipoUsuario()));
-        stmt.setString(3, aluno.getTxtSenha());
-        stmt.setString(4, aluno.getDesEmail());
-        stmt.setString(5, String.valueOf(aluno.getDatNascimento()));
-        stmt.setString(6, aluno.getCodCpf());
+        stmt.setString(1, aluno.getNome());
+        stmt.setString(2, String.valueOf(aluno.getTipo()));
+        stmt.setString(3, aluno.getSenha());
+        stmt.setString(4, aluno.getEmail());
+        stmt.setString(5, String.valueOf(aluno.getDataNascimento()));
+        stmt.setString(6, aluno.getCpf());
 
         stmt.executeUpdate();
 

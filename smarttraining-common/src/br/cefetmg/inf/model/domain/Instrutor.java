@@ -13,16 +13,16 @@ public class Instrutor extends Usuario {
         
     }
 
-    public Instrutor(String nroCref, String codCpf, String nomUsuario, char idtTipoUsuario, String txtSenha, String desEmail, LocalDate datNascimento) {
-        super(codCpf, nomUsuario, idtTipoUsuario, txtSenha, desEmail, datNascimento);
+    public Instrutor(String nroCref, String cpf, String nome, char tipo, String senha, String email, LocalDate dataNascimento) {
+        super(cpf, nome, tipo, senha, email, dataNascimento);
         this.nroCref = nroCref;
     } 
     
-    public void setCodCREF(String codCREF) {
-        this.nroCref = codCREF;
+    public void setNroCref(String nroCref) {
+        this.nroCref = nroCref;
     }
 
-    public String getCodCREF() {
+    public String getNroCref() {
         return nroCref;
     }
 }

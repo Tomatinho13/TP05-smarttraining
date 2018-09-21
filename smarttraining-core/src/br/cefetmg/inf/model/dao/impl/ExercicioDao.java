@@ -146,14 +146,14 @@ public class ExercicioDao implements IExercicioDao {
         sql = "INSERT INTO \"Exercicio\" (nom_exercicio, des_exercicio) VALUES (?, ?);";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, exercicio.getNomeExercicio());
-        stmt.setString(2, exercicio.getDescricaoExercicio());
+        stmt.setString(1, exercicio.getNome());
+        stmt.setString(2, exercicio.getDescricao());
         stmt.executeUpdate();
 
         sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST( ? as integer), CAST( ? as bigint))";
         stmt = conn.prepareStatement(sql);
         for (String codMusculo : codMusculos) {
-            stmt.setString(1, String.valueOf(getExercicio(exercicio.getNomeExercicio()).getCodExercicio()));
+            stmt.setString(1, String.valueOf(getExercicio(exercicio.getNome()).getNumero()));
             stmt.setString(2, codMusculo);
 
             stmt.addBatch();
@@ -179,10 +179,10 @@ public class ExercicioDao implements IExercicioDao {
         sql = "UPDATE \"Exercicio\" "
                 + "SET nom_exercicio=?, "
                 + "des_exercicio=? "
-                + "WHERE cod_exercicio = '" + exercicio.getCodExercicio() + "'";
+                + "WHERE cod_exercicio = '" + exercicio.getNumero() + "'";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, exercicio.getNomeExercicio());
-        stmt.setString(2, exercicio.getDescricaoExercicio());
+        stmt.setString(1, exercicio.getNome());
+        stmt.setString(2, exercicio.getDescricao());
 
         stmt.executeUpdate();
 

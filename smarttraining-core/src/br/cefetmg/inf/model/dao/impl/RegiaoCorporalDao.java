@@ -47,7 +47,7 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
         sql = "INSERT INTO \"RegiaoCorporal\" (nom_regiao) VALUES (?);";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, regiao.getNomeRegiao());
+        stmt.setString(1, regiao.getNome());
 
         stmt.executeQuery(sql);
 
@@ -59,7 +59,7 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
         sql = "UPDATE \"RegiaoCorporal\" "
                 + "SET nom_regiao=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, regiao.getNomeRegiao());
+        stmt.setString(1, regiao.getNome());
 
         stmt.executeQuery(sql);
 

@@ -37,7 +37,7 @@
                     for (int i = 0; i < listaMusculos.size(); i++) {
                         musculo = listaMusculos.get(i);
                 %>
-                <li class="list-group-item"> <h3> <%= musculo.getNomMusculo()%> </h3> </li>
+                <li class="list-group-item"> <h3> <%= musculo.getNome()%> </h3> </li>
                 <li>
                     <ul class="list-group">
                         <%
@@ -48,11 +48,11 @@
                                 exercicio = listaExercicios.get(j);
                         %>
                         <li class="list-group-item"> 
-                            <h4><%= exercicio.getNomeExercicio()%></h4>
-                            <a href="/servletweb?acao=MostrarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>">
+                            <h4><%= exercicio.getNome()%></h4>
+                            <a href="/servletweb?acao=MostrarExercicio&codExercicio=<%= exercicio.getNumero()%>">
                                 Ver 
                             </a>
-                            <a href="/servletweb?acao=TelaAlterarExercicio&codExercicio=<%= exercicio.getCodExercicio()%>"> 
+                            <a href="/servletweb?acao=TelaAlterarExercicio&codExercicio=<%= exercicio.getNumero()%>"> 
                                 Alterar 
                             </a>
                         </li>

@@ -28,7 +28,7 @@ public class CadastrarExercicio extends Controller {
             exercicio = manterExercicio.pesquisarPorNome(nomeExercicio);
 
             for (String codAparelho : codAparelhos) {
-                manterExercicio.cadastrarAparelhoExercicio(exercicio.getCodExercicio(), Integer.parseInt(codAparelho), "");
+                manterExercicio.cadastrarAparelhoExercicio(exercicio.getNumero(), Integer.parseInt(codAparelho), "");
             }
 
         } catch (SQLException e) {

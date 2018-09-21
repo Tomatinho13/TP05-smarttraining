@@ -106,8 +106,8 @@ public class AparelhoDao implements IAparelhoDao {
         sql = "INSERT INTO \"Aparelho\" VALUES (CAST(? as smallint),?)";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, String.valueOf(aparelho.getNroAparelho()));
-        stmt.setString(2, aparelho.getNomAparelho());
+        stmt.setString(1, String.valueOf(aparelho.getNumero()));
+        stmt.setString(2, aparelho.getNome());
 
         stmt.executeUpdate();
 
@@ -117,8 +117,8 @@ public class AparelhoDao implements IAparelhoDao {
     public void putAparelho(Aparelho aparelho) throws SQLException {
         this.aparelho = aparelho;
         sql = "UPDATE \"Aparelho\" "
-                + "SET nom_usuario='" + aparelho.getNomAparelho() + "'"
-                + "WHERE nro_aparelho='" + aparelho.getNroAparelho() + "'";
+                + "SET nom_usuario='" + aparelho.getNome() + "'"
+                + "WHERE nro_aparelho='" + aparelho.getNumero() + "'";
 
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(sql);

@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container">
-        <%String cpf = (String)((Usuario)request.getSession().getAttribute("usuario")).getCodCpf();%>
+        <%String cpf = (String)((Usuario)request.getSession().getAttribute("usuario")).getCpf();%>
         <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=cpf%>"
             class="btn btn-primary">Perfil</a><br>
             

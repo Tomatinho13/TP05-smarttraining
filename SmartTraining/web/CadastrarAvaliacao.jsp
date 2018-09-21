@@ -32,10 +32,10 @@
                 %>
 
                 <input type = "hidden" name = "codCpfAluno" value="
-                       <%= aluno.getCodCpf()%>" 
+                       <%= aluno.getCpf()%>" 
                        />
                 <input type = "hidden" name = "codCpfInstrutor" value="
-                       <%= instrutor.getCodCpf()%>"
+                       <%= instrutor.getCpf()%>"
                        />
 
                 <label for="peso" class="form">Peso: </label>
@@ -114,8 +114,8 @@
                         objetivo = listaObjetivos.get(i);
                 %>
 
-                <input type="checkbox" name="objetivo" value="<%= objetivo.getNomObjetivo()%>" id="<%= objetivo.getNomObjetivo()%>">
-                <label for="<%=objetivo.getNomObjetivo()%>"> <%= objetivo.getNomObjetivo()%> </label>
+                <input type="checkbox" name="objetivo" value="<%= objetivo.getNome()%>" id="<%= objetivo.getNome()%>">
+                <label for="<%=objetivo.getNome()%>"> <%= objetivo.getNome()%> </label>
                 <br>
                 
                 <%

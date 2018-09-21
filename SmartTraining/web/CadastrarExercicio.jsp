@@ -40,8 +40,8 @@
                         aparelho = listaAparelhos.get(i);
                 %>
 
-                <input type="checkbox" name="aparelhos" value="<%= aparelho.getNroAparelho()%>" id="<%= aparelho.getNomAparelho()%>">
-                <label for="<%=aparelho.getNomAparelho()%>"> <%= aparelho.getNomAparelho()%> </label>
+                <input type="checkbox" name="aparelhos" value="<%= aparelho.getNumero()%>" id="<%= aparelho.getNome()%>">
+                <label for="<%=aparelho.getNome()%>"> <%= aparelho.getNome()%> </label>
                 <br>
                 
                 <%
@@ -56,8 +56,8 @@
                         musculo = listaMusculos.get(i);
                 %>
 
-                <input type="checkbox" name="musculos" value="<%= musculo.getCodMusculo()%>" id="<%= musculo.getNomMusculo()%>">
-                <label for="<%=musculo.getNomMusculo()%>"> <%= musculo.getNomMusculo()%> </label>
+                <input type="checkbox" name="musculos" value="<%= musculo.getNumero()%>" id="<%= musculo.getNome()%>">
+                <label for="<%=musculo.getNome()%>"> <%= musculo.getNome()%> </label>
                 <br>
                 
                 <%

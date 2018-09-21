@@ -105,9 +105,9 @@ public class AvaliacaoDao implements IAvaliacaoDao {
     @Override
     public void postAvaliacao(Avaliacao avaliacao) throws SQLException {
         sql = "INSERT INTO \"Avaliacao\" VALUES ("
-                + "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfAluno() + "'),"
+                + "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + avaliacao.getCpfAluno() + "'),"
                 + "CAST(? as date),"
-                + "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + avaliacao.getCodCpfInstrutor() + "'),"
+                + "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + avaliacao.getCpfInstrutor() + "'),"
                 + "CAST(? as boolean),"
                 + "CAST(? as numeric),"
                 + "CAST(? as numeric),"
@@ -127,8 +127,8 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "CAST(? as numeric),"
                 + "CAST(? as numeric))";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, avaliacao.getDatAvaliacao().toString());
-        stmt.setString(2, String.valueOf(avaliacao.getIdtRecencia()));
+        stmt.setString(1, avaliacao.getData().toString());
+        stmt.setString(2, String.valueOf(avaliacao.getRecencia()));
         stmt.setString(3, String.valueOf(avaliacao.getPeso()));
         stmt.setString(4, String.valueOf(avaliacao.getMassaGorda()));
         stmt.setString(5, String.valueOf(avaliacao.getPercentualGordura()));
@@ -151,13 +151,13 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         for (int i = 0; i < avaliacao.getListaObjetivos().size(); i++) {
             sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES ("
                 + "CAST((SELECT dat_avaliacao FROM \"Avaliacao\" "
-                    + "WHERE cod_cpf='" + avaliacao.getCodCpfAluno() + "' "
-                    + "AND dat_avaliacao=CAST('" + avaliacao.getDatAvaliacao().toString() + "' as date)) as date),"
+                    + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' "
+                    + "AND dat_avaliacao=CAST('" + avaliacao.getData().toString() + "' as date)) as date),"
                 + " (SELECT cod_cpf FROM \"Avaliacao\" "
-                    + "WHERE cod_cpf='" + avaliacao.getCodCpfAluno() + "' "
-                    + "AND dat_avaliacao=CAST('" + avaliacao.getDatAvaliacao().toString() + "' as date)), "
+                    + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' "
+                    + "AND dat_avaliacao=CAST('" + avaliacao.getData().toString() + "' as date)), "
                 + "CAST((SELECT cod_objetivo FROM \"Objetivo\" "
-                    + "WHERE cod_objetivo='" + avaliacao.getListaObjetivos().get(i).getCodObjetivo() + "') as bigint))";
+                    + "WHERE cod_objetivo='" + avaliacao.getListaObjetivos().get(i).getCodigo() + "') as bigint))";
             
             stmt = conn.prepareStatement(sql);
             stmt.execute();
@@ -190,8 +190,8 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "WHERE cod_cpf=? "
                 + "AND dat_avaliacao= CAST(? as date)";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, avaliacao.getCodCpfInstrutor());
-        stmt.setString(2, String.valueOf(avaliacao.getIdtRecencia()));
+        stmt.setString(1, avaliacao.getCpfInstrutor());
+        stmt.setString(2, String.valueOf(avaliacao.getRecencia()));
         stmt.setString(3, String.valueOf(avaliacao.getPeso()));
         stmt.setString(4, String.valueOf(avaliacao.getMassaGorda()));
         stmt.setString(5, String.valueOf(avaliacao.getPercentualGordura()));
@@ -209,8 +209,8 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         stmt.setString(17, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
         stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
         stmt.setString(19, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-        stmt.setString(20, avaliacao.getCodCpfAluno().trim());
-        stmt.setString(21, avaliacao.getDatAvaliacao().toString().trim());
+        stmt.setString(20, avaliacao.getCpfAluno().trim());
+        stmt.setString(21, avaliacao.getData().toString().trim());
 
         stmt.executeUpdate();
 

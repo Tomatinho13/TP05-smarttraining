@@ -33,17 +33,17 @@
                         aluno = listaUsuarios.get(i);
                 %>
                 <li>
-                    <h4><%= aluno.getNomUsuario()%></h4>
-                    <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=aluno.getCodCpf()%>" class="btn btn-primary"> 
+                    <h4><%= aluno.getNome()%></h4>
+                    <a href="/servletweb?acao=MostrarUsuario&codCpfUsuario=<%=aluno.getCpf()%>" class="btn btn-primary"> 
                         Ver 
                     </a>
-                    <a href="/servletweb?acao=ListarAvaliacoes&codCpfAluno=<%= aluno.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=ListarAvaliacoes&codCpfAluno=<%= aluno.getCpf()%>" class="btn btn-primary">
                         Ver Avaliacoes
                     </a>
-                    <a href="/servletweb?acao=ListarFichas&codCpfAluno=<%= aluno.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=ListarFichas&codCpfAluno=<%= aluno.getCpf()%>" class="btn btn-primary">
                         Ver Fichas
                     </a>
-                    <a href="/servletweb?acao=TelaCadastrarAvaliacao&codCpfAluno=<%= aluno.getCodCpf()%>" class="btn btn-primary">
+                    <a href="/servletweb?acao=TelaCadastrarAvaliacao&codCpfAluno=<%= aluno.getCpf()%>" class="btn btn-primary">
                         Cadastrar Avaliacao
                     </a>
                     <br><br>

@@ -25,7 +25,7 @@
         %>
         
         <input type = "hidden" name = "codCpfAluno" value="
-               <%= usuario.getCodCpf() %>" 
+               <%= usuario.getCpf() %>" 
         />
         
         <title>Lista de Fichas</title>
@@ -45,8 +45,8 @@
                         ficha = listaFichas.get(i);
                 %>
                 <li class="list-group-item">
-                    <a href="/controller/servletweb?acao=MostrarFicha&nroFicha=<%= ficha.getNroFicha() %>"> 
-                        Data: <%= ficha.getDataFicha() %> 
+                    <a href="/controller/servletweb?acao=MostrarFicha&nroFicha=<%= ficha.getNumero() %>"> 
+                        Data: <%= ficha.getData() %> 
                     </a>
                 </li>
 

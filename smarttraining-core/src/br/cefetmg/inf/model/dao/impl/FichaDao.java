@@ -37,7 +37,6 @@ public class FichaDao implements IFichaDao {
                     resultado.getString("cod_cpf_instrutor"),
                     resultado.getDate("dat_ficha").toLocalDate(),
                     resultado.getDate("dat_prevista_troca").toLocalDate(),
-                    resultado.getString("idt_treino").charAt(0),
                     treinoDao.getFichaTreinos(cpf, nroFicha));
         } else {
 
@@ -62,7 +61,6 @@ public class FichaDao implements IFichaDao {
                     resultado.getString("cod_cpf_instrutor"),
                     resultado.getDate("dat_ficha").toLocalDate(),
                     resultado.getDate("dat_prevista_troca").toLocalDate(),
-                    resultado.getString("idt_treino").charAt(0),
                     treinoDao.getFichaTreinos(cpf, resultado.getInt("nro_ficha")));
             listaFicha.add(ficha);
         }
@@ -72,14 +70,13 @@ public class FichaDao implements IFichaDao {
 
     @Override
     public void postFicha(Ficha ficha) throws SQLException {
-        sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,CAST(? as date),CAST(? as date),?)";
+        sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,CAST(? as date),CAST(? as date))";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + ficha.getCodCpfAluno() + "')");
-        stmt.setString(2, String.valueOf(ficha.getNroFicha()));
-        stmt.setString(3, "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + ficha.getCodCpfInstrutor() + "')");
-        stmt.setString(4, ficha.getDataFicha().toString());
-        stmt.setString(5, ficha.getDataPrevistaTroca().toString());
-        stmt.setString(6, String.valueOf(ficha.getIdtTreino()));
+        stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + ficha.cpfAluno() + "')");
+        stmt.setString(2, String.valueOf(ficha.getNumero()));
+        stmt.setString(3, "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + ficha.getCpfInstrutor() + "')");
+        stmt.setString(4, ficha.getData().toString());
+        stmt.setString(5, ficha.getDataTroca().toString());
 
         stmt.executeQuery(sql);
 
@@ -91,16 +88,14 @@ public class FichaDao implements IFichaDao {
                 + "SET cod_cpf_instrutor=?, "
                 + "dat_ficha=CAST(? as date), "
                 + "dat_prevista_troca=CAST(? as date), "
-                + "idt_treino=? "
                 + "WHERE cod_cpf=?"
                 + "AND nro_ficha=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + ficha.getCodCpfInstrutor() + "')");
-        stmt.setString(2, ficha.getDataFicha().toString());
-        stmt.setString(3, ficha.getDataPrevistaTroca().toString());
-        stmt.setString(4, String.valueOf(ficha.getIdtTreino()));
-        stmt.setString(5, ficha.getCodCpfAluno());
-        stmt.setString(6, String.valueOf(ficha.getNroFicha()));
+        stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + ficha.getCpfInstrutor() + "')");
+        stmt.setString(2, ficha.getData().toString());
+        stmt.setString(3, ficha.getDataTroca().toString());
+        stmt.setString(4, ficha.cpfAluno());
+        stmt.setString(5, String.valueOf(ficha.getNumero()));
 
         stmt.executeQuery(sql);
 

@@ -34,8 +34,8 @@
                 %>
                 
                 <input type="hidden" name="codCpfAluno" value="${usuario.codCpf}">
-                <input type="hidden" name="dataAvaliacao" value="<%=avaliacao.getDatAvaliacao()%>">
-                <input type="hidden" name="codCpfInstrutor" value="<%=instrutor.getCodCpf()%>">
+                <input type="hidden" name="dataAvaliacao" value="<%=avaliacao.getData()%>">
+                <input type="hidden" name="codCpfInstrutor" value="<%=instrutor.getCpf()%>">
                 
                 <label for="peso" class="form">Peso: </label>
                 <input type="number" name="peso" class="form-control" max="300" min="0" value="<%= avaliacao.getPeso()%>" >

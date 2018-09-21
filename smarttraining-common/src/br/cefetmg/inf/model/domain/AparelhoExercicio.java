@@ -46,6 +46,4 @@ public class AparelhoExercicio {
     public void setCaminhoImagem(String caminhoImagem) {
         this.caminhoImagem = caminhoImagem;
     }
-    
-    
 }

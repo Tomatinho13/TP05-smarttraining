@@ -29,13 +29,13 @@
 
             <form action="servletweb" method="post">
                 <input type="hidden" name="acao" value="AlterarExercicio">
-                <input type="hidden" name="codExercicio" value="<%=exercicio.getCodExercicio()%>">
+                <input type="hidden" name="codExercicio" value="<%=exercicio.getNumero()%>">
 
                 <label for="nomeExercicio">Nome do exercicio:</label><br>
-                <input type="text" name="nomeExercicio" class="form-control" value="<%= exercicio.getNomeExercicio()%>"><br>
+                <input type="text" name="nomeExercicio" class="form-control" value="<%= exercicio.getNome()%>"><br>
 
                 <label for="descExercicio">Descrição do novo exercicio:</label><br>
-                <textarea name="descExercicio" class="form-control"  rows="5"><%= exercicio.getDescricaoExercicio()%></textarea><br>
+                <textarea name="descExercicio" class="form-control"  rows="5"><%= exercicio.getDescricao()%></textarea><br>
 
                 <input type="submit" name="Alterar" class="btn btn-primary" value="Alterar">
             </form>

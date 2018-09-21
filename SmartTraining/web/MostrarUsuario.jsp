@@ -24,7 +24,7 @@
                 Usuario usuario = (Usuario) request.getAttribute("usuario");
 
                 String tipoUsuario;
-                switch (usuario.getIdtTipoUsuario()) {
+                switch (usuario.getTipo()) {
                     case 'A':
                         tipoUsuario = "Aluno";
                         break;
@@ -39,15 +39,15 @@
             <table class="table table-hover">
                 <tr>
                     <td>Nome:</td>
-                    <td><%= usuario.getNomUsuario()%></td>
+                    <td><%= usuario.getNome()%></td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><%= usuario.getDesEmail()%></td>
+                    <td><%= usuario.getEmail()%></td>
                 </tr>
                 <tr>
                     <td>Data de nascimento:</td>
-                    <td><%= usuario.getDatNascimento()%></td>
+                    <td><%= usuario.getDataNascimento()%></td>
                 </tr>
                 <tr>
                     <td>Função:</td>

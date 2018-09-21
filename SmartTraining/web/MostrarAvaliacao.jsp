@@ -106,7 +106,7 @@
                                 for (int i = 0; i < listaObjetivos.size(); i++) {
                                     objetivo = listaObjetivos.get(i);
                             %>
-                            <label><%=objetivo.getNomObjetivo()%></label>
+                            <label><%=objetivo.getNome()%></label>
                             <br>
                             <%
                                 }

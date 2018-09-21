@@ -7,72 +7,71 @@ import java.time.LocalDate;
  */
 
 public class Usuario {
-    protected String codCpf;
-    protected String nomUsuario;
-    protected char idtTipoUsuario;
-    protected String txtSenha;
-    protected String desEmail;
-    protected LocalDate datNascimento;
+    protected String cpf;
+    protected String usuario;
+    protected char tipo;
+    protected String senha;
+    protected String email;
+    protected LocalDate dataNascimento;
 
     public Usuario(){
             
     }
     
-    public Usuario(String codCpf, String nomUsuario, char idtTipoUsuario, 
-                   String txtSenha, String desEmail, LocalDate datNascimento){
-        this.codCpf = codCpf;
-        this.nomUsuario = nomUsuario;
-        this.idtTipoUsuario = idtTipoUsuario;
-        this.txtSenha = txtSenha;
-        this.desEmail = desEmail;
-        this.datNascimento = datNascimento;
+    public Usuario(String cpf, String nome, char tipo, String senha, String email, LocalDate dataNascimento){
+        this.cpf = cpf;
+        this.usuario = nome;
+        this.tipo = tipo;
+        this.senha = senha;
+        this.email = email;
+        this.dataNascimento = dataNascimento;
     }
     
-    public void setCodCpf(String codCpf) {
-        this.codCpf = codCpf;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
     
-    public String getCodCpf() {
-        return codCpf;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setNomUsuario(String nomUsuario) {
-        this.nomUsuario = nomUsuario;
+    public void setNome(String nome) {
+        this.usuario = nome;
     }
     
-    public String getNomUsuario() {
-        return nomUsuario;
+    public String getNome() {
+        return usuario;
     }
 
-    public void setIdtTipoUsuario(char idtTipoUsuario) {
-        this.idtTipoUsuario = idtTipoUsuario;
+    public void setTipo(char tipo) {
+        this.tipo = tipo;
     }
 
-    public char getIdtTipoUsuario() {
-        return idtTipoUsuario;
+    public char getTipo() {
+        return tipo;
     }
 
-    public void setTxtSenha(String txtSenha) {
-        this.txtSenha = txtSenha;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public String getTxtSenha() {
-        return txtSenha;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setDesEmail(String desEmail) {
-        this.desEmail = desEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getDesEmail() {
-        return desEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDatNascimento(LocalDate datNascimento) {
-        this.datNascimento = datNascimento;
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
-    public LocalDate getDatNascimento() {
-        return datNascimento;
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
     }   
 }

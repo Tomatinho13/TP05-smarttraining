@@ -36,10 +36,10 @@ public class AlterarAvaliacao extends Controller {
             Avaliacao avaliacao = new Avaliacao();
             IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
             
-            avaliacao.setCodCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
-            avaliacao.setDatAvaliacao(dataAvaliacao);
-            avaliacao.setCodCpfInstrutor(request.getParameter("codCpfInstrutor").replaceAll("[^0-9]", ""));
-            avaliacao.setIdtRecencia(true);
+            avaliacao.setCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
+            avaliacao.setData(dataAvaliacao);
+            avaliacao.setCpfInstrutor(request.getParameter("codCpfInstrutor").replaceAll("[^0-9]", ""));
+            avaliacao.setRecencia(true);
 
             avaliacao.setPeso(peso);
             avaliacao.setPercentualGordura(percentualGordura);

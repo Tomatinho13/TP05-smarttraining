@@ -20,8 +20,8 @@
             <%
                 Exercicio exercicio = (Exercicio) request.getAttribute("exercicio");
             %>
-            Nome: <%= exercicio.getNomeExercicio()%><br>
-            Descrição: <%= exercicio.getDescricaoExercicio()%><br>
+            Nome: <%= exercicio.getNome()%><br>
+            Descrição: <%= exercicio.getDescricao()%><br>
             
             <button class="btn btn-primary voltar">Voltar</button>
         </div>

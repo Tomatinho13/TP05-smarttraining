@@ -27,7 +27,7 @@
                             exercicio = listaExercicios.get(i);
                     %>
 
-                    <option value=" <%= exercicio.getCodExercicio()%> "><%= exercicio.getNomeExercicio()%></option>
+                    <option value=" <%= exercicio.getNumero()%> "><%= exercicio.getNome()%></option>
 
                     <%
                         }

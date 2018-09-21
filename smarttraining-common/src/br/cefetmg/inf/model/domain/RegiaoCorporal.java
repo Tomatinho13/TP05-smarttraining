@@ -8,33 +8,33 @@ import java.util.ArrayList;
  */
 
 public class RegiaoCorporal {
-    private int nroSequenciaRegiaoCorporal;
-    private String nomeRegiao;
+    private int numero;
+    private String nome;
     private ArrayList<Musculo> listaMusculos;
 
     public RegiaoCorporal() {
     }
 
-    public RegiaoCorporal(int nroSequenciaRegiaoCorporal, String nomeRegiao, ArrayList<Musculo> listaMusculos) {
-        this.nroSequenciaRegiaoCorporal = nroSequenciaRegiaoCorporal;
-        this.nomeRegiao = nomeRegiao;
+    public RegiaoCorporal(int numero, String nome, ArrayList<Musculo> listaMusculos) {
+        this.numero = numero;
+        this.nome = nome;
         this.listaMusculos=new ArrayList<>(listaMusculos);
     }
 
-    public int getNroSequenciaRegiaoCorporal() {
-        return nroSequenciaRegiaoCorporal;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setNroSequenciaRegiaoCorporal(int nroSequenciaRegiaoCorporal) {
-        this.nroSequenciaRegiaoCorporal = nroSequenciaRegiaoCorporal;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public String getNomeRegiao() {
-        return nomeRegiao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeRegiao(String nomeRegiao) {
-        this.nomeRegiao = nomeRegiao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public ArrayList<Musculo> getListaMusculos() {
@@ -44,6 +44,4 @@ public class RegiaoCorporal {
     public void setListaMusculos(ArrayList<Musculo> listaMusculos) {
         this.listaMusculos = new ArrayList<>(listaMusculos);
     }
-    
-    
 }

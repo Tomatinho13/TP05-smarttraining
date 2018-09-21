@@ -8,75 +8,65 @@ import java.util.ArrayList;
  */
 
 public class Ficha {
-    private String codCpfAluno;
-    private int nroFicha;
-    private String codCpfInstrutor;
-    private LocalDate dataFicha;
-    private LocalDate dataPrevistaTroca;
-    private char idtTreino;
+    private String cpfAluno;
+    private int numero;
+    private String cpfInstrutor;
+    private LocalDate data;
+    private LocalDate dataTroca;
     ArrayList<Treino> listaTreino;
 
     public Ficha() {
     }
 
-    public Ficha(String codCpfAluno, int nroFicha, String codCpfInstrutor, LocalDate dataFicha, LocalDate dataPrevistaTroca, char idtTreino, ArrayList<Treino> listaTreino) {
-        this.codCpfAluno = codCpfAluno;
-        this.nroFicha = nroFicha;
-        this.codCpfInstrutor = codCpfInstrutor;
-        this.dataFicha = dataFicha;
-        this.dataPrevistaTroca = dataPrevistaTroca;
-        this.idtTreino = idtTreino;
+    public Ficha(String cpfAluno, int numero, String cpfInstrutor, LocalDate data, LocalDate dataTroca, ArrayList<Treino> listaTreino) {
+        this.cpfAluno = cpfAluno;
+        this.numero = numero;
+        this.cpfInstrutor = cpfInstrutor;
+        this.data = data;
+        this.dataTroca = dataTroca;
         this.listaTreino = new ArrayList<>(listaTreino);
     }
     
-    public String getCodCpfAluno() {
-        return codCpfAluno;
+    public String cpfAluno() {
+        return cpfAluno;
     }
 
-    public void setCodCpfAluno(String codCpfAluno) {
-        this.codCpfAluno = codCpfAluno;
+    public void cpfAluno(String cpfAluno) {
+        this.cpfAluno = cpfAluno;
     }
 
-    public int getNroFicha() {
-        return nroFicha;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setNroFicha(int nroFicha) {
-        this.nroFicha = nroFicha;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public String getCodCpfInstrutor() {
-        return codCpfInstrutor;
+    public String getCpfInstrutor() {
+        return cpfInstrutor;
     }
 
-    public void setCodCpfInstrutor(String codCpfInstrutor) {
-        this.codCpfInstrutor = codCpfInstrutor;
+    public void setCpfInstrutor(String cpfInstrutor) {
+        this.cpfInstrutor = cpfInstrutor;
     }
 
-    public LocalDate getDataFicha() {
-        return dataFicha;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setDataFicha(LocalDate dataFicha) {
-        this.dataFicha = dataFicha;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
-    public LocalDate getDataPrevistaTroca() {
-        return dataPrevistaTroca;
+    public LocalDate getDataTroca() {
+        return dataTroca;
     }
 
-    public void setDataPrevistaTroca(LocalDate dataPrevistaTroca) {
-        this.dataPrevistaTroca = dataPrevistaTroca;
+    public void setDataTroca(LocalDate dataTroca) {
+        this.dataTroca = dataTroca;
     }
-
-    public char getIdtTreino() {
-        return idtTreino;
-    }
-
-    public void setIdtTreino(char idtTreino) {
-        this.idtTreino = idtTreino;
-    }
-
+    
     public ArrayList<Treino> getListaTreino() {
         return listaTreino;
     }

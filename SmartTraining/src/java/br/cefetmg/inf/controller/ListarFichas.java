@@ -21,7 +21,7 @@ public class ListarFichas extends Controller {
             IManterUsuario manterAluno = new ManterAlunoProxy();
             String codCpfAluno = (String) request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
             Usuario aluno = manterAluno.pesquisarPorCpf(codCpfAluno);
-            ArrayList<Ficha> listaFichas = manterFicha.pesquisarPorAluno(aluno.getCodCpf());
+            ArrayList<Ficha> listaFichas = manterFicha.pesquisarPorAluno(aluno.getCpf());
 
             if (!listaFichas.isEmpty()) {
                 request.setAttribute("fichas", listaFichas);
