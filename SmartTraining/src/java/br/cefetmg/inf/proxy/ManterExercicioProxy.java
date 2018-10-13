@@ -134,7 +134,7 @@ public class ManterExercicioProxy implements IManterExercicio {
     }
 
     @Override
-    public void cadastrar(Exercicio exercicio, String[] codMusculos) throws SQLException {
+    public void cadastrar(Exercicio exercicio) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -143,7 +143,6 @@ public class ManterExercicioProxy implements IManterExercicio {
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(exercicio));
-        dados.add(gson.toJson(codMusculos));
         pacoteEnviado = new Pacote(TipoOperacao.CAD_EXERCICIO, dados);
 
         cliente.requisicao(pacoteEnviado);

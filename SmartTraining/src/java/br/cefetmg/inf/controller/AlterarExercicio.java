@@ -4,6 +4,7 @@ import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 public class AlterarExercicio extends Controller {
@@ -17,7 +18,7 @@ public class AlterarExercicio extends Controller {
             String nomeExercicio = request.getParameter("nomeExercicio");
             String descricaoExercicio = request.getParameter("descExercicio");
 
-            Exercicio exercicio = new Exercicio(codExercicio, nomeExercicio, descricaoExercicio);
+            Exercicio exercicio = new Exercicio(codExercicio, nomeExercicio, descricaoExercicio, new ArrayList<>());
 
             IManterExercicio manterExercicio = new ManterExercicioProxy();
 

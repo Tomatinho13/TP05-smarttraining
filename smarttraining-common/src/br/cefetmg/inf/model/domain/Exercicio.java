@@ -1,24 +1,27 @@
 package br.cefetmg.inf.model.domain;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Tomatinho
  */
-
 public class Exercicio {
+
     private int numero;
     private String nome;
     private String descricao;
-    
+    private ArrayList<Musculo> listaMusculos;
 
     public Exercicio() {
-        
+
     }
 
-    public Exercicio(int numero, String nome, String descricao) {
+    public Exercicio(int numero, String nome, String descricao, ArrayList<Musculo> listaMusculos) {
         this.numero = numero;
         this.nome = nome;
         this.descricao = descricao;
+        this.listaMusculos = listaMusculos;
     }
 
     public int getNumero() {
@@ -44,4 +47,13 @@ public class Exercicio {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public ArrayList<Musculo> getListaMusculos() {
+        return listaMusculos;
+    }
+
+    public void setListaMusculos(ArrayList<Musculo> listaMusculos) {
+        this.listaMusculos = listaMusculos;
+    }
+
 }

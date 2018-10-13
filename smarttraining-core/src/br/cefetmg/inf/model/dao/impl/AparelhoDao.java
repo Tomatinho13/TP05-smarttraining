@@ -1,6 +1,7 @@
 package br.cefetmg.inf.model.dao.impl;
 
 import br.cefetmg.inf.model.dao.IAparelhoDao;
+import br.cefetmg.inf.model.dao.IExercicioDao;
 import br.cefetmg.inf.model.db.ConectaBd;
 import com.google.gson.Gson;
 import java.sql.*;
@@ -19,7 +20,7 @@ public class AparelhoDao implements IAparelhoDao {
     private final Gson gson;
 
     public AparelhoDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
     }
 
@@ -80,17 +81,16 @@ public class AparelhoDao implements IAparelhoDao {
     @Override
     public ArrayList<Exercicio> getListaExercicios(int nroAparelho) throws SQLException {
         ArrayList<Exercicio> listaExercicios = new ArrayList<>();
+        IExercicioDao exercicioDao = new ExercicioDao();
 
-        sql = "SELECT * FROM \"Exercicio\" WHERE cod_exercicio IN("
+        sql = "SELECT cod_exercicio FROM \"Exercicio\" WHERE cod_exercicio IN("
                 + "SELECT cod_exercicio FROM \"AparelhoExercicio\" WHERE nro_aparelho = '" + nroAparelho + "')";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
 
         while (resultado.next()) {
-            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"), 
-                    resultado.getString("nom_exercicio"), 
-                    resultado.getString("des_exercicio")));
+            listaExercicios.add(exercicioDao.getExercicio(resultado.getInt("cod_exercicio")));
         }
         if (listaExercicios.isEmpty()) {
 

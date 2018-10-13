@@ -18,7 +18,6 @@ public class ManterRegiaoCorporal implements IManterRegiaoCorporal {
     public RegiaoCorporal pesquisarRegiaoCorporal(int codRegiao) throws SQLException {
         regiaoCorporalDao = new RegiaoCorporalDao();
         RegiaoCorporal resultado = regiaoCorporalDao.getRegiaoCorporal(codRegiao);
-        regiaoCorporalDao.fechaConexao();
         return resultado;
     }
     
@@ -26,20 +25,17 @@ public class ManterRegiaoCorporal implements IManterRegiaoCorporal {
     public void cadastrar(RegiaoCorporal regiaoCorporal, int codMusculo) throws SQLException{
         regiaoCorporalDao = new RegiaoCorporalDao();
         regiaoCorporalDao.postRegiaoCorporal(regiaoCorporal, codMusculo);
-        regiaoCorporalDao.fechaConexao();
     }
 
     @Override
     public void alterar(RegiaoCorporal regiaoCorporal) throws SQLException{
         regiaoCorporalDao = new RegiaoCorporalDao();
         regiaoCorporalDao.putRegiaoCorporal(regiaoCorporal);
-        regiaoCorporalDao.fechaConexao();
     }
 
     @Override
     public void excluir(int codRegiao) throws SQLException{
         regiaoCorporalDao = new RegiaoCorporalDao();
         regiaoCorporalDao.deleteRegiaoCorporal(codRegiao);
-        regiaoCorporalDao.fechaConexao();
     }     
 }

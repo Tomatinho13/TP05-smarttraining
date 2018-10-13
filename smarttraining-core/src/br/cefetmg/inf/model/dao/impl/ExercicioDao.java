@@ -6,8 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.dao.IExercicioDao;
+import br.cefetmg.inf.model.dao.IMusculoDao;
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.AparelhoExercicio;
+import br.cefetmg.inf.model.domain.Musculo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,12 +21,13 @@ public class ExercicioDao implements IExercicioDao {
     private final Gson gson;
 
     public ExercicioDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
     }
 
     @Override
     public Exercicio getExercicio(int codExercicio) throws SQLException {
+        IMusculoDao musculoDao = new MusculoDao();
         exercicio = new Exercicio();
         sql = "SELECT * "
                 + "FROM \"Exercicio\""
@@ -36,7 +39,8 @@ public class ExercicioDao implements IExercicioDao {
         if (resultado.next()) {
             exercicio = new Exercicio(codExercicio,
                     resultado.getString("nom_exercicio"),
-                    resultado.getString("des_exercicio"));
+                    resultado.getString("des_exercicio"),
+                    musculoDao.getExercicioMusculos(codExercicio));
         }
 
         return exercicio;
@@ -44,6 +48,7 @@ public class ExercicioDao implements IExercicioDao {
 
     @Override
     public Exercicio getExercicio(String nomeExercicio) throws SQLException {
+        IMusculoDao musculoDao = new MusculoDao();
         exercicio = new Exercicio();
         sql = "SELECT * "
                 + "FROM \"Exercicio\""
@@ -55,13 +60,15 @@ public class ExercicioDao implements IExercicioDao {
         if (resultado.next()) {
             exercicio = new Exercicio(resultado.getInt("cod_exercicio"),
                     nomeExercicio,
-                    resultado.getString("des_exercicio"));
+                    resultado.getString("des_exercicio"),
+                    musculoDao.getExercicioMusculos(resultado.getInt("cod_exercicio")));
         }
         return exercicio;
     }
 
     @Override
     public AparelhoExercicio getAparelhoExercicio(int codExercicio, int nroAparelho) throws SQLException {
+        IMusculoDao musculoDao = new MusculoDao();
         AparelhoExercicio aparelhoExercicio = new AparelhoExercicio();
         sql = "SELECT nom_exercicio, des_exercicio, nom_aparelho, img_execucao "
                 + "FROM \"Exercicio\""
@@ -76,7 +83,8 @@ public class ExercicioDao implements IExercicioDao {
             Aparelho aparelho = new Aparelho(nroAparelho, resultado.getString("nom_aparelho"));
             exercicio = new Exercicio(codExercicio,
                     resultado.getString("nom_exercicio"),
-                    resultado.getString("des_exercicio"));
+                    resultado.getString("des_exercicio"),
+                    musculoDao.getExercicioMusculos(codExercicio));
             aparelhoExercicio = new AparelhoExercicio(aparelho, exercicio, resultado.getString("img_execucao"));
         }
 
@@ -86,7 +94,7 @@ public class ExercicioDao implements IExercicioDao {
     @Override
     public ArrayList<Exercicio> getRegiaoExercicios(String nomRegiao) throws SQLException {
         ArrayList<Exercicio> listaExercicios = new ArrayList<>();
-        sql = "SELECT * FROM \"Exercicio\" "
+        sql = "SELECT cod_exercicio FROM \"Exercicio\" "
                 + "WHERE cod_exercicio in ("
                 + "SELECT cod_exercicio FROM \"MusculoExercicio\" "
                 + "WHERE cod_musculo IN ("
@@ -98,9 +106,7 @@ public class ExercicioDao implements IExercicioDao {
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
         while (resultado.next()) {
-            listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"),
-                    resultado.getString("nom_regiao"),
-                    resultado.getString("des_regiao")));
+            listaExercicios.add(getExercicio(resultado.getInt("cod_exercicio")));
         }
 
         return listaExercicios;
@@ -108,6 +114,7 @@ public class ExercicioDao implements IExercicioDao {
 
     @Override
     public ArrayList<Exercicio> getMusculoExercicios(int codMusculo) throws SQLException {
+        IMusculoDao musculoDao = new MusculoDao();
         ArrayList<Exercicio> listaExercicios = new ArrayList<>();
 
         sql = "SELECT * FROM \"Exercicio\" WHERE cod_exercicio IN("
@@ -119,7 +126,8 @@ public class ExercicioDao implements IExercicioDao {
         while (resultado.next()) {
             listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"),
                     resultado.getString("nom_exercicio"),
-                    resultado.getString("des_exercicio")));
+                    resultado.getString("des_exercicio"),
+                    musculoDao.getExercicioMusculos(resultado.getInt("cod_exercicio"))));
         }
 
         return listaExercicios;
@@ -127,6 +135,7 @@ public class ExercicioDao implements IExercicioDao {
 
     @Override
     public ArrayList<Exercicio> getListaExercicios() throws SQLException {
+        IMusculoDao musculoDao = new MusculoDao();
         ArrayList<Exercicio> listaExercicios = new ArrayList<>();
         sql = "SELECT * FROM \"Exercicio\"";
 
@@ -136,13 +145,14 @@ public class ExercicioDao implements IExercicioDao {
         while (resultado.next()) {
             listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"),
                     resultado.getString("nom_exercicio"),
-                    resultado.getString("des_exercicio")));
+                    resultado.getString("des_exercicio"),
+                    musculoDao.getExercicioMusculos(resultado.getInt("cod_exercicio"))));
         }
         return listaExercicios;
     }
 
     @Override
-    public void postExercicio(Exercicio exercicio, String[] codMusculos) throws SQLException {
+    public void postExercicio(Exercicio exercicio) throws SQLException {
         sql = "INSERT INTO \"Exercicio\" (nom_exercicio, des_exercicio) VALUES (?, ?);";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -152,7 +162,11 @@ public class ExercicioDao implements IExercicioDao {
 
         sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST( ? as integer), CAST( ? as bigint))";
         stmt = conn.prepareStatement(sql);
-        for (String codMusculo : codMusculos) {
+        
+        ArrayList<Musculo> listaMusculos = exercicio.getListaMusculos();
+        
+        for (int i = 0; i < listaMusculos.size(); i++) {
+            String codMusculo = String.valueOf(listaMusculos.get(i).getNumero());
             stmt.setString(1, String.valueOf(getExercicio(exercicio.getNome()).getNumero()));
             stmt.setString(2, codMusculo);
 

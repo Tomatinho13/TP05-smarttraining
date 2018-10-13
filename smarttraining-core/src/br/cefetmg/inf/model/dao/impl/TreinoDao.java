@@ -21,7 +21,7 @@ public class TreinoDao implements ITreinoDao {
     private final ExercicioDao exercicioDao;
 
     public TreinoDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
         aparelhoDao = new AparelhoDao();
         exercicioDao = new ExercicioDao();

@@ -1,9 +1,13 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Exercicio;
+import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterExercicio;
+import br.cefetmg.inf.model.services.IManterMusculo;
 import br.cefetmg.inf.proxy.ManterExercicioProxy;
+import br.cefetmg.inf.proxy.ManterMusculoProxy;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 public class CadastrarExercicio extends Controller {
@@ -13,17 +17,24 @@ public class CadastrarExercicio extends Controller {
         String jsp = "TelaInicialInstrutor";
 
         try {
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
+            IManterMusculo manterMusculo = new ManterMusculoProxy();
+            
             String nomeExercicio = request.getParameter("nomeExercicio");
             String descricaoExercicio = request.getParameter("descExercicio");
 
-            Exercicio exercicio = new Exercicio(0, nomeExercicio, descricaoExercicio);
-
             String[] codAparelhos = request.getParameterValues("aparelhos");
             String[] codMusculos = request.getParameterValues("musculos");
-
-            IManterExercicio manterExercicio = new ManterExercicioProxy();
-
-            manterExercicio.cadastrar(exercicio, codMusculos);
+            
+            ArrayList<Musculo> listaMusculos = new ArrayList<>();
+            
+            for(String codMusculo : codMusculos){
+                listaMusculos.add(manterMusculo.pesquisarPorCodigo(Integer.parseInt(codMusculo)));
+            }
+            
+            Exercicio exercicio = new Exercicio(0, nomeExercicio, descricaoExercicio, listaMusculos);
+            
+            manterExercicio.cadastrar(exercicio);
 
             exercicio = manterExercicio.pesquisarPorNome(nomeExercicio);
 

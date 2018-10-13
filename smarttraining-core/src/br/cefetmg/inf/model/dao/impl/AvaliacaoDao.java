@@ -19,7 +19,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
     private final ObjetivoDao objetivoDao;
 
     public AvaliacaoDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
         objetivoDao = new ObjetivoDao();
     }

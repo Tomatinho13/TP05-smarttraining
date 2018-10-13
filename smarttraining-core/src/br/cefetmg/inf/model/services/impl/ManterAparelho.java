@@ -18,7 +18,6 @@ public class ManterAparelho implements IManterAparelho {
     public Aparelho pesquisar(int nroAparelho) throws SQLException {
         aparelhoDao = new AparelhoDao();
         Aparelho resultado = aparelhoDao.getAparelho(nroAparelho);
-        aparelhoDao.fechaConexao();
         return resultado;
     }
     
@@ -26,7 +25,6 @@ public class ManterAparelho implements IManterAparelho {
     public Aparelho pesquisar(String nomAparelho) throws SQLException{
         aparelhoDao = new AparelhoDao();
         Aparelho resultado = aparelhoDao.getAparelho(nomAparelho);
-        aparelhoDao.fechaConexao();
         return resultado;
     }
     
@@ -34,7 +32,6 @@ public class ManterAparelho implements IManterAparelho {
     public ArrayList<Aparelho> pesquisarTodos() throws SQLException{
         aparelhoDao = new AparelhoDao();
         ArrayList<Aparelho> resultado = aparelhoDao.getListaAparelhos();
-        aparelhoDao.fechaConexao();
         return resultado;
     }
 
@@ -42,20 +39,17 @@ public class ManterAparelho implements IManterAparelho {
     public void cadastrar(Aparelho aparelho) throws SQLException {
         aparelhoDao = new AparelhoDao();
         aparelhoDao.postAparelho(aparelho);
-        aparelhoDao.fechaConexao();
     }
 
     @Override
     public void alterar(Aparelho aparelho) throws SQLException {
         aparelhoDao = new AparelhoDao();
         aparelhoDao.putAparelho(aparelho);
-        aparelhoDao.fechaConexao();
     }
 
     @Override
     public void excluir(int nroAparelho) throws SQLException {
         aparelhoDao = new AparelhoDao();
         aparelhoDao.deleteAparelho(nroAparelho);
-        aparelhoDao.fechaConexao();
     }
 }

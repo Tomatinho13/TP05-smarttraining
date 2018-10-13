@@ -18,7 +18,7 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
     private final Gson gson;
 
     public RegiaoCorporalDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
     }
 

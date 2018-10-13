@@ -431,8 +431,7 @@ public class AdapterService implements Runnable {
             }
             case CAD_EXERCICIO: {
                 try {
-                    manterExercicio.cadastrar(gson.fromJson(pacote.getDados().get(0), Exercicio.class),
-                            gson.fromJson(pacote.getDados().get(1), String[].class));
+                    manterExercicio.cadastrar(gson.fromJson(pacote.getDados().get(0), Exercicio.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }

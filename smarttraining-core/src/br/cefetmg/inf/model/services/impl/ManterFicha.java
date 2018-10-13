@@ -18,7 +18,6 @@ public class ManterFicha implements IManterFicha {
     public Ficha pesquisarPorCodigo(String codCpf, int nroFicha) throws SQLException {
         fichaDao = new FichaDao();
         Ficha resultado = fichaDao.getFicha(codCpf, nroFicha);
-        fichaDao.fechaConexao();
         return resultado;
     }
 
@@ -26,7 +25,6 @@ public class ManterFicha implements IManterFicha {
     public ArrayList<Ficha> pesquisarPorAluno(String codCpf) throws SQLException {
         fichaDao = new FichaDao();
         ArrayList<Ficha> resultado = new ArrayList<>(fichaDao.getListaFicha(codCpf));
-        fichaDao.fechaConexao();
         return resultado;
     }
 
@@ -34,20 +32,17 @@ public class ManterFicha implements IManterFicha {
     public void cadastrar(Ficha ficha) throws SQLException {
         fichaDao = new FichaDao();
         fichaDao.postFicha(ficha);
-        fichaDao.fechaConexao();
     }
 
     @Override
     public void alterar(Ficha ficha) throws SQLException {
         fichaDao = new FichaDao();
         fichaDao.putFicha(ficha);
-        fichaDao.fechaConexao();
     }
 
     @Override
     public void excluir(String codCpf, int nroFicha) throws SQLException {
         fichaDao = new FichaDao();
         fichaDao.deleteFicha(codCpf, nroFicha);
-        fichaDao.fechaConexao();
     }
 }

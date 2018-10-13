@@ -20,7 +20,7 @@ public class AtividadeDao implements IAtividadeDao {
     private final ExercicioDao exercicioDao;
 
     public AtividadeDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
         exercicioDao = new ExercicioDao();
     }

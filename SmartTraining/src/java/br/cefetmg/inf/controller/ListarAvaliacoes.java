@@ -25,19 +25,7 @@ public class ListarAvaliacoes extends Controller {
 
             if (!listaAvaliacoes.isEmpty()) {
                 request.setAttribute("avaliacoes", listaAvaliacoes);
-                request.setAttribute("aluno", aluno);
-
-//                if (request.getAttribute("tipoView").equals("text/html")) {
-//                    jsp = "/L"
-//                }
-//                } 
-                
-//                else if (request.getAttribute("tipoView").equals("text/json")) {
-//                    request.setAttribute("avaliacoes", listaAvaliacoes);
-//                    request.setAttribute("aluno", aluno);
-//                }
-                
-                
+                request.setAttribute("aluno", aluno);                
                 jsp = "/ListaAvaliacoes";
             } else {
                 String erro = "Nao existe registro de avaliacoes!";

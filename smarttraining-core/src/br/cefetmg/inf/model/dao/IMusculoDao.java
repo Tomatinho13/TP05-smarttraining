@@ -14,6 +14,8 @@ public interface IMusculoDao {
 
     public ArrayList<Musculo> getListaMusculos() throws SQLException;
 
+    public ArrayList<Musculo> getExercicioMusculos(int codExercicio);
+
     public void postMusculo(Musculo musculo) throws SQLException;
 
     public void putMusculo(Musculo musculo) throws SQLException;

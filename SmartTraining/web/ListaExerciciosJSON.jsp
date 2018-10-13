@@ -12,9 +12,22 @@
 <json:object>
     <json:array name="listaExercicios" var="exercicio" items="${exercicios}">
         <json:object>
-            <json:property name="codExercicio" value="${exercicio.codExercicio}"/>
-            <json:property name="nomeExercicio" value="${exercicio.nomeExercicio}"/>
-            <json:property name="descricaoExercicio" value="${exercicio.descricaoExercicio}"/>
+            <json:property name="codExercicio" value="${exercicio.numero}"/>
+            <json:property name="nomeExercicio" value="${exercicio.nome}"/>
+            <json:property name="descricaoExercicio" value="${exercicio.descricao}"/>
+                <json:array name="listaMusculos" var="musculo" items="${exercicios.listaMusculos}">
+                    <json:property name="codMusculo" value="${musculo.numero}"/>
+                    <json:property name="nomeMusculo" value="${exercicio.nome}"/>
+                    <json:property name="codRegiaoCorp" value="${exercicio.codRegiaoCorporal}"/>
+                    <json:property name="imagemMusculo" value="${exercicio.caminhoImagem}"/>
+                    <json:array name="listaExercicios" var="exercicioMusculo" items="${musculo.listaExercicios}">
+                        <json:object>
+                            <json:property name="codExercicio" value="${exercicioMusculo.numero}"/>
+                            <json:property name="nomeExercicio" value="${exercicioMusculo.nome}"/>
+                            <json:property name="descricaoExercicio" value="${exercicioMusculo.descricao}"/>
+                        </json:object>
+                    </json:array>
+                </json:array>
         </json:object>
     </json:array>
 </json:object>

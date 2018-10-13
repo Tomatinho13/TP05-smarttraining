@@ -21,7 +21,7 @@ public class DiaTreinoDao implements IDiaTreinoDao {
     private DiaTreino diaTreino;
 
     public DiaTreinoDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
     }
 

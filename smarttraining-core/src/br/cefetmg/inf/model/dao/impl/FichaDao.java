@@ -18,7 +18,7 @@ public class FichaDao implements IFichaDao {
     private final TreinoDao treinoDao;
 
     public FichaDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
         treinoDao = new TreinoDao();
     }

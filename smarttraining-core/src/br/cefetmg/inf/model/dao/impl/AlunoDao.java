@@ -17,7 +17,7 @@ public class AlunoDao implements IUsuarioDao {
     private final Gson gson;
 
     public AlunoDao() {
-        conn = ConectaBd.conecta();
+        conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
     }
 

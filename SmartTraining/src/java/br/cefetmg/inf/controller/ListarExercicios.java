@@ -7,10 +7,6 @@ import br.cefetmg.inf.proxy.ManterMusculoProxy;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Tomatinho
- */
 public class ListarExercicios extends Controller {
 
     @Override

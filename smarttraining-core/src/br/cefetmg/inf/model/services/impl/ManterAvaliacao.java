@@ -20,7 +20,6 @@ public class ManterAvaliacao implements IManterAvaliacao {
     public ArrayList<Avaliacao> pesquisarPorAluno(String codCpf) throws SQLException{
         avaliacaoDao = new AvaliacaoDao();
         ArrayList<Avaliacao> resultado = new ArrayList<>(avaliacaoDao.getListaAvaliacao(codCpf));
-        avaliacaoDao.fechaConexao();
         return resultado;       
     }
     
@@ -28,7 +27,6 @@ public class ManterAvaliacao implements IManterAvaliacao {
     public Avaliacao pesquisar(String codCpf, LocalDate data) throws SQLException {
         avaliacaoDao = new AvaliacaoDao();
         Avaliacao resultado = avaliacaoDao.getAvaliacao(codCpf, data);
-        avaliacaoDao.fechaConexao();
         return resultado;
     }
     
@@ -36,20 +34,17 @@ public class ManterAvaliacao implements IManterAvaliacao {
     public void cadastrar(Avaliacao avaliacao) throws SQLException{
         avaliacaoDao = new AvaliacaoDao();
         avaliacaoDao.postAvaliacao(avaliacao);
-        avaliacaoDao.fechaConexao();
     }
 
     @Override
     public void alterar(Avaliacao avaliacao) throws SQLException{
         avaliacaoDao = new AvaliacaoDao();
         avaliacaoDao.putAvaliacao(avaliacao);
-        avaliacaoDao.fechaConexao();
     }
 
     @Override
     public void excluir(String codCpf, LocalDate datAvaliacao) throws SQLException {
         avaliacaoDao = new AvaliacaoDao();
         avaliacaoDao.deleteAvaliacao(codCpf, datAvaliacao);
-        avaliacaoDao.fechaConexao();
     }     
 }
