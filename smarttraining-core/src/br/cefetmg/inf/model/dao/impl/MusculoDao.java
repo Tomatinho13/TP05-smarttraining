@@ -25,7 +25,7 @@ public class MusculoDao implements IMusculoDao {
     @Override
     public Musculo getMusculo(int codMusculo) throws SQLException {
         IExercicioDao exercicioDao = new ExercicioDao();
-        sql = "SELECT * FROM Musculo WHERE cod_musculo = '"+codMusculo+"'";
+        sql = "SELECT * FROM \"Musculo\" WHERE cod_musculo = '"+codMusculo+"'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
@@ -66,14 +66,14 @@ public class MusculoDao implements IMusculoDao {
     public ArrayList<Musculo> getExercicioMusculos(int codExercicio) {
         ArrayList<Musculo> listaMusculos = new ArrayList<>();
 
-        sql = "SELECT cod_musculo FROM \"Musculo\" WHERE cod_musculo IN("
+        sql = "SELECT * FROM \"Musculo\" WHERE cod_musculo IN("
                 + "SELECT cod_musculo FROM \"MusculoExercicio\" WHERE cod_exercicio = '" + codExercicio + "')";
         try {
             Statement stmt = conn.createStatement();
             ResultSet resultado = stmt.executeQuery(sql);
 
             while (resultado.next()) {
-                listaMusculos.add(getMusculo(resultado.getInt("cod_musculo")));
+                listaMusculos.add(new Musculo(resultado.getInt("cod_musculo"), resultado.getInt("cod_regCorp"), resultado.getString("nom_musculo"), resultado.getString("img_musculo"), new ArrayList<>()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MusculoDao.class.getName()).log(Level.SEVERE, null, ex);

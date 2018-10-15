@@ -11,9 +11,9 @@
 <json:object>
     <json:array name="exercicios" var="exercicio" items="${exercicios}">
         <json:object>
-            <json:property name="codExercicio" value="${exercicio.codExercicio}"/>
-            <json:property name="nomeExercicio" value="${exercicio.nomeExercicio}"/>
-            <json:property name="descricaoExercicio" value="${exercicio.descricaoExercicio}"/>
+            <json:property name="codExercicio" value="${exercicio.numero}"/>
+            <json:property name="nomeExercicio" value="${exercicio.nome}"/>
+            <json:property name="descricaoExercicio" value="${exercicio.descricao}"/>
         </json:object>
     </json:array>
 </json:object>

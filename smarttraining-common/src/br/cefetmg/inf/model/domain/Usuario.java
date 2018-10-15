@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class Usuario {
     protected String cpf;
-    protected String usuario;
+    protected String nome;
     protected char tipo;
     protected String senha;
     protected String email;
@@ -20,7 +20,7 @@ public class Usuario {
     
     public Usuario(String cpf, String nome, char tipo, String senha, String email, LocalDate dataNascimento){
         this.cpf = cpf;
-        this.usuario = nome;
+        this.nome = nome;
         this.tipo = tipo;
         this.senha = senha;
         this.email = email;
@@ -36,11 +36,11 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
-        this.usuario = nome;
+        this.nome = nome;
     }
     
     public String getNome() {
-        return usuario;
+        return nome;
     }
 
     public void setTipo(char tipo) {

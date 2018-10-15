@@ -11,10 +11,10 @@
 
 
 <json:object name="usuario">
-    <json:property name="codCpf" value="${usuario.codCpf}"/>
-    <json:property name="nomUsuario" value="${usuario.nomUsuario}"/>
-    <json:property name="idtTipoUsuario" value="${usuario.idtTipoUsuario}"/>
-    <json:property name="txtSenha" value="${usuario.txtSenha}"/>
-    <json:property name="desEmail" value="${usuario.desEmail}"/>
-    <json:property name="datNascimento" value="${usuario.datNascimento}"/>
+    <json:property name="codCpf" value="${usuario.cpf}"/>
+    <json:property name="nomUsuario" value="${usuario.nome}"/>
+    <json:property name="idtTipoUsuario" value="${usuario.tipo}"/>
+    <json:property name="txtSenha" value="${usuario.senha}"/>
+    <json:property name="desEmail" value="${usuario.email}"/>
+    <json:property name="datNascimento" value="${usuario.dataNascimento}"/>
 </json:object>

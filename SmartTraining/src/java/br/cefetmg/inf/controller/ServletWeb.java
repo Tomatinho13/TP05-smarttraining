@@ -73,7 +73,7 @@ public class ServletWeb extends HttpServlet {
 
         final List<String> tiposAceitos = Arrays.asList(cabecalhoAceita.split(","));
 
-        final int indiceJson = tiposAceitos.indexOf("text/json");
+        final int indiceJson = tiposAceitos.indexOf("application/json");
         final int indiceHtml = tiposAceitos.indexOf("text/html");
 
         if (indiceJson > indiceHtml) {

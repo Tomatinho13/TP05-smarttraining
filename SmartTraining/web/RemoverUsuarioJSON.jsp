@@ -10,12 +10,11 @@
 <json:object>
     <json:array name="usuarios" var="usuario" items="${usuarios}">
         <json:object>
-            <json:property name="codCpfUsuario" value="${usuario.codCpf}"/>
-            <json:property name="nomUsuario" value="${usuario.nomUsuario}"/>
-            <json:property name="idtTipoUsuario" value="${usuario.idtTipoUsuario}"/>
-            <json:property name="txtSenhaUsuario" value="${usuario.txtSenha}"/>
-            <json:property name="desEmailUsuario" value="${usuario.desEmail}"/>
-            <json:property name="datNascimentoUsuario" value="${usuario.datNascimento}"/>
+            <json:property name="codCpfUsuario" value="${usuario.cpf}"/>
+            <json:property name="nomUsuario" value="${usuario.nome}"/>
+            <json:property name="idtTipoUsuario" value="${usuario.tipo}"/>
+            <json:property name="desEmailUsuario" value="${usuario.email}"/>
+            <json:property name="datNascimentoUsuario" value="${usuario.dataNascimento}"/>
         </json:object>
     </json:array>
 </json:object>

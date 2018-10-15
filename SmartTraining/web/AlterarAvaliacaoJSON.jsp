@@ -12,19 +12,19 @@
 
 
 <json:object>
-    <json:object name="">
-        <json:property name="codCpfUsuario" value="${usuario.codCpf}"/>
-        <json:property name="nomUsuario" value="${usuario.nomUsuario}"/>
-        <json:property name="idtTipoUsuario" value="${usuario.idtTipoUsuario}"/>
-        <json:property name="txtSenhaUsuario" value="${usuario.txtSenha}"/>
-        <json:property name="desEmailUsuario" value="${usuario.desEmail}"/>
-        <json:property name="datNascimentoUsuario" value="${usuario.datNascimento}"/>
+    <json:object name="aluno">
+        <json:property name="codCpfUsuario" value="${usuario.cpf}"/>
+        <json:property name="nomUsuario" value="${usuario.nome}"/>
+        <json:property name="idtTipoUsuario" value="${usuario.tipo}"/>
+        <json:property name="txtSenhaUsuario" value="${usuario.senha}"/>
+        <json:property name="desEmailUsuario" value="${usuario.email}"/>
+        <json:property name="datNascimentoUsuario" value="${usuario.dataNascimento}"/>
     </json:object>
-    <json:object>
-        <json:property name="codCpfAlunoAvaliacao" value="${avaliacao.codCpfAluno}"/>
-        <json:property name="datAvaliacao" value="${avaliacao.datAvaliacao}"/>
-        <json:property name="codCpfInstrutor" value="${avaliacao.codCpfInstrutor}"/>
-        <json:property name="idtRecencia" value="${avaliacao.idtRecencia}"/>
+    <json:object name="avaliacao">
+        <json:property name="codCpfAluno" value="${avaliacao.cpfAluno}"/>
+        <json:property name="datAvaliacao" value="${avaliacao.data}"/>
+        <json:property name="codCpfInstrutor" value="${avaliacao.cpfInstrutor}"/>
+        <json:property name="idtRecencia" value="${avaliacao.recencia}"/>
         <json:property name="peso" value="${avaliacao.peso}"/>
         <json:property name="percentualGordura" value="${avaliacao.percentualGordura}"/>
         <json:property name="tamanhoPescoco" value="${avaliacao.tamanhoPescoco}"/>
@@ -42,11 +42,11 @@
         <json:property name="tamanhoCoxaDireita" value="${avaliacao.tamanhoCoxaDireita}"/>
         <json:property name="tamanhoPanturrilhaEsquerda" value="${avaliacao.tamanhoPanturrilhaEsquerda}"/>
         <json:property name="tamanhoPanturrilhaDireita" value="${avaliacao.tamanhoPanturrilhaDireita}"/>
-        <json:array var="objetivo" items="${avaliacao.listaObjetivos}">
+        <json:array name="listaObjetivos" var="objetivo" items="${avaliacao.listaObjetivos}">
             <json:object>
-                <json:property name="codObjetivo" value="${objetivo.codObjetivo}"/>
-                <json:property name="nomObjetivo" value="${objetivo.nomObjetivo}"/>
-                <json:property name="desObjetivo" value="${objetivo.desObjetivo}"/>
+                <json:property name="codObjetivo" value="${objetivo.codigo}"/>
+                <json:property name="nomObjetivo" value="${objetivo.nome}"/>
+                <json:property name="desObjetivo" value="${objetivo.descricao}"/>
             </json:object>
         </json:array>
     </json:object>

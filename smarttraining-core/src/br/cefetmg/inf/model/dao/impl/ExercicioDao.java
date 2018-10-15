@@ -127,7 +127,7 @@ public class ExercicioDao implements IExercicioDao {
             listaExercicios.add(new Exercicio(resultado.getInt("cod_exercicio"),
                     resultado.getString("nom_exercicio"),
                     resultado.getString("des_exercicio"),
-                    musculoDao.getExercicioMusculos(resultado.getInt("cod_exercicio"))));
+                    new ArrayList<>()));
         }
 
         return listaExercicios;

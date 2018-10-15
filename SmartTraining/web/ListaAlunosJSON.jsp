@@ -1,17 +1,19 @@
 <%-- 
-    Document   : ListaAlunosJSON
-    Created on : 18/09/2018, 10:26:31
-    Author     : Aluno
+    Document   : ListaAvaliacoesJSON
+    Created on : 17/09/2018, 17:12:24
+    Author     : Jamalz
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@page import="java.util.ArrayList"%>
+<%@page import="br.cefetmg.inf.model.domain.Avaliacao"%>
+<%@page contentType="text/json" pageEncoding="UTF-8"%>
+<%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
+
+<json:object>
+    <json:array name="listaAlunos" var="aluno" items="${alunos}">
+        <json:object>
+            <json:property name="codCpfAluno" value="${aluno.cpf}"/>
+            <json:property name="dataAvaliacao" value="${aluno.nome}"/>
+        </json:object>
+    </json:array>
+</json:object>
