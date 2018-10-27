@@ -26,6 +26,7 @@ public class ServletWeb extends HttpServlet {
         controllers.put("CadastrarInstrutor", new CadastrarInstrutor());
         controllers.put("CadastrarAvaliacao", new CadastrarAvaliacao());
         controllers.put("CadastrarExercicio", new CadastrarExercicio());
+        controllers.put("CadastrarFicha", new CadastrarFicha());
         controllers.put("ListarAvaliacoes", new ListarAvaliacoes());
         controllers.put("ListarExercicios", new ListarExercicios());
         controllers.put("ListarFichas", new ListarFichas());
