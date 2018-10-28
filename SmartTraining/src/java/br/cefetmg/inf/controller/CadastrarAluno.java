@@ -9,8 +9,6 @@ import br.cefetmg.inf.proxy.ManterAlunoProxy;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class CadastrarAluno extends Controller {
 
@@ -21,7 +19,7 @@ public class CadastrarAluno extends Controller {
             try {
                 BufferedReader leitor = request.getReader();
                 Gson gson = new Gson();
-                Usuario aluno = gson.fromJson(leitor, Usuario.class);
+                Usuario aluno = gson.fromJson(leitor.readLine(), Usuario.class);
                 IManterUsuario manterAluno = new ManterAlunoProxy();
                 manterAluno.cadastrar(aluno);
             } catch (IOException ex) {
