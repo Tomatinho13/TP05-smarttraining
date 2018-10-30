@@ -22,17 +22,20 @@ public class CadastrarAluno extends Controller {
                 Usuario aluno = gson.fromJson(leitor.readLine(), Usuario.class);
                 IManterUsuario manterAluno = new ManterAlunoProxy();
                 manterAluno.cadastrar(aluno);
+                request.setAttribute("resposta", "Sucesso!");
+                jsp = "resposta";
             } catch (IOException ex) {
                 ex.printStackTrace(System.err);
                 String erro = "Erro no recebimento dos dados do aluno!";
                 request.setAttribute("erro", erro);
-                jsp = "erro.jsp";
+                jsp = "erro";
                 
             } catch (SQLException ex) {
                 ex.printStackTrace(System.err);
                 String erro = "Erro ao cadastrar o aluno!";
                 request.setAttribute("erro", erro);
-                jsp = "erro.jsp";
+                jsp = "erro";
+                
             }
         } else {
             try {
