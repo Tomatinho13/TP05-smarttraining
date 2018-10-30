@@ -13,7 +13,7 @@
 
 <json:object>
     <json:object name="aluno">
-        <json:property name="codCpfUsuario" value="${usuario.cpf}"/>
+        <json:property name="codCpf" value="${usuario.cpf}"/>
         <json:property name="nomUsuario" value="${usuario.nome}"/>
         <json:property name="idtTipoUsuario" value="${usuario.tipo}"/>
         <json:property name="txtSenhaUsuario" value="${usuario.senha}"/>

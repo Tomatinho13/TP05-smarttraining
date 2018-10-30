@@ -10,7 +10,7 @@
 <json:object>
     <json:array name="usuarios" var="usuario" items="${usuarios}">
         <json:object>
-            <json:property name="codCpfUsuario" value="${usuario.cpf}"/>
+            <json:property name="codCpf" value="${usuario.cpf}"/>
             <json:property name="nomUsuario" value="${usuario.nome}"/>
             <json:property name="idtTipoUsuario" value="${usuario.tipo}"/>
             <json:property name="desEmailUsuario" value="${usuario.email}"/>
