@@ -54,7 +54,7 @@ ALTER TABLE public."Aluno" OWNER TO postgres;
 --
 
 CREATE TABLE "Aparelho" (
-    nro_aparelho smallint NOT NULL,
+    nro_aparelho integer NOT NULL,
     nom_aparelho character varying NOT NULL
 );
 
@@ -68,8 +68,8 @@ ALTER TABLE public."Aparelho" OWNER TO postgres;
 
 CREATE TABLE "AparelhoExercicio" (
     cod_exercicio integer NOT NULL,
-    nro_aparelho smallint NOT NULL,
-    img_execucao bigint NOT NULL
+    nro_aparelho integer NOT NULL,
+    img_execucao character varying NOT NULL
 );
 
 
@@ -84,24 +84,23 @@ CREATE TABLE "Avaliacao" (
     cod_cpf character varying(11) NOT NULL,
     dat_avaliacao date NOT NULL,
     cod_cpf_instrutor character varying(11) NOT NULL,
-    idt_recencia boolean NOT NULL,
     qtd_peso numeric(5,2) NOT NULL,
-    "qtd_massaGorda" numeric(5,2) NOT NULL,
-    "qtd_percGordura" numeric(5,2) NOT NULL,
+    qtd_massaGorda numeric(5,2) NOT NULL,
+    qtd_percGordura numeric(5,2) NOT NULL,
     tam_pescoco numeric(6,2) NOT NULL,
     tam_ombro numeric(6,2) NOT NULL,
     tam_torax numeric(6,2) NOT NULL,
     tam_abdomen numeric(6,2) NOT NULL,
     tam_cintura numeric(6,2) NOT NULL,
     tam_quadril numeric(6,2) NOT NULL,
-    "tam_bracoEsq" numeric(6,2) NOT NULL,
-    "tam_bracoDir" numeric(6,2) NOT NULL,
-    "tam_antebracoEsq" numeric(6,2) NOT NULL,
-    "tam_antebracoDir" numeric(6,2) NOT NULL,
-    "tam_coxaEsq" numeric(6,2) NOT NULL,
-    "tam_coxaDir" numeric(6,2) NOT NULL,
-    "tam_panturrilhaEsq" numeric(6,2) NOT NULL,
-    "tam_panturrilhaDir" numeric(6,2) NOT NULL
+    tam_bracoEsq numeric(6,2) NOT NULL,
+    tam_bracoDir numeric(6,2) NOT NULL,
+    tam_antebracoEsq numeric(6,2) NOT NULL,
+    tam_antebracoDir numeric(6,2) NOT NULL,
+    tam_coxaEsq numeric(6,2) NOT NULL,
+    tam_coxaDir numeric(6,2) NOT NULL,
+    tam_panturrilhaEsq numeric(6,2) NOT NULL,
+    tam_panturrilhaDir numeric(6,2) NOT NULL
 );
 
 
@@ -114,9 +113,9 @@ ALTER TABLE public."Avaliacao" OWNER TO postgres;
 
 CREATE TABLE "DiaTreino" (
     cod_exercicio integer NOT NULL,
-    nro_aparelho smallint NOT NULL,
+    nro_aparelho integer NOT NULL,
     cod_cpf character varying(11) NOT NULL,
-    nro_treino smallint NOT NULL,
+    nro_treino integer NOT NULL,
     nro_ficha integer NOT NULL,
     dat_treino date NOT NULL
 );
@@ -131,8 +130,8 @@ ALTER TABLE public."DiaTreino" OWNER TO postgres;
 
 CREATE TABLE "Exercicio" (
     cod_exercicio integer NOT NULL,
-    nom_exercicio character varying(20) NOT NULL,
-    des_exercicio character varying(50) NOT NULL
+    nom_exercicio character varying NOT NULL,
+    des_exercicio character varying NOT NULL
 );
 
 
@@ -172,8 +171,7 @@ CREATE TABLE "Ficha" (
     nro_ficha integer NOT NULL,
     cod_cpf_instrutor character varying(11) NOT NULL,
     dat_ficha date NOT NULL,
-    dat_prevista_troca date NOT NULL,
-    idt_treino character varying(1) NOT NULL
+    dat_prevista_troca date NOT NULL
 );
 
 
@@ -198,10 +196,10 @@ ALTER TABLE public."Instrutor" OWNER TO postgres;
 --
 
 CREATE TABLE "Musculo" (
-    cod_musculo bigint NOT NULL,
-    "cod_regCorp" bigint,
+    cod_musculo integer NOT NULL,
+    cod_regCorp integer,
     nom_musculo character varying NOT NULL,
-    img_musculo bigint NOT NULL
+    img_musculo integer NOT NULL
 );
 
 
@@ -214,7 +212,7 @@ ALTER TABLE public."Musculo" OWNER TO postgres;
 
 CREATE TABLE "MusculoExercicio" (
     cod_exercicio integer NOT NULL,
-    cod_musculo bigint NOT NULL
+    cod_musculo integer NOT NULL
 );
 
 
@@ -226,7 +224,7 @@ ALTER TABLE public."MusculoExercicio" OWNER TO postgres;
 --
 
 CREATE TABLE "Objetivo" (
-    cod_objetivo bigint NOT NULL,
+    cod_objetivo integer NOT NULL,
     nom_objetivo character varying NOT NULL,
     des_objetivo character varying NOT NULL
 );
@@ -242,7 +240,7 @@ ALTER TABLE public."Objetivo" OWNER TO postgres;
 CREATE TABLE "ObjetivoAvaliacao" (
     dat_avaliacao date NOT NULL,
     cod_cpf character varying(11) NOT NULL,
-    cod_objetivo bigint NOT NULL
+    cod_objetivo integer NOT NULL
 );
 
 
@@ -254,8 +252,8 @@ ALTER TABLE public."ObjetivoAvaliacao" OWNER TO postgres;
 --
 
 CREATE TABLE "RegiaoCorporal" (
-    "cod_regCorp" bigint NOT NULL,
-    "nom_regCorp" character varying NOT NULL
+    cod_regCorp integer NOT NULL,
+    nom_regCorp character varying NOT NULL
 );
 
 
@@ -269,7 +267,7 @@ ALTER TABLE public."RegiaoCorporal" OWNER TO postgres;
 CREATE TABLE "Treino" (
     cod_cpf character varying(11) NOT NULL,
     nro_ficha integer NOT NULL,
-    nro_treino smallint NOT NULL,
+    nro_treino integer NOT NULL,
     des_treino character varying NOT NULL
 );
 
@@ -283,11 +281,11 @@ ALTER TABLE public."Treino" OWNER TO postgres;
 
 CREATE TABLE "TreinoExercicio" (
     cod_cpf character varying(11) NOT NULL,
-    nro_treino smallint NOT NULL,
+    nro_treino integer NOT NULL,
     cod_exercicio integer NOT NULL,
-    nro_aparelho smallint NOT NULL,
+    nro_aparelho integer NOT NULL,
     nro_ficha integer NOT NULL,
-    nro_series smallint NOT NULL,
+    nro_series integer NOT NULL,
     nro_repeticoes character varying(6) NOT NULL,
     qtd_peso integer NOT NULL
 );
@@ -302,10 +300,10 @@ ALTER TABLE public."TreinoExercicio" OWNER TO postgres;
 
 CREATE TABLE "Usuario" (
     cod_cpf character varying(11) NOT NULL,
-    nom_usuario character varying(50) NOT NULL,
+    nom_usuario character varying NOT NULL,
     idt_tipo_usuario character varying(1) NOT NULL,
-    txt_senha character varying(20) NOT NULL,
-    des_email character varying(30) NOT NULL,
+    txt_senha character varying NOT NULL,
+    des_email character varying NOT NULL,
     dat_nascimento date NOT NULL
 );
 
@@ -352,7 +350,7 @@ INSERT INTO "Aparelho" VALUES (1, 'Banco Flexor');
 -- Data for Name: Avaliacao; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "Avaliacao" VALUES ('00000000000', '2018-09-04', '11111111111', true, 24.00, 11.00, 21.00, 9.00, 12.00, 8.00, 20.00, 17.00, 26.00, 18.00, 19.00, 24.00, 17.00, 25.00, 18.00, 24.00, 15.00);
+INSERT INTO "Avaliacao" VALUES ('00000000000', '2018-09-04', '11111111111', 24.00, 11.00, 21.00, 9.00, 12.00, 8.00, 20.00, 17.00, 26.00, 18.00, 19.00, 24.00, 17.00, 25.00, 18.00, 24.00, 15.00);
 
 
 --
@@ -495,7 +493,7 @@ ALTER TABLE ONLY "Musculo"
 --
 
 ALTER TABLE ONLY "RegiaoCorporal"
-    ADD CONSTRAINT "Key17" PRIMARY KEY ("cod_regCorp");
+    ADD CONSTRAINT "Key17" PRIMARY KEY (cod_regCorp);
 
 
 --
@@ -636,7 +634,7 @@ CREATE INDEX "IX_Relationship13" ON "Avaliacao" USING btree (cod_cpf_instrutor);
 -- Name: IX_Relationship20; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE INDEX "IX_Relationship20" ON "Musculo" USING btree ("cod_regCorp");
+CREATE INDEX "IX_Relationship20" ON "Musculo" USING btree (cod_regCorp);
 
 
 --
@@ -681,7 +679,7 @@ ALTER TABLE ONLY "Treino"
 --
 
 ALTER TABLE ONLY "Musculo"
-    ADD CONSTRAINT "Relationship20" FOREIGN KEY ("cod_regCorp") REFERENCES "RegiaoCorporal"("cod_regCorp") ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT "Relationship20" FOREIGN KEY (cod_regCorp) REFERENCES "RegiaoCorporal"(cod_regCorp) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
