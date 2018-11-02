@@ -12,9 +12,9 @@ public interface IManterAparelho {
     
     public ArrayList<Aparelho> pesquisarTodos() throws SQLException;
     
-    public void cadastrar(Aparelho aparelho) throws SQLException;
+    public boolean cadastrar(Aparelho aparelho) throws SQLException;
 
-    public void alterar(Aparelho aparelho) throws SQLException;
+    public boolean alterar(Aparelho aparelho) throws SQLException;
 
-    public void excluir(int nroAparelho) throws SQLException;
+    public boolean excluir(int nroAparelho) throws SQLException;
 }

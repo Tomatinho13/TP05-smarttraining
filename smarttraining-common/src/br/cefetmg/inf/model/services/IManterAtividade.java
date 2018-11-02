@@ -7,9 +7,9 @@ public interface IManterAtividade {
 
     public Atividade pesquisar(String codCpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException;
 
-    public void cadastrar(Atividade atividade) throws SQLException;
+    public boolean cadastrar(Atividade atividade) throws SQLException;
 
-    public void alterar(Atividade atividade) throws SQLException;
+    public boolean alterar(Atividade atividade) throws SQLException;
 
-    public void excluir(String codCpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException;
+    public boolean excluir(String codCpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException;
 }

@@ -11,9 +11,9 @@ public interface IManterAvaliacao {
     
     public Avaliacao pesquisar(String codCpf, LocalDate data) throws SQLException;
 
-    public void cadastrar(Avaliacao avaliacao) throws SQLException;
+    public boolean cadastrar(Avaliacao avaliacao) throws SQLException;
 
-    public void alterar(Avaliacao avaliacao) throws SQLException;
+    public boolean alterar(Avaliacao avaliacao) throws SQLException;
 
-    public void excluir(String codCpf, LocalDate datAvaliacao) throws SQLException;
+    public boolean excluir(String codCpf, LocalDate datAvaliacao) throws SQLException;
 }

@@ -36,20 +36,38 @@ public class ManterAparelho implements IManterAparelho {
     }
 
     @Override
-    public void cadastrar(Aparelho aparelho) throws SQLException {
-        aparelhoDao = new AparelhoDao();
-        aparelhoDao.postAparelho(aparelho);
+    public boolean cadastrar(Aparelho aparelho) throws SQLException {
+        try {
+            aparelhoDao = new AparelhoDao();
+            aparelhoDao.postAparelho(aparelho);
+        } catch(SQLException exception){
+            //retorno da excecao
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Aparelho aparelho) throws SQLException {
-        aparelhoDao = new AparelhoDao();
-        aparelhoDao.putAparelho(aparelho);
+    public boolean alterar(Aparelho aparelho) throws SQLException {
+        try {
+            aparelhoDao = new AparelhoDao();
+            aparelhoDao.putAparelho(aparelho);
+        } catch(SQLException exception){
+            //retorno da excecao
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(int nroAparelho) throws SQLException {
-        aparelhoDao = new AparelhoDao();
-        aparelhoDao.deleteAparelho(nroAparelho);
+    public boolean excluir(int nroAparelho) throws SQLException {
+        try {
+            aparelhoDao = new AparelhoDao();
+            aparelhoDao.deleteAparelho(nroAparelho);
+        } catch(SQLException exception){
+            //retorno da excecao
+            return false;      
+        }
+        return true;
     }
 }

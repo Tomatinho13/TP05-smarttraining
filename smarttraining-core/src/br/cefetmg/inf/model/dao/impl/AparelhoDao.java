@@ -61,7 +61,7 @@ public class AparelhoDao implements IAparelhoDao {
 
         return aparelho;
     }
-                   
+
     @Override
     public ArrayList<Aparelho> getListaAparelhos() throws SQLException {
         listaAparelhos = new ArrayList<>();
@@ -101,42 +101,56 @@ public class AparelhoDao implements IAparelhoDao {
     }
 
     @Override
-    public void postAparelho(Aparelho aparelho) throws SQLException {
+    public boolean postAparelho(Aparelho aparelho) throws SQLException {
         this.aparelho = aparelho;
         sql = "INSERT INTO \"Aparelho\" VALUES (CAST(? as smallint),?)";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, String.valueOf(aparelho.getNumero()));
-        stmt.setString(2, aparelho.getNome());
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, String.valueOf(aparelho.getNumero()));
+            stmt.setString(2, aparelho.getNome());
+            stmt.executeUpdate();
 
-        stmt.executeUpdate();
-
+        } catch (SQLException exception) {
+            //algum retorno da excecao
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void putAparelho(Aparelho aparelho) throws SQLException {
+    public boolean putAparelho(Aparelho aparelho) throws SQLException {
         this.aparelho = aparelho;
         sql = "UPDATE \"Aparelho\" "
                 + "SET nom_usuario='" + aparelho.getNome() + "'"
                 + "WHERE nro_aparelho='" + aparelho.getNumero() + "'";
 
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate(sql);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
 
+        } catch (SQLException exception) {
+            //retorno de exceção
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void deleteAparelho(int nroAparelho) throws SQLException {
+    public boolean deleteAparelho(int nroAparelho) throws SQLException {
         sql = "DELETE FROM \"Aparelho\" "
                 + "WHERE nro_aparelho='" + nroAparelho + "'";
 
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate(sql);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
 
+        } catch (SQLException exception) {
+            //retorno da excecao
+            return false;
+        }
+        return true;
     }
-    
+
     @Override
-    public void fechaConexao(){
+    public void fechaConexao() {
         try {
             conn.close();
         } catch (SQLException ex) {

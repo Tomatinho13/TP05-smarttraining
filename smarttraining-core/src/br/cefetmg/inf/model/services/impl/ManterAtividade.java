@@ -21,20 +21,38 @@ public class ManterAtividade implements IManterAtividade {
     }
 
     @Override
-    public void cadastrar(Atividade atividade) throws SQLException {
-        atividadeDao = new AtividadeDao();
-        atividadeDao.postAtividade(atividade);
+    public boolean cadastrar(Atividade atividade) throws SQLException {
+        try {
+            atividadeDao = new AtividadeDao();
+            atividadeDao.postAtividade(atividade);
+        } catch(SQLException exception){
+            //retorno
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Atividade atividade) throws SQLException {
-        atividadeDao = new AtividadeDao();
-        atividadeDao.putAtividade(atividade);
+    public boolean alterar(Atividade atividade) throws SQLException {
+        try {
+            atividadeDao = new AtividadeDao();
+            atividadeDao.putAtividade(atividade);
+        } catch(SQLException exception){
+            //retorno
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(String codCpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException {
-        atividadeDao = new AtividadeDao();
-        atividadeDao.deleteAtividade(codCpf, nroTreino, codExercicio, nroAparelho, nroFicha);
+    public boolean excluir(String codCpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException {
+        try {    
+            atividadeDao = new AtividadeDao();
+            atividadeDao.deleteAtividade(codCpf, nroTreino, codExercicio, nroAparelho, nroFicha);
+        } catch(SQLException exception){
+            //retorno
+            return false;
+        }    
+        return true;
     }
 }

@@ -31,20 +31,38 @@ public class ManterAvaliacao implements IManterAvaliacao {
     }
     
     @Override
-    public void cadastrar(Avaliacao avaliacao) throws SQLException{
-        avaliacaoDao = new AvaliacaoDao();
-        avaliacaoDao.postAvaliacao(avaliacao);
+    public boolean cadastrar(Avaliacao avaliacao) throws SQLException{
+        try {    
+            avaliacaoDao = new AvaliacaoDao();
+            avaliacaoDao.postAvaliacao(avaliacao);
+        } catch(SQLException exception){
+            //retorno
+            return false;
+        }    
+        return true;
     }
 
     @Override
-    public void alterar(Avaliacao avaliacao) throws SQLException{
-        avaliacaoDao = new AvaliacaoDao();
-        avaliacaoDao.putAvaliacao(avaliacao);
+    public boolean alterar(Avaliacao avaliacao) throws SQLException{
+        try {
+            avaliacaoDao = new AvaliacaoDao();
+            avaliacaoDao.putAvaliacao(avaliacao);
+        } catch(SQLException exception){
+            //retorno
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(String codCpf, LocalDate datAvaliacao) throws SQLException {
-        avaliacaoDao = new AvaliacaoDao();
-        avaliacaoDao.deleteAvaliacao(codCpf, datAvaliacao);
+    public boolean excluir(String codCpf, LocalDate datAvaliacao) throws SQLException {
+        try {
+            avaliacaoDao = new AvaliacaoDao();
+            avaliacaoDao.deleteAvaliacao(codCpf, datAvaliacao);
+        } catch(SQLException exception){
+            //retorno
+            return false;
+        }    
+        return true;
     }     
 }

@@ -19,11 +19,11 @@ public interface IAparelhoDao {
 
     public ArrayList<Exercicio> getListaExercicios(int nroAparelho) throws SQLException;
 
-    public void postAparelho(Aparelho aparelho) throws SQLException;
+    public boolean postAparelho(Aparelho aparelho) throws SQLException;
 
-    public void putAparelho(Aparelho aparelho) throws SQLException;
+    public boolean putAparelho(Aparelho aparelho) throws SQLException;
 
-    public void deleteAparelho(int codAparelho) throws SQLException;
+    public boolean deleteAparelho(int codAparelho) throws SQLException;
 
     public void fechaConexao();
 }
