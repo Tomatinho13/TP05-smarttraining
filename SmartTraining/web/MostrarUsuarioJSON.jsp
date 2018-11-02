@@ -8,10 +8,10 @@
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
 <json:object>
-    <json:property name="codCpf" value="${usuario.cpf}"/>
-    <json:property name="nomUsuario" value="${usuario.nome}"/>
-    <json:property name="idtTipoUsuario" value="${usuario.tipo}"/>
-    <json:property name="desEmailUsuario" value="${usuario.email}"/>
+    <json:property name="cpf" value="${usuario.cpf}"/>
+    <json:property name="nome" value="${usuario.nome}"/>
+    <json:property name="tipo" value="${usuario.tipo}"/>
+    <json:property name="email" value="${usuario.email}"/>
     <json:property name="senha" value="${usuario.senha}"/>
-    <json:property name="datNascimentoUsuario" value="${usuario.dataNascimento}"/>
+    <json:property name="dataNascimento" value="${usuario.dataNascimento}"/>
 </json:object>
