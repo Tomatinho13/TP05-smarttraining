@@ -42,43 +42,55 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
     }
 
     @Override
-    public void postRegiaoCorporal(RegiaoCorporal regiao, int codMusculo) throws SQLException {
+    public boolean postRegiaoCorporal(RegiaoCorporal regiao, int codMusculo) throws SQLException {
         this.regiao = regiao;
         sql = "INSERT INTO \"RegiaoCorporal\" (nom_regiao) VALUES (?);";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, regiao.getNome());
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, regiao.getNome());
 
-        stmt.executeQuery(sql);
+            stmt.executeQuery(sql);
 
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void putRegiaoCorporal(RegiaoCorporal regiao) throws SQLException {
+    public boolean putRegiaoCorporal(RegiaoCorporal regiao) throws SQLException {
         this.regiao = regiao;
         sql = "UPDATE \"RegiaoCorporal\" "
                 + "SET nom_regiao=?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, regiao.getNome());
 
-        stmt.executeQuery(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, regiao.getNome());
 
+            stmt.executeQuery(sql);
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void deleteRegiaoCorporal(int cod_regiao) throws SQLException {
+    public boolean deleteRegiaoCorporal(int cod_regiao) throws SQLException {
         sql = "DELETE FROM \"RegiaoCorporal\" "
                 + "WHERE cod_regiao=?";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, String.valueOf(cod_regiao));
-
-        stmt.executeQuery(sql);
-
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, String.valueOf(cod_regiao));
+            stmt.executeQuery(sql);
+            
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
-    
+
     @Override
-    public void fechaConexao(){
+    public void fechaConexao() {
         try {
             conn.close();
         } catch (SQLException ex) {

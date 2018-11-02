@@ -78,57 +78,71 @@ public class ManterAparelhoProxy implements IManterAparelho {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_APARELHO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        
+
         ArrayList<Aparelho> listaAparelhos = gson.fromJson(pacoteRecebido.getDados().get(0),
                 new TypeToken<ArrayList<Aparelho>>() {
                 }.getType());
-        
+
         return listaAparelhos;
     }
 
     @Override
-    public void cadastrar(Aparelho aparelho) throws SQLException {
+    public boolean cadastrar(Aparelho aparelho) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
 
-        dados.add(gson.toJson(aparelho));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_APARELHO, dados);
+        try {
+            dados.add(gson.toJson(aparelho));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_APARELHO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Aparelho aparelho) throws SQLException {
+    public boolean alterar(Aparelho aparelho) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
 
-        dados.add(gson.toJson(aparelho));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_APARELHO, dados);
+        try {
+            dados.add(gson.toJson(aparelho));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_APARELHO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(int nroAparelho) throws SQLException {
+    public boolean excluir(int nroAparelho) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
 
-        dados.add(gson.toJson(nroAparelho));
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_APARELHO, dados);
+        try {
+            dados.add(gson.toJson(nroAparelho));
+            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_APARELHO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
-
 }

@@ -43,13 +43,14 @@ public class ManterAvaliacaoProxy implements IManterAvaliacao {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codCpf));
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_AVALIACAO_ALUNO, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Avaliacao> listaAvaliacoes = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Avaliacao>>() {}.getType());
+        ArrayList<Avaliacao> listaAvaliacoes = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Avaliacao>>() {
+                }.getType());
         return listaAvaliacoes;
     }
 
@@ -61,7 +62,7 @@ public class ManterAvaliacaoProxy implements IManterAvaliacao {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codCpf));
         dados.add(gson.toJson(data));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_AVALIACAO, dados);
@@ -72,49 +73,64 @@ public class ManterAvaliacaoProxy implements IManterAvaliacao {
     }
 
     @Override
-    public void cadastrar(Avaliacao avaliacao) throws SQLException {
+    public boolean cadastrar(Avaliacao avaliacao) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(avaliacao));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_AVALIACAO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(avaliacao));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_AVALIACAO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Avaliacao avaliacao) throws SQLException {
+    public boolean alterar(Avaliacao avaliacao) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(avaliacao));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_AVALIACAO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(avaliacao));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_AVALIACAO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(String codCpf, LocalDate datAvaliacao) throws SQLException {
+    public boolean excluir(String codCpf, LocalDate datAvaliacao) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-        
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(codCpf));
-        dados.add(gson.toJson(datAvaliacao));
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_AVALIACAO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(codCpf));
+            dados.add(gson.toJson(datAvaliacao));
+            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_AVALIACAO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
 }

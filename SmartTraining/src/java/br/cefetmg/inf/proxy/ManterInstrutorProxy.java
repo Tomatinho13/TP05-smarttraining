@@ -43,7 +43,7 @@ public class ManterInstrutorProxy implements IManterUsuario {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codCpf));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_INSTRUTOR_CPF, dados);
 
@@ -60,7 +60,7 @@ public class ManterInstrutorProxy implements IManterUsuario {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(nome));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_INSTRUTOR_NOME, dados);
 
@@ -79,53 +79,69 @@ public class ManterInstrutorProxy implements IManterUsuario {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_INSTRUTOR, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Usuario> listaInstrutores = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Instrutor>>() {}.getType());
+        ArrayList<Usuario> listaInstrutores = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Instrutor>>() {
+                }.getType());
         return listaInstrutores;
     }
 
     @Override
-    public void cadastrar(Usuario instrutor) throws SQLException {
+    public boolean cadastrar(Usuario instrutor) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(instrutor));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_INSTRUTOR, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(instrutor));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_INSTRUTOR, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Usuario instrutor) throws SQLException {
+    public boolean alterar(Usuario instrutor) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(instrutor));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_INSTRUTOR, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(instrutor));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_INSTRUTOR, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(String codCpf) throws SQLException {
+    public boolean excluir(String codCpf) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(codCpf));
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_INSTRUTOR, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(codCpf));
+            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_INSTRUTOR, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 }

@@ -165,7 +165,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 stmt.close();
             }
         } catch (SQLException exception) {
-            //retorno
             return false;
         }
         return true;
@@ -222,7 +221,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
             stmt.executeUpdate();
 
         } catch (SQLException exception) {
-            //retorno
             return false;
         }
         return true;
@@ -237,7 +235,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
             stmt.executeUpdate(sql);
 
         } catch (SQLException exception) {
-            //retorno
             return false;
         }
         return true;

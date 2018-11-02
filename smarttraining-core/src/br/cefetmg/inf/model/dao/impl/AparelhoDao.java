@@ -111,7 +111,6 @@ public class AparelhoDao implements IAparelhoDao {
             stmt.executeUpdate();
 
         } catch (SQLException exception) {
-            //algum retorno da excecao
             return false;
         }
         return true;
@@ -128,7 +127,6 @@ public class AparelhoDao implements IAparelhoDao {
             stmt.executeUpdate(sql);
 
         } catch (SQLException exception) {
-            //retorno de exceção
             return false;
         }
         return true;
@@ -143,7 +141,6 @@ public class AparelhoDao implements IAparelhoDao {
             stmt.executeUpdate(sql);
 
         } catch (SQLException exception) {
-            //retorno da excecao
             return false;
         }
         return true;

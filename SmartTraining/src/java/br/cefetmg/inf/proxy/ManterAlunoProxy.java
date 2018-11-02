@@ -6,6 +6,7 @@ import br.cefetmg.inf.util.Pacote;
 import br.cefetmg.inf.util.TipoOperacao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -20,9 +21,7 @@ public class ManterAlunoProxy implements IManterUsuario {
     public ManterAlunoProxy() {
         try {
             this.cliente = Cliente.getInstancia();
-        } catch (SocketException ex) {
-            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnknownHostException ex) {
+        } catch (SocketException | UnknownHostException ex) {
             Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -33,9 +32,9 @@ public class ManterAlunoProxy implements IManterUsuario {
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-        
+
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codCpf));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_ALUNO_CPF, dados);
 
@@ -52,7 +51,7 @@ public class ManterAlunoProxy implements IManterUsuario {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(nome));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_ALUNO_NOME, dados);
 
@@ -71,54 +70,69 @@ public class ManterAlunoProxy implements IManterUsuario {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_ALUNO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Usuario> listaAlunos = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Usuario>>() {}.getType());
+        ArrayList<Usuario> listaAlunos = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Usuario>>() {
+                }.getType());
         return listaAlunos;
     }
 
     @Override
-    public void cadastrar(Usuario aluno) throws SQLException {
+    public boolean cadastrar(Usuario aluno) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(aluno));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_ALUNO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(aluno));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_ALUNO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Usuario aluno) throws SQLException {
+    public boolean alterar(Usuario aluno) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(aluno));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_ALUNO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(aluno));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_ALUNO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+            
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(String codCpf) throws SQLException {
+    public boolean excluir(String codCpf) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
+
+        try {
         dados.add(gson.toJson(codCpf));
         pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_ALUNO, dados);
 
         cliente.requisicao(pacoteEnviado);
+        
+        } catch (Exception exception){
+            return false;
+        }
+        return true;
     }
-
 }

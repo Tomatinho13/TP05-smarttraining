@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ManterObjetivo implements IManterObjetivo {
 
-    private  IObjetivoDao objetivoDao;
+    private IObjetivoDao objetivoDao;
 
     public ManterObjetivo() {
     }
@@ -44,20 +44,38 @@ public class ManterObjetivo implements IManterObjetivo {
     }
 
     @Override
-    public void cadastrar(Objetivo objetivo) throws SQLException {
-        objetivoDao = new ObjetivoDao();
-        objetivoDao.postObjetivo(objetivo);
+    public boolean cadastrar(Objetivo objetivo) throws SQLException {
+        try {
+            objetivoDao = new ObjetivoDao();
+            objetivoDao.postObjetivo(objetivo);
+            objetivoDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Objetivo objetivo) throws SQLException {
-        objetivoDao = new ObjetivoDao();
-        objetivoDao.putObjetivo(objetivo);
+    public boolean alterar(Objetivo objetivo) throws SQLException {
+        try {
+            objetivoDao = new ObjetivoDao();
+            objetivoDao.putObjetivo(objetivo);
+            objetivoDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(int codObjetivo) throws SQLException {
-        objetivoDao = new ObjetivoDao();
-        objetivoDao.deleteObjetivo(codObjetivo);
+    public boolean excluir(int codObjetivo) throws SQLException {
+        try {
+            objetivoDao = new ObjetivoDao();
+            objetivoDao.deleteObjetivo(codObjetivo);
+            objetivoDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 }

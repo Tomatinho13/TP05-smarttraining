@@ -25,7 +25,7 @@ public class MusculoDao implements IMusculoDao {
     @Override
     public Musculo getMusculo(int codMusculo) throws SQLException {
         IExercicioDao exercicioDao = new ExercicioDao();
-        sql = "SELECT * FROM \"Musculo\" WHERE cod_musculo = '"+codMusculo+"'";
+        sql = "SELECT * FROM \"Musculo\" WHERE cod_musculo = '" + codMusculo + "'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
@@ -82,42 +82,55 @@ public class MusculoDao implements IMusculoDao {
     }
 
     @Override
-    public void postMusculo(Musculo musculo) throws SQLException {
+    public boolean postMusculo(Musculo musculo) throws SQLException {
         this.musculo = musculo;
         sql = "INSERT INTO \"Musculo\" VALUES (?,?,?,?)";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, String.valueOf(musculo.getNumero()));
-        stmt.setString(2, "(SELECT \"cod_regCorp\" FROM \"RegiaoCorporal\" WHERE \"cod_regCorp\"='" + musculo.getCodRegiaoCorporal() + "')");
-        stmt.setString(3, musculo.getNome());
-        stmt.setString(4, musculo.getCaminhoImagem());
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, String.valueOf(musculo.getNumero()));
+            stmt.setString(2, "(SELECT \"cod_regCorp\" FROM \"RegiaoCorporal\" WHERE \"cod_regCorp\"='" + musculo.getCodRegiaoCorporal() + "')");
+            stmt.setString(3, musculo.getNome());
+            stmt.setString(4, musculo.getCaminhoImagem());
 
-        stmt.executeQuery(sql);
+            stmt.executeQuery(sql);
 
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void putMusculo(Musculo musculo) throws SQLException {
+    public boolean putMusculo(Musculo musculo) throws SQLException {
         this.musculo = musculo;
         sql = "UPDATE \"Musculo\" "
                 + "SET nom_musculo=?, "
                 + "img_musculo=? "
                 + "WHERE cod_musculo = '" + musculo.getNumero() + "'";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, musculo.getNome());
-        stmt.setString(2, musculo.getCaminhoImagem());
 
-        stmt.executeQuery(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, musculo.getNome());
+            stmt.setString(2, musculo.getCaminhoImagem());
 
+            stmt.executeQuery(sql);
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void deleteMusculo(int codMusculo) throws SQLException {
+    public boolean deleteMusculo(int codMusculo) throws SQLException {
         sql = "DELETE FROM \"Musculo\" WHERE cod_musculo = '" + codMusculo + "'";
 
-        Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeQuery(sql);
 
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override

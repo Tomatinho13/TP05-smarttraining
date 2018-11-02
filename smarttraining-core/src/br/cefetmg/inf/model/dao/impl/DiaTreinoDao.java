@@ -48,47 +48,52 @@ public class DiaTreinoDao implements IDiaTreinoDao {
     }
 
     @Override
-    public void postDiaTreino(DiaTreino diaTreino) throws SQLException {
+    public boolean postDiaTreino(DiaTreino diaTreino) throws SQLException {
         atividade = diaTreino.getAtividade();
         sql = "INSERT INTO \"DiaTreino\" VALUES (?,?,?,?,?,CAST(? as date))";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, "(SELECT \"cod_exercicio\" FROM \"TreinoExercicio\" "
-                + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
-                + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
-                + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
-                + "AND nro_ficha='" + atividade.getNroFicha() + "'");
-        
-        stmt.setString(2, "(SELECT \"nro_aparelho\" FROM \"TreinoExercicio\" "
-                + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
-                + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
-                + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
-                + "AND nro_ficha='" + atividade.getNroFicha() + "'");
-        
-        stmt.setString(3, "(SELECT \"cod_cpf\" FROM \"TreinoExercicio\" "
-                + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
-                + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
-                + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
-                + "AND nro_ficha='" + atividade.getNroFicha() + "'");
-        
-        stmt.setString(4, "(SELECT \"nro_treino\" FROM \"TreinoExercicio\" "
-                + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
-                + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
-                + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
-                + "AND nro_ficha='" + atividade.getNroFicha() + "'");
-        
-        stmt.setString(5, "(SELECT \"nro_ficha\" FROM \"TreinoExercicio\" "
-                + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
-                + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
-                + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
-                + "AND nro_ficha='" + atividade.getNroFicha() + "'");
-        
-        stmt.setString(6, diaTreino.getDataTreino().toString());
 
-        stmt.executeQuery(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "(SELECT \"cod_exercicio\" FROM \"TreinoExercicio\" "
+                    + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
+                    + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
+                    + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
+                    + "AND nro_ficha='" + atividade.getNroFicha() + "'");
+
+            stmt.setString(2, "(SELECT \"nro_aparelho\" FROM \"TreinoExercicio\" "
+                    + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
+                    + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
+                    + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
+                    + "AND nro_ficha='" + atividade.getNroFicha() + "'");
+
+            stmt.setString(3, "(SELECT \"cod_cpf\" FROM \"TreinoExercicio\" "
+                    + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
+                    + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
+                    + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
+                    + "AND nro_ficha='" + atividade.getNroFicha() + "'");
+
+            stmt.setString(4, "(SELECT \"nro_treino\" FROM \"TreinoExercicio\" "
+                    + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
+                    + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
+                    + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
+                    + "AND nro_ficha='" + atividade.getNroFicha() + "'");
+
+            stmt.setString(5, "(SELECT \"nro_ficha\" FROM \"TreinoExercicio\" "
+                    + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
+                    + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
+                    + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
+                    + "AND nro_ficha='" + atividade.getNroFicha() + "'");
+
+            stmt.setString(6, diaTreino.getDataTreino().toString());
+            stmt.executeQuery(sql);
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
-    
+
     @Override
-    public void fechaConexao(){
+    public void fechaConexao() {
         try {
             conn.close();
         } catch (SQLException ex) {

@@ -89,26 +89,31 @@ public class AlunoDao implements IUsuarioDao {
     }
 
     @Override
-    public void postUsuario(Usuario aluno) throws SQLException {
+    public boolean postUsuario(Usuario aluno) throws SQLException {
         this.aluno = aluno;
         sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,CAST(? as date));"
                 + "INSERT INTO \"Aluno\" "
                 + "VALUES((SELECT cod_cpf FROM \"Usuario\" "
                 + "WHERE cod_cpf = '" + aluno.getCpf() + "'))";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, aluno.getCpf());
-        stmt.setString(2, aluno.getNome());
-        stmt.setString(3, String.valueOf(aluno.getTipo()));
-        stmt.setString(4, aluno.getSenha());
-        stmt.setString(5, aluno.getEmail());
-        stmt.setString(6, String.valueOf(aluno.getDataNascimento()));
 
-        stmt.executeUpdate();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, aluno.getCpf());
+            stmt.setString(2, aluno.getNome());
+            stmt.setString(3, String.valueOf(aluno.getTipo()));
+            stmt.setString(4, aluno.getSenha());
+            stmt.setString(5, aluno.getEmail());
+            stmt.setString(6, String.valueOf(aluno.getDataNascimento()));
 
+            stmt.executeUpdate();
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void putUsuario(Usuario aluno) throws SQLException {
+    public boolean putUsuario(Usuario aluno) throws SQLException {
         this.aluno = aluno;
         sql = "UPDATE \"Usuario\" "
                 + "SET nom_usuario=?, "
@@ -117,34 +122,39 @@ public class AlunoDao implements IUsuarioDao {
                 + "des_email=?, "
                 + "dat_nascimento=CAST(? as date) "
                 + "WHERE cod_cpf=?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, aluno.getNome());
-        stmt.setString(2, String.valueOf(aluno.getTipo()));
-        stmt.setString(3, aluno.getSenha());
-        stmt.setString(4, aluno.getEmail());
-        stmt.setString(5, String.valueOf(aluno.getDataNascimento()));
-        stmt.setString(6, aluno.getCpf());
 
-        stmt.executeUpdate();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, aluno.getNome());
+            stmt.setString(2, String.valueOf(aluno.getTipo()));
+            stmt.setString(3, aluno.getSenha());
+            stmt.setString(4, aluno.getEmail());
+            stmt.setString(5, String.valueOf(aluno.getDataNascimento()));
+            stmt.setString(6, aluno.getCpf());
 
-    }
+            stmt.executeUpdate();
 
-    @Override
-    public void deleteUsuario(String codCpf) {
-        try {
-            sql = "DELETE FROM \"Usuario\" "
-                    + "WHERE cod_cpf='" + codCpf + "'";
-            
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException exception) {
+            return false;
         }
-
+        return true;
     }
-    
+
     @Override
-    public void fechaConexao(){
+    public boolean deleteUsuario(String codCpf) {
+        sql = "DELETE FROM \"Usuario\" "
+                + "WHERE cod_cpf='" + codCpf + "'";
+
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void fechaConexao() {
         try {
             conn.close();
         } catch (SQLException ex) {

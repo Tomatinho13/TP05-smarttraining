@@ -29,9 +29,7 @@ public class ManterMusculoProxy implements IManterMusculo {
     public ManterMusculoProxy() {
         try {
             this.cliente = Cliente.getInstancia();
-        } catch (SocketException ex) {
-            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnknownHostException ex) {
+        } catch (SocketException | UnknownHostException ex) {
             Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -44,7 +42,7 @@ public class ManterMusculoProxy implements IManterMusculo {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codMusculo));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_MUSCULO, dados);
 
@@ -63,53 +61,69 @@ public class ManterMusculoProxy implements IManterMusculo {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_MUSCULO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Musculo> listaMusculos = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Musculo>>() {}.getType());
+        ArrayList<Musculo> listaMusculos = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Musculo>>() {
+                }.getType());
         return listaMusculos;
     }
 
     @Override
-    public void cadastrar(Musculo musculo) throws SQLException {
+    public boolean cadastrar(Musculo musculo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(musculo));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_MUSCULO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(musculo));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_MUSCULO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Musculo musculo) throws SQLException {
+    public boolean alterar(Musculo musculo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(musculo));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_MUSCULO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(musculo));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_MUSCULO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(int codMusculo) throws SQLException {
+    public boolean excluir(int codMusculo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(codMusculo));
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_MUSCULO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(codMusculo));
+            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_MUSCULO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 }
