@@ -37,20 +37,38 @@ public class ManterInstrutor implements IManterUsuario {
     }
 
     @Override
-    public void cadastrar(Usuario instrutor) throws SQLException {
-        instrutorDao = new InstrutorDao();
-        instrutorDao.postUsuario((Instrutor) instrutor);
+    public boolean cadastrar(Usuario instrutor) throws SQLException {
+        try {
+            instrutorDao = new InstrutorDao();
+            instrutorDao.postUsuario((Instrutor) instrutor);
+            instrutorDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Usuario instrutor) throws SQLException {
-        instrutorDao = new InstrutorDao();
-        instrutorDao.putUsuario((Instrutor) instrutor);
+    public boolean alterar(Usuario instrutor) throws SQLException {
+        try {
+            instrutorDao = new InstrutorDao();
+            instrutorDao.putUsuario((Instrutor) instrutor);
+            instrutorDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(String codCpf) throws SQLException {
-        instrutorDao = new InstrutorDao();
-        instrutorDao.deleteUsuario(codCpf);
+    public boolean excluir(String codCpf) throws SQLException {
+        try {
+            instrutorDao = new InstrutorDao();
+            instrutorDao.deleteUsuario(codCpf);
+            instrutorDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 }

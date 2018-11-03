@@ -41,7 +41,7 @@ public class ManterAtividadeProxy implements IManterAtividade {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codCpf));
         dados.add(gson.toJson(nroTreino));
         dados.add(gson.toJson(codExercicio));
@@ -55,52 +55,66 @@ public class ManterAtividadeProxy implements IManterAtividade {
     }
 
     @Override
-    public void cadastrar(Atividade atividade) throws SQLException {
+    public boolean cadastrar(Atividade atividade) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(atividade));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_ATIVIDADE, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(atividade));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_ATIVIDADE, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Atividade atividade) throws SQLException {
+    public boolean alterar(Atividade atividade) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(atividade));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_ATIVIDADE, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(atividade));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_ATIVIDADE, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(String codCpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException {
+    public boolean excluir(String codCpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(codCpf));
-        dados.add(gson.toJson(nroTreino));
-        dados.add(gson.toJson(codExercicio));
-        dados.add(gson.toJson(nroAparelho));
-        dados.add(gson.toJson(nroFicha));
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_ATIVIDADE, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(codCpf));
+            dados.add(gson.toJson(nroTreino));
+            dados.add(gson.toJson(codExercicio));
+            dados.add(gson.toJson(nroAparelho));
+            dados.add(gson.toJson(nroFicha));
+            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_ATIVIDADE, dados);
+
+            cliente.requisicao(pacoteEnviado);
+            
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
-
 }

@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class ManterRegiaoCorporalProxy implements IManterRegiaoCorporal {
 
-Cliente cliente;
+    Cliente cliente;
 
     public ManterRegiaoCorporalProxy() {
         try {
@@ -32,7 +32,7 @@ Cliente cliente;
             Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public RegiaoCorporal pesquisarRegiaoCorporal(int codRegiao) throws SQLException {
         Pacote pacoteEnviado;
@@ -41,7 +41,7 @@ Cliente cliente;
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codRegiao));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_REGCORP, dados);
 
@@ -51,49 +51,64 @@ Cliente cliente;
     }
 
     @Override
-    public void cadastrar(RegiaoCorporal regiaoCorporal, int codMusculo) throws SQLException {
+    public boolean cadastrar(RegiaoCorporal regiaoCorporal, int codMusculo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(regiaoCorporal));
-        dados.add(gson.toJson(codMusculo));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_REGCORP, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(regiaoCorporal));
+            dados.add(gson.toJson(codMusculo));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_REGCORP, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(RegiaoCorporal regiaoCorporal) throws SQLException {
+    public boolean alterar(RegiaoCorporal regiaoCorporal) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(regiaoCorporal));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_REGCORP, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(regiaoCorporal));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_REGCORP, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(int codRegiao) throws SQLException {
+    public boolean excluir(int codRegiao) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(codRegiao));
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_REGCORP, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(codRegiao));
+            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_REGCORP, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
 }

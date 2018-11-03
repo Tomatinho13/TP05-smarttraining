@@ -16,11 +16,11 @@ public interface IUsuarioDao {
 
     public ArrayList<Usuario> getListaUsuarios() throws SQLException;
 
-    public void postUsuario(Usuario aluno) throws SQLException;
+    public boolean postUsuario(Usuario aluno) throws SQLException;
 
-    public void putUsuario(Usuario aluno) throws SQLException;
+    public boolean putUsuario(Usuario aluno) throws SQLException;
 
-    public void deleteUsuario(String codCpf) throws SQLException;
+    public boolean deleteUsuario(String codCpf) throws SQLException;
 
     public void fechaConexao();
 }

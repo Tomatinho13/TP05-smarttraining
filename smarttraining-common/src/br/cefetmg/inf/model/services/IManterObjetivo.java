@@ -15,9 +15,9 @@ public interface IManterObjetivo {
     
     public ArrayList<Objetivo> pesquisarTodos() throws SQLException;
 
-    public void cadastrar(Objetivo objetivo) throws SQLException;
+    public boolean cadastrar(Objetivo objetivo) throws SQLException;
 
-    public void alterar(Objetivo objetivo) throws SQLException;
+    public boolean alterar(Objetivo objetivo) throws SQLException;
 
-    public void excluir(int codRegiao) throws SQLException;
+    public boolean excluir(int codRegiao) throws SQLException;
 }

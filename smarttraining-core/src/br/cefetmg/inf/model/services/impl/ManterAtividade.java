@@ -25,8 +25,8 @@ public class ManterAtividade implements IManterAtividade {
         try {
             atividadeDao = new AtividadeDao();
             atividadeDao.postAtividade(atividade);
+            atividadeDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno
             return false;
         }
         return true;
@@ -37,8 +37,8 @@ public class ManterAtividade implements IManterAtividade {
         try {
             atividadeDao = new AtividadeDao();
             atividadeDao.putAtividade(atividade);
+            atividadeDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno
             return false;
         }
         return true;
@@ -49,8 +49,8 @@ public class ManterAtividade implements IManterAtividade {
         try {    
             atividadeDao = new AtividadeDao();
             atividadeDao.deleteAtividade(codCpf, nroTreino, codExercicio, nroAparelho, nroFicha);
+            atividadeDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno
             return false;
         }    
         return true;

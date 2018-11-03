@@ -43,7 +43,7 @@ public class ManterObjetivoProxy implements IManterObjetivo {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codObjetivo));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_OBJETIVO_COD, dados);
 
@@ -60,7 +60,7 @@ public class ManterObjetivoProxy implements IManterObjetivo {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(nome));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_OBJETIVO_NOME, dados);
 
@@ -77,14 +77,15 @@ public class ManterObjetivoProxy implements IManterObjetivo {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codCpf));
         dados.add(gson.toJson(dataAvaliacao));
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_OBJETIVO_AVALIACAO, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Objetivo> listaObjetivos = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Objetivo>>() {}.getType());
+        ArrayList<Objetivo> listaObjetivos = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Objetivo>>() {
+                }.getType());
         return listaObjetivos;
     }
 
@@ -98,54 +99,69 @@ public class ManterObjetivoProxy implements IManterObjetivo {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_OBJETIVO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Objetivo> listaObjetivos = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Objetivo>>() {}.getType());
+        ArrayList<Objetivo> listaObjetivos = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Objetivo>>() {
+                }.getType());
         return listaObjetivos;
     }
 
     @Override
-    public void cadastrar(Objetivo objetivo) throws SQLException {
+    public boolean cadastrar(Objetivo objetivo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(objetivo));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_OBJETIVO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(objetivo));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_OBJETIVO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Objetivo objetivo) throws SQLException {
+    public boolean alterar(Objetivo objetivo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(objetivo));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_OBJETIVO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(objetivo));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_OBJETIVO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(int codObjetivo) throws SQLException {
+    public boolean excluir(int codObjetivo) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(codObjetivo));
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_OBJETIVO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(codObjetivo));
+            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_OBJETIVO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
-
 }

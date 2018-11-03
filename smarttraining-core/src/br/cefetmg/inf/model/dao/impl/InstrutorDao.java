@@ -48,7 +48,7 @@ public class InstrutorDao implements IUsuarioDao {
 
         return instrutor;
     }
-    
+
     @Override
     public Usuario getUsuarioPeloNome(String nome) throws SQLException {
         sql = "SELECT * "
@@ -75,10 +75,10 @@ public class InstrutorDao implements IUsuarioDao {
 
         return instrutor;
     }
-    
+
     @Override
     public ArrayList<Usuario> getListaUsuarios() throws SQLException {
-        ArrayList <Usuario> listaUsuarios = new ArrayList<>();
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
         sql = "SELECT * "
                 + "FROM \"Usuario\" "
                 + "JOIN \"Instrutor\" USING(cod_cpf) "
@@ -100,26 +100,31 @@ public class InstrutorDao implements IUsuarioDao {
     }
 
     @Override
-    public void postUsuario(Usuario instrutor) throws SQLException {
-        this.instrutor = (Instrutor)instrutor;
+    public boolean postUsuario(Usuario instrutor) throws SQLException {
+        this.instrutor = (Instrutor) instrutor;
         sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,CAST(? as date)); "
                 + "INSERT INTO \"Instrutor\" "
                 + "VALUES((SELECT cod_cpf FROM \"Usuario\" "
                 + "WHERE cod_cpf = '" + instrutor.getCpf() + "'), '" + this.instrutor.getNroCref() + "')";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, instrutor.getCpf());
-        stmt.setString(2, instrutor.getNome());
-        stmt.setString(3, String.valueOf(instrutor.getTipo()));
-        stmt.setString(4, instrutor.getSenha());
-        stmt.setString(5, instrutor.getEmail());
-        stmt.setString(6, String.valueOf(instrutor.getDataNascimento()));
 
-        stmt.executeUpdate();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, instrutor.getCpf());
+            stmt.setString(2, instrutor.getNome());
+            stmt.setString(3, String.valueOf(instrutor.getTipo()));
+            stmt.setString(4, instrutor.getSenha());
+            stmt.setString(5, instrutor.getEmail());
+            stmt.setString(6, String.valueOf(instrutor.getDataNascimento()));
 
+            stmt.executeUpdate();
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void putUsuario(Usuario instrutor) throws SQLException {
+    public boolean putUsuario(Usuario instrutor) throws SQLException {
         sql = "UPDATE \"Usuario\" "
                 + "SET nom_usuario=?, "
                 + "idt_tipo_usuario=?, "
@@ -127,30 +132,39 @@ public class InstrutorDao implements IUsuarioDao {
                 + "des_email=?, "
                 + "dat_nascimento=CAST(? as date) "
                 + "WHERE cod_cpf=?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, instrutor.getNome());
-        stmt.setString(2, String.valueOf(instrutor.getTipo()));
-        stmt.setString(3, instrutor.getSenha());
-        stmt.setString(4, instrutor.getEmail());
-        stmt.setString(5, String.valueOf(instrutor.getDataNascimento()));
-        stmt.setString(6, instrutor.getCpf());
 
-        stmt.executeQuery(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, instrutor.getNome());
+            stmt.setString(2, String.valueOf(instrutor.getTipo()));
+            stmt.setString(3, instrutor.getSenha());
+            stmt.setString(4, instrutor.getEmail());
+            stmt.setString(5, String.valueOf(instrutor.getDataNascimento()));
+            stmt.setString(6, instrutor.getCpf());
 
+            stmt.executeQuery(sql);
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void deleteUsuario(String cpf) throws SQLException {
+    public boolean deleteUsuario(String cpf) throws SQLException {
         sql = "DELETE FROM \"Usuario\" "
                 + "WHERE cod_cpf='" + cpf + "'";
 
-        Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeQuery(sql);
 
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
-    
+
     @Override
-    public void fechaConexao(){
+    public void fechaConexao() {
         try {
             conn.close();
         } catch (SQLException ex) {

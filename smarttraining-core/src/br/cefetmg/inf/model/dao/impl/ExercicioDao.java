@@ -152,66 +152,83 @@ public class ExercicioDao implements IExercicioDao {
     }
 
     @Override
-    public void postExercicio(Exercicio exercicio) throws SQLException {
+    public boolean postExercicio(Exercicio exercicio) throws SQLException {
         sql = "INSERT INTO \"Exercicio\" (nom_exercicio, des_exercicio) VALUES (?, ?);";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, exercicio.getNome());
-        stmt.setString(2, exercicio.getDescricao());
-        stmt.executeUpdate();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, exercicio.getNome());
+            stmt.setString(2, exercicio.getDescricao());
+            stmt.executeUpdate();
 
-        sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST( ? as integer), CAST( ? as bigint))";
-        stmt = conn.prepareStatement(sql);
-        
-        ArrayList<Musculo> listaMusculos = exercicio.getListaMusculos();
-        
-        for (int i = 0; i < listaMusculos.size(); i++) {
-            String codMusculo = String.valueOf(listaMusculos.get(i).getNumero());
-            stmt.setString(1, String.valueOf(getExercicio(exercicio.getNome()).getNumero()));
-            stmt.setString(2, codMusculo);
+            sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST( ? as integer), CAST( ? as bigint))";
+            stmt = conn.prepareStatement(sql);
 
-            stmt.addBatch();
+            ArrayList<Musculo> listaMusculos = exercicio.getListaMusculos();
+
+            for (int i = 0; i < listaMusculos.size(); i++) {
+                String codMusculo = String.valueOf(listaMusculos.get(i).getNumero());
+                stmt.setString(1, String.valueOf(getExercicio(exercicio.getNome()).getNumero()));
+                stmt.setString(2, codMusculo);
+
+                stmt.addBatch();
+            }
+
+            stmt.executeBatch();
+            stmt.close();
+        } catch (SQLException exception) {
+            return false;
         }
-        stmt.executeBatch();
+        return true;
     }
 
     @Override
-    public void postAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException {
+    public boolean postAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException {
         sql = "INSERT INTO \"AparelhoExercicio\" VALUES (CAST(? as integer), CAST(? as integer), ?);";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, String.valueOf(codExercicio));
-        stmt.setString(2, String.valueOf(nroAparelho));
-        stmt.setString(3, caminhoImg);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, String.valueOf(codExercicio));
+            stmt.setString(2, String.valueOf(nroAparelho));
+            stmt.setString(3, caminhoImg);
+            stmt.executeUpdate();
 
-        stmt.executeUpdate();
-
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void putExercicio(Exercicio exercicio) throws SQLException {
+    public boolean putExercicio(Exercicio exercicio) throws SQLException {
         sql = "UPDATE \"Exercicio\" "
                 + "SET nom_exercicio=?, "
                 + "des_exercicio=? "
                 + "WHERE cod_exercicio = '" + exercicio.getNumero() + "'";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, exercicio.getNome());
-        stmt.setString(2, exercicio.getDescricao());
 
-        stmt.executeUpdate();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, exercicio.getNome());
+            stmt.setString(2, exercicio.getDescricao());
+            stmt.executeUpdate();
 
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void deleteExercicio(int codExercicio) throws SQLException {
+    public boolean deleteExercicio(int codExercicio) throws SQLException {
         sql = "DELETE FROM \"Exercicio\" "
                 + "WHERE cod_exercicio=CAST(? as integer)";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, String.valueOf(codExercicio));
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, String.valueOf(codExercicio));
+            stmt.executeUpdate();
 
-        stmt.executeUpdate();
-
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override

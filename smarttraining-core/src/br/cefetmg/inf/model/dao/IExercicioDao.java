@@ -23,13 +23,13 @@ public interface IExercicioDao {
 
     public ArrayList<Exercicio> getListaExercicios() throws SQLException;
 
-    public void postExercicio(Exercicio exercicio) throws SQLException;
+    public boolean postExercicio(Exercicio exercicio) throws SQLException;
 
-    public void postAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException;
+    public boolean postAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException;
 
-    public void putExercicio(Exercicio exercicio) throws SQLException;
+    public boolean putExercicio(Exercicio exercicio) throws SQLException;
 
-    public void deleteExercicio(int codExercicio) throws SQLException;
+    public boolean deleteExercicio(int codExercicio) throws SQLException;
 
     public void fechaConexao();
 }

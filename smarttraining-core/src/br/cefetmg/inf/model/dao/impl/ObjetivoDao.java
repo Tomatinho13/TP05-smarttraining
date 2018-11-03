@@ -86,41 +86,54 @@ public class ObjetivoDao implements IObjetivoDao {
     }
 
     @Override
-    public void postObjetivo(Objetivo objetivo) throws SQLException {
+    public boolean postObjetivo(Objetivo objetivo) throws SQLException {
         sql = "INSERT INTO \"Objetivo\" VALUES (?,?,?);";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, String.valueOf(objetivo.getCodigo()));
-        stmt.setString(2, objetivo.getNome());
-        stmt.setString(3, objetivo.getDescricao());
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, String.valueOf(objetivo.getCodigo()));
+            stmt.setString(2, objetivo.getNome());
+            stmt.setString(3, objetivo.getDescricao());
 
-        stmt.executeQuery(sql);
+            stmt.executeQuery(sql);
 
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void putObjetivo(Objetivo objetivo) throws SQLException {
+    public boolean putObjetivo(Objetivo objetivo) throws SQLException {
         sql = "UPDATE \"Usuario\" "
                 + "SET nom_objetivo=?, "
                 + "des_objetivo=?"
                 + "WHERE cod_objetivo=?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, objetivo.getNome());
-        stmt.setString(2, objetivo.getDescricao());
-        stmt.setString(3, String.valueOf(objetivo.getCodigo()));
 
-        stmt.executeQuery(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, objetivo.getNome());
+            stmt.setString(2, objetivo.getDescricao());
+            stmt.setString(3, String.valueOf(objetivo.getCodigo()));
 
+            stmt.executeQuery(sql);
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void deleteObjetivo(int codObjetivo) throws SQLException {
+    public boolean deleteObjetivo(int codObjetivo) throws SQLException {
         sql = "DELETE FROM \"Objetivo\" "
                 + "WHERE cod_objetivo='" + codObjetivo + "'";
 
-        Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeQuery(sql);
 
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -139,9 +152,9 @@ public class ObjetivoDao implements IObjetivoDao {
         }
         return objetivo;
     }
-    
+
     @Override
-    public void fechaConexao(){
+    public void fechaConexao() {
         try {
             conn.close();
         } catch (SQLException ex) {

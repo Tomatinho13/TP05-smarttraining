@@ -18,7 +18,7 @@ public interface IDiaTreinoDao {
 
     public ArrayList<DiaTreino> getListaDiaTreino(Atividade atividade) throws SQLException;
 
-    public void postDiaTreino(DiaTreino diaTreino) throws SQLException;
+    public boolean postDiaTreino(DiaTreino diaTreino) throws SQLException;
 
     public void fechaConexao();
 }

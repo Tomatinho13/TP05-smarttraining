@@ -27,29 +27,47 @@ public class ManterAluno implements IManterUsuario {
         Usuario resultado = alunoDao.getUsuarioPeloNome(nome);
         return resultado;
     }
-        
+
     @Override
     public ArrayList<Usuario> pesquisarTodos() throws SQLException {
         alunoDao = new AlunoDao();
-        ArrayList <Usuario> listaAlunos = alunoDao.getListaUsuarios();
+        ArrayList<Usuario> listaAlunos = alunoDao.getListaUsuarios();
         return listaAlunos;
     }
-    
+
     @Override
-    public void cadastrar(Usuario aluno) throws SQLException {
-        alunoDao = new AlunoDao();
-        alunoDao.postUsuario(aluno);
+    public boolean cadastrar(Usuario aluno) throws SQLException {
+        try {
+            alunoDao = new AlunoDao();
+            alunoDao.postUsuario(aluno);
+            alunoDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Usuario aluno) throws SQLException {
-        alunoDao = new AlunoDao();
-        alunoDao.putUsuario(aluno);
+    public boolean alterar(Usuario aluno) throws SQLException {
+        try {
+            alunoDao = new AlunoDao();
+            alunoDao.putUsuario(aluno);
+            alunoDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(String codCpf) throws SQLException {
-        alunoDao = new AlunoDao();
-        alunoDao.deleteUsuario(codCpf);
+    public boolean excluir(String codCpf) throws SQLException {
+        try {
+            alunoDao = new AlunoDao();
+            alunoDao.deleteUsuario(codCpf);
+            alunoDao.fechaConexao();
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 }

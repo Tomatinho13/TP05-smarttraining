@@ -98,42 +98,54 @@ public class TreinoDao implements ITreinoDao {
     }
 
     @Override
-    public void postTreino(Treino treino) throws SQLException {
+    public boolean postTreino(Treino treino) throws SQLException {
         sql = "INSERT INTO \"Treino\" VALUES (?,?,?,?)";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Ficha\" WHERE \"cod_cpf\"='" + treino.getCpfAluno() + "'");
-        stmt.setString(2, "SELECT \"nro_ficha\" FROM \"Ficha\" WHERE \"nro_ficha\"='" + treino.getNroFicha() + "'");
-        stmt.setString(3, String.valueOf(treino.getNroTreino()));
-        stmt.setString(4, treino.getDescricao());
 
-        stmt.executeQuery(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Ficha\" WHERE \"cod_cpf\"='" + treino.getCpfAluno() + "'");
+            stmt.setString(2, "SELECT \"nro_ficha\" FROM \"Ficha\" WHERE \"nro_ficha\"='" + treino.getNroFicha() + "'");
+            stmt.setString(3, String.valueOf(treino.getNroTreino()));
+            stmt.setString(4, treino.getDescricao());
 
+            stmt.executeQuery(sql);
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void putTreino(Treino treino) throws SQLException {
+    public boolean putTreino(Treino treino) throws SQLException {
         sql = "UPDATE \"Treino\" "
                 + "SET des_treino=?";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, treino.getDescricao());
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, treino.getDescricao());
+            stmt.executeQuery(sql);
 
-        stmt.executeQuery(sql);
-
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void deleteTreino(String cpf, int nroFicha, int nroTreino) throws SQLException {
+    public boolean deleteTreino(String cpf, int nroFicha, int nroTreino) throws SQLException {
         sql = "DELETE FROM \"Treino\" "
                 + "WHERE cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "' AND nro_treino='" + nroTreino + "'";
 
-        Statement stmt = conn.createStatement();
-        stmt.executeQuery(sql);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeQuery(sql);
 
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
     }
-    
+
     @Override
-    public void fechaConexao(){
+    public void fechaConexao() {
         try {
             conn.close();
         } catch (SQLException ex) {

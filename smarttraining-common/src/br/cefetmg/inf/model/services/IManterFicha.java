@@ -10,9 +10,9 @@ public interface IManterFicha {
 
     public ArrayList<Ficha> pesquisarPorAluno(String codCpf) throws SQLException;
 
-    public void cadastrar(Ficha ficha) throws SQLException;
+    public boolean cadastrar(Ficha ficha) throws SQLException;
 
-    public void alterar(Ficha ficha) throws SQLException;
+    public boolean alterar(Ficha ficha) throws SQLException;
 
-    public void excluir(String codCpf, int nroFicha) throws SQLException;
+    public boolean excluir(String codCpf, int nroFicha) throws SQLException;
 }

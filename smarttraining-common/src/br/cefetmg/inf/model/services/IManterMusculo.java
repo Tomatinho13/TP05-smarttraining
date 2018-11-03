@@ -10,9 +10,9 @@ public interface IManterMusculo {
 
     public ArrayList <Musculo> pesquisarTodos() throws SQLException;
     
-    public void cadastrar(Musculo musculo) throws SQLException;
+    public boolean cadastrar(Musculo musculo) throws SQLException;
 
-    public void alterar(Musculo musculo) throws SQLException;
+    public boolean alterar(Musculo musculo) throws SQLException;
 
-    public void excluir(int codMusculo) throws SQLException;
+    public boolean excluir(int codMusculo) throws SQLException;
 }

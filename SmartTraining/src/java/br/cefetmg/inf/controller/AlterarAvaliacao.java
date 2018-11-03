@@ -39,7 +39,6 @@ public class AlterarAvaliacao extends Controller {
             avaliacao.setCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
             avaliacao.setData(dataAvaliacao);
             avaliacao.setCpfInstrutor(request.getParameter("codCpfInstrutor").replaceAll("[^0-9]", ""));
-            avaliacao.setRecencia(true);
 
             avaliacao.setPeso(peso);
             avaliacao.setPercentualGordura(percentualGordura);

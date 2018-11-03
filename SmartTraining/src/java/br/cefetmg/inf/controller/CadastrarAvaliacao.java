@@ -42,7 +42,6 @@ public class CadastrarAvaliacao extends Controller {
             avaliacao.setCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
             avaliacao.setData(dataAvaliacao);
             avaliacao.setCpfInstrutor(request.getParameter("codCpfInstrutor").replaceAll("[^0-9]", ""));
-            avaliacao.setRecencia(true);
 
             String objetivos[] = request.getParameterValues("objetivo");
             ArrayList<Objetivo> listaObjetivos = new ArrayList<>();

@@ -35,8 +35,8 @@ public class ManterAvaliacao implements IManterAvaliacao {
         try {    
             avaliacaoDao = new AvaliacaoDao();
             avaliacaoDao.postAvaliacao(avaliacao);
+            avaliacaoDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno
             return false;
         }    
         return true;
@@ -47,8 +47,8 @@ public class ManterAvaliacao implements IManterAvaliacao {
         try {
             avaliacaoDao = new AvaliacaoDao();
             avaliacaoDao.putAvaliacao(avaliacao);
+            avaliacaoDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno
             return false;
         }
         return true;
@@ -59,8 +59,8 @@ public class ManterAvaliacao implements IManterAvaliacao {
         try {
             avaliacaoDao = new AvaliacaoDao();
             avaliacaoDao.deleteAvaliacao(codCpf, datAvaliacao);
+            avaliacaoDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno
             return false;
         }    
         return true;

@@ -67,7 +67,6 @@ public class AtividadeDao implements IAtividadeDao {
             stmt.setString(8, String.valueOf(atividade.getQtdPeso()));
             stmt.executeQuery(sql);
         } catch (SQLException exception) {
-            //retorno da excecao
             return false;
         }
         return true;
@@ -91,7 +90,6 @@ public class AtividadeDao implements IAtividadeDao {
             stmt.executeQuery(sql);
 
         } catch (SQLException exception) {
-            //retorno da excecao
             return false;
         }
         return true;
@@ -107,7 +105,6 @@ public class AtividadeDao implements IAtividadeDao {
         try (Statement stmt = conn.createStatement()) {
             stmt.executeQuery(sql);
         } catch (SQLException exception) {
-            //retorno da excecao
             return false;
         }
         return true;

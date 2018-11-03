@@ -16,11 +16,11 @@ public interface IMusculoDao {
 
     public ArrayList<Musculo> getExercicioMusculos(int codExercicio);
 
-    public void postMusculo(Musculo musculo) throws SQLException;
+    public boolean postMusculo(Musculo musculo) throws SQLException;
 
-    public void putMusculo(Musculo musculo) throws SQLException;
+    public boolean putMusculo(Musculo musculo) throws SQLException;
 
-    public void deleteMusculo(int codMusculo) throws SQLException;
+    public boolean deleteMusculo(int codMusculo) throws SQLException;
 
     public void fechaConexao();
 }

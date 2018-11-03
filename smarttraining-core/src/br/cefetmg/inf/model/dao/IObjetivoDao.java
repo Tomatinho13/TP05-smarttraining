@@ -19,11 +19,11 @@ public interface IObjetivoDao {
 
     public ArrayList<Objetivo> getListaObjetivos() throws SQLException;
 
-    public void postObjetivo(Objetivo objetivo) throws SQLException;
+    public boolean postObjetivo(Objetivo objetivo) throws SQLException;
 
-    public void putObjetivo(Objetivo objetivo) throws SQLException;
+    public boolean putObjetivo(Objetivo objetivo) throws SQLException;
 
-    public void deleteObjetivo(int codObjetivo) throws SQLException;
+    public boolean deleteObjetivo(int codObjetivo) throws SQLException;
 
     public void fechaConexao();
 }

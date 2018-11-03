@@ -40,8 +40,8 @@ public class ManterAparelho implements IManterAparelho {
         try {
             aparelhoDao = new AparelhoDao();
             aparelhoDao.postAparelho(aparelho);
+            aparelhoDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno da excecao
             return false;
         }
         return true;
@@ -52,8 +52,8 @@ public class ManterAparelho implements IManterAparelho {
         try {
             aparelhoDao = new AparelhoDao();
             aparelhoDao.putAparelho(aparelho);
+            aparelhoDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno da excecao
             return false;
         }
         return true;
@@ -64,8 +64,8 @@ public class ManterAparelho implements IManterAparelho {
         try {
             aparelhoDao = new AparelhoDao();
             aparelhoDao.deleteAparelho(nroAparelho);
+            aparelhoDao.fechaConexao();
         } catch(SQLException exception){
-            //retorno da excecao
             return false;      
         }
         return true;

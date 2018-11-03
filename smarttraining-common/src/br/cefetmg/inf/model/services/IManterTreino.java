@@ -14,9 +14,9 @@ public interface IManterTreino {
 
     public ArrayList<Treino> pesquisarPorFicha(String cpf, int nroFicha) throws SQLException;
 
-    public void cadastrar(Treino treino) throws SQLException;
+    public boolean cadastrar(Treino treino) throws SQLException;
 
-    public void alterar(Treino treino) throws SQLException;
+    public boolean alterar(Treino treino) throws SQLException;
 
-    public void excluir(String cpf, int nroTreino, int nroFicha) throws SQLException;
+    public boolean excluir(String cpf, int nroTreino, int nroFicha) throws SQLException;
 }

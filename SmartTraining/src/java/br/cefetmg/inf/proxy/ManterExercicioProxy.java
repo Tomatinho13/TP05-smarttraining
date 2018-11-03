@@ -38,7 +38,7 @@ public class ManterExercicioProxy implements IManterExercicio {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codExercicio));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_EXERCICIO_COD, dados);
 
@@ -55,7 +55,7 @@ public class ManterExercicioProxy implements IManterExercicio {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(nomeExercicio));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_EXERCICIO_NOME, dados);
 
@@ -72,7 +72,7 @@ public class ManterExercicioProxy implements IManterExercicio {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codExercicio));
         dados.add(gson.toJson(nroAparelho));
         pacoteEnviado = new Pacote(TipoOperacao.PESQ_APARELHOEXERCICIO, dados);
@@ -90,13 +90,14 @@ public class ManterExercicioProxy implements IManterExercicio {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(nomeRegiao));
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_EXERCICIO_REGIAO, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Exercicio>>() {}.getType());
+        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Exercicio>>() {
+                }.getType());
         return listaExercicios;
     }
 
@@ -108,13 +109,14 @@ public class ManterExercicioProxy implements IManterExercicio {
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
-        
+
         dados.add(gson.toJson(codMusculo));
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_EXERCICIO_MUSCULO, dados);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Exercicio>>() {}.getType());
+        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Exercicio>>() {
+                }.getType());
         return listaExercicios;
     }
 
@@ -128,71 +130,91 @@ public class ManterExercicioProxy implements IManterExercicio {
         pacoteEnviado = new Pacote(TipoOperacao.LISTA_EXERCICIO, null);
 
         pacoteRecebido = cliente.requisicao(pacoteEnviado);
-        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0), 
-                new TypeToken<ArrayList<Exercicio>>() {}.getType());
+        ArrayList<Exercicio> listaExercicios = gson.fromJson(pacoteRecebido.getDados().get(0),
+                new TypeToken<ArrayList<Exercicio>>() {
+                }.getType());
         return listaExercicios;
     }
 
     @Override
-    public void cadastrar(Exercicio exercicio) throws SQLException {
+    public boolean cadastrar(Exercicio exercicio) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(exercicio));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_EXERCICIO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(exercicio));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_EXERCICIO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void cadastrarAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException {
+    public boolean cadastrarAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(codExercicio));
-        dados.add(gson.toJson(nroAparelho));
-        dados.add(gson.toJson(caminhoImg));
-        pacoteEnviado = new Pacote(TipoOperacao.CAD_APARELHOEXERCICIO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(codExercicio));
+            dados.add(gson.toJson(nroAparelho));
+            dados.add(gson.toJson(caminhoImg));
+            pacoteEnviado = new Pacote(TipoOperacao.CAD_APARELHOEXERCICIO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void alterar(Exercicio exercicio) throws SQLException {
+    public boolean alterar(Exercicio exercicio) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(exercicio));
-        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_EXERCICIO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(exercicio));
+            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_EXERCICIO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void excluir(int codExercicio) throws SQLException {
+    public boolean excluir(int codExercicio) throws SQLException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
-
         ArrayList<String> dados = new ArrayList<>();
-        
-        dados.add(gson.toJson(codExercicio));
-        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_EXERCICIO, dados);
 
-        cliente.requisicao(pacoteEnviado);
+        try {
+            dados.add(gson.toJson(codExercicio));
+            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_EXERCICIO, dados);
+
+            cliente.requisicao(pacoteEnviado);
+
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
-
 }

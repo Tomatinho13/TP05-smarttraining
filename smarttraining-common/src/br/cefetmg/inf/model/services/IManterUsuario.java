@@ -12,9 +12,9 @@ public interface IManterUsuario {
     
     public ArrayList <Usuario> pesquisarTodos() throws SQLException;
     
-    public void cadastrar(Usuario aluno) throws SQLException;
+    public boolean cadastrar(Usuario aluno) throws SQLException;
 
-    public void alterar(Usuario aluno) throws SQLException;
+    public boolean alterar(Usuario aluno) throws SQLException;
 
-    public void excluir(String codCpf) throws SQLException;
+    public boolean excluir(String codCpf) throws SQLException;
 }

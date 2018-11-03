@@ -14,11 +14,11 @@ public interface ITreinoDao {
 
     public ArrayList<Treino> getFichaTreinos(String cpf, int nroFicha) throws SQLException;
 
-    public void postTreino(Treino treino) throws SQLException;
+    public boolean postTreino(Treino treino) throws SQLException;
 
-    public void putTreino(Treino treino) throws SQLException;
+    public boolean putTreino(Treino treino) throws SQLException;
 
-    public void deleteTreino(String cpf, int nroFicha, int nroTreino) throws SQLException;
+    public boolean deleteTreino(String cpf, int nroFicha, int nroTreino) throws SQLException;
 
     public void fechaConexao();
 }
