@@ -36,7 +36,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
             avaliacao = new Avaliacao(cpf,
                     data,
                     resultado.getString("cod_cpf_instrutor"),
-                    resultado.getBoolean("idt_recencia"),
                     Double.parseDouble(resultado.getString("qtd_peso")),
                     Double.parseDouble(resultado.getString("qtd_percGordura")),
                     Double.parseDouble(resultado.getString("tam_pescoco")),
@@ -56,7 +55,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                     Double.parseDouble(resultado.getString("tam_panturrilhaDir")),
                     objetivoDao.getAvaliacaoObjetivos(cpf, resultado.getDate("dat_avaliacao").toLocalDate()));
         } else {
-
             return null;
         }
 
@@ -76,7 +74,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
             avaliacao = new Avaliacao(codCpf,
                     resultado.getDate("dat_avaliacao").toLocalDate(),
                     resultado.getString("cod_cpf_instrutor"),
-                    resultado.getBoolean("idt_recencia"),
                     Double.parseDouble(resultado.getString("qtd_peso")),
                     Double.parseDouble(resultado.getString("qtd_percGordura")),
                     Double.parseDouble(resultado.getString("tam_pescoco")),
@@ -107,7 +104,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + avaliacao.getCpfAluno() + "'),"
                 + "CAST(? as date),"
                 + "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + avaliacao.getCpfInstrutor() + "'),"
-                + "CAST(? as boolean),"
                 + "CAST(? as numeric),"
                 + "CAST(? as numeric),"
                 + "CAST(? as numeric),"
@@ -129,24 +125,23 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, avaliacao.getData().toString());
-            stmt.setString(2, String.valueOf(avaliacao.getRecencia()));
-            stmt.setString(3, String.valueOf(avaliacao.getPeso()));
-            stmt.setString(4, String.valueOf(avaliacao.getMassaGorda()));
-            stmt.setString(5, String.valueOf(avaliacao.getPercentualGordura()));
-            stmt.setString(6, String.valueOf(avaliacao.getTamanhoPescoco()));
-            stmt.setString(7, String.valueOf(avaliacao.getTamanhoOmbro()));
-            stmt.setString(8, String.valueOf(avaliacao.getTamanhoTorax()));
-            stmt.setString(9, String.valueOf(avaliacao.getTamanhoAbdomen()));
-            stmt.setString(10, String.valueOf(avaliacao.getTamanhoCintura()));
-            stmt.setString(11, String.valueOf(avaliacao.getTamanhoQuadril()));
-            stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
-            stmt.setString(13, String.valueOf(avaliacao.getTamanhoBracoDireito()));
-            stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
-            stmt.setString(15, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
-            stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
-            stmt.setString(17, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
-            stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
-            stmt.setString(19, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
+            stmt.setString(2, String.valueOf(avaliacao.getPeso()));
+            stmt.setString(3, String.valueOf(avaliacao.getMassaGorda()));
+            stmt.setString(4, String.valueOf(avaliacao.getPercentualGordura()));
+            stmt.setString(5, String.valueOf(avaliacao.getTamanhoPescoco()));
+            stmt.setString(6, String.valueOf(avaliacao.getTamanhoOmbro()));
+            stmt.setString(7, String.valueOf(avaliacao.getTamanhoTorax()));
+            stmt.setString(8, String.valueOf(avaliacao.getTamanhoAbdomen()));
+            stmt.setString(9, String.valueOf(avaliacao.getTamanhoCintura()));
+            stmt.setString(10, String.valueOf(avaliacao.getTamanhoQuadril()));
+            stmt.setString(11, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
+            stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoDireito()));
+            stmt.setString(13, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
+            stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
+            stmt.setString(15, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
+            stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
+            stmt.setString(17, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
+            stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
             stmt.executeUpdate();
 
             for (int i = 0; i < avaliacao.getListaObjetivos().size(); i++) {
@@ -198,26 +193,25 @@ public class AvaliacaoDao implements IAvaliacaoDao {
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, avaliacao.getCpfInstrutor());
-            stmt.setString(2, String.valueOf(avaliacao.getRecencia()));
-            stmt.setString(3, String.valueOf(avaliacao.getPeso()));
-            stmt.setString(4, String.valueOf(avaliacao.getMassaGorda()));
-            stmt.setString(5, String.valueOf(avaliacao.getPercentualGordura()));
-            stmt.setString(6, String.valueOf(avaliacao.getTamanhoPescoco()));
-            stmt.setString(7, String.valueOf(avaliacao.getTamanhoOmbro()));
-            stmt.setString(8, String.valueOf(avaliacao.getTamanhoTorax()));
-            stmt.setString(9, String.valueOf(avaliacao.getTamanhoAbdomen()));
-            stmt.setString(10, String.valueOf(avaliacao.getTamanhoCintura()));
-            stmt.setString(11, String.valueOf(avaliacao.getTamanhoQuadril()));
-            stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
-            stmt.setString(13, String.valueOf(avaliacao.getTamanhoBracoDireito()));
-            stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
-            stmt.setString(15, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
-            stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
-            stmt.setString(17, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
-            stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
-            stmt.setString(19, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-            stmt.setString(20, avaliacao.getCpfAluno().trim());
-            stmt.setString(21, avaliacao.getData().toString().trim());
+            stmt.setString(2, String.valueOf(avaliacao.getPeso()));
+            stmt.setString(3, String.valueOf(avaliacao.getMassaGorda()));
+            stmt.setString(4, String.valueOf(avaliacao.getPercentualGordura()));
+            stmt.setString(5, String.valueOf(avaliacao.getTamanhoPescoco()));
+            stmt.setString(6, String.valueOf(avaliacao.getTamanhoOmbro()));
+            stmt.setString(7, String.valueOf(avaliacao.getTamanhoTorax()));
+            stmt.setString(8, String.valueOf(avaliacao.getTamanhoAbdomen()));
+            stmt.setString(9, String.valueOf(avaliacao.getTamanhoCintura()));
+            stmt.setString(10, String.valueOf(avaliacao.getTamanhoQuadril()));
+            stmt.setString(11, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
+            stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoDireito()));
+            stmt.setString(13, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
+            stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
+            stmt.setString(15, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
+            stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
+            stmt.setString(17, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
+            stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
+            stmt.setString(19, avaliacao.getCpfAluno().trim());
+            stmt.setString(20, avaliacao.getData().toString().trim());
 
             stmt.executeUpdate();
 

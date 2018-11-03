@@ -11,7 +11,6 @@ public class Avaliacao {
     private String cpfAluno;
     private LocalDate data;
     private String cpfInstrutor;
-    private boolean recencia;
     private double peso;
     private double percentualGordura;
     private double tamanhoPescoco;
@@ -34,7 +33,7 @@ public class Avaliacao {
     public Avaliacao(){
     }
     
-    public Avaliacao(String cpfAluno, LocalDate data, String cpfInstrutor, boolean recencia, double peso, 
+    public Avaliacao(String cpfAluno, LocalDate data, String cpfInstrutor, double peso, 
             double percentualGordura, double tamanhoPescoco, double tamanhoOmbro, double tamanhoTorax, double tamanhoAbdomen, 
             double tamanhoCintura, double tamanhoQuadril, double massaGorda, double tamanhoBracoEsquerdo, double tamanhoBracoDireito, 
             double tamanhoAntebracoEsquerdo, double tamanhoAntebracoDireito, double tamanhoCoxaEsquerda, double tamanhoCoxaDireita, 
@@ -42,7 +41,6 @@ public class Avaliacao {
         this.cpfAluno = cpfAluno;
         this.data = data;
         this.cpfInstrutor = cpfInstrutor;
-        this.recencia = recencia;
         this.peso = peso;
         this.percentualGordura = percentualGordura;
         this.tamanhoPescoco = tamanhoPescoco;
@@ -93,14 +91,6 @@ public class Avaliacao {
 
     public void setCpfInstrutor(String cpfInstrutor) {
         this.cpfInstrutor = cpfInstrutor;
-    }
-
-    public boolean getRecencia() {
-        return recencia;
-    }
-
-    public void setRecencia(boolean recencia) {
-        this.recencia = recencia;
     }
 
     public double getPeso() {

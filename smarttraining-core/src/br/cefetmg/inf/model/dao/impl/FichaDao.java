@@ -5,6 +5,9 @@ import br.cefetmg.inf.model.db.ConectaBd;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Ficha;
+import br.cefetmg.inf.model.domain.Treino;
+import br.cefetmg.inf.model.services.IManterTreino;
+import br.cefetmg.inf.model.services.impl.ManterTreino;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,7 +82,10 @@ public class FichaDao implements IFichaDao {
         stmt.setString(5, ficha.getDataTroca().toString());
 
         stmt.executeQuery(sql);
-
+        IManterTreino manterTreino = new ManterTreino();
+        for (Treino treino : ficha.getListaTreino()) {
+            manterTreino.cadastrar(treino);
+        }
     }
 
     @Override
