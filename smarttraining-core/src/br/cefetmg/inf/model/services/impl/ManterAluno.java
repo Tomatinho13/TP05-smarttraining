@@ -37,37 +37,34 @@ public class ManterAluno implements IManterUsuario {
 
     @Override
     public boolean cadastrar(Usuario aluno) throws SQLException {
-        try {
-            alunoDao = new AlunoDao();
-            alunoDao.postUsuario(aluno);
-            alunoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        alunoDao = new AlunoDao();
+        testeDao = alunoDao.postUsuario(aluno);
+        alunoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Usuario aluno) throws SQLException {
-        try {
-            alunoDao = new AlunoDao();
-            alunoDao.putUsuario(aluno);
-            alunoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        alunoDao = new AlunoDao();
+        testeDao = alunoDao.putUsuario(aluno);
+        alunoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(String codCpf) throws SQLException {
-        try {
-            alunoDao = new AlunoDao();
-            alunoDao.deleteUsuario(codCpf);
-            alunoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        alunoDao = new AlunoDao();
+        testeDao = alunoDao.deleteUsuario(codCpf);
+        alunoDao.fechaConexao();
+        
+        return testeDao;
     }
 }

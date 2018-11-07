@@ -20,16 +20,16 @@ public class ManterAparelho implements IManterAparelho {
         Aparelho resultado = aparelhoDao.getAparelho(nroAparelho);
         return resultado;
     }
-    
+
     @Override
-    public Aparelho pesquisar(String nomAparelho) throws SQLException{
+    public Aparelho pesquisar(String nomAparelho) throws SQLException {
         aparelhoDao = new AparelhoDao();
         Aparelho resultado = aparelhoDao.getAparelho(nomAparelho);
         return resultado;
     }
-    
+
     @Override
-    public ArrayList<Aparelho> pesquisarTodos() throws SQLException{
+    public ArrayList<Aparelho> pesquisarTodos() throws SQLException {
         aparelhoDao = new AparelhoDao();
         ArrayList<Aparelho> resultado = aparelhoDao.getListaAparelhos();
         return resultado;
@@ -37,37 +37,31 @@ public class ManterAparelho implements IManterAparelho {
 
     @Override
     public boolean cadastrar(Aparelho aparelho) throws SQLException {
-        try {
-            aparelhoDao = new AparelhoDao();
-            aparelhoDao.postAparelho(aparelho);
-            aparelhoDao.fechaConexao();
-        } catch(SQLException exception){
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        aparelhoDao = new AparelhoDao();
+        testeDao = aparelhoDao.postAparelho(aparelho);
+        aparelhoDao.fechaConexao();
+
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Aparelho aparelho) throws SQLException {
-        try {
-            aparelhoDao = new AparelhoDao();
-            aparelhoDao.putAparelho(aparelho);
-            aparelhoDao.fechaConexao();
-        } catch(SQLException exception){
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        aparelhoDao = new AparelhoDao();
+        testeDao = aparelhoDao.putAparelho(aparelho);
+        aparelhoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(int nroAparelho) throws SQLException {
-        try {
-            aparelhoDao = new AparelhoDao();
-            aparelhoDao.deleteAparelho(nroAparelho);
-            aparelhoDao.fechaConexao();
-        } catch(SQLException exception){
-            return false;      
-        }
-        return true;
+        boolean testeDao;
+        aparelhoDao = new AparelhoDao();
+        testeDao = aparelhoDao.deleteAparelho(nroAparelho);
+        aparelhoDao.fechaConexao();
+        
+        return testeDao;
     }
 }

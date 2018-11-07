@@ -38,37 +38,34 @@ public class ManterInstrutor implements IManterUsuario {
 
     @Override
     public boolean cadastrar(Usuario instrutor) throws SQLException {
-        try {
-            instrutorDao = new InstrutorDao();
-            instrutorDao.postUsuario((Instrutor) instrutor);
-            instrutorDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        instrutorDao = new InstrutorDao();
+        testeDao = instrutorDao.postUsuario((Instrutor) instrutor);
+        instrutorDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Usuario instrutor) throws SQLException {
-        try {
-            instrutorDao = new InstrutorDao();
-            instrutorDao.putUsuario((Instrutor) instrutor);
-            instrutorDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        instrutorDao = new InstrutorDao();
+        testeDao = instrutorDao.putUsuario((Instrutor) instrutor);
+        instrutorDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(String codCpf) throws SQLException {
-        try {
-            instrutorDao = new InstrutorDao();
-            instrutorDao.deleteUsuario(codCpf);
-            instrutorDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        instrutorDao = new InstrutorDao();
+        testeDao = instrutorDao.deleteUsuario(codCpf);
+        instrutorDao.fechaConexao();
+        
+        return testeDao;
     }
 }

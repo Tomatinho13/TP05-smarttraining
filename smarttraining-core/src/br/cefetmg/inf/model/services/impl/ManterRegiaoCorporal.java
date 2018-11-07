@@ -22,37 +22,34 @@ public class ManterRegiaoCorporal implements IManterRegiaoCorporal {
 
     @Override
     public boolean cadastrar(RegiaoCorporal regiaoCorporal, int codMusculo) throws SQLException {
-        try {
-            regiaoCorporalDao = new RegiaoCorporalDao();
-            regiaoCorporalDao.postRegiaoCorporal(regiaoCorporal, codMusculo);
-            regiaoCorporalDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        regiaoCorporalDao = new RegiaoCorporalDao();
+        testeDao = regiaoCorporalDao.postRegiaoCorporal(regiaoCorporal, codMusculo);
+        regiaoCorporalDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(RegiaoCorporal regiaoCorporal) throws SQLException {
-        try {
-            regiaoCorporalDao = new RegiaoCorporalDao();
-            regiaoCorporalDao.putRegiaoCorporal(regiaoCorporal);
-            regiaoCorporalDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        regiaoCorporalDao = new RegiaoCorporalDao();
+        testeDao = regiaoCorporalDao.putRegiaoCorporal(regiaoCorporal);
+        regiaoCorporalDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(int codRegiao) throws SQLException {
-        try {
-            regiaoCorporalDao = new RegiaoCorporalDao();
-            regiaoCorporalDao.deleteRegiaoCorporal(codRegiao);
-            regiaoCorporalDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        regiaoCorporalDao = new RegiaoCorporalDao();
+        testeDao = regiaoCorporalDao.deleteRegiaoCorporal(codRegiao);
+        regiaoCorporalDao.fechaConexao();
+        
+        return testeDao;
     }
 }

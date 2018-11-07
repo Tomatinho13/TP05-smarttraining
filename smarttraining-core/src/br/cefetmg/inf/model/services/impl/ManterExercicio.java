@@ -59,49 +59,45 @@ public class ManterExercicio implements IManterExercicio {
 
     @Override
     public boolean cadastrar(Exercicio exercicio) throws SQLException {
-        try {
-            exercicioDao = new ExercicioDao();
-            exercicioDao.postExercicio(exercicio);
-            exercicioDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        exercicioDao = new ExercicioDao();
+        testeDao = exercicioDao.postExercicio(exercicio);
+        exercicioDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean cadastrarAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException {
-        try {
-            exercicioDao = new ExercicioDao();
-            exercicioDao.postAparelhoExercicio(codExercicio, nroAparelho, caminhoImg);
-            exercicioDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        exercicioDao = new ExercicioDao();
+        testeDao = exercicioDao.postAparelhoExercicio(codExercicio, nroAparelho, caminhoImg);
+        exercicioDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Exercicio exercicio) throws SQLException {
-        try {
-            exercicioDao = new ExercicioDao();
-            exercicioDao.putExercicio(exercicio);
-            exercicioDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        exercicioDao = new ExercicioDao();
+        testeDao = exercicioDao.putExercicio(exercicio);
+        exercicioDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(int codExercicio) throws SQLException {
-        try {
-            exercicioDao = new ExercicioDao();
-            exercicioDao.deleteExercicio(codExercicio);
-            exercicioDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        exercicioDao = new ExercicioDao();
+        testeDao = exercicioDao.deleteExercicio(codExercicio);
+        exercicioDao.fechaConexao();
+        
+        return testeDao;
     }
 }

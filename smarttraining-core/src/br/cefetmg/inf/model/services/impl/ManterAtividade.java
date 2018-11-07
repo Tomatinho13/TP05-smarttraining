@@ -22,37 +22,34 @@ public class ManterAtividade implements IManterAtividade {
 
     @Override
     public boolean cadastrar(Atividade atividade) throws SQLException {
-        try {
-            atividadeDao = new AtividadeDao();
-            atividadeDao.postAtividade(atividade);
-            atividadeDao.fechaConexao();
-        } catch(SQLException exception){
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        atividadeDao = new AtividadeDao();
+        testeDao = atividadeDao.postAtividade(atividade);
+        atividadeDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Atividade atividade) throws SQLException {
-        try {
-            atividadeDao = new AtividadeDao();
-            atividadeDao.putAtividade(atividade);
-            atividadeDao.fechaConexao();
-        } catch(SQLException exception){
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        atividadeDao = new AtividadeDao();
+        testeDao = atividadeDao.putAtividade(atividade);
+        atividadeDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(String codCpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException {
-        try {    
-            atividadeDao = new AtividadeDao();
-            atividadeDao.deleteAtividade(codCpf, nroTreino, codExercicio, nroAparelho, nroFicha);
-            atividadeDao.fechaConexao();
-        } catch(SQLException exception){
-            return false;
-        }    
-        return true;
+        boolean testeDao;
+        
+        atividadeDao = new AtividadeDao();
+        testeDao = atividadeDao.deleteAtividade(codCpf, nroTreino, codExercicio, nroAparelho, nroFicha);
+        atividadeDao.fechaConexao();
+        
+        return testeDao;
     }
 }

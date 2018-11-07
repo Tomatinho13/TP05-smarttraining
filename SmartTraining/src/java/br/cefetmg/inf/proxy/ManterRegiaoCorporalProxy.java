@@ -58,17 +58,14 @@ public class ManterRegiaoCorporalProxy implements IManterRegiaoCorporal {
         Gson gson = new Gson();
         ArrayList<String> dados = new ArrayList<>();
 
-        try {
-            dados.add(gson.toJson(regiaoCorporal));
-            dados.add(gson.toJson(codMusculo));
-            pacoteEnviado = new Pacote(TipoOperacao.CAD_REGCORP, dados);
+        dados.add(gson.toJson(regiaoCorporal));
+        dados.add(gson.toJson(codMusculo));
+        pacoteEnviado = new Pacote(TipoOperacao.CAD_REGCORP, dados);
 
-            cliente.requisicao(pacoteEnviado);
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        boolean testeDao = gson.fromJson(pacoteRecebido.getDados().get(0), boolean.class);
 
-        } catch (Exception exception) {
-            return false;
-        }
-        return true;
+        return testeDao;
     }
 
     @Override
@@ -79,16 +76,13 @@ public class ManterRegiaoCorporalProxy implements IManterRegiaoCorporal {
         Gson gson = new Gson();
         ArrayList<String> dados = new ArrayList<>();
 
-        try {
-            dados.add(gson.toJson(regiaoCorporal));
-            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_REGCORP, dados);
+        dados.add(gson.toJson(regiaoCorporal));
+        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_REGCORP, dados);
 
-            cliente.requisicao(pacoteEnviado);
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        boolean testeDao = gson.fromJson(pacoteRecebido.getDados().get(0), boolean.class);
 
-        } catch (Exception exception) {
-            return false;
-        }
-        return true;
+        return testeDao;
     }
 
     @Override
@@ -99,16 +93,13 @@ public class ManterRegiaoCorporalProxy implements IManterRegiaoCorporal {
         Gson gson = new Gson();
         ArrayList<String> dados = new ArrayList<>();
 
-        try {
-            dados.add(gson.toJson(codRegiao));
-            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_REGCORP, dados);
+        dados.add(gson.toJson(codRegiao));
+        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_REGCORP, dados);
 
-            cliente.requisicao(pacoteEnviado);
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        boolean testeDao = gson.fromJson(pacoteRecebido.getDados().get(0), boolean.class);
 
-        } catch (Exception exception) {
-            return false;
-        }
-        return true;
+        return testeDao;
     }
 
 }

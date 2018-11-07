@@ -30,37 +30,34 @@ public class ManterFicha implements IManterFicha {
 
     @Override
     public boolean cadastrar(Ficha ficha) throws SQLException {
-        try {
-            fichaDao = new FichaDao();
-            fichaDao.postFicha(ficha);
-            fichaDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        fichaDao = new FichaDao();
+        testeDao = fichaDao.postFicha(ficha);
+        fichaDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Ficha ficha) throws SQLException {
-        try {
-            fichaDao = new FichaDao();
-            fichaDao.putFicha(ficha);
-            fichaDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        fichaDao = new FichaDao();
+        testeDao = fichaDao.putFicha(ficha);
+        fichaDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(String codCpf, int nroFicha) throws SQLException {
-        try {
-            fichaDao = new FichaDao();
-            fichaDao.deleteFicha(codCpf, nroFicha);
-            fichaDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        fichaDao = new FichaDao();
+        testeDao = fichaDao.deleteFicha(codCpf, nroFicha);
+        fichaDao.fechaConexao();
+        
+        return testeDao;
     }
 }

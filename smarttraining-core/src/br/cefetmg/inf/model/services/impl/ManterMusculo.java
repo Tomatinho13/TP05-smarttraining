@@ -30,37 +30,34 @@ public class ManterMusculo implements IManterMusculo {
 
     @Override
     public boolean cadastrar(Musculo musculo) throws SQLException {
-        try {
-            musculoDao = new MusculoDao();
-            musculoDao.postMusculo(musculo);
-            musculoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        musculoDao = new MusculoDao();
+        testeDao = musculoDao.postMusculo(musculo);
+        musculoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Musculo musculo) throws SQLException {
-        try {
-            musculoDao = new MusculoDao();
-            musculoDao.putMusculo(musculo);
-            musculoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        musculoDao = new MusculoDao();
+        testeDao = musculoDao.putMusculo(musculo);
+        musculoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(int codMusculo) throws SQLException {
-        try {
-            musculoDao = new MusculoDao();
-            musculoDao.deleteMusculo(codMusculo);
-            musculoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        musculoDao = new MusculoDao();
+        testeDao = musculoDao.deleteMusculo(codMusculo);
+        musculoDao.fechaConexao();
+        
+        return testeDao;
     }
 }

@@ -30,37 +30,34 @@ public class ManterTreino implements IManterTreino {
 
     @Override
     public boolean cadastrar(Treino treino) throws SQLException {
-        try {
-            treinoDao = new TreinoDao();
-            treinoDao.postTreino(treino);
-            treinoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        treinoDao = new TreinoDao();
+        testeDao = treinoDao.postTreino(treino);
+        treinoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Treino treino) throws SQLException {
-        try {
-            treinoDao = new TreinoDao();
-            treinoDao.putTreino(treino);
-            treinoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        treinoDao = new TreinoDao();
+        testeDao = treinoDao.putTreino(treino);
+        treinoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(String cpf, int nroTreino, int nroFicha) throws SQLException {
-        try {
-            treinoDao = new TreinoDao();
-            treinoDao.deleteTreino(cpf, nroFicha, nroTreino);
-            treinoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        treinoDao = new TreinoDao();
+        testeDao = treinoDao.deleteTreino(cpf, nroFicha, nroTreino);
+        treinoDao.fechaConexao();
+        
+        return testeDao;
     }
 }

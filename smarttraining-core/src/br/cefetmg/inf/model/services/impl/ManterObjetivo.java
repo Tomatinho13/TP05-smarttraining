@@ -45,37 +45,34 @@ public class ManterObjetivo implements IManterObjetivo {
 
     @Override
     public boolean cadastrar(Objetivo objetivo) throws SQLException {
-        try {
-            objetivoDao = new ObjetivoDao();
-            objetivoDao.postObjetivo(objetivo);
-            objetivoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        objetivoDao = new ObjetivoDao();
+        testeDao = objetivoDao.postObjetivo(objetivo);
+        objetivoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean alterar(Objetivo objetivo) throws SQLException {
-        try {
-            objetivoDao = new ObjetivoDao();
-            objetivoDao.putObjetivo(objetivo);
-            objetivoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        objetivoDao = new ObjetivoDao();
+        testeDao = objetivoDao.putObjetivo(objetivo);
+        objetivoDao.fechaConexao();
+        
+        return testeDao;
     }
 
     @Override
     public boolean excluir(int codObjetivo) throws SQLException {
-        try {
-            objetivoDao = new ObjetivoDao();
-            objetivoDao.deleteObjetivo(codObjetivo);
-            objetivoDao.fechaConexao();
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        boolean testeDao;
+        
+        objetivoDao = new ObjetivoDao();
+        testeDao = objetivoDao.deleteObjetivo(codObjetivo);
+        objetivoDao.fechaConexao();
+        
+        return testeDao;
     }
 }

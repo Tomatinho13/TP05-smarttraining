@@ -93,16 +93,13 @@ public class ManterInstrutorProxy implements IManterUsuario {
         Gson gson = new Gson();
         ArrayList<String> dados = new ArrayList<>();
 
-        try {
-            dados.add(gson.toJson(instrutor));
-            pacoteEnviado = new Pacote(TipoOperacao.CAD_INSTRUTOR, dados);
+        dados.add(gson.toJson(instrutor));
+        pacoteEnviado = new Pacote(TipoOperacao.CAD_INSTRUTOR, dados);
 
-            cliente.requisicao(pacoteEnviado);
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        boolean testeDao = gson.fromJson(pacoteRecebido.getDados().get(0), boolean.class);
 
-        } catch (Exception exception) {
-            return false;
-        }
-        return true;
+        return testeDao;
     }
 
     @Override
@@ -113,16 +110,13 @@ public class ManterInstrutorProxy implements IManterUsuario {
         Gson gson = new Gson();
         ArrayList<String> dados = new ArrayList<>();
 
-        try {
-            dados.add(gson.toJson(instrutor));
-            pacoteEnviado = new Pacote(TipoOperacao.ALTERA_INSTRUTOR, dados);
+        dados.add(gson.toJson(instrutor));
+        pacoteEnviado = new Pacote(TipoOperacao.ALTERA_INSTRUTOR, dados);
 
-            cliente.requisicao(pacoteEnviado);
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        boolean testeDao = gson.fromJson(pacoteRecebido.getDados().get(0), boolean.class);
 
-        } catch (Exception exception) {
-            return false;
-        }
-        return true;
+        return testeDao;
     }
 
     @Override
@@ -133,15 +127,12 @@ public class ManterInstrutorProxy implements IManterUsuario {
         Gson gson = new Gson();
         ArrayList<String> dados = new ArrayList<>();
 
-        try {
-            dados.add(gson.toJson(codCpf));
-            pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_INSTRUTOR, dados);
+        dados.add(gson.toJson(codCpf));
+        pacoteEnviado = new Pacote(TipoOperacao.EXCLUI_INSTRUTOR, dados);
 
-            cliente.requisicao(pacoteEnviado);
+        pacoteRecebido = cliente.requisicao(pacoteEnviado);
+        boolean testeDao = gson.fromJson(pacoteRecebido.getDados().get(0), boolean.class);
 
-        } catch (Exception exception) {
-            return false;
-        }
-        return true;
+        return testeDao;
     }
 }
