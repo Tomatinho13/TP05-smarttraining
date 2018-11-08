@@ -41,6 +41,7 @@ public class AdapterService implements Runnable {
     public void analisaRequisicao() {
         TipoOperacao tipoOperacao = pacote.getTipoOperacao();
         Pacote pacoteResposta;
+        boolean testeDao = true;
 
         IManterAparelho manterAparelho = new ManterAparelho();
         IManterAtividade manterAtividade = new ManterAtividade();
@@ -121,12 +122,17 @@ public class AdapterService implements Runnable {
             }
             case CAD_APARELHO: {
                 try {
-                    manterAparelho.cadastrar(gson.fromJson(pacote.getDados().get(0), Aparelho.class));
+                    testeDao = manterAparelho.cadastrar(gson.fromJson(pacote.getDados().get(0), Aparelho.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -134,12 +140,17 @@ public class AdapterService implements Runnable {
             }
             case ALTERA_APARELHO: {
                 try {
-                    manterAparelho.alterar(gson.fromJson(pacote.getDados().get(0), Aparelho.class));
+                    testeDao = manterAparelho.alterar(gson.fromJson(pacote.getDados().get(0), Aparelho.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -147,12 +158,17 @@ public class AdapterService implements Runnable {
             }
             case EXCLUI_APARELHO: {
                 try {
-                    manterAparelho.excluir(gson.fromJson(pacote.getDados().get(0), int.class));
+                    testeDao = manterAparelho.excluir(gson.fromJson(pacote.getDados().get(0), int.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -184,12 +200,17 @@ public class AdapterService implements Runnable {
             }
             case CAD_ATIVIDADE: {
                 try {
-                    manterAtividade.cadastrar(gson.fromJson(pacote.getDados().get(0), Atividade.class));
+                    testeDao = manterAtividade.cadastrar(gson.fromJson(pacote.getDados().get(0), Atividade.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -197,12 +218,17 @@ public class AdapterService implements Runnable {
             }
             case ALTERA_ATIVIDADE: {
                 try {
-                    manterAtividade.alterar(gson.fromJson(pacote.getDados().get(0), Atividade.class));
+                    testeDao = manterAtividade.alterar(gson.fromJson(pacote.getDados().get(0), Atividade.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -210,7 +236,7 @@ public class AdapterService implements Runnable {
             }
             case EXCLUI_ATIVIDADE: {
                 try {
-                    manterAtividade.excluir(gson.fromJson(pacote.getDados().get(0), String.class),
+                    testeDao = manterAtividade.excluir(gson.fromJson(pacote.getDados().get(0), String.class),
                             gson.fromJson(pacote.getDados().get(1), int.class),
                             gson.fromJson(pacote.getDados().get(2), int.class),
                             gson.fromJson(pacote.getDados().get(3), int.class),
@@ -218,8 +244,13 @@ public class AdapterService implements Runnable {
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -269,12 +300,17 @@ public class AdapterService implements Runnable {
             }
             case CAD_AVALIACAO: {
                 try {
-                    manterAvaliacao.cadastrar(gson.fromJson(pacote.getDados().get(0), Avaliacao.class));
+                    testeDao = manterAvaliacao.cadastrar(gson.fromJson(pacote.getDados().get(0), Avaliacao.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -282,12 +318,17 @@ public class AdapterService implements Runnable {
             }
             case ALTERA_AVALIACAO: {
                 try {
-                    manterAvaliacao.alterar(gson.fromJson(pacote.getDados().get(0), Avaliacao.class));
+                    testeDao = manterAvaliacao.alterar(gson.fromJson(pacote.getDados().get(0), Avaliacao.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -295,13 +336,18 @@ public class AdapterService implements Runnable {
             }
             case EXCLUI_AVALIACAO: {
                 try {
-                    manterAvaliacao.excluir(gson.fromJson(pacote.getDados().get(0), String.class),
+                    testeDao = manterAvaliacao.excluir(gson.fromJson(pacote.getDados().get(0), String.class),
                             gson.fromJson(pacote.getDados().get(1), LocalDate.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -431,12 +477,17 @@ public class AdapterService implements Runnable {
             }
             case CAD_EXERCICIO: {
                 try {
-                    manterExercicio.cadastrar(gson.fromJson(pacote.getDados().get(0), Exercicio.class));
+                    testeDao = manterExercicio.cadastrar(gson.fromJson(pacote.getDados().get(0), Exercicio.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -444,21 +495,25 @@ public class AdapterService implements Runnable {
             }
             case CAD_APARELHOEXERCICIO: {
                 try {
-                    manterExercicio.cadastrarAparelhoExercicio(gson.fromJson(pacote.getDados().get(0), int.class),
+                    testeDao = manterExercicio.cadastrarAparelhoExercicio(gson.fromJson(pacote.getDados().get(0), int.class),
                             gson.fromJson(pacote.getDados().get(1), int.class),
                             gson.fromJson(pacote.getDados().get(2), String.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             }
             case ALTERA_EXERCICIO: {
-                boolean testeDao = true;
                 try {
                     testeDao = manterExercicio.alterar(gson.fromJson(pacote.getDados().get(0), Exercicio.class));
                 } catch (SQLException ex) {
@@ -478,12 +533,17 @@ public class AdapterService implements Runnable {
             }
             case EXCLUI_EXERCICIO: {
                 try {
-                    manterExercicio.excluir(gson.fromJson(pacote.getDados().get(0), int.class));
+                    testeDao = manterExercicio.excluir(gson.fromJson(pacote.getDados().get(0), int.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -532,12 +592,17 @@ public class AdapterService implements Runnable {
             }
             case CAD_FICHA: {
                 try {
-                    manterFicha.cadastrar(gson.fromJson(pacote.getDados().get(0), Ficha.class));
+                    testeDao = manterFicha.cadastrar(gson.fromJson(pacote.getDados().get(0), Ficha.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -545,12 +610,17 @@ public class AdapterService implements Runnable {
             }
             case ALTERA_FICHA: {
                 try {
-                    manterFicha.alterar(gson.fromJson(pacote.getDados().get(0), Ficha.class));
+                    testeDao = manterFicha.alterar(gson.fromJson(pacote.getDados().get(0), Ficha.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -558,13 +628,18 @@ public class AdapterService implements Runnable {
             }
             case EXCLUI_FICHA: {
                 try {
-                    manterFicha.excluir(gson.fromJson(pacote.getDados().get(0), String.class),
+                    testeDao = manterFicha.excluir(gson.fromJson(pacote.getDados().get(0), String.class),
                             gson.fromJson(pacote.getDados().get(1), int.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
