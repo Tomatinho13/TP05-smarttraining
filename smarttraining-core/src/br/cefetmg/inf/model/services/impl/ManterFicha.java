@@ -34,8 +34,7 @@ public class ManterFicha implements IManterFicha {
         
         fichaDao = new FichaDao();
         testeDao = fichaDao.postFicha(ficha);
-        fichaDao.fechaConexao();
-        
+                
         return testeDao;
     }
 
@@ -45,8 +44,7 @@ public class ManterFicha implements IManterFicha {
         
         fichaDao = new FichaDao();
         testeDao = fichaDao.putFicha(ficha);
-        fichaDao.fechaConexao();
-        
+               
         return testeDao;
     }
 
@@ -56,7 +54,6 @@ public class ManterFicha implements IManterFicha {
         
         fichaDao = new FichaDao();
         testeDao = fichaDao.deleteFicha(codCpf, nroFicha);
-        fichaDao.fechaConexao();
         
         return testeDao;
     }

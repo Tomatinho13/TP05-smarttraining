@@ -34,7 +34,6 @@ public class ManterTreino implements IManterTreino {
         
         treinoDao = new TreinoDao();
         testeDao = treinoDao.postTreino(treino);
-        treinoDao.fechaConexao();
         
         return testeDao;
     }
@@ -45,8 +44,7 @@ public class ManterTreino implements IManterTreino {
         
         treinoDao = new TreinoDao();
         testeDao = treinoDao.putTreino(treino);
-        treinoDao.fechaConexao();
-        
+
         return testeDao;
     }
 
@@ -56,7 +54,6 @@ public class ManterTreino implements IManterTreino {
         
         treinoDao = new TreinoDao();
         testeDao = treinoDao.deleteTreino(cpf, nroFicha, nroTreino);
-        treinoDao.fechaConexao();
         
         return testeDao;
     }

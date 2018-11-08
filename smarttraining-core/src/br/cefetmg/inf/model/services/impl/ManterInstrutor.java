@@ -42,7 +42,6 @@ public class ManterInstrutor implements IManterUsuario {
         
         instrutorDao = new InstrutorDao();
         testeDao = instrutorDao.postUsuario((Instrutor) instrutor);
-        instrutorDao.fechaConexao();
         
         return testeDao;
     }
@@ -53,7 +52,6 @@ public class ManterInstrutor implements IManterUsuario {
         
         instrutorDao = new InstrutorDao();
         testeDao = instrutorDao.putUsuario((Instrutor) instrutor);
-        instrutorDao.fechaConexao();
         
         return testeDao;
     }
@@ -64,7 +62,6 @@ public class ManterInstrutor implements IManterUsuario {
         
         instrutorDao = new InstrutorDao();
         testeDao = instrutorDao.deleteUsuario(codCpf);
-        instrutorDao.fechaConexao();
         
         return testeDao;
     }

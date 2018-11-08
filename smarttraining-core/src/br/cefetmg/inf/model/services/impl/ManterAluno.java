@@ -41,7 +41,6 @@ public class ManterAluno implements IManterUsuario {
         
         alunoDao = new AlunoDao();
         testeDao = alunoDao.postUsuario(aluno);
-        alunoDao.fechaConexao();
         
         return testeDao;
     }
@@ -52,7 +51,6 @@ public class ManterAluno implements IManterUsuario {
         
         alunoDao = new AlunoDao();
         testeDao = alunoDao.putUsuario(aluno);
-        alunoDao.fechaConexao();
         
         return testeDao;
     }
@@ -63,7 +61,6 @@ public class ManterAluno implements IManterUsuario {
         
         alunoDao = new AlunoDao();
         testeDao = alunoDao.deleteUsuario(codCpf);
-        alunoDao.fechaConexao();
         
         return testeDao;
     }

@@ -26,7 +26,6 @@ public class ManterRegiaoCorporal implements IManterRegiaoCorporal {
         
         regiaoCorporalDao = new RegiaoCorporalDao();
         testeDao = regiaoCorporalDao.postRegiaoCorporal(regiaoCorporal, codMusculo);
-        regiaoCorporalDao.fechaConexao();
         
         return testeDao;
     }
@@ -37,7 +36,6 @@ public class ManterRegiaoCorporal implements IManterRegiaoCorporal {
         
         regiaoCorporalDao = new RegiaoCorporalDao();
         testeDao = regiaoCorporalDao.putRegiaoCorporal(regiaoCorporal);
-        regiaoCorporalDao.fechaConexao();
         
         return testeDao;
     }
@@ -48,7 +46,6 @@ public class ManterRegiaoCorporal implements IManterRegiaoCorporal {
         
         regiaoCorporalDao = new RegiaoCorporalDao();
         testeDao = regiaoCorporalDao.deleteRegiaoCorporal(codRegiao);
-        regiaoCorporalDao.fechaConexao();
         
         return testeDao;
     }

@@ -49,7 +49,6 @@ public class ManterObjetivo implements IManterObjetivo {
         
         objetivoDao = new ObjetivoDao();
         testeDao = objetivoDao.postObjetivo(objetivo);
-        objetivoDao.fechaConexao();
         
         return testeDao;
     }
@@ -60,7 +59,6 @@ public class ManterObjetivo implements IManterObjetivo {
         
         objetivoDao = new ObjetivoDao();
         testeDao = objetivoDao.putObjetivo(objetivo);
-        objetivoDao.fechaConexao();
         
         return testeDao;
     }
@@ -71,7 +69,6 @@ public class ManterObjetivo implements IManterObjetivo {
         
         objetivoDao = new ObjetivoDao();
         testeDao = objetivoDao.deleteObjetivo(codObjetivo);
-        objetivoDao.fechaConexao();
         
         return testeDao;
     }

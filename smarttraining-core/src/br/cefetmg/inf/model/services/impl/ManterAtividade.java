@@ -26,7 +26,6 @@ public class ManterAtividade implements IManterAtividade {
         
         atividadeDao = new AtividadeDao();
         testeDao = atividadeDao.postAtividade(atividade);
-        atividadeDao.fechaConexao();
         
         return testeDao;
     }
@@ -37,7 +36,6 @@ public class ManterAtividade implements IManterAtividade {
         
         atividadeDao = new AtividadeDao();
         testeDao = atividadeDao.putAtividade(atividade);
-        atividadeDao.fechaConexao();
         
         return testeDao;
     }
@@ -48,8 +46,7 @@ public class ManterAtividade implements IManterAtividade {
         
         atividadeDao = new AtividadeDao();
         testeDao = atividadeDao.deleteAtividade(codCpf, nroTreino, codExercicio, nroAparelho, nroFicha);
-        atividadeDao.fechaConexao();
-        
+
         return testeDao;
     }
 }

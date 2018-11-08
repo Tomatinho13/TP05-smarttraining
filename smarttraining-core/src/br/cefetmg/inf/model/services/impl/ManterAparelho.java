@@ -40,7 +40,6 @@ public class ManterAparelho implements IManterAparelho {
         boolean testeDao;
         aparelhoDao = new AparelhoDao();
         testeDao = aparelhoDao.postAparelho(aparelho);
-        aparelhoDao.fechaConexao();
 
         return testeDao;
     }
@@ -50,7 +49,6 @@ public class ManterAparelho implements IManterAparelho {
         boolean testeDao;
         aparelhoDao = new AparelhoDao();
         testeDao = aparelhoDao.putAparelho(aparelho);
-        aparelhoDao.fechaConexao();
         
         return testeDao;
     }
@@ -60,7 +58,6 @@ public class ManterAparelho implements IManterAparelho {
         boolean testeDao;
         aparelhoDao = new AparelhoDao();
         testeDao = aparelhoDao.deleteAparelho(nroAparelho);
-        aparelhoDao.fechaConexao();
         
         return testeDao;
     }

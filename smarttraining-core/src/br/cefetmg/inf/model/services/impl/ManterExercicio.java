@@ -63,8 +63,7 @@ public class ManterExercicio implements IManterExercicio {
         
         exercicioDao = new ExercicioDao();
         testeDao = exercicioDao.postExercicio(exercicio);
-        exercicioDao.fechaConexao();
-        
+
         return testeDao;
     }
 
@@ -74,7 +73,6 @@ public class ManterExercicio implements IManterExercicio {
         
         exercicioDao = new ExercicioDao();
         testeDao = exercicioDao.postAparelhoExercicio(codExercicio, nroAparelho, caminhoImg);
-        exercicioDao.fechaConexao();
         
         return testeDao;
     }
@@ -85,7 +83,6 @@ public class ManterExercicio implements IManterExercicio {
         
         exercicioDao = new ExercicioDao();
         testeDao = exercicioDao.putExercicio(exercicio);
-        exercicioDao.fechaConexao();
         
         return testeDao;
     }
@@ -96,7 +93,6 @@ public class ManterExercicio implements IManterExercicio {
         
         exercicioDao = new ExercicioDao();
         testeDao = exercicioDao.deleteExercicio(codExercicio);
-        exercicioDao.fechaConexao();
         
         return testeDao;
     }

@@ -458,13 +458,19 @@ public class AdapterService implements Runnable {
                 break;
             }
             case ALTERA_EXERCICIO: {
+                boolean testeDao = true;
                 try {
-                    manterExercicio.alterar(gson.fromJson(pacote.getDados().get(0), Exercicio.class));
+                    testeDao = manterExercicio.alterar(gson.fromJson(pacote.getDados().get(0), Exercicio.class));
                 } catch (SQLException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ArrayList<String> dados = new ArrayList<>();
+
+                dados.add(gson.toJson(testeDao));
+
+                pacoteResposta = new Pacote(TipoOperacao.RESPOSTA, dados);
                 try {
-                    enviaResposta(new Pacote(TipoOperacao.RESPOSTA, new ArrayList<>()));
+                    enviaResposta(pacoteResposta);
                 } catch (IOException ex) {
                     Logger.getLogger(AdapterService.class.getName()).log(Level.SEVERE, null, ex);
                 }

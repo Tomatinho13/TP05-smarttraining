@@ -34,7 +34,6 @@ public class ManterMusculo implements IManterMusculo {
         
         musculoDao = new MusculoDao();
         testeDao = musculoDao.postMusculo(musculo);
-        musculoDao.fechaConexao();
         
         return testeDao;
     }
@@ -45,7 +44,6 @@ public class ManterMusculo implements IManterMusculo {
         
         musculoDao = new MusculoDao();
         testeDao = musculoDao.putMusculo(musculo);
-        musculoDao.fechaConexao();
         
         return testeDao;
     }
@@ -56,7 +54,6 @@ public class ManterMusculo implements IManterMusculo {
         
         musculoDao = new MusculoDao();
         testeDao = musculoDao.deleteMusculo(codMusculo);
-        musculoDao.fechaConexao();
         
         return testeDao;
     }

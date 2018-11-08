@@ -35,7 +35,6 @@ public class ManterAvaliacao implements IManterAvaliacao {
         
         avaliacaoDao = new AvaliacaoDao();
         testeDao = avaliacaoDao.postAvaliacao(avaliacao);
-        avaliacaoDao.fechaConexao();
         
         return testeDao;
     }
@@ -46,7 +45,6 @@ public class ManterAvaliacao implements IManterAvaliacao {
         
         avaliacaoDao = new AvaliacaoDao();
         testeDao = avaliacaoDao.putAvaliacao(avaliacao);
-        avaliacaoDao.fechaConexao();
         
         return testeDao;
     }
@@ -57,7 +55,6 @@ public class ManterAvaliacao implements IManterAvaliacao {
         
         avaliacaoDao = new AvaliacaoDao();
         testeDao = avaliacaoDao.deleteAvaliacao(codCpf, datAvaliacao);
-        avaliacaoDao.fechaConexao();
         
         return testeDao;
     }
