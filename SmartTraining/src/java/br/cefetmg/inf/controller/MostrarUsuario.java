@@ -13,9 +13,11 @@ public class MostrarUsuario extends Controller{
     public String execute(HttpServletRequest request) {
         String jsp="MostrarUsuario";
         try {
-            String cpfUsuario = request.getParameter("codCpf").replaceAll("[^0-9]", "");
+            String cpfUsuario = request.getParameter("codCpfUsuario").replaceAll("[^0-9]", "");
+            
             IManterUsuario manterAluno = new ManterAlunoProxy();
             IManterUsuario manterInstrutor = new ManterInstrutorProxy();
+            
             Usuario aluno  = manterAluno.pesquisarPorCpf(cpfUsuario);
             Usuario instrutor  = manterInstrutor.pesquisarPorCpf(cpfUsuario);
             if(aluno!=null){
