@@ -28,12 +28,12 @@
                 <input type="hidden" name="acao" value="AlterarAvaliacao">
 
                 <%
-                    Usuario usuario = (Usuario) request.getAttribute("aluno");
+                    Usuario aluno = (Usuario) request.getAttribute("aluno");
                     Avaliacao avaliacao = (Avaliacao) request.getAttribute("avaliacao");
                     Instrutor instrutor = (Instrutor) request.getSession().getAttribute("usuario");
                 %>
                 
-                <input type="hidden" name="codCpfAluno" value="${usuario.cpf}">
+                <input type="hidden" name="codCpfAluno" value="<%=aluno.getCpf()%>">
                 <input type="hidden" name="dataAvaliacao" value="<%=avaliacao.getData()%>">
                 <input type="hidden" name="codCpfInstrutor" value="<%=instrutor.getCpf()%>">
                 

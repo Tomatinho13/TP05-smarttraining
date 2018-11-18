@@ -9,6 +9,7 @@ import br.cefetmg.inf.model.domain.Avaliacao;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.postgresql.util.PSQLException;
 
 public class AvaliacaoDao implements IAvaliacaoDao {
 
@@ -168,55 +169,56 @@ public class AvaliacaoDao implements IAvaliacaoDao {
     @Override
     public boolean putAvaliacao(Avaliacao avaliacao) throws SQLException {
         sql = "UPDATE \"Avaliacao\" "
-                + "SET cod_cpf_instrutor=?, "
-                + "idt_recencia= CAST(? as boolean), "
-                + "qtd_peso= CAST(? as numeric), "
-                + "\"qtd_massaGorda\"=CAST(? as numeric), "
-                + "\"qtd_percGordura\"=CAST(? as numeric), "
+                + "SET \"cod_cpf_instrutor\"=?, "
+                + "\"qtd_peso\"=CAST(? as numeric), "
+                + "\"qtd_massagorda\"=CAST(? as numeric), "
+                + "\"qtd_percgordura\"=CAST(? as numeric), "
                 + "tam_pescoco=CAST(? as numeric), "
                 + "tam_ombro=CAST(? as numeric), "
                 + "tam_torax=CAST(? as numeric), "
                 + "tam_abdomen=CAST(? as numeric), "
                 + "tam_cintura=CAST(? as numeric), "
                 + "tam_quadril=CAST(? as numeric), "
-                + "\"tam_bracoEsq\"=CAST(? as numeric), "
-                + "\"tam_bracoDir\"=CAST(? as numeric), "
-                + "\"tam_antebracoEsq\"=CAST(? as numeric), "
-                + "\"tam_antebracoDir\"=CAST(? as numeric), "
-                + "\"tam_coxaEsq\"=CAST(? as numeric), "
-                + "\"tam_coxaDir\"=CAST(? as numeric), "
-                + "\"tam_panturrilhaEsq\"=CAST(? as numeric), "
-                + "\"tam_panturrilhaDir\"=CAST(? as numeric) "
+                + "\"tam_bracoesq\"=CAST(? as numeric), "
+                + "\"tam_bracodir\"=CAST(? as numeric), "
+                + "\"tam_antebracoesq\"=CAST(? as numeric), "
+                + "\"tam_antebracodir\"=CAST(? as numeric), "
+                + "\"tam_coxaesq\"=CAST(? as numeric), "
+                + "\"tam_coxadir\"=CAST(? as numeric), "
+                + "\"tam_panturrilhaesq\"=CAST(? as numeric), "
+                + "\"tam_panturrilhadir\"=CAST(? as numeric) "
                 + "WHERE cod_cpf=? "
                 + "AND dat_avaliacao= CAST(? as date)";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, avaliacao.getCpfInstrutor());
-            stmt.setString(2, String.valueOf(avaliacao.getPeso()));
-            stmt.setString(3, String.valueOf(avaliacao.getMassaGorda()));
-            stmt.setString(4, String.valueOf(avaliacao.getPercentualGordura()));
-            stmt.setString(5, String.valueOf(avaliacao.getTamanhoPescoco()));
-            stmt.setString(6, String.valueOf(avaliacao.getTamanhoOmbro()));
-            stmt.setString(7, String.valueOf(avaliacao.getTamanhoTorax()));
-            stmt.setString(8, String.valueOf(avaliacao.getTamanhoAbdomen()));
-            stmt.setString(9, String.valueOf(avaliacao.getTamanhoCintura()));
-            stmt.setString(10, String.valueOf(avaliacao.getTamanhoQuadril()));
-            stmt.setString(11, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
-            stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoDireito()));
-            stmt.setString(13, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
-            stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
-            stmt.setString(15, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
-            stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
-            stmt.setString(17, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
-            stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-            stmt.setString(19, avaliacao.getCpfAluno().trim());
-            stmt.setString(20, avaliacao.getData().toString().trim());
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, avaliacao.getCpfInstrutor());
+        stmt.setString(2, String.valueOf(avaliacao.getPeso()));
+        stmt.setString(3, String.valueOf(avaliacao.getMassaGorda()));
+        stmt.setString(4, String.valueOf(avaliacao.getPercentualGordura()));
+        stmt.setString(5, String.valueOf(avaliacao.getTamanhoPescoco()));
+        stmt.setString(6, String.valueOf(avaliacao.getTamanhoOmbro()));
+        stmt.setString(7, String.valueOf(avaliacao.getTamanhoTorax()));
+        stmt.setString(8, String.valueOf(avaliacao.getTamanhoAbdomen()));
+        stmt.setString(9, String.valueOf(avaliacao.getTamanhoCintura()));
+        stmt.setString(10, String.valueOf(avaliacao.getTamanhoQuadril()));
+        stmt.setString(11, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
+        stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoDireito()));
+        stmt.setString(13, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
+        stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
+        stmt.setString(15, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
+        stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
+        stmt.setString(17, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
+        stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
+        stmt.setString(19, avaliacao.getCpfAluno().trim());
+        stmt.setString(20, avaliacao.getData().toString().trim());
 
+        try{
             stmt.executeUpdate();
-
-        } catch (SQLException exception) {
+        } catch(PSQLException exception){
+            exception.printStackTrace(System.out);
             return false;
         }
+
         return true;
     }
 
@@ -224,7 +226,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
     public boolean deleteAvaliacao(String cpf, LocalDate datAvaliacao) throws SQLException {
         sql = "DELETE FROM \"Avaliacao\" "
                 + "WHERE cod_cpf='" + cpf + "' AND dat_avaliacao='" + datAvaliacao.toString() + "';";
-        
+
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
 
