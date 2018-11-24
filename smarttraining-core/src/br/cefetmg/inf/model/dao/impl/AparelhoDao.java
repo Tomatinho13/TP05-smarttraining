@@ -35,7 +35,9 @@ public class AparelhoDao implements IAparelhoDao {
 
         if (resultado.next()) {
             aparelho = new Aparelho(nroAparelho,
-                    resultado.getString("nom_aparelho"));
+                    resultado.getString("nom_aparelho"),
+                    getListaExercicios(nroAparelho)
+            );
         } else {
 
             return null;
@@ -54,7 +56,7 @@ public class AparelhoDao implements IAparelhoDao {
         ResultSet resultado = stmt.executeQuery(sql);
 
         if (resultado.next()) {
-            aparelho = new Aparelho(resultado.getInt("nro_aparelho"), nomAparelho);
+            aparelho = new Aparelho(resultado.getInt("nro_aparelho"), nomAparelho, getListaExercicios(resultado.getInt("nro_aparelho")));
         } else {
             return null;
         }
@@ -72,7 +74,9 @@ public class AparelhoDao implements IAparelhoDao {
         ResultSet resultado = stmt.executeQuery(sql);
         while (resultado.next()) {
             listaAparelhos.add(new Aparelho(resultado.getInt("nro_aparelho"),
-                    resultado.getString("nom_aparelho")));
+                    resultado.getString("nom_aparelho"),
+                    getListaExercicios(resultado.getInt("nro_aparelho")
+            )));
         }
 
         return listaAparelhos;

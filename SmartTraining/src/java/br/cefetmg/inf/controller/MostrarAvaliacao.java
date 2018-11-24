@@ -14,8 +14,8 @@ public class MostrarAvaliacao extends Controller{
     public String execute(HttpServletRequest request) {
         String jsp="MostrarAvaliacao";
         try {
-            String codCpfAluno = request.getParameter("codCpfAluno");
-            LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
+            String codCpfAluno = request.getParameter("codCpf");
+            LocalDate dataAvaliacao = Date.valueOf(request.getParameter("data").trim()).toLocalDate();
             IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
             Avaliacao avaliacao = manterAvaliacao.pesquisar(codCpfAluno, dataAvaliacao);
             

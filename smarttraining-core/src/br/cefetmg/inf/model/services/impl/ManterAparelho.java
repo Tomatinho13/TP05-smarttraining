@@ -1,6 +1,7 @@
 package br.cefetmg.inf.model.services.impl;
 
 import br.cefetmg.inf.model.dao.IAparelhoDao;
+import br.cefetmg.inf.model.dao.IExercicioDao;
 import br.cefetmg.inf.model.dao.impl.AparelhoDao;
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.services.IManterAparelho;

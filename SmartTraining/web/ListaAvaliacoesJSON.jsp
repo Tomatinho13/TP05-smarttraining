@@ -11,8 +11,8 @@
 
 <json:array name="avaliacoes" var="avaliacao" items="${avaliacoes}">
     <json:object>
-        <json:property name="codCpfAluno" value="${avaliacao.cpfAluno}"/>
-        <json:property name="datAvaliacao" value="${avaliacao.data}"/>
+        <json:property name="cpf" value="${avaliacao.cpfAluno}"/>
+        <json:property name="data" value="${avaliacao.data}"/>
     </json:object>
 </json:array>
 

@@ -14,6 +14,8 @@ public interface IManterExercicio {
     public AparelhoExercicio pesquisarAparelhoExercicio(int codExercicio, int nroAparelho) throws SQLException;
 
     public ArrayList<Exercicio> pesquisarPorRegiao(String nomeRegiao) throws SQLException;
+    
+    public ArrayList<Exercicio> pesquisarPorAparelho(int nroAparelho) throws SQLException;
 
     public ArrayList<Exercicio> pesquisarPorMusculo(int codMusculo) throws SQLException;
     

@@ -18,6 +18,8 @@ public interface IExercicioDao {
     public AparelhoExercicio getAparelhoExercicio(int codExercicio, int nroAparelho) throws SQLException;
 
     public ArrayList<Exercicio> getRegiaoExercicios(String nomRegiao) throws SQLException;
+    
+    public ArrayList<Exercicio> getAparelhoExercicios(int nroAparelho) throws SQLException;
 
     public ArrayList<Exercicio> getMusculoExercicios(int codMusculo) throws SQLException;
 

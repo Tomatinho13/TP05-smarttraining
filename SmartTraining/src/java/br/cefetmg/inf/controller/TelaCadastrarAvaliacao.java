@@ -29,16 +29,17 @@ public class TelaCadastrarAvaliacao extends Controller {
             if (listaObjetivos.isEmpty()) {
                 String erro = "Nao ha objetivos cadastrados!";
                 request.setAttribute("erro", erro);
-                jsp = "erro.jsp";
+                jsp = "erro";
             }
 
             request.setAttribute("aluno", aluno);
             request.setAttribute("objetivos", listaObjetivos);
+            
         } catch (SQLException e) {
             e.printStackTrace(System.err);
             String erro = "Erro ao cadastrar avaliacao!";
             request.setAttribute("erro", erro);
-            jsp = "erro.jsp";
+            jsp = "erro";
         }
         return defineView(request, jsp);
     }

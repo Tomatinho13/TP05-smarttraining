@@ -25,12 +25,12 @@ public class TelaCadastrarExercicio extends Controller {
             ArrayList<Musculo> listaMusculos = manterMusculo.pesquisarTodos();
 
             if (listaAparelhos == null) {
-                jsp = "erro.jsp";
+                jsp = "erro";
                 String erro = "Erro ao pesquisar aparelhos!";
                 request.setAttribute("erro", erro);
                 return defineView(request, jsp);
             } else if (listaMusculos == null) {
-                jsp = "erro.jsp";
+                jsp = "erro";
                 String erro = "Erro ao pesquisar musculos!";
                 request.setAttribute("erro", erro);
                 return defineView(request, jsp);
@@ -43,7 +43,7 @@ public class TelaCadastrarExercicio extends Controller {
             e.printStackTrace(System.err);
             String erro = "Erro ao cadastrar exercicio!";
             request.setAttribute("erro", erro);
-            jsp = "erro.jsp";
+            jsp = "erro";
         }
         return defineView(request, jsp);
     }

@@ -80,7 +80,7 @@ public class ExercicioDao implements IExercicioDao {
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
         if (resultado.next()) {
-            Aparelho aparelho = new Aparelho(nroAparelho, resultado.getString("nom_aparelho"));
+            Aparelho aparelho = new Aparelho(nroAparelho, resultado.getString("nom_aparelho"), new ArrayList<>());
             exercicio = new Exercicio(codExercicio,
                     resultado.getString("nom_exercicio"),
                     resultado.getString("des_exercicio"),
@@ -102,6 +102,23 @@ public class ExercicioDao implements IExercicioDao {
                 + "WHERE \"cod_regCorp\" IN ("
                 + "SELECT \"cod_regCorp\" FROM \"RegiaoCorporal\" "
                 + "WHERE \"nom_regCorp\" = '" + nomRegiao + "')))";
+
+        Statement stmt = conn.createStatement();
+        ResultSet resultado = stmt.executeQuery(sql);
+        while (resultado.next()) {
+            listaExercicios.add(getExercicio(resultado.getInt("cod_exercicio")));
+        }
+
+        return listaExercicios;
+    }
+    
+    @Override
+    public ArrayList<Exercicio> getAparelhoExercicios(int nroAparelho) throws SQLException {
+        ArrayList<Exercicio> listaExercicios = new ArrayList<>();
+        sql = "SELECT cod_exercicio FROM \"Exercicio\" "
+                + "WHERE cod_exercicio in ("
+                + "SELECT cod_exercicio FROM \"AparelhoExercicio\" "
+                + "WHERE nro_aparelho = '"+ nroAparelho +"'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);

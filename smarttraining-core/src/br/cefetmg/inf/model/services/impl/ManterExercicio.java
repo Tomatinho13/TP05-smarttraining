@@ -42,6 +42,13 @@ public class ManterExercicio implements IManterExercicio {
         ArrayList<Exercicio> resultado = exercicioDao.getRegiaoExercicios(nomeRegiao);
         return resultado;
     }
+    
+    @Override
+    public ArrayList<Exercicio> pesquisarPorAparelho(int nroAparelho) throws SQLException {
+        exercicioDao = new ExercicioDao();
+        ArrayList<Exercicio> resultado = exercicioDao.getAparelhoExercicios(nroAparelho);
+        return resultado;
+    }
 
     @Override
     public ArrayList<Exercicio> pesquisarPorMusculo(int codMusculo) throws SQLException {

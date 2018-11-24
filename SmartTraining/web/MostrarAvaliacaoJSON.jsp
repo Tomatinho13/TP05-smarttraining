@@ -11,10 +11,9 @@
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
 <json:object name="avaliacao">
-    <json:property name="codCpfAluno" value="${avaliacao.cpfAluno}"/>
-    <json:property name="datAvaliacao" value="${avaliacao.data}"/>
+    <json:property name="codCpf" value="${avaliacao.cpfAluno}"/>
+    <json:property name="data" value="${avaliacao.data}"/>
     <json:property name="codCpfInstrutor" value="${avaliacao.cpfInstrutor}"/>
-    <json:property name="idtRecencia" value="${avaliacao.recencia}"/>
     <json:property name="peso" value="${avaliacao.peso}"/>
     <json:property name="percentualGordura" value="${avaliacao.percentualGordura}"/>
     <json:property name="tamanhoPescoco" value="${avaliacao.tamanhoPescoco}"/>
@@ -32,11 +31,11 @@
     <json:property name="tamanhoCoxaDireita" value="${avaliacao.tamanhoCoxaDireita}"/>
     <json:property name="tamanhoPanturrilhaEsquerda" value="${avaliacao.tamanhoPanturrilhaEsquerda}"/>
     <json:property name="tamanhoPanturrilhaDireita" value="${avaliacao.tamanhoPanturrilhaDireita}"/>
-    <json:array name="listaObjetivos" var="objetivo" items="${avaliacao.listaObjetivos}">
+    <json:array name="objetivos" var="objetivo" items="${avaliacao.listaObjetivos}">
         <json:object>
-            <json:property name="codObjetivo" value="${objetivo.codigo}"/>
-            <json:property name="nomObjetivo" value="${objetivo.nome}"/>
-            <json:property name="desObjetivo" value="${objetivo.descricao}"/>
+            <json:property name="codigo" value="${objetivo.codigo}"/>
+            <json:property name="nome" value="${objetivo.nome}"/>
+            <json:property name="descricao" value="${objetivo.descricao}"/>
         </json:object>
     </json:array>
 </json:object>
