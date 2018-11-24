@@ -9,7 +9,7 @@
 <%@page contentType="text/json" pageEncoding="UTF-8"%>
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
-<json:array name="listaAvaliacoes" var="avaliacao" items="${avaliacoes}">
+<json:array name="avaliacoes" var="avaliacao" items="${avaliacoes}">
     <json:object>
         <json:property name="codCpfAluno" value="${avaliacao.cpfAluno}"/>
         <json:property name="datAvaliacao" value="${avaliacao.data}"/>

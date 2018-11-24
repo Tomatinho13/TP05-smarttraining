@@ -9,11 +9,11 @@ import java.time.LocalDate;
 
 public class DiaTreino {
     private Atividade atividade;
-    private LocalDate dataTreino;
+    private LocalDate data;
 
     public DiaTreino(Atividade atividade, LocalDate dataTreino) {
         this.atividade = atividade;
-        this.dataTreino = dataTreino;
+        this.data = dataTreino;
     }
 
     public Atividade getAtividade() {
@@ -25,11 +25,11 @@ public class DiaTreino {
     }
 
     public LocalDate getDataTreino() {
-        return dataTreino;
+        return data;
     }
 
     public void setDataTreino(LocalDate dataTreino) {
-        this.dataTreino = dataTreino;
+        this.data = dataTreino;
     }
      
 }

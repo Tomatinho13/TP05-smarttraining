@@ -4,6 +4,7 @@ import br.cefetmg.inf.model.dao.IDiaTreinoDao;
 import br.cefetmg.inf.model.db.ConectaBd;
 import br.cefetmg.inf.model.domain.Atividade;
 import br.cefetmg.inf.model.domain.DiaTreino;
+import br.cefetmg.inf.model.domain.Ficha;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Usuario;
@@ -26,19 +27,19 @@ public class DiaTreinoDao implements IDiaTreinoDao {
     }
 
     @Override
-    public ArrayList<DiaTreino> getListaDiaTreino(Atividade atividade) throws SQLException {
+    public ArrayList<DiaTreino> getListaDiaTreino(String codCpf, String nroFicha) throws SQLException {
+        AtividadeDao atividadeDao = new AtividadeDao();
         ArrayList<DiaTreino> listaDiaTreino = new ArrayList<>();
-        sql = "SELECT * FROM \"DiaTreino\" "
-                + "WHERE cod_cpf='" + atividade.getCpf() + "' AND nro_treino = '" + atividade.getNroTreino() + "'"
-                + "AND cod_exercicio = '" + atividade.getAparelhoExercicio().getExercicio().getNumero() + "' "
-                + "AND nro_aparelho='" + atividade.getAparelhoExercicio().getAparelho().getNumero() + "' "
-                + "AND nro_ficha='" + atividade.getNroFicha() + "'";
+        sql = "SELECT dat_treino, cod_cpf, nro_treino, cod_exercicio, nro_aparelho, nro_ficha FROM \"DiaTreino\" "
+                + "WHERE cod_cpf='" + codCpf + "' "
+                + "AND nro_ficha='" + nroFicha + "'";
 
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
 
         if (resultado.next()) {
             do {
+                atividade = atividadeDao.getAtividade(resultado.getString(2), resultado.getInt(3), resultado.getInt(4), resultado.getInt(5), resultado.getInt(6));
                 diaTreino = new DiaTreino(atividade, resultado.getDate("dat_treino").toLocalDate());
                 listaDiaTreino.add(diaTreino);
             } while (resultado.next());

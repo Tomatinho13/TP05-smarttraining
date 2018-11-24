@@ -27,11 +27,11 @@ public class Ficha {
         this.listaTreino = new ArrayList<>(listaTreino);
     }
     
-    public String cpfAluno() {
+    public String getCpfAluno() {
         return cpfAluno;
     }
 
-    public void cpfAluno(String cpfAluno) {
+    public void setCpfAluno(String cpfAluno) {
         this.cpfAluno = cpfAluno;
     }
 

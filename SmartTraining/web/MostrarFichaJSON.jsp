@@ -13,11 +13,11 @@
     <json:property name="codCpfInstrutor" value="${ficha.cpfInstrutor}"/>
     <json:property name="dataFicha" value="${ficha.data}"/>
     <json:property name="dataPrevistaTroca" value="${ficha.dataTroca}"/>
-    <json:array name="listaTreinos" var="treino" items="${ficha.listaTreino}">
+    <json:array name="treinos" var="treino" items="${ficha.listaTreino}">
         <json:object>
             <json:property name="nroTreino" value="${treino.nroTreino}"/>
             <json:property name="desTreino" value="${treino.descricao}"/>
-            <json:array name="listaAtividades" var="atividade" items="${treino.atividades}">
+            <json:array name="atividades" var="atividade" items="${treino.atividades}">
                 <json:object>
                     <json:property name="nroAparelho" value="${atividade.aparelhoExercicio.aparelho.numero}"/>
                     <json:property name="nomAparelho" value="${atividade.aparelhoExercicio.aparelho.nome}"/>
@@ -25,8 +25,8 @@
                     <json:property name="nomExercicio" value="${atividade.aparelhoExercicio.exercicio.nome}"/>
                     <json:array name="listaMusculos" var="musculo" items="${atividade.aparelhoExercicio.exercicio.listaMusculos}">
                         <json:object>
-                            <json:property name="nroMusculo" value="${musculo.numero}"/>
-                            <json:property name="nomMusculo" value="${musculo.nome}"/>
+                            <json:property name="numero" value="${musculo.numero}"/>
+                            <json:property name="nome" value="${musculo.nome}"/>
                         </json:object>
                     </json:array>
                     <json:property name="imgAtividade" value="${atividade.aparelhoExercicio.caminhoImagem}"/>

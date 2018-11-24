@@ -76,7 +76,7 @@ public class FichaDao implements IFichaDao {
         sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,CAST(? as date),CAST(? as date))";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + ficha.cpfAluno() + "')");
+            stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + ficha.getCpfAluno() + "')");
             stmt.setString(2, String.valueOf(ficha.getNumero()));
             stmt.setString(3, "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + ficha.getCpfInstrutor() + "')");
             stmt.setString(4, ficha.getData().toString());
@@ -108,7 +108,7 @@ public class FichaDao implements IFichaDao {
             stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + ficha.getCpfInstrutor() + "')");
             stmt.setString(2, ficha.getData().toString());
             stmt.setString(3, ficha.getDataTroca().toString());
-            stmt.setString(4, ficha.cpfAluno());
+            stmt.setString(4, ficha.getCpfAluno());
             stmt.setString(5, String.valueOf(ficha.getNumero()));
 
             stmt.executeQuery(sql);
