@@ -168,6 +168,15 @@ public class AvaliacaoDao implements IAvaliacaoDao {
 
     @Override
     public boolean putAvaliacao(Avaliacao avaliacao) throws SQLException {
+        if (!atualizaAvaliacao(avaliacao)) {
+            return false;
+        } else if (!deletaObjetivoAvaliacao(avaliacao)) {
+            return false;
+        }
+        return postObjetivoAvaliacao(avaliacao);
+    }
+
+    private boolean atualizaAvaliacao(Avaliacao avaliacao) {
         sql = "UPDATE \"Avaliacao\" "
                 + "SET \"cod_cpf_instrutor\"=?, "
                 + "\"qtd_peso\"=CAST(? as numeric), "
@@ -190,35 +199,69 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "WHERE cod_cpf=? "
                 + "AND dat_avaliacao= CAST(? as date)";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, avaliacao.getCpfInstrutor());
-        stmt.setString(2, String.valueOf(avaliacao.getPeso()));
-        stmt.setString(3, String.valueOf(avaliacao.getMassaGorda()));
-        stmt.setString(4, String.valueOf(avaliacao.getPercentualGordura()));
-        stmt.setString(5, String.valueOf(avaliacao.getTamanhoPescoco()));
-        stmt.setString(6, String.valueOf(avaliacao.getTamanhoOmbro()));
-        stmt.setString(7, String.valueOf(avaliacao.getTamanhoTorax()));
-        stmt.setString(8, String.valueOf(avaliacao.getTamanhoAbdomen()));
-        stmt.setString(9, String.valueOf(avaliacao.getTamanhoCintura()));
-        stmt.setString(10, String.valueOf(avaliacao.getTamanhoQuadril()));
-        stmt.setString(11, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
-        stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoDireito()));
-        stmt.setString(13, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
-        stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
-        stmt.setString(15, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
-        stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
-        stmt.setString(17, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
-        stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
-        stmt.setString(19, avaliacao.getCpfAluno().trim());
-        stmt.setString(20, avaliacao.getData().toString().trim());
-
-        try{
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, avaliacao.getCpfInstrutor());
+            stmt.setString(2, String.valueOf(avaliacao.getPeso()));
+            stmt.setString(3, String.valueOf(avaliacao.getMassaGorda()));
+            stmt.setString(4, String.valueOf(avaliacao.getPercentualGordura()));
+            stmt.setString(5, String.valueOf(avaliacao.getTamanhoPescoco()));
+            stmt.setString(6, String.valueOf(avaliacao.getTamanhoOmbro()));
+            stmt.setString(7, String.valueOf(avaliacao.getTamanhoTorax()));
+            stmt.setString(8, String.valueOf(avaliacao.getTamanhoAbdomen()));
+            stmt.setString(9, String.valueOf(avaliacao.getTamanhoCintura()));
+            stmt.setString(10, String.valueOf(avaliacao.getTamanhoQuadril()));
+            stmt.setString(11, String.valueOf(avaliacao.getTamanhoBracoEsquerdo()));
+            stmt.setString(12, String.valueOf(avaliacao.getTamanhoBracoDireito()));
+            stmt.setString(13, String.valueOf(avaliacao.getTamanhoAntebracoEsquerdo()));
+            stmt.setString(14, String.valueOf(avaliacao.getTamanhoAntebracoDireito()));
+            stmt.setString(15, String.valueOf(avaliacao.getTamanhoCoxaEsquerda()));
+            stmt.setString(16, String.valueOf(avaliacao.getTamanhoCoxaDireita()));
+            stmt.setString(17, String.valueOf(avaliacao.getTamanhoPanturrilhaEsquerda()));
+            stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
+            stmt.setString(19, avaliacao.getCpfAluno().trim());
+            stmt.setString(20, avaliacao.getData().toString().trim());
             stmt.executeUpdate();
-        } catch(PSQLException exception){
-            exception.printStackTrace(System.out);
+        } catch (SQLException exception) {
             return false;
         }
+        return true;
+    }
 
+    private boolean deletaObjetivoAvaliacao(Avaliacao avaliacao) {
+        sql = "DELETE FROM \"ObjetivoAvaliacao\" "
+                + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' AND dat_avaliacao='" + avaliacao.getData().toString() + "';";
+
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean postObjetivoAvaliacao(Avaliacao avaliacao) {
+        PreparedStatement stmt;
+        try {
+            for (int i = 0; i < avaliacao.getListaObjetivos().size(); i++) {
+                sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES ("
+                        + "CAST((SELECT dat_avaliacao FROM \"Avaliacao\" "
+                        + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' "
+                        + "AND dat_avaliacao=CAST('" + avaliacao.getData().toString() + "' as date)) as date),"
+                        + " (SELECT cod_cpf FROM \"Avaliacao\" "
+                        + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' "
+                        + "AND dat_avaliacao=CAST('" + avaliacao.getData().toString() + "' as date)), "
+                        + "CAST((SELECT cod_objetivo FROM \"Objetivo\" "
+                        + "WHERE cod_objetivo='" + avaliacao.getListaObjetivos().get(i).getCodigo() + "') as bigint))";
+
+                stmt = conn.prepareStatement(sql);
+                stmt.execute();
+                stmt.close();
+            }
+        } catch (SQLException ex) {
+            return false;
+        }
         return true;
     }
 
