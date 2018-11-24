@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
-import br.cefetmg.inf.proxy.ManterInstrutorProxy;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
+import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 
 public class AlterarUsuario extends Controller {
 
@@ -27,9 +27,9 @@ public class AlterarUsuario extends Controller {
             usuario.setSenha(request.getParameter("senha"));
 
             if (usuario.getTipo() == 'I') {
-                manterUsuario = new ManterInstrutorProxy();
+                manterUsuario = new ManterInstrutor();
             } else {
-                manterUsuario = new ManterAlunoProxy();
+                manterUsuario = new ManterAluno();
             }
 
             manterUsuario.alterar(usuario);

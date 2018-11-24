@@ -4,8 +4,8 @@ import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.proxy.ManterExercicioProxy;
-import br.cefetmg.inf.proxy.ManterMusculoProxy;
+import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.model.services.impl.ManterMusculo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +17,8 @@ public class CadastrarExercicio extends Controller {
         String jsp = "TelaInicialInstrutor";
 
         try {
-            IManterExercicio manterExercicio = new ManterExercicioProxy();
-            IManterMusculo manterMusculo = new ManterMusculoProxy();
+            IManterExercicio manterExercicio = new ManterExercicio();
+            IManterMusculo manterMusculo = new ManterMusculo();
             
             String nomeExercicio = request.getParameter("nomeExercicio");
             String descricaoExercicio = request.getParameter("descExercicio");

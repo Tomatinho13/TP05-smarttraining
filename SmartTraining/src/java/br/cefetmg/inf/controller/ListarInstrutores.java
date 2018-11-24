@@ -2,7 +2,7 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterInstrutorProxy;
+import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +15,7 @@ public class ListarInstrutores extends Controller {
 
         try {
             jsp="ListaInstrutores";
-            IManterUsuario manterInstrutor = new ManterInstrutorProxy();
+            IManterUsuario manterInstrutor = new ManterInstrutor();
 
             ArrayList<Usuario> listaInstrutores = manterInstrutor.pesquisarTodos();
 

@@ -4,8 +4,8 @@ import br.cefetmg.inf.model.domain.Usuario;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
-import br.cefetmg.inf.proxy.ManterInstrutorProxy;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
+import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 
 public class MostrarUsuario extends Controller{
 
@@ -15,8 +15,8 @@ public class MostrarUsuario extends Controller{
         try {
             String cpfUsuario = request.getParameter("codCpf").replaceAll("[^0-9]", "");
             
-            IManterUsuario manterAluno = new ManterAlunoProxy();
-            IManterUsuario manterInstrutor = new ManterInstrutorProxy();
+            IManterUsuario manterAluno = new ManterAluno();
+            IManterUsuario manterInstrutor = new ManterInstrutor();
             
             Usuario aluno  = manterAluno.pesquisarPorCpf(cpfUsuario);
             Usuario instrutor  = manterInstrutor.pesquisarPorCpf(cpfUsuario);

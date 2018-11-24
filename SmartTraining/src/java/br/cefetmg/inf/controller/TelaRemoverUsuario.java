@@ -2,8 +2,8 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
-import br.cefetmg.inf.proxy.ManterInstrutorProxy;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
+import br.cefetmg.inf.model.services.impl.ManterInstrutor;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +16,8 @@ public class TelaRemoverUsuario extends Controller {
         try {
             jsp = "RemoverUsuario";
 
-            IManterUsuario manterAluno = new ManterAlunoProxy();
-            IManterUsuario manterInstrutor = new ManterInstrutorProxy();
+            IManterUsuario manterAluno = new ManterAluno();
+            IManterUsuario manterInstrutor = new ManterInstrutor();
 
             ArrayList<Usuario> listaAlunos = manterAluno.pesquisarTodos();
             ArrayList<Usuario> listaInstrutores = manterInstrutor.pesquisarTodos();

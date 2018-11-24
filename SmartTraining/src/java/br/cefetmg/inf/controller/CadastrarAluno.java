@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class CadastrarAluno extends Controller {
                 BufferedReader leitor = request.getReader();
                 Gson gson = new Gson();
                 Usuario aluno = gson.fromJson(leitor.readLine(), Usuario.class);
-                IManterUsuario manterAluno = new ManterAlunoProxy();
+                IManterUsuario manterAluno = new ManterAluno();
                 manterAluno.cadastrar(aluno);
                 request.setAttribute("resposta", "Sucesso!");
                 jsp = "resposta";
@@ -55,7 +55,7 @@ public class CadastrarAluno extends Controller {
                 aluno.setEmail(email);
                 aluno.setDataNascimento(nascimento);
 
-                IManterUsuario manterAluno = new ManterAlunoProxy();
+                IManterUsuario manterAluno = new ManterAluno();
                 manterAluno.cadastrar(aluno);
             } catch (SQLException e) {
                 e.printStackTrace(System.err);

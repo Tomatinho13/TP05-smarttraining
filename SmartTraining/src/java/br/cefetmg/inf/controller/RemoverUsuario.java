@@ -3,7 +3,7 @@ package br.cefetmg.inf.controller;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
 
 public class RemoverUsuario extends Controller {
 
@@ -15,7 +15,7 @@ public class RemoverUsuario extends Controller {
             String codCpfUsuario = request.getParameter("usuario").replaceAll(" ", "");
 
             
-            IManterUsuario manterUsuario = new ManterAlunoProxy();
+            IManterUsuario manterUsuario = new ManterAluno();
 
             manterUsuario.excluir(codCpfUsuario);
 

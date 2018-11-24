@@ -2,7 +2,7 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Avaliacao;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
-import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ public class MostrarAvaliacao extends Controller{
         try {
             String codCpfAluno = request.getParameter("codCpfAluno");
             LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
             Avaliacao avaliacao = manterAvaliacao.pesquisar(codCpfAluno, dataAvaliacao);
             
             if(avaliacao!=null){

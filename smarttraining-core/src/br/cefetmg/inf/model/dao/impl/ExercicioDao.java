@@ -160,22 +160,9 @@ public class ExercicioDao implements IExercicioDao {
             stmt.setString(1, exercicio.getNome());
             stmt.setString(2, exercicio.getDescricao());
             stmt.executeUpdate();
-
-            sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST( ? as integer), CAST( ? as bigint))";
-            stmt = conn.prepareStatement(sql);
-
-            ArrayList<Musculo> listaMusculos = exercicio.getListaMusculos();
-
-            for (int i = 0; i < listaMusculos.size(); i++) {
-                String codMusculo = String.valueOf(listaMusculos.get(i).getNumero());
-                stmt.setString(1, String.valueOf(getExercicio(exercicio.getNome()).getNumero()));
-                stmt.setString(2, codMusculo);
-
-                stmt.addBatch();
-            }
-
-            stmt.executeBatch();
             stmt.close();
+
+            postMusculoExercicio(exercicio);
         } catch (SQLException exception) {
             return false;
         }
@@ -200,14 +187,67 @@ public class ExercicioDao implements IExercicioDao {
 
     @Override
     public boolean putExercicio(Exercicio exercicio) throws SQLException {
-        if(!atualizaExercicio(exercicio))
+        if (!atualizaExercicio(exercicio)) {
             return false;
-        if(!deletaExercicio(exercicio))
+        }
+        if (!deleteMusculoExercicio(exercicio)) {
             return false;
-        if(!insereMuscExercicio(exercicio))
+        }
+        return postMusculoExercicio(exercicio);
+    }
+
+    private boolean atualizaExercicio(Exercicio exercicio) {
+        sql = "UPDATE \"Exercicio\" "
+                + "SET nom_exercicio=?, "
+                + "des_exercicio=? "
+                + "WHERE cod_exercicio = '" + exercicio.getNumero() + "'";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, exercicio.getNome());
+            stmt.setString(2, exercicio.getDescricao());
+            stmt.executeUpdate();
+
+        } catch (SQLException exception) {
             return false;
-        
-        
+        }
+        return true;
+    }
+
+    private boolean deleteMusculoExercicio(Exercicio exercicio) {
+        sql = "DELETE FROM \"MusculoExercicio\" "
+                + "WHERE cod_exercicio = '" + exercicio.getNumero() + "'";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, exercicio.getNome());
+            stmt.setString(2, exercicio.getDescricao());
+            stmt.executeUpdate();
+
+        } catch (SQLException exception) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean postMusculoExercicio(Exercicio exercicio) {
+        try {
+            sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST( ? as integer), CAST( ? as bigint))";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                ArrayList<Musculo> listaMusculos = exercicio.getListaMusculos();
+                
+                for (int i = 0; i < listaMusculos.size(); i++) {
+                    String codMusculo = String.valueOf(listaMusculos.get(i).getNumero());
+                    stmt.setString(1, String.valueOf(getExercicio(exercicio.getNome()).getNumero()));
+                    stmt.setString(2, codMusculo);
+                    
+                    stmt.addBatch();
+                }
+                
+                stmt.executeBatch();
+            }
+        } catch (SQLException exception) {
+            return false;
+        }
+
         return true;
     }
 
@@ -233,56 +273,5 @@ public class ExercicioDao implements IExercicioDao {
         } catch (SQLException ex) {
             Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public boolean atualizaExercicio(Exercicio exercicio){
-        sql = "UPDATE \"Exercicio\" "
-                + "SET nom_exercicio=?, "
-                + "des_exercicio=? "
-                + "WHERE cod_exercicio = '" + exercicio.getNumero() + "'";
-
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, exercicio.getNome());
-            stmt.setString(2, exercicio.getDescricao());
-            stmt.executeUpdate();
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean deletaExercicio(Exercicio exercicio){
-            sql = "DELETE FROM \"MusculoExercicio\" "
-                + "WHERE cod_exercicio = '" + exercicio.getNumero() + "'";
-
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, exercicio.getNome());
-            stmt.setString(2, exercicio.getDescricao());
-            stmt.executeUpdate();
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean insereMuscExercicio(Exercicio exercicio){
-            sql = "INSERT INTO \"MusculoExercicio\" (cod_exercicio, cod_musculo) "
-                + "VALUES"; 
-            
-            for(int i = 0; i < exercicio.getListaMusculos().size(); i++){
-                sql += "("+ exercicio.getNumero() +"," + exercicio.getListaMusculos().get(i) + ")";               
-            }
-            
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, exercicio.getNome());
-            stmt.setString(2, exercicio.getDescricao());
-            stmt.executeUpdate();
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
     }
 }

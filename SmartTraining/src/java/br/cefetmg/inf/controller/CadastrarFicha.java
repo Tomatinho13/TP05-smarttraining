@@ -2,7 +2,7 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Ficha;
 import br.cefetmg.inf.model.services.IManterFicha;
-import br.cefetmg.inf.proxy.ManterFichaProxy;
+import br.cefetmg.inf.model.services.impl.ManterFicha;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ public class CadastrarFicha extends Controller {
             Gson gson = new Gson();
             Ficha ficha = gson.fromJson(request.getReader(), Ficha.class);
             
-            IManterFicha manterFicha = new ManterFichaProxy();
+            IManterFicha manterFicha = new ManterFicha();
             manterFicha.cadastrar(ficha);
         } catch (IOException | SQLException ex) {
             Logger.getLogger(CadastrarFicha.class.getName()).log(Level.SEVERE, null, ex);

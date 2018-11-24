@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
-import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
+import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
 
 public class ListarAvaliacoes extends Controller {
 
@@ -17,9 +17,9 @@ public class ListarAvaliacoes extends Controller {
         String jsp = null;
 
         try {
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
-            IManterUsuario manterUsuario = new ManterAlunoProxy();
-            String codCpfAluno = request.getParameter("codCpfAluno").replaceAll("[^0-9]", "");
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
+            IManterUsuario manterUsuario = new ManterAluno();
+            String codCpfAluno = request.getParameter("codCpf").replaceAll("[^0-9]", "");
             Usuario aluno = manterUsuario.pesquisarPorCpf(codCpfAluno);
             ArrayList<Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(aluno.getCpf());
 

@@ -1,7 +1,8 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Usuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ public class ListarAlunos extends Controller {
 
         try {
             jsp="ListaAlunos";
-            ManterAlunoProxy manterAluno = new ManterAlunoProxy();
+            IManterUsuario manterAluno = new ManterAluno();
 
             ArrayList<Usuario> listaAlunos = manterAluno.pesquisarTodos();
 

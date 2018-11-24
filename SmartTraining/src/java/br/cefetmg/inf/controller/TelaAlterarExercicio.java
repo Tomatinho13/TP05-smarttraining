@@ -6,9 +6,9 @@ import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.proxy.ManterAparelhoProxy;
-import br.cefetmg.inf.proxy.ManterExercicioProxy;
-import br.cefetmg.inf.proxy.ManterMusculoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAparelho;
+import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.model.services.impl.ManterMusculo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ public class TelaAlterarExercicio extends Controller{
         String jsp="AlterarExercicio";
         try {
             int codExercicio = Integer.parseInt(request.getParameter("codExercicio"));
-            IManterExercicio manterExercicio = new ManterExercicioProxy();
+            IManterExercicio manterExercicio = new ManterExercicio();
             Exercicio exercicio = manterExercicio.pesquisarPorCodigo(codExercicio);
             if(exercicio!=null){
                 request.setAttribute("exercicio", exercicio);
@@ -31,7 +31,7 @@ public class TelaAlterarExercicio extends Controller{
                 request.setAttribute("erro", erro);
             }
             
-            IManterAparelho manterAparelho = new ManterAparelhoProxy();
+            IManterAparelho manterAparelho = new ManterAparelho();
             ArrayList<Aparelho> listaAparelhos = manterAparelho.pesquisarTodos();
             if(!listaAparelhos.isEmpty()){
                 request.setAttribute("aparelhos", listaAparelhos);
@@ -42,7 +42,7 @@ public class TelaAlterarExercicio extends Controller{
                 request.setAttribute("erro", erro);
             }
             
-            IManterMusculo manterMusculo = new ManterMusculoProxy();
+            IManterMusculo manterMusculo = new ManterMusculo();
             ArrayList<Musculo> listaMusculos = manterMusculo.pesquisarTodos();
             if(!listaMusculos.isEmpty()){
                 request.setAttribute("musculos", listaMusculos);

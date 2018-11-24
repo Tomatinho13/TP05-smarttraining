@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
-import br.cefetmg.inf.proxy.ManterObjetivoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
+import br.cefetmg.inf.model.services.impl.ManterObjetivo;
 
 public class TelaCadastrarAvaliacao extends Controller {
 
@@ -19,8 +19,8 @@ public class TelaCadastrarAvaliacao extends Controller {
             jsp = "CadastrarAvaliacao";
             String cpfAluno = request.getParameter("codCpfAluno").trim();
 
-            IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
-            IManterUsuario manterAluno = new ManterAlunoProxy();
+            IManterObjetivo manterObjetivo = new ManterObjetivo();
+            IManterUsuario manterAluno = new ManterAluno();
 
             Usuario aluno = manterAluno.pesquisarPorCpf(cpfAluno);
 

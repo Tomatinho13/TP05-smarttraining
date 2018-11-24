@@ -11,9 +11,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.proxy.ManterAlunoProxy;
-import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
-import br.cefetmg.inf.proxy.ManterObjetivoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAluno;
+import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
+import br.cefetmg.inf.model.services.impl.ManterObjetivo;
 
 public class TelaAlterarAvaliacao extends Controller {
 
@@ -25,9 +25,9 @@ public class TelaAlterarAvaliacao extends Controller {
             String codCpfAluno = request.getParameter("codCpfAluno").trim();
             LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
 
-            IManterUsuario manterAluno = new ManterAlunoProxy();
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
-            IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
+            IManterUsuario manterAluno = new ManterAluno();
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
+            IManterObjetivo manterObjetivo = new ManterObjetivo();
 
             Usuario aluno = manterAluno.pesquisarPorCpf(codCpfAluno);
 

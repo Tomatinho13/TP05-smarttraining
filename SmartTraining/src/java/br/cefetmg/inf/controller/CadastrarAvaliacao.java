@@ -4,8 +4,8 @@ import br.cefetmg.inf.model.domain.Avaliacao;
 import br.cefetmg.inf.model.domain.Objetivo;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
 import br.cefetmg.inf.model.services.IManterObjetivo;
-import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
-import br.cefetmg.inf.proxy.ManterObjetivoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
+import br.cefetmg.inf.model.services.impl.ManterObjetivo;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class CadastrarAvaliacao extends Controller {
             double tamanhoPanturrilhaEsquerda = Double.parseDouble(request.getParameter("tamanhoPanturrilhaEsquerda"));
 
             Avaliacao avaliacao = new Avaliacao();
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
             LocalDate dataAvaliacao = LocalDate.now();
 
             avaliacao.setCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
@@ -45,7 +45,7 @@ public class CadastrarAvaliacao extends Controller {
 
             String objetivos[] = request.getParameterValues("objetivo");
             ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
-            IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
+            IManterObjetivo manterObjetivo = new ManterObjetivo();
             Objetivo obj;
 
             for (String objetivo : objetivos) {

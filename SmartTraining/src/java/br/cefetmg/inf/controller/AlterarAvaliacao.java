@@ -2,7 +2,7 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Avaliacao;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
-import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
+import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -34,7 +34,7 @@ public class AlterarAvaliacao extends Controller {
             double tamanhoPanturrilhaEsquerda = Double.parseDouble(request.getParameter("tamanhoPanturrilhaEsquerda"));
 
             Avaliacao avaliacao = new Avaliacao();
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
             
             avaliacao.setCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
             avaliacao.setData(dataAvaliacao);
