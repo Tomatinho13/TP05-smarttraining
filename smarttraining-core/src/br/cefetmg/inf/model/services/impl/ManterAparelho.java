@@ -6,38 +6,40 @@ import br.cefetmg.inf.model.dao.impl.AparelhoDao;
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.services.IManterAparelho;
 import java.sql.SQLException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class ManterAparelho implements IManterAparelho {
+public class ManterAparelho extends UnicastRemoteObject implements IManterAparelho {
 
     private IAparelhoDao aparelhoDao;
 
-    public ManterAparelho() {
+    public ManterAparelho() throws RemoteException{
     }
 
     @Override
-    public Aparelho pesquisar(int nroAparelho) throws SQLException {
+    public Aparelho pesquisar(int nroAparelho) throws SQLException, RemoteException {
         aparelhoDao = new AparelhoDao();
         Aparelho resultado = aparelhoDao.getAparelho(nroAparelho);
         return resultado;
     }
 
     @Override
-    public Aparelho pesquisar(String nomAparelho) throws SQLException {
+    public Aparelho pesquisar(String nomAparelho) throws SQLException, RemoteException {
         aparelhoDao = new AparelhoDao();
         Aparelho resultado = aparelhoDao.getAparelho(nomAparelho);
         return resultado;
     }
 
     @Override
-    public ArrayList<Aparelho> pesquisarTodos() throws SQLException {
+    public ArrayList<Aparelho> pesquisarTodos() throws SQLException, RemoteException {
         aparelhoDao = new AparelhoDao();
         ArrayList<Aparelho> resultado = aparelhoDao.getListaAparelhos();
         return resultado;
     }
 
     @Override
-    public boolean cadastrar(Aparelho aparelho) throws SQLException {
+    public boolean cadastrar(Aparelho aparelho) throws SQLException, RemoteException {
         boolean testeDao;
         aparelhoDao = new AparelhoDao();
         testeDao = aparelhoDao.postAparelho(aparelho);
@@ -46,7 +48,7 @@ public class ManterAparelho implements IManterAparelho {
     }
 
     @Override
-    public boolean alterar(Aparelho aparelho) throws SQLException {
+    public boolean alterar(Aparelho aparelho) throws SQLException, RemoteException {
         boolean testeDao;
         aparelhoDao = new AparelhoDao();
         testeDao = aparelhoDao.putAparelho(aparelho);
@@ -55,7 +57,7 @@ public class ManterAparelho implements IManterAparelho {
     }
 
     @Override
-    public boolean excluir(int nroAparelho) throws SQLException {
+    public boolean excluir(int nroAparelho) throws SQLException, RemoteException {
         boolean testeDao;
         aparelhoDao = new AparelhoDao();
         testeDao = aparelhoDao.deleteAparelho(nroAparelho);

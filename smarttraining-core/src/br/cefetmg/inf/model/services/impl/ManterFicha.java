@@ -5,31 +5,33 @@ import br.cefetmg.inf.model.dao.impl.FichaDao;
 import br.cefetmg.inf.model.domain.Ficha;
 import br.cefetmg.inf.model.services.IManterFicha;
 import java.sql.SQLException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class ManterFicha implements IManterFicha {
+public class ManterFicha extends UnicastRemoteObject implements IManterFicha {
 
     private IFichaDao fichaDao;
 
-    public ManterFicha() {
+    public ManterFicha() throws RemoteException {
     }
 
     @Override
-    public Ficha pesquisarPorCodigo(String codCpf, int nroFicha) throws SQLException {
+    public Ficha pesquisarPorCodigo(String codCpf, int nroFicha) throws SQLException, RemoteException {
         fichaDao = new FichaDao();
         Ficha resultado = fichaDao.getFicha(codCpf, nroFicha);
         return resultado;
     }
 
     @Override
-    public ArrayList<Ficha> pesquisarPorAluno(String codCpf) throws SQLException {
+    public ArrayList<Ficha> pesquisarPorAluno(String codCpf) throws SQLException, RemoteException {
         fichaDao = new FichaDao();
         ArrayList<Ficha> resultado = new ArrayList<>(fichaDao.getListaFicha(codCpf));
         return resultado;
     }
 
     @Override
-    public boolean cadastrar(Ficha ficha) throws SQLException {
+    public boolean cadastrar(Ficha ficha) throws SQLException, RemoteException {
         boolean testeDao;
         
         fichaDao = new FichaDao();
@@ -39,7 +41,7 @@ public class ManterFicha implements IManterFicha {
     }
 
     @Override
-    public boolean alterar(Ficha ficha) throws SQLException {
+    public boolean alterar(Ficha ficha) throws SQLException, RemoteException {
         boolean testeDao;
         
         fichaDao = new FichaDao();
@@ -49,7 +51,7 @@ public class ManterFicha implements IManterFicha {
     }
 
     @Override
-    public boolean excluir(String codCpf, int nroFicha) throws SQLException {
+    public boolean excluir(String codCpf, int nroFicha) throws SQLException, RemoteException {
         boolean testeDao;
         
         fichaDao = new FichaDao();

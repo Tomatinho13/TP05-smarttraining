@@ -8,6 +8,7 @@ import br.cefetmg.inf.model.domain.Ficha;
 import br.cefetmg.inf.model.domain.Treino;
 import br.cefetmg.inf.model.services.IManterTreino;
 import br.cefetmg.inf.model.services.impl.ManterTreino;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
