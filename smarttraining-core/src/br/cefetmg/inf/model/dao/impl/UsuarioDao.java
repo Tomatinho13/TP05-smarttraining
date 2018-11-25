@@ -2,9 +2,11 @@ package br.cefetmg.inf.model.dao.impl;
 
 import br.cefetmg.inf.model.dao.IUsuarioDao;
 import br.cefetmg.inf.model.db.ConectaBd;
+import br.cefetmg.inf.model.domain.Instrutor;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Usuario;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,12 +32,17 @@ public class UsuarioDao implements IUsuarioDao {
         Statement stmt = conn.createStatement();
         ResultSet resultado = stmt.executeQuery(sql);
         if (resultado.next()) {
-            usuario = new Usuario(codCpf,
-                    resultado.getString("nom_usuario"),
-                    resultado.getString("idt_tipo_usuario").charAt(0),
-                    resultado.getString("txt_senha"),
-                    resultado.getString("des_email"),
-                    resultado.getDate("dat_nascimento").toLocalDate());
+            if (resultado.getString("idt_tipo_usuario").charAt(0) == 'I') {
+                IUsuarioDao instrutorDao = new InstrutorDao();
+                usuario = instrutorDao.getUsuario(codCpf);
+            } else {
+                usuario = new Usuario(codCpf,
+                        resultado.getString("nom_usuario"),
+                        resultado.getString("idt_tipo_usuario").charAt(0),
+                        resultado.getString("txt_senha"),
+                        resultado.getString("des_email"),
+                        resultado.getDate("dat_nascimento").toLocalDate());
+            }
         } else {
             return null;
         }
