@@ -12,7 +12,7 @@ public class Musculo {
     private int codRegiaoCorporal;
     private String nome;
     private String caminhoImagem; 
-    private ArrayList<Exercicio> listaExercicios;
+    private ArrayList<Exercicio> exercicios;
 
     public Musculo() {
     }
@@ -23,7 +23,7 @@ public class Musculo {
         this.codRegiaoCorporal = codRegiaoCorporal;
         this.nome = nome;
         this.caminhoImagem = caminhoImagem;
-        this.listaExercicios = new ArrayList<>(listaExercicios);
+        this.exercicios = new ArrayList<>(listaExercicios);
     }
     
     public int getNumero() {
@@ -59,10 +59,10 @@ public class Musculo {
     }
 
     public ArrayList<Exercicio> getListaExercicios() {
-        return listaExercicios;
+        return exercicios;
     }
 
     public void setListaExercicios(ArrayList<Exercicio> listaExercicios) {
-        this.listaExercicios = listaExercicios;
+        this.exercicios = listaExercicios;
     }
 }

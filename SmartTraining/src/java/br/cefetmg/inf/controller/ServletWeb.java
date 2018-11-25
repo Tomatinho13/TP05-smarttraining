@@ -38,6 +38,7 @@ public class ServletWeb extends HttpServlet {
         controllers.put("MostrarAparelho", new MostrarAparelho());
         controllers.put("MostrarAvaliacao", new MostrarAvaliacao());
         controllers.put("MostrarExercicio", new MostrarExercicio());
+        controllers.put("MostrarMusculo", new MostrarMusculo());
         controllers.put("MostrarUsuario", new MostrarUsuario());
         controllers.put("RemoverExercicio", new RemoverExercicio());
         controllers.put("RemoverUsuario", new RemoverUsuario());
