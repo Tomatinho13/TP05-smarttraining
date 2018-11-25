@@ -17,24 +17,24 @@ public class TelaCadastrarAvaliacao extends Controller {
         String jsp;
         try {
             jsp = "CadastrarAvaliacao";
-            String cpfAluno = request.getParameter("codCpfAluno").trim();
-
-            IManterObjetivo manterObjetivo = new ManterObjetivo();
-            IManterUsuario manterAluno = new ManterAluno();
-
-            Usuario aluno = manterAluno.pesquisarPorCpf(cpfAluno);
-
-            ArrayList<Objetivo> listaObjetivos = manterObjetivo.pesquisarTodos();
+            if (request.getAttribute("tipoView").equals("html")) {
+                String cpfAluno = request.getParameter("codCpfAluno").trim();    
+                IManterUsuario manterAluno = new ManterAluno();
+                Usuario aluno = manterAluno.pesquisarPorCpf(cpfAluno);
+                request.setAttribute("aluno", aluno);
+            }
             
+            IManterObjetivo manterObjetivo = new ManterObjetivo();
+            ArrayList<Objetivo> listaObjetivos = manterObjetivo.pesquisarTodos();
+
             if (listaObjetivos.isEmpty()) {
                 String erro = "Nao ha objetivos cadastrados!";
                 request.setAttribute("erro", erro);
                 jsp = "erro";
             }
-
-            request.setAttribute("aluno", aluno);
-            request.setAttribute("objetivos", listaObjetivos);
             
+            request.setAttribute("objetivos", listaObjetivos);
+
         } catch (SQLException e) {
             e.printStackTrace(System.err);
             String erro = "Erro ao cadastrar avaliacao!";
