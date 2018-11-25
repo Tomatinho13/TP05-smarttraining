@@ -8,15 +8,15 @@
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
 <json:object>
-    <json:property name="codCpfAluno" value="${ficha.cpfAluno}"/>
-    <json:property name="nroFicha" value="${ficha.numero}"/>
+    <json:property name="codCpf" value="${ficha.cpfAluno}"/>
+    <json:property name="numero" value="${ficha.numero}"/>
     <json:property name="codCpfInstrutor" value="${ficha.cpfInstrutor}"/>
-    <json:property name="dataFicha" value="${ficha.data}"/>
-    <json:property name="dataPrevistaTroca" value="${ficha.dataTroca}"/>
+    <json:property name="data" value="${ficha.data}"/>
+    <json:property name="dataTroca" value="${ficha.dataTroca}"/>
     <json:array name="treinos" var="treino" items="${ficha.listaTreino}">
         <json:object>
-            <json:property name="nroTreino" value="${treino.nroTreino}"/>
-            <json:property name="desTreino" value="${treino.descricao}"/>
+            <json:property name="numero" value="${treino.nroTreino}"/>
+            <json:property name="descricao" value="${treino.descricao}"/>
             <json:array name="atividades" var="atividade" items="${treino.atividades}">
                 <json:object>
                     <json:property name="nroAparelho" value="${atividade.aparelhoExercicio.aparelho.numero}"/>

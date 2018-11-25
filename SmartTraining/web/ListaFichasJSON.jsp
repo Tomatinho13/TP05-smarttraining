@@ -11,8 +11,8 @@
 
 <json:array name="listaFichas" var="ficha" items="${fichas}">
     <json:object>
-        <json:property name="nroFicha" value="${ficha.numero}"/>
-        <json:property name="datFicha" value="${ficha.data}"/>
-        <json:property name="codCpfAluno" value="${ficha.cpfAluno}"/>
+        <json:property name="numero" value="${ficha.numero}"/>
+        <json:property name="data" value="${ficha.data}"/>
+        <json:property name="codCpf" value="${ficha.cpfAluno}"/>
     </json:object>
 </json:array>
