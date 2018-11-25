@@ -4,7 +4,7 @@
 <json:object>
     <json:property name="numero" value="${musculo.numero}"/>
     <json:property name="nome" value="${musculo.nome}"/>
-    <json:array name="exercicios" var="exercicio" items="${musculo.exercicios}">
+    <json:array name="exercicios" var="exercicio" items="${musculo.listaExercicios}">
         <json:object>
             <json:property name="numero" value="${exercicio.numero}"/>
             <json:property name="nome" value="${exercicio.nome}"/>

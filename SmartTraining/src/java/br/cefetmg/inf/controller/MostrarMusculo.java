@@ -1,10 +1,7 @@
 package br.cefetmg.inf.controller;
 
-import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.Musculo;
-import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.model.services.impl.ManterAparelho;
 import br.cefetmg.inf.model.services.impl.ManterMusculo;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
