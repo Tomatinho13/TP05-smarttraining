@@ -12,7 +12,7 @@ public class MostrarExercicio extends Controller{
     public String execute(HttpServletRequest request) {
         String jsp="MostrarExercicio";
         try {
-            int codExercicio = Integer.parseInt(request.getParameter("codExercicio"));
+            int codExercicio = Integer.parseInt(request.getParameter("numero"));
             IManterExercicio manterExercicio = new ManterExercicio();
             Exercicio exercicio = manterExercicio.pesquisarPorCodigo(codExercicio);
             if(exercicio!=null){
@@ -20,14 +20,14 @@ public class MostrarExercicio extends Controller{
             }
             else{
                 String erro = "Erro ao carregar exercicio!";
-                jsp = "erro.jsp";
+                jsp = "erro";
                 request.setAttribute("erro", erro);
             }
         } catch (SQLException e) {
             e.printStackTrace(System.err);
             String erro = "Erro ao carregar exercicio!";
             request.setAttribute("erro", erro);
-            jsp = "erro.jsp";
+            jsp = "erro";
         }
         return defineView(request, jsp);
     }

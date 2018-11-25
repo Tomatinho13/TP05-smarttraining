@@ -8,13 +8,13 @@
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
 <json:object name="exercicio">
-    <json:property name="codExercicio" value="${exercicio.numero}"/>
-    <json:property name="nomeExercicio" value="${exercicio.nome}"/>
-    <json:property name="descricaoExercicio" value="${exercicio.descricao}"/>
-    <json:array name="listaMusculos" var="musculo" items="${exercicio.listaMusculos}">
+    <json:property name="numero" value="${exercicio.numero}"/>
+    <json:property name="nome" value="${exercicio.nome}"/>
+    <json:property name="descricao" value="${exercicio.descricao}"/>
+    <json:array name="musculos" var="musculo" items="${exercicio.listaMusculos}">
         <json:object>
-        <json:property name="codMusculo" value="${exercicio.numero}"/>
-        <json:property name="nomMusculo" value="${exercicio.nome}"/>
+        <json:property name="numero" value="${musculo.numero}"/>
+        <json:property name="nome" value="${musculo.nome}"/>
         </json:object>
     </json:array>
 </json:object>

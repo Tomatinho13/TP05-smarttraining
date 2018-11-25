@@ -20,7 +20,7 @@ public class CadastrarAparelho extends Controller {
             if (manterAparelho.pesquisar(numero) != null) {
                 String erro = "Numero de aparelho ja registrado";
                 request.setAttribute("erro", erro);
-                jsp = "erro.jsp";
+                jsp = "erro";
                 return defineView(request, jsp);
             }
             Aparelho aparelho = new Aparelho(numero, nome, new ArrayList<>());

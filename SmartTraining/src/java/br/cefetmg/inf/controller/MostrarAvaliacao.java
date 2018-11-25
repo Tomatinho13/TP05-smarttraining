@@ -24,14 +24,14 @@ public class MostrarAvaliacao extends Controller{
             }
             else{
                 String erro = "Avaliacao nao encontrada!";
-                jsp = "erro.jsp";
+                jsp = "erro";
                 request.setAttribute("erro", erro);
             }
         } catch (SQLException e) {
             e.printStackTrace(System.err);
             String erro = "Erro ao carregar avaliacao!";
             request.setAttribute("erro", erro);
-            jsp = "erro.jsp";
+            jsp = "erro";
         }
         return defineView(request, jsp);
     }
