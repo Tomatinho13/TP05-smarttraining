@@ -1,2 +1,8 @@
-# SmartTraining---Back-end
-Back-end do Trabalho de Conclusão de Curso vulgo smart ficha
+# TP05-smarttraining
+Implementação do Projeto Integrado(PI) usando JPA e RMI.
+
+Augusto Carvalho
+Felipe Gonçalves
+Gabriel Araújo
+João Victor R. Melo
+Matheus Quintão
