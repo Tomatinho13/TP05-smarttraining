@@ -145,7 +145,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
             stmt.setString(18, String.valueOf(avaliacao.getTamanhoPanturrilhaDireita()));
             stmt.executeUpdate();
 
-            for (int i = 0; i < avaliacao.getListaObjetivos().size(); i++) {
+            for (int i = 0; i < avaliacao.getObjetivos().size(); i++) {
                 sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES ("
                         + "CAST((SELECT dat_avaliacao FROM \"Avaliacao\" "
                         + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' "
@@ -154,13 +154,14 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                         + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' "
                         + "AND dat_avaliacao=CAST('" + avaliacao.getData().toString() + "' as date)), "
                         + "CAST((SELECT cod_objetivo FROM \"Objetivo\" "
-                        + "WHERE cod_objetivo='" + avaliacao.getListaObjetivos().get(i).getCodigo() + "') as bigint))";
+                        + "WHERE cod_objetivo='" + avaliacao.getObjetivos().get(i).getCodigo() + "') as bigint))";
 
                 stmt = conn.prepareStatement(sql);
                 stmt.execute();
                 stmt.close();
             }
         } catch (SQLException exception) {
+            exception.printStackTrace();
             return false;
         }
         return true;
@@ -244,7 +245,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
     private boolean postObjetivoAvaliacao(Avaliacao avaliacao) {
         PreparedStatement stmt;
         try {
-            for (int i = 0; i < avaliacao.getListaObjetivos().size(); i++) {
+            for (int i = 0; i < avaliacao.getObjetivos().size(); i++) {
                 sql = "INSERT INTO \"ObjetivoAvaliacao\" VALUES ("
                         + "CAST((SELECT dat_avaliacao FROM \"Avaliacao\" "
                         + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' "
@@ -253,7 +254,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                         + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' "
                         + "AND dat_avaliacao=CAST('" + avaliacao.getData().toString() + "' as date)), "
                         + "CAST((SELECT cod_objetivo FROM \"Objetivo\" "
-                        + "WHERE cod_objetivo='" + avaliacao.getListaObjetivos().get(i).getCodigo() + "') as bigint))";
+                        + "WHERE cod_objetivo='" + avaliacao.getObjetivos().get(i).getCodigo() + "') as bigint))";
 
                 stmt = conn.prepareStatement(sql);
                 stmt.execute();

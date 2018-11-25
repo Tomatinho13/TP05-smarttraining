@@ -36,7 +36,7 @@ public class CadastrarExercicio extends Controller {
                 ex.printStackTrace(System.err);
                 String erro = "Erro ao cadastrar exercicio!";
                 request.setAttribute("erro", erro);
-                jsp = "erro.jsp";
+                jsp = "erro";
             }
         } else {
             try {

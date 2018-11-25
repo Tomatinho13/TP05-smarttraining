@@ -28,7 +28,7 @@ public class Avaliacao {
     private double tamanhoCoxaDireita;
     private double tamanhoPanturrilhaEsquerda;
     private double tamanhoPanturrilhaDireita;
-    private ArrayList<Objetivo> listaObjetivos;
+    private ArrayList<Objetivo> objetivos;
     
     public Avaliacao(){
     }
@@ -58,7 +58,7 @@ public class Avaliacao {
         this.tamanhoCoxaDireita = tamanhoCoxaDireita;
         this.tamanhoPanturrilhaEsquerda = tamanhoPanturrilhaEsquerda;
         this.tamanhoPanturrilhaDireita = tamanhoPanturrilhaDireita;
-        this.listaObjetivos = listaObjetivos;
+        this.objetivos = listaObjetivos;
     }
 
     public double getTamanhoQuadril() {
@@ -221,11 +221,11 @@ public class Avaliacao {
         this.tamanhoPanturrilhaDireita = tamanhoPanturrilhaDireita;
     }
 
-    public ArrayList<Objetivo> getListaObjetivos() {
-        return listaObjetivos;
+    public ArrayList<Objetivo> getObjetivos() {
+        return objetivos;
     }
 
-    public void setListaObjetivos(ArrayList<Objetivo> listaObjetivos) {
-        this.listaObjetivos = listaObjetivos;
+    public void setObjetivos(ArrayList<Objetivo> objetivos) {
+        this.objetivos = objetivos;
     }
 }
