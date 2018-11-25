@@ -181,22 +181,22 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         sql = "UPDATE \"Avaliacao\" "
                 + "SET \"cod_cpf_instrutor\"=?, "
                 + "\"qtd_peso\"=CAST(? as numeric), "
-                + "\"qtd_massagorda\"=CAST(? as numeric), "
-                + "\"qtd_percgordura\"=CAST(? as numeric), "
+                + "\"qtd_massaGorda\"=CAST(? as numeric), "
+                + "\"qtd_percGordura\"=CAST(? as numeric), "
                 + "tam_pescoco=CAST(? as numeric), "
                 + "tam_ombro=CAST(? as numeric), "
                 + "tam_torax=CAST(? as numeric), "
                 + "tam_abdomen=CAST(? as numeric), "
                 + "tam_cintura=CAST(? as numeric), "
                 + "tam_quadril=CAST(? as numeric), "
-                + "\"tam_bracoesq\"=CAST(? as numeric), "
-                + "\"tam_bracodir\"=CAST(? as numeric), "
-                + "\"tam_antebracoesq\"=CAST(? as numeric), "
-                + "\"tam_antebracodir\"=CAST(? as numeric), "
-                + "\"tam_coxaesq\"=CAST(? as numeric), "
-                + "\"tam_coxadir\"=CAST(? as numeric), "
-                + "\"tam_panturrilhaesq\"=CAST(? as numeric), "
-                + "\"tam_panturrilhadir\"=CAST(? as numeric) "
+                + "\"tam_bracoEsq\"=CAST(? as numeric), "
+                + "\"tam_bracoDir\"=CAST(? as numeric), "
+                + "\"tam_antebracoEsq\"=CAST(? as numeric), "
+                + "\"tam_antebracoDir\"=CAST(? as numeric), "
+                + "\"tam_coxaEsq\"=CAST(? as numeric), "
+                + "\"tam_coxaDir\"=CAST(? as numeric), "
+                + "\"tam_panturrilhaEsq\"=CAST(? as numeric), "
+                + "\"tam_panturrilhaDir\"=CAST(? as numeric) "
                 + "WHERE cod_cpf=? "
                 + "AND dat_avaliacao= CAST(? as date)";
 
@@ -224,6 +224,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
             stmt.setString(20, avaliacao.getData().toString().trim());
             stmt.executeUpdate();
         } catch (SQLException exception) {
+            exception.printStackTrace();
             return false;
         }
         return true;

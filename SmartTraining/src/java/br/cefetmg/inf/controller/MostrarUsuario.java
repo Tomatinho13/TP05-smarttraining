@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
 import br.cefetmg.inf.model.services.impl.ManterAluno;
 import br.cefetmg.inf.model.services.impl.ManterInstrutor;
+import br.cefetmg.inf.model.services.impl.ManterUsuario;
 
 public class MostrarUsuario extends Controller{
 
@@ -15,19 +16,14 @@ public class MostrarUsuario extends Controller{
         try {
             String cpfUsuario = request.getParameter("codCpf").replaceAll("[^0-9]", "");
             
-            IManterUsuario manterAluno = new ManterAluno();
-            IManterUsuario manterInstrutor = new ManterInstrutor();
+            IManterUsuario manterUsuario = new ManterUsuario();
             
-            Usuario aluno  = manterAluno.pesquisarPorCpf(cpfUsuario);
-            Usuario instrutor  = manterInstrutor.pesquisarPorCpf(cpfUsuario);
-            if(aluno!=null){
-                request.setAttribute("usuario", aluno);
-            }
-            else if(instrutor!=null){
-                request.setAttribute("usuario", instrutor);
+            Usuario usuario  = manterUsuario.pesquisarPorCpf(cpfUsuario);
+            if(usuario!=null){
+                request.setAttribute("usuario", usuario);
             }
             else{
-                String erro = "Erro ao carregar perfil!";
+                String erro = "Usuario nao cadastrado!";
                 jsp = "erro";
                 request.setAttribute("erro", erro);
             }
