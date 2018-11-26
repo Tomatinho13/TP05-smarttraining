@@ -11,6 +11,8 @@ import br.cefetmg.inf.model.services.IManterMusculo;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,27 +30,52 @@ public class ManterMusculoProxy implements IManterMusculo {
 
     @Override
     public Musculo pesquisarPorCodigo(int codMusculo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterMusculo.pesquisarPorCodigo(codMusculo);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;    
     }
 
     @Override
     public ArrayList<Musculo> pesquisarTodos() throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterMusculo.pesquisarTodos();
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;      
     }
 
     @Override
     public boolean cadastrar(Musculo musculo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterMusculo.cadastrar(musculo);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;      
     }
 
     @Override
     public boolean alterar(Musculo musculo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try {
+            return manterMusculo.alterar(musculo);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;      
     }
 
     @Override
     public boolean excluir(int codMusculo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterMusculo.excluir(codMusculo);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;      
     }
     
 }

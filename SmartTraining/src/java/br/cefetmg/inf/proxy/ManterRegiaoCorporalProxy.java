@@ -10,6 +10,8 @@ import br.cefetmg.inf.model.domain.RegiaoCorporal;
 import br.cefetmg.inf.model.services.IManterRegiaoCorporal;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,22 +29,42 @@ public class ManterRegiaoCorporalProxy implements IManterRegiaoCorporal {
 
     @Override
     public RegiaoCorporal pesquisarRegiaoCorporal(int codRegiao) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterRegiaoCorporal.pesquisarRegiaoCorporal(codRegiao);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;      
     }
 
     @Override
     public boolean cadastrar(RegiaoCorporal regiaoCorporal, int codMusculo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterRegiaoCorporal.cadastrar(regiaoCorporal, codMusculo);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;      
     }
 
     @Override
     public boolean alterar(RegiaoCorporal regiaoCorporal) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterRegiaoCorporal.alterar(regiaoCorporal);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;      
     }
 
     @Override
     public boolean excluir(int codRegiao) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterRegiaoCorporal.excluir(codRegiao);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;      
     }
     
 }

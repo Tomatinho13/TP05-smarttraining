@@ -11,6 +11,8 @@ import br.cefetmg.inf.model.services.IManterTreino;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,27 +30,52 @@ public class ManterTreinoProxy implements IManterTreino {
 
     @Override
     public Treino pesquisarTreino(String cpf, int nroFicha, int nroTreino) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterTreino.pesquisarTreino(cpf, nroFicha, nroTreino);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
     }
 
     @Override
     public ArrayList<Treino> pesquisarPorFicha(String cpf, int nroFicha) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterTreino.pesquisarPorFicha(cpf, nroFicha);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
     }
 
     @Override
     public boolean cadastrar(Treino treino) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterTreino.cadastrar(treino);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
     }
 
     @Override
     public boolean alterar(Treino treino) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterTreino.alterar(treino);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
     }
 
     @Override
     public boolean excluir(String cpf, int nroTreino, int nroFicha) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return manterTreino.excluir(cpf, nroTreino, nroFicha);
+        } catch (RemoteException e) {
+            Logger.getLogger(ManterAlunoProxy.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
     }
     
 }
