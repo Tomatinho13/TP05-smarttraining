@@ -24,7 +24,7 @@ public class ServerRMI {
     private static IManterExercicio manterExercicioStub;
     private static IManterFicha manterFichaStub;
     private static IManterMusculo manterMusculoStub;
-    private static IManterMusculo manterObjetivoStub;
+    private static IManterObjetivo manterObjetivoStub;
     private static IManterRegiaoCorporal manterRegiaoCorporalStub;
     private static IManterTreino manterTreinoStub;
 
