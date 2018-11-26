@@ -9,6 +9,6 @@ package br.cefetmg.inf.proxy;
  *
  * @author melog
  */
-public class ManterReigaoCorporalProxy {
+public class ManterRegiaoCorporalProxy {
     
 }
