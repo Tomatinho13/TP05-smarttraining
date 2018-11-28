@@ -3,7 +3,7 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Atividade;
 import br.cefetmg.inf.model.domain.DiaTreino;
 import br.cefetmg.inf.model.services.IManterDiaTreino;
-import br.cefetmg.inf.model.services.impl.ManterDiaTreino;
+import br.cefetmg.inf.proxy.ManterDiaTreinoProxy;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,11 +20,11 @@ public class CadastrarDiaTreino extends Controller {
             try {
                 BufferedReader leitor = request.getReader();
                 Gson gson = new Gson();
-                
+
                 Atividade atividade = gson.fromJson(leitor.readLine(), Atividade.class);
                 DiaTreino diaTreino = new DiaTreino(atividade, LocalDate.now());
-                
-                IManterDiaTreino manterDiaTreino = new ManterDiaTreino();
+
+                IManterDiaTreino manterDiaTreino = new ManterDiaTreinoProxy();
                 manterDiaTreino.cadastrar(diaTreino);
                 request.setAttribute("resposta", "Sucesso!");
             } catch (IOException ex) {
@@ -37,7 +37,7 @@ public class CadastrarDiaTreino extends Controller {
                 String erro = "Erro ao cadastrar o dia de treino!";
                 request.setAttribute("erro", erro);
                 jsp = "erro";
-                
+
             }
         } else {
             jsp = "erro.jsp";

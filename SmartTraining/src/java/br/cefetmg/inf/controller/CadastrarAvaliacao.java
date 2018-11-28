@@ -4,14 +4,17 @@ import br.cefetmg.inf.model.domain.Avaliacao;
 import br.cefetmg.inf.model.domain.Objetivo;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
 import br.cefetmg.inf.model.services.IManterObjetivo;
-import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
-import br.cefetmg.inf.model.services.impl.ManterObjetivo;
+import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
+import br.cefetmg.inf.proxy.ManterObjetivoProxy;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class CadastrarAvaliacao extends Controller {
@@ -25,15 +28,14 @@ public class CadastrarAvaliacao extends Controller {
                 leitor = request.getReader();
 
                 Gson gson = new Gson();
-                IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
+                IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
 
                 Avaliacao avaliacao = gson.fromJson(leitor.readLine(), Avaliacao.class);
 
                 if (manterAvaliacao.cadastrar(avaliacao)) {
                     request.setAttribute("resposta", "Sucesso!");
                     jsp = "resposta";
-                }
-                else{
+                } else {
                     request.setAttribute("erro", "Erro ao cadastrar avaliacao");
                     jsp = "erro";
                 }
@@ -64,7 +66,7 @@ public class CadastrarAvaliacao extends Controller {
                 double tamanhoPanturrilhaEsquerda = Double.parseDouble(request.getParameter("tamanhoPanturrilhaEsquerda"));
 
                 Avaliacao avaliacao = new Avaliacao();
-                IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
+                IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
                 LocalDate dataAvaliacao = LocalDate.now();
 
                 avaliacao.setCpfAluno(request.getParameter("codCpfAluno").replaceAll("[^0-9]", ""));
@@ -73,7 +75,7 @@ public class CadastrarAvaliacao extends Controller {
 
                 String objetivos[] = request.getParameterValues("objetivo");
                 ArrayList<Objetivo> listaObjetivos = new ArrayList<>();
-                IManterObjetivo manterObjetivo = new ManterObjetivo();
+                IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
                 Objetivo obj;
 
                 for (String objetivo : objetivos) {
@@ -105,6 +107,8 @@ public class CadastrarAvaliacao extends Controller {
                 String erro = "Erro ao cadastrar avaliacao!";
                 request.setAttribute("erro", erro);
                 jsp = "erro.jsp";
+            } catch (RemoteException ex) {
+                Logger.getLogger(CadastrarAvaliacao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return defineView(request, jsp);

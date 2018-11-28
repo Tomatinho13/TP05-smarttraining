@@ -5,14 +5,17 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterInstrutorProxy;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AlterarUsuario extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp;
+        String jsp = "";
         try {
             IManterUsuario manterUsuario;
 
@@ -27,9 +30,9 @@ public class AlterarUsuario extends Controller {
             usuario.setSenha(request.getParameter("senha"));
 
             if (usuario.getTipo() == 'I') {
-                manterUsuario = new ManterInstrutor();
+                manterUsuario = new ManterInstrutorProxy();
             } else {
-                manterUsuario = new ManterAluno();
+                manterUsuario = new ManterAlunoProxy();
             }
 
             manterUsuario.alterar(usuario);
@@ -39,6 +42,8 @@ public class AlterarUsuario extends Controller {
             String erro = "Ocorreu erro ao tentar alterar os dados do usuario!";
             request.setAttribute("erro", erro);
             jsp = "/erro";
+        } catch (RemoteException ex) {
+            Logger.getLogger(AlterarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }

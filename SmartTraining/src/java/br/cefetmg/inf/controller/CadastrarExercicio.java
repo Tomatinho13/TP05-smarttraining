@@ -4,13 +4,16 @@ import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterMusculo;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
+import br.cefetmg.inf.proxy.ManterMusculoProxy;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class CadastrarExercicio extends Controller {
@@ -22,16 +25,16 @@ public class CadastrarExercicio extends Controller {
             BufferedReader leitor;
             try {
                 leitor = request.getReader();
-                
+
                 Gson gson = new Gson();
-                IManterExercicio manterExercicio = new ManterExercicio();
-                
+                IManterExercicio manterExercicio = new ManterExercicioProxy();
+
                 Exercicio exercicio = gson.fromJson(leitor.readLine(), Exercicio.class);
-                
+
                 manterExercicio.cadastrar(exercicio);
                 request.setAttribute("resposta", "Sucesso!");
                 jsp = "resposta";
-                
+
             } catch (IOException | SQLException ex) {
                 ex.printStackTrace(System.err);
                 String erro = "Erro ao cadastrar exercicio!";
@@ -40,8 +43,8 @@ public class CadastrarExercicio extends Controller {
             }
         } else {
             try {
-                IManterExercicio manterExercicio = new ManterExercicio();
-                IManterMusculo manterMusculo = new ManterMusculo();
+                IManterExercicio manterExercicio = new ManterExercicioProxy();
+                IManterMusculo manterMusculo = new ManterMusculoProxy();
 
                 String nomeExercicio = request.getParameter("nomeExercicio");
                 String descricaoExercicio = request.getParameter("descExercicio");
@@ -70,6 +73,8 @@ public class CadastrarExercicio extends Controller {
                 String erro = "Erro ao cadastrar exercicio!";
                 request.setAttribute("erro", erro);
                 jsp = "erro.jsp";
+            } catch (RemoteException ex) {
+                Logger.getLogger(CadastrarExercicio.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return defineView(request, jsp);
