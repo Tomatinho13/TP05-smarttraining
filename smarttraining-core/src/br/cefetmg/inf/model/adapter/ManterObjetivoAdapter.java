@@ -2,46 +2,57 @@ package br.cefetmg.inf.model.adapter;
 
 import br.cefetmg.inf.model.domain.Objetivo;
 import br.cefetmg.inf.model.services.IManterObjetivo;
+import br.cefetmg.inf.model.services.impl.ManterObjetivo;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ManterObjetivoAdapter implements IManterObjetivo{
+public class ManterObjetivoAdapter implements IManterObjetivo {
+
+    private final IManterObjetivo manterObjetivo;
+
+    public ManterObjetivoAdapter() throws RemoteException {
+        this.manterObjetivo = new ManterObjetivo();
+    }
 
     @Override
     public Objetivo pesquisarPorCodigo(int codObjetivo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Objetivo resultado = manterObjetivo.pesquisarPorCodigo(codObjetivo);
+        return resultado;
     }
 
     @Override
     public Objetivo pesquisarPorNome(String nome) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Objetivo resultado = manterObjetivo.pesquisarPorNome(nome);
+        return resultado;
     }
 
     @Override
     public ArrayList<Objetivo> pesquisarPorAvaliacao(String codCpf, LocalDate dataAvaliacao) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return manterObjetivo.pesquisarPorAvaliacao(codCpf, dataAvaliacao);
     }
 
     @Override
     public ArrayList<Objetivo> pesquisarTodos() throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return manterObjetivo.pesquisarTodos();
     }
 
     @Override
     public boolean cadastrar(Objetivo objetivo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = manterObjetivo.cadastrar(objetivo);
+        return resultado;
     }
 
     @Override
     public boolean alterar(Objetivo objetivo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = manterObjetivo.alterar(objetivo);
+        return resultado;
     }
 
     @Override
     public boolean excluir(int codRegiao) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = manterObjetivo.excluir(codRegiao);
+        return resultado;
     }
-    
 }

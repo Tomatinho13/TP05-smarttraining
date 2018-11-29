@@ -1,11 +1,9 @@
 package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Aparelho;
-import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.services.IManterAparelho;
-import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterAparelho;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.proxy.ManterAparelhoProxy;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,7 +16,7 @@ public class ListarAparelhos extends Controller{
     public String execute(HttpServletRequest request) {
         String jsp = "ListaAparelhos";
         try {
-            IManterAparelho manterAparelho = new ManterAparelho();
+            IManterAparelho manterAparelho = new ManterAparelhoProxy();
             
             ArrayList<Aparelho> listaAparelhos = manterAparelho.pesquisarTodos();
             
@@ -30,6 +28,8 @@ public class ListarAparelhos extends Controller{
                 return defineView(request, jsp);
             }
         } catch (SQLException ex) {
+            Logger.getLogger(ListarAparelhos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
             Logger.getLogger(ListarAparelhos.class.getName()).log(Level.SEVERE, null, ex);
         }
         

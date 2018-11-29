@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
+import br.cefetmg.inf.proxy.ManterInstrutorProxy;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CadastrarInstrutor extends Controller {
 
@@ -23,7 +26,7 @@ public class CadastrarInstrutor extends Controller {
             String cref = request.getParameter("cref");
 
             Instrutor instrutor = new Instrutor();
-            IManterUsuario manterInstrutor = new ManterInstrutor();
+            IManterUsuario manterInstrutor = new ManterInstrutorProxy();
 
             instrutor.setCpf(cpf);
             instrutor.setNome(nome);
@@ -39,6 +42,8 @@ public class CadastrarInstrutor extends Controller {
             String erro = "Erro ao cadastrar instrutor!";
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
+        } catch (RemoteException ex) {
+            Logger.getLogger(CadastrarInstrutor.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }

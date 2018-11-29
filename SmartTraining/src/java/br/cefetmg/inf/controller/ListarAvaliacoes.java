@@ -3,22 +3,25 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Avaliacao;
 import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterAvaliacao;
+import br.cefetmg.inf.model.services.IManterUsuario;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
 
 public class ListarAvaliacoes extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp = null;
+        String jsp = "";
 
         try {
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            IManterUsuario manterUsuario = new ManterAluno();
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
+            IManterUsuario manterUsuario = new ManterAlunoProxy();
             String codCpfAluno = request.getParameter("codCpf").replaceAll("[^0-9]", "");
             Usuario aluno = manterUsuario.pesquisarPorCpf(codCpfAluno);
             ArrayList<Avaliacao> listaAvaliacoes = manterAvaliacao.pesquisarPorAluno(aluno.getCpf());
@@ -39,6 +42,8 @@ public class ListarAvaliacoes extends Controller {
             String erro = "Erro ao listar avaliacoes!";
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
+        } catch (RemoteException ex) {
+            Logger.getLogger(ListarAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
     return defineView(request, jsp);
     }

@@ -9,7 +9,6 @@ import br.cefetmg.inf.client.ClientRMI;
 import br.cefetmg.inf.model.domain.AparelhoExercicio;
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.IManterUsuario;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;

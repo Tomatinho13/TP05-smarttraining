@@ -5,22 +5,25 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterInstrutorProxy;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FazerLogin extends Controller{
 
     @Override
     public  String execute(HttpServletRequest request) {
-        String jsp;
+        String jsp = "";
         HttpSession sessao = request.getSession();
-        try{
+        try {
 
             String cpf =  request.getParameter("cpf").replaceAll("[^0-9]", "");
             String senha = request.getParameter("senha");
 
-            IManterUsuario manterAluno = new ManterAluno();
-            IManterUsuario manterInstrutor = new ManterInstrutor();
+            IManterUsuario manterAluno = new ManterAlunoProxy();
+            IManterUsuario manterInstrutor = new ManterInstrutorProxy();
             Usuario aluno = manterAluno.pesquisarPorCpf(cpf);
             Usuario instrutor = manterInstrutor.pesquisarPorCpf(cpf);
             
@@ -49,6 +52,8 @@ public class FazerLogin extends Controller{
             String erro = "Erro ao fazer login!";
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
+        } catch (RemoteException ex) {
+            Logger.getLogger(FazerLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }

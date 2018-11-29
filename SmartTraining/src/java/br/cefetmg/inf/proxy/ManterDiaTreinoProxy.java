@@ -7,9 +7,7 @@ package br.cefetmg.inf.proxy;
 
 import br.cefetmg.inf.client.ClientRMI;
 import br.cefetmg.inf.model.domain.DiaTreino;
-import br.cefetmg.inf.model.domain.Usuario;
 import br.cefetmg.inf.model.services.IManterDiaTreino;
-import br.cefetmg.inf.model.services.IManterUsuario;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ public class ManterDiaTreinoProxy implements IManterDiaTreino {
 
     public ManterDiaTreinoProxy() {
         this.cliente = ClientRMI.getInstancia();
-        manterDiaTreino = (IManterDiaTreino) cliente.recebeObjeto("IManterDiaTreino");
+        manterDiaTreino = (IManterDiaTreino) cliente.recebeObjeto("ManterDiaTreino");
     }
 
     @Override

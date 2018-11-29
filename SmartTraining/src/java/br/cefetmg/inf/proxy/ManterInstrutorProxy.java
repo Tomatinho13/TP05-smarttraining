@@ -25,7 +25,7 @@ public class ManterInstrutorProxy implements IManterUsuario{
     
     public ManterInstrutorProxy() {
         this.cliente = ClientRMI.getInstancia();
-        manterUsuario = (IManterUsuario) cliente.recebeObjeto("ManterUsuario");
+        manterUsuario = (IManterUsuario) cliente.recebeObjeto("ManterInstrutor");
     }
 
     @Override
@@ -87,5 +87,5 @@ public class ManterInstrutorProxy implements IManterUsuario{
         }
         return false;
     }
-    
+
 }

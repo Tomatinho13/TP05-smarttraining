@@ -2,29 +2,40 @@ package br.cefetmg.inf.model.adapter;
 
 import br.cefetmg.inf.model.domain.RegiaoCorporal;
 import br.cefetmg.inf.model.services.IManterRegiaoCorporal;
+import br.cefetmg.inf.model.services.impl.ManterRegiaoCorporal;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public class ManterRegiaoCorporalAdapter implements IManterRegiaoCorporal{
+public class ManterRegiaoCorporalAdapter implements IManterRegiaoCorporal {
+
+    private final IManterRegiaoCorporal manterRegiaoCorporal;
+
+    public ManterRegiaoCorporalAdapter() throws RemoteException {
+        this.manterRegiaoCorporal = new ManterRegiaoCorporal();
+    }
 
     @Override
     public RegiaoCorporal pesquisarRegiaoCorporal(int codRegiao) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RegiaoCorporal resultado = manterRegiaoCorporal.pesquisarRegiaoCorporal(codRegiao);
+        return resultado;
     }
 
     @Override
     public boolean cadastrar(RegiaoCorporal regiaoCorporal, int codMusculo) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = manterRegiaoCorporal.cadastrar(regiaoCorporal, codMusculo);
+        return resultado;
     }
 
     @Override
     public boolean alterar(RegiaoCorporal regiaoCorporal) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = manterRegiaoCorporal.alterar(regiaoCorporal);
+        return resultado;
     }
 
     @Override
     public boolean excluir(int codRegiao) throws SQLException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = manterRegiaoCorporal.excluir(codRegiao);
+        return resultado;
     }
-    
+
 }

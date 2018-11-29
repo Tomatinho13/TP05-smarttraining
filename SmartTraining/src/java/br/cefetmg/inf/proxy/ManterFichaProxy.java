@@ -7,7 +7,6 @@ package br.cefetmg.inf.proxy;
 
 import br.cefetmg.inf.client.ClientRMI;
 import br.cefetmg.inf.model.domain.Ficha;
-import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.IManterFicha;
 import java.rmi.RemoteException;
 import java.sql.SQLException;

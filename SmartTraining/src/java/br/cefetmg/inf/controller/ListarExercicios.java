@@ -3,18 +3,21 @@ package br.cefetmg.inf.controller;
 import br.cefetmg.inf.model.domain.Exercicio;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ListarExercicios extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp;
+        String jsp = "";
 
         try {
-            IManterExercicio manterExercicio = new ManterExercicio();
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
 
             ArrayList<Exercicio> listaExercicios = manterExercicio.pesquisarTodos();
 
@@ -32,6 +35,8 @@ public class ListarExercicios extends Controller {
             String erro = "Erro ao listar exercicios!";
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
+        } catch (RemoteException ex) {
+            Logger.getLogger(ListarExercicios.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }
