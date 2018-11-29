@@ -10,6 +10,10 @@ import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.Exercicio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class AparelhoDao implements IAparelhoDao {
 
@@ -18,6 +22,9 @@ public class AparelhoDao implements IAparelhoDao {
     private final Connection conn;
     private String sql;
     private final Gson gson;
+
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
+    EntityManager manager = factory.createEntityManager();
 
     public AparelhoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
@@ -30,18 +37,8 @@ public class AparelhoDao implements IAparelhoDao {
                 + "FROM \"Aparelho\" "
                 + "WHERE nro_aparelho = '" + nroAparelho + "'";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-
-        if (resultado.next()) {
-            aparelho = new Aparelho(nroAparelho,
-                    resultado.getString("nom_aparelho"),
-                    getListaExercicios(nroAparelho)
-            );
-        } else {
-
-            return null;
-        }
+        Query query = manager.createNativeQuery(sql);
+        aparelho = (Aparelho) query.getSingleResult();
 
         return aparelho;
     }
@@ -52,14 +49,8 @@ public class AparelhoDao implements IAparelhoDao {
                 + "FROM \"Aparelho\" "
                 + "WHERE nom_aparelho = '" + nomAparelho + "'";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-
-        if (resultado.next()) {
-            aparelho = new Aparelho(resultado.getInt("nro_aparelho"), nomAparelho, getListaExercicios(resultado.getInt("nro_aparelho")));
-        } else {
-            return null;
-        }
+        Query query = manager.createNativeQuery(sql);
+        aparelho = (Aparelho) query.getSingleResult();
 
         return aparelho;
     }
@@ -70,16 +61,9 @@ public class AparelhoDao implements IAparelhoDao {
         sql = "SELECT * "
                 + "FROM \"Aparelho\" ";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        while (resultado.next()) {
-            listaAparelhos.add(new Aparelho(resultado.getInt("nro_aparelho"),
-                    resultado.getString("nom_aparelho"),
-                    getListaExercicios(resultado.getInt("nro_aparelho")
-            )));
-        }
+        Query query = manager.createNativeQuery(sql);
 
-        return listaAparelhos;
+        return (ArrayList<Aparelho>) query.getResultList();
     }
 
     @Override
@@ -90,64 +74,62 @@ public class AparelhoDao implements IAparelhoDao {
         sql = "SELECT cod_exercicio FROM \"Exercicio\" WHERE cod_exercicio IN("
                 + "SELECT cod_exercicio FROM \"AparelhoExercicio\" WHERE nro_aparelho = '" + nroAparelho + "')";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
+        Query query = manager.createNativeQuery(sql);
 
-        while (resultado.next()) {
-            listaExercicios.add(exercicioDao.getExercicio(resultado.getInt("cod_exercicio")));
-        }
-        if (listaExercicios.isEmpty()) {
-
-            return null;
-        }
-
-        return listaExercicios;
+        return (ArrayList<Exercicio>) query.getResultList();
     }
 
     @Override
     public boolean postAparelho(Aparelho aparelho) throws SQLException {
         this.aparelho = aparelho;
-        sql = "INSERT INTO \"Aparelho\" VALUES (CAST(? as smallint),?)";
+//        sql = "INSERT INTO \"Aparelho\" VALUES (CAST(? as smallint),?)";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, String.valueOf(aparelho.getNumero()));
-            stmt.setString(2, aparelho.getNome());
-            stmt.executeUpdate();
+        try {
+            manager.getTransaction().begin();
+            manager.persist(aparelho);
+            manager.getTransaction().commit();
 
-        } catch (SQLException exception) {
-            return false;
+            return true;
+        } catch (Exception e) {
+            Logger.getLogger(AparelhoDao.class.getName()).log(Level.SEVERE, null, e);
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean putAparelho(Aparelho aparelho) throws SQLException {
         this.aparelho = aparelho;
-        sql = "UPDATE \"Aparelho\" "
-                + "SET nom_usuario='" + aparelho.getNome() + "'"
-                + "WHERE nro_aparelho='" + aparelho.getNumero() + "'";
+//        sql = "UPDATE \"Aparelho\" "
+//                + "SET nom_usuario='" + aparelho.getNome() + "'"
+//                + "WHERE nro_aparelho='" + aparelho.getNumero() + "'";
 
-        try (Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql);
+        try {
+            manager.getTransaction().begin();
+            manager.refresh(aparelho);
+            manager.getTransaction().commit();
 
-        } catch (SQLException exception) {
-            return false;
+            return true;
+        } catch (Exception e) {
+            Logger.getLogger(AparelhoDao.class.getName()).log(Level.SEVERE, null, e);
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean deleteAparelho(int nroAparelho) throws SQLException {
-        sql = "DELETE FROM \"Aparelho\" "
-                + "WHERE nro_aparelho='" + nroAparelho + "'";
+//        sql = "DELETE FROM \"Aparelho\" "
+//                + "WHERE nro_aparelho='" + nroAparelho + "'";
 
-        try (Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql);
+        try {
+            manager.getTransaction().begin();
+            manager.remove(aparelho);
+            manager.getTransaction().commit();
 
-        } catch (SQLException exception) {
-            return false;
+            return true;
+        } catch (Exception e) {
+            Logger.getLogger(AparelhoDao.class.getName()).log(Level.SEVERE, null, e);
         }
-        return true;
+        return false;
     }
 
     @Override
