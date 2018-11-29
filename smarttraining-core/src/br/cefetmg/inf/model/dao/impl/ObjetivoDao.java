@@ -3,6 +3,7 @@ package br.cefetmg.inf.model.dao.impl;
 import br.cefetmg.inf.model.dao.IObjetivoDao;
 import br.cefetmg.inf.model.db.ConectaBd;
 import br.cefetmg.inf.model.domain.Objetivo;
+import br.cefetmg.inf.server.ServerRMI;
 import com.google.gson.Gson;
 import java.sql.*;
 import java.time.LocalDate;
@@ -21,9 +22,6 @@ public class ObjetivoDao implements IObjetivoDao {
     private String sql;
     private final Gson gson;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public ObjetivoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -34,7 +32,7 @@ public class ObjetivoDao implements IObjetivoDao {
         sql = "SELECT * FROM \"Objetivo\" "
                 + "WHERE cod_objetivo='" + codObjetivo + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         objetivo = (Objetivo) query.getSingleResult();
 
         return objetivo;
@@ -50,7 +48,7 @@ public class ObjetivoDao implements IObjetivoDao {
                 + "AND dat_avaliacao IN("
                 + "SELECT dat_avaliacao FROM \"Avaliacao\" WHERE dat_avaliacao='" + dataAvaliacao.toString() + "'))";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Objetivo>) query.getResultList();
     }
@@ -61,7 +59,7 @@ public class ObjetivoDao implements IObjetivoDao {
         sql = "SELECT * "
                 + "FROM \"Objetivo\" ";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Objetivo>) query.getResultList();
     }
@@ -70,7 +68,7 @@ public class ObjetivoDao implements IObjetivoDao {
     public boolean postObjetivo(Objetivo objetivo) throws SQLException {
         sql = "INSERT INTO \"Objetivo\" VALUES (?,?,?);";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -83,7 +81,7 @@ public class ObjetivoDao implements IObjetivoDao {
                 + "des_objetivo=?"
                 + "WHERE cod_objetivo=?";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -94,7 +92,7 @@ public class ObjetivoDao implements IObjetivoDao {
         sql = "DELETE FROM \"Objetivo\" "
                 + "WHERE cod_objetivo='" + codObjetivo + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -105,7 +103,7 @@ public class ObjetivoDao implements IObjetivoDao {
         sql = "SELECT * FROM \"Objetivo\" "
                 + "WHERE nom_objetivo='" + nome + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         objetivo = (Objetivo) query.getSingleResult();
 
         return objetivo;

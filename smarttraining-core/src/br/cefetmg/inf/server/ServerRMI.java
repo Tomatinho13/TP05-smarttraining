@@ -9,6 +9,9 @@ import java.rmi.NoSuchObjectException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class ServerRMI {
 
@@ -28,10 +31,13 @@ public class ServerRMI {
     private static IManterRegiaoCorporal manterRegiaoCorporalStub;
     private static IManterTreino manterTreinoStub;
 
+    public static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
+    public static final EntityManager manager = factory.createEntityManager();
+
     public static void main(String[] args) {
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }
+//        if (System.getSecurityManager() == null) {
+//            System.setSecurityManager(new SecurityManager());
+//        }
 
         try {
             registro = iniciaRegistro();
@@ -42,10 +48,10 @@ public class ServerRMI {
     }
 
     private static Registry iniciaRegistro() throws InterruptedException, RemoteException {
-        if (LocateRegistry.getRegistry(4000) != null) {
-            return LocateRegistry.createRegistry(4000);
+        if (LocateRegistry.getRegistry(2345) != null) {
+            return LocateRegistry.createRegistry(2345);
         } else {
-            return LocateRegistry.getRegistry(4000);
+            return LocateRegistry.getRegistry(2345);
         }
     }
 

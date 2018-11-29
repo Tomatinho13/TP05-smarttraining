@@ -14,7 +14,7 @@ public class ClientRMI {
     
     private ClientRMI() {
         try {
-            registro = LocateRegistry.getRegistry("Localhost", 4000);
+            registro = LocateRegistry.getRegistry("Localhost", 2345);
         } catch (RemoteException e) {
             Logger.getLogger(ClientRMI.class.getName()).log(Level.SEVERE, null, e);
         }

@@ -6,6 +6,7 @@ import br.cefetmg.inf.model.domain.Instrutor;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Usuario;
+import br.cefetmg.inf.server.ServerRMI;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,9 +23,6 @@ public class UsuarioDao implements IUsuarioDao {
     private String sql;
     private final Gson gson;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public UsuarioDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -36,7 +34,7 @@ public class UsuarioDao implements IUsuarioDao {
                 + "FROM \"Usuario\" "
                 + "WHERE cod_cpf = '" + codCpf + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         usuario = (Usuario) query.getSingleResult();
 
         return usuario;
@@ -48,7 +46,7 @@ public class UsuarioDao implements IUsuarioDao {
                 + "FROM \"Usuario\" "
                 + "WHERE nom_usuario = '" + nome;
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         usuario = (Usuario) query.getSingleResult();
 
         return usuario;
@@ -60,7 +58,7 @@ public class UsuarioDao implements IUsuarioDao {
         sql = "SELECT * "
                 + "FROM \"Usuario\" ";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Usuario>) query.getResultList();
     }
@@ -70,7 +68,7 @@ public class UsuarioDao implements IUsuarioDao {
         this.usuario = usuario;
         sql = "INSERT INTO \"Usuario\" VALUES (?,?,?,?,?,CAST(? as date));";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -87,7 +85,7 @@ public class UsuarioDao implements IUsuarioDao {
                 + "dat_nascimento=CAST(? as date) "
                 + "WHERE cod_cpf=?";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -98,7 +96,7 @@ public class UsuarioDao implements IUsuarioDao {
         sql = "DELETE FROM \"Usuario\" "
                 + "WHERE cod_cpf='" + codCpf + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;

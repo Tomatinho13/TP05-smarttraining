@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import java.sql.*;
 import java.time.LocalDate;
 import br.cefetmg.inf.model.domain.Avaliacao;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,9 +23,6 @@ public class AvaliacaoDao implements IAvaliacaoDao {
     private final Gson gson;
     private final ObjetivoDao objetivoDao;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public AvaliacaoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -37,7 +35,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "FROM \"Avaliacao\" "
                 + "WHERE cod_cpf = '" + cpf + "' AND dat_avaliacao = '" + data + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         avaliacao = (Avaliacao) query.getSingleResult();
 
         return avaliacao;
@@ -50,7 +48,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "FROM \"Avaliacao\" "
                 + "WHERE cod_cpf = '" + codCpf + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         return (ArrayList<Avaliacao>) query.getResultList();
     }
 
@@ -79,9 +77,9 @@ public class AvaliacaoDao implements IAvaliacaoDao {
 //                + "CAST(? as numeric))";
 
         try {
-            manager.getTransaction().begin();
-            manager.persist(avaliacao);
-            manager.getTransaction().commit();
+            ServerRMI.manager.getTransaction().begin();
+            ServerRMI.manager.persist(avaliacao);
+            ServerRMI.manager.getTransaction().commit();
 
             return true;
         } catch (Exception e) {
@@ -123,7 +121,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
                 + "WHERE cod_cpf=? "
                 + "AND dat_avaliacao= CAST(? as date)";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -134,9 +132,9 @@ public class AvaliacaoDao implements IAvaliacaoDao {
 //                + "WHERE cod_cpf='" + avaliacao.getCpfAluno() + "' AND dat_avaliacao='" + avaliacao.getData().toString() + "';";
 
         try {
-            manager.getTransaction().begin();
-            manager.remove(avaliacao);
-            manager.getTransaction().commit();
+            ServerRMI.manager.getTransaction().begin();
+            ServerRMI.manager.remove(avaliacao);
+            ServerRMI.manager.getTransaction().commit();
 
             return true;
         } catch (Exception e) {
@@ -158,9 +156,9 @@ public class AvaliacaoDao implements IAvaliacaoDao {
 //                        + "WHERE cod_objetivo='" + avaliacao.getObjetivos().get(i).getCodigo() + "') as bigint))";
 
         try {
-            manager.getTransaction().begin();
-            manager.persist(avaliacao);
-            manager.getTransaction().commit();
+            ServerRMI.manager.getTransaction().begin();
+            ServerRMI.manager.persist(avaliacao);
+            ServerRMI.manager.getTransaction().commit();
 
             return true;
         } catch (Exception e) {
@@ -174,7 +172,7 @@ public class AvaliacaoDao implements IAvaliacaoDao {
         sql = "DELETE FROM \"Avaliacao\" "
                 + "WHERE cod_cpf='" + cpf + "' AND dat_avaliacao='" + datAvaliacao.toString() + "';";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;

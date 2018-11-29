@@ -8,6 +8,7 @@ import br.cefetmg.inf.model.domain.Ficha;
 import br.cefetmg.inf.model.domain.Treino;
 import br.cefetmg.inf.model.services.IManterTreino;
 import br.cefetmg.inf.model.services.impl.ManterTreino;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,9 +25,6 @@ public class FichaDao implements IFichaDao {
     private final Gson gson;
     private final TreinoDao treinoDao;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public FichaDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -39,7 +37,7 @@ public class FichaDao implements IFichaDao {
                 + "FROM \"Ficha\" "
                 + "WHERE cod_cpf = '" + cpf + "' AND nro_ficha = '" + nroFicha + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         ficha = (Ficha) query.getSingleResult();
 
         return ficha;
@@ -51,7 +49,7 @@ public class FichaDao implements IFichaDao {
                 + "FROM \"Ficha\" "
                 + "WHERE cod_cpf = '" + cpf + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Ficha>) query.getResultList();
     }
@@ -60,7 +58,7 @@ public class FichaDao implements IFichaDao {
     public boolean postFicha(Ficha ficha) throws SQLException {
         sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,CAST(? as date),CAST(? as date))";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -75,7 +73,7 @@ public class FichaDao implements IFichaDao {
                 + "WHERE cod_cpf=?"
                 + "AND nro_ficha=?";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -86,7 +84,7 @@ public class FichaDao implements IFichaDao {
         sql = "DELETE FROM \"Ficha\" "
                 + "WHERE cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;

@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.domain.Atividade;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -23,9 +24,6 @@ public class AtividadeDao implements IAtividadeDao {
     private final Gson gson;
     private final ExercicioDao exercicioDao;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public AtividadeDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -40,7 +38,7 @@ public class AtividadeDao implements IAtividadeDao {
                 + "AND cod_exercicio = '" + codExercicio + "'AND nro_aparelho='" + nroAparelho + "' "
                 + "AND nro_ficha='" + nroFicha + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         atividade = (Atividade) query.getSingleResult();
 
         return atividade;
@@ -50,7 +48,7 @@ public class AtividadeDao implements IAtividadeDao {
     public boolean postAtividade(Atividade atividade) throws SQLException {
         sql = "INSERT INTO \"TreinoExercicio\" VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -68,9 +66,9 @@ public class AtividadeDao implements IAtividadeDao {
 //                + "AND nro_ficha='" + atividade.getNroFicha() + "'";
 
         try {
-            manager.getTransaction().begin();
-            manager.refresh(atividade);
-            manager.getTransaction().commit();
+            ServerRMI.manager.getTransaction().begin();
+            ServerRMI.manager.refresh(atividade);
+            ServerRMI.manager.getTransaction().commit();
 
             return true;
         } catch (Exception e) {
@@ -86,7 +84,7 @@ public class AtividadeDao implements IAtividadeDao {
                 + "AND cod_exercicio = '" + codExercicio + "'AND nro_aparelho='" + nroAparelho + "' "
                 + "AND nro_ficha='" + nroFicha + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;

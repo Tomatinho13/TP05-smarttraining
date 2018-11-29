@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import br.cefetmg.inf.model.dao.IRegiaoCorporalDao;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.domain.RegiaoCorporal;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -21,9 +22,6 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
     private String sql;
     private final Gson gson;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public RegiaoCorporalDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -37,7 +35,7 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
                 + "GROUP BY \"cod_regCorp\", cod_musculo "
                 + "HAVING \"cod_regCorp\"='" + codRegiao + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         regiao = (RegiaoCorporal) query.getSingleResult();
 
         return regiao;
@@ -48,7 +46,7 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
         this.regiao = regiao;
         sql = "INSERT INTO \"RegiaoCorporal\" (nom_regiao) VALUES (?);";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -60,7 +58,7 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
         sql = "UPDATE \"RegiaoCorporal\" "
                 + "SET nom_regiao=?";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -71,7 +69,7 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
         sql = "DELETE FROM \"RegiaoCorporal\" "
                 + "WHERE cod_regiao=?";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;

@@ -6,6 +6,7 @@ import br.cefetmg.inf.model.db.ConectaBd;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Musculo;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,9 +22,6 @@ public class MusculoDao implements IMusculoDao {
     private String sql;
     private final Gson gson;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public MusculoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -33,7 +31,7 @@ public class MusculoDao implements IMusculoDao {
     public Musculo getMusculo(int codMusculo) throws SQLException {
         sql = "SELECT * FROM \"Musculo\" WHERE cod_musculo = '" + codMusculo + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         musculo = (Musculo) query.getSingleResult();
 
         return musculo;
@@ -46,7 +44,7 @@ public class MusculoDao implements IMusculoDao {
 
         sql = "SELECT * FROM \"Musculo\" order by nom_musculo";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Musculo>) query.getResultList();
     }
@@ -58,7 +56,7 @@ public class MusculoDao implements IMusculoDao {
         sql = "SELECT * FROM \"Musculo\" WHERE cod_musculo IN("
                 + "SELECT cod_musculo FROM \"MusculoExercicio\" WHERE cod_exercicio = '" + codExercicio + "')";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Musculo>) query.getResultList();
     }
@@ -68,7 +66,7 @@ public class MusculoDao implements IMusculoDao {
         this.musculo = musculo;
         sql = "INSERT INTO \"Musculo\" VALUES (?,?,?,?)";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -83,9 +81,9 @@ public class MusculoDao implements IMusculoDao {
 //                + "WHERE cod_musculo = '" + musculo.getNumero() + "'";
 
         try {
-            manager.getTransaction().begin();
-            manager.refresh(musculo);
-            manager.getTransaction().commit();
+            ServerRMI.manager.getTransaction().begin();
+            ServerRMI.manager.refresh(musculo);
+            ServerRMI.manager.getTransaction().commit();
 
             return true;
         } catch (Exception e) {
@@ -98,7 +96,7 @@ public class MusculoDao implements IMusculoDao {
     public boolean deleteMusculo(int codMusculo) throws SQLException {
         sql = "DELETE FROM \"Musculo\" WHERE cod_musculo = '" + codMusculo + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;

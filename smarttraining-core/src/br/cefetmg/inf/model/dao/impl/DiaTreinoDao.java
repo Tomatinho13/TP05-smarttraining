@@ -7,6 +7,7 @@ import br.cefetmg.inf.model.domain.DiaTreino;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Usuario;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,9 +25,6 @@ public class DiaTreinoDao implements IDiaTreinoDao {
     private Atividade atividade;
     private DiaTreino diaTreino;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public DiaTreinoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -38,7 +36,7 @@ public class DiaTreinoDao implements IDiaTreinoDao {
                 + "WHERE cod_cpf='" + codCpf + "' "
                 + "AND nro_ficha='" + nroFicha + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<DiaTreino>) query.getResultList();
     }
@@ -48,9 +46,9 @@ public class DiaTreinoDao implements IDiaTreinoDao {
         sql = "INSERT INTO \"DiaTreino\" VALUES (?,?,?,?,?,CAST(? as date))";
 
         try {
-            manager.getTransaction().begin();
-            manager.persist(diaTreino);
-            manager.getTransaction().commit();
+            ServerRMI.manager.getTransaction().begin();
+            ServerRMI.manager.persist(diaTreino);
+            ServerRMI.manager.getTransaction().commit();
 
             return true;
         } catch (Exception e) {

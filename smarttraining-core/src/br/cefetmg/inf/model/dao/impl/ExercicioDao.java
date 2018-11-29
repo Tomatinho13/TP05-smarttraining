@@ -10,6 +10,7 @@ import br.cefetmg.inf.model.dao.IMusculoDao;
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.AparelhoExercicio;
 import br.cefetmg.inf.model.domain.Musculo;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -24,9 +25,6 @@ public class ExercicioDao implements IExercicioDao {
     private String sql;
     private final Gson gson;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public ExercicioDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -38,7 +36,7 @@ public class ExercicioDao implements IExercicioDao {
                 + "FROM \"Exercicio\""
                 + "WHERE cod_exercicio = '" + codExercicio + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         exercicio = (Exercicio) query.getSingleResult();
 
         return exercicio;
@@ -50,7 +48,7 @@ public class ExercicioDao implements IExercicioDao {
                 + "FROM \"Exercicio\""
                 + "WHERE nom_exercicio = '" + nomeExercicio + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         exercicio = (Exercicio) query.getSingleResult();
 
         return exercicio;
@@ -66,7 +64,7 @@ public class ExercicioDao implements IExercicioDao {
                 + "GROUP BY nro_aparelho, cod_exercicio, nom_aparelho"
                 + "HAVING cod_exercicio = '" + codExercicio + "' AND nro_aparelho='" + nroAparelho + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         aparelhoExercicio = (AparelhoExercicio) query.getSingleResult();
 
         return aparelhoExercicio;
@@ -83,7 +81,7 @@ public class ExercicioDao implements IExercicioDao {
                 + "SELECT \"cod_regCorp\" FROM \"RegiaoCorporal\" "
                 + "WHERE \"nom_regCorp\" = '" + nomRegiao + "')))";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Exercicio>) query.getResultList();
     }
@@ -95,7 +93,7 @@ public class ExercicioDao implements IExercicioDao {
                 + "SELECT cod_exercicio FROM \"AparelhoExercicio\" "
                 + "WHERE nro_aparelho = '" + nroAparelho + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Exercicio>) query.getResultList();
     }
@@ -105,7 +103,7 @@ public class ExercicioDao implements IExercicioDao {
         sql = "SELECT * FROM \"Exercicio\" WHERE cod_exercicio IN("
                 + "SELECT cod_exercicio FROM \"MusculoExercicio\" WHERE cod_musculo = '" + codMusculo + "')";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Exercicio>) query.getResultList();
     }
@@ -114,7 +112,7 @@ public class ExercicioDao implements IExercicioDao {
     public ArrayList<Exercicio> getListaExercicios() throws SQLException {
         sql = "SELECT * FROM \"Exercicio\"";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Exercicio>) query.getResultList();
     }
@@ -123,7 +121,7 @@ public class ExercicioDao implements IExercicioDao {
     public boolean postExercicio(Exercicio exercicio) throws SQLException {
         sql = "INSERT INTO \"Exercicio\" (nom_exercicio, des_exercicio) VALUES (?, ?);";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -133,7 +131,7 @@ public class ExercicioDao implements IExercicioDao {
     public boolean postAparelhoExercicio(int codExercicio, int nroAparelho, String caminhoImg) throws SQLException {
         sql = "INSERT INTO \"AparelhoExercicio\" VALUES (CAST(? as integer), CAST(? as integer), ?);";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -156,7 +154,7 @@ public class ExercicioDao implements IExercicioDao {
                 + "des_exercicio=? "
                 + "WHERE cod_exercicio = '" + exercicio.getNumero() + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -166,7 +164,7 @@ public class ExercicioDao implements IExercicioDao {
         sql = "DELETE FROM \"MusculoExercicio\" "
                 + "WHERE cod_exercicio = '" + exercicio.getNumero() + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -176,7 +174,7 @@ public class ExercicioDao implements IExercicioDao {
 
         sql = "INSERT INTO \"MusculoExercicio\" VALUES(CAST( ? as integer), CAST( ? as bigint))";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -187,7 +185,7 @@ public class ExercicioDao implements IExercicioDao {
         sql = "DELETE FROM \"Exercicio\" "
                 + "WHERE cod_exercicio=CAST(? as integer)";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;

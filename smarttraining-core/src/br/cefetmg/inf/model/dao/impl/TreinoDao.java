@@ -7,6 +7,7 @@ import br.cefetmg.inf.model.domain.Atividade;
 import com.google.gson.Gson;
 import java.sql.*;
 import br.cefetmg.inf.model.domain.Treino;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,9 +24,6 @@ public class TreinoDao implements ITreinoDao {
     private final Gson gson;
     private final AparelhoDao aparelhoDao;
     private final ExercicioDao exercicioDao;
-
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
 
     public TreinoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
@@ -44,7 +42,7 @@ public class TreinoDao implements ITreinoDao {
                 + "GROUP BY cod_cpf, nro_ficha, nro_treino, cod_exercicio, nro_aparelho, nro_series, qtd_peso, nro_repeticoes "
                 + "HAVING cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "' AND nro_treino='" + nroTreino + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         treino = (Treino) query.getSingleResult();
 
         return treino;
@@ -63,7 +61,7 @@ public class TreinoDao implements ITreinoDao {
                     + "GROUP BY cod_cpf, nro_ficha, nro_treino, cod_exercicio, nro_aparelho, nro_series, qtd_peso, nro_repeticoes "
                     + "HAVING cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "' AND nro_treino='" + nroTreino + "'";
 
-            Query query = manager.createNativeQuery(sql);
+            Query query = ServerRMI.manager.createNativeQuery(sql);
 
             return (ArrayList<Treino>) query.getSingleResult();
         }
@@ -73,7 +71,7 @@ public class TreinoDao implements ITreinoDao {
     public boolean postTreino(Treino treino) throws SQLException {
         sql = "INSERT INTO \"Treino\" VALUES (?,?,?,?)";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -84,7 +82,7 @@ public class TreinoDao implements ITreinoDao {
         sql = "UPDATE \"Treino\" "
                 + "SET des_treino=?";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -95,7 +93,7 @@ public class TreinoDao implements ITreinoDao {
         sql = "DELETE FROM \"Treino\" "
                 + "WHERE cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "' AND nro_treino='" + nroTreino + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;

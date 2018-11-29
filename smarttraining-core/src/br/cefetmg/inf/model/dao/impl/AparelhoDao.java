@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.Exercicio;
+import br.cefetmg.inf.server.ServerRMI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -23,9 +24,6 @@ public class AparelhoDao implements IAparelhoDao {
     private String sql;
     private final Gson gson;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
-    EntityManager manager = factory.createEntityManager();
-
     public AparelhoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -37,7 +35,7 @@ public class AparelhoDao implements IAparelhoDao {
                 + "FROM \"Aparelho\" "
                 + "WHERE nro_aparelho = '" + nroAparelho + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         aparelho = (Aparelho) query.getSingleResult();
 
         return aparelho;
@@ -49,7 +47,7 @@ public class AparelhoDao implements IAparelhoDao {
                 + "FROM \"Aparelho\" "
                 + "WHERE nom_aparelho = '" + nomAparelho + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         aparelho = (Aparelho) query.getSingleResult();
 
         return aparelho;
@@ -61,7 +59,7 @@ public class AparelhoDao implements IAparelhoDao {
         sql = "SELECT * "
                 + "FROM \"Aparelho\" ";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Aparelho>) query.getResultList();
     }
@@ -74,7 +72,7 @@ public class AparelhoDao implements IAparelhoDao {
         sql = "SELECT cod_exercicio FROM \"Exercicio\" WHERE cod_exercicio IN("
                 + "SELECT cod_exercicio FROM \"AparelhoExercicio\" WHERE nro_aparelho = '" + nroAparelho + "')";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
 
         return (ArrayList<Exercicio>) query.getResultList();
     }
@@ -84,7 +82,7 @@ public class AparelhoDao implements IAparelhoDao {
         this.aparelho = aparelho;
         sql = "INSERT INTO \"Aparelho\" VALUES (CAST(? as smallint),?)";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -97,7 +95,7 @@ public class AparelhoDao implements IAparelhoDao {
                 + "SET nom_usuario='" + aparelho.getNome() + "'"
                 + "WHERE nro_aparelho='" + aparelho.getNumero() + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
@@ -108,7 +106,7 @@ public class AparelhoDao implements IAparelhoDao {
         sql = "DELETE FROM \"Aparelho\" "
                 + "WHERE nro_aparelho='" + nroAparelho + "'";
 
-        Query query = manager.createNativeQuery(sql);
+        Query query = ServerRMI.manager.createNativeQuery(sql);
         boolean resultado = (boolean) query.getSingleResult();
 
         return resultado;
