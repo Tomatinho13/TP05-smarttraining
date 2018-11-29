@@ -5,10 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- *
- * @author Tomatinho
- */
 @Entity
 public class Exercicio implements Serializable {
     @Id

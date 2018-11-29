@@ -1,24 +1,30 @@
 package br.cefetmg.inf.model.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ *
+ * @author Gabriel
+ */
 @Embeddable
-public class AvaliacaoChave implements Serializable {
+public class FichaChave implements Serializable {
     @ManyToOne
-    @JoinColumn(referencedColumnName = "cod_cpf")
+    @JoinColumn(name="cod_cpf", referencedColumnName = "cod_cpf")
     private Aluno aluno;
-    
-    @Column(name = "dat_avaliacao")
-    private LocalDate data;
 
-    public AvaliacaoChave(Aluno aluno, LocalDate data) {
+    @Column(name = "nro_ficha")
+    private int numero;
+
+    public FichaChave() {
+    }
+
+    public FichaChave(Aluno aluno, int numero) {
         this.aluno = aluno;
-        this.data = data;
+        this.numero = numero;
     }
 
     public Aluno getAluno() {
@@ -29,13 +35,11 @@ public class AvaliacaoChave implements Serializable {
         this.aluno = aluno;
     }
 
-    public LocalDate getData() {
-        return data;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
-    
-    
 }

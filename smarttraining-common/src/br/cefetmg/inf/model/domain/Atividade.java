@@ -5,10 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-/**
- *
- * @author Felipe
- */
 @Entity
 public class Atividade implements Serializable {
 

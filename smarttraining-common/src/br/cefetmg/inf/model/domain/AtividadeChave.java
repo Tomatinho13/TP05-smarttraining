@@ -7,10 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 
-/**
- *
- * @author Felipe
- */
 @Embeddable
 public class AtividadeChave implements Serializable {
 
