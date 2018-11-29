@@ -1,21 +1,32 @@
 package br.cefetmg.inf.model.domain;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-public class Aparelho {
+/**
+ *
+ * @author Tomatinho
+ */
+
+@Entity
+public class Aparelho implements Serializable {
+    @Id
+    @Column(name="nro_aparelho", nullable = false)
     private int numero;
+    
+    @Column(name="nom_aparelho", nullable = false)
     private String nome;
-    private ArrayList<Exercicio> exercicios;
 
     public Aparelho() {
     }
 
-    public Aparelho(int numero, String nome, ArrayList<Exercicio> exercicios) {
+    public Aparelho(int numero, String nome) {
         this.numero = numero;
         this.nome = nome;
-        this.exercicios = exercicios;
     }
-
+    
     public int getNumero() {
         return numero;
     }
@@ -30,13 +41,5 @@ public class Aparelho {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public ArrayList<Exercicio> getExercicios() {
-        return exercicios;
-    }
-
-    public void setExercicios(ArrayList<Exercicio> exercicios) {
-        this.exercicios = exercicios;
     }
 }
