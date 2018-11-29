@@ -82,54 +82,36 @@ public class AparelhoDao implements IAparelhoDao {
     @Override
     public boolean postAparelho(Aparelho aparelho) throws SQLException {
         this.aparelho = aparelho;
-//        sql = "INSERT INTO \"Aparelho\" VALUES (CAST(? as smallint),?)";
+        sql = "INSERT INTO \"Aparelho\" VALUES (CAST(? as smallint),?)";
 
-        try {
-            manager.getTransaction().begin();
-            manager.persist(aparelho);
-            manager.getTransaction().commit();
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            return true;
-        } catch (Exception e) {
-            Logger.getLogger(AparelhoDao.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return false;
+        return resultado;
     }
 
     @Override
     public boolean putAparelho(Aparelho aparelho) throws SQLException {
         this.aparelho = aparelho;
-//        sql = "UPDATE \"Aparelho\" "
-//                + "SET nom_usuario='" + aparelho.getNome() + "'"
-//                + "WHERE nro_aparelho='" + aparelho.getNumero() + "'";
+        sql = "UPDATE \"Aparelho\" "
+                + "SET nom_usuario='" + aparelho.getNome() + "'"
+                + "WHERE nro_aparelho='" + aparelho.getNumero() + "'";
 
-        try {
-            manager.getTransaction().begin();
-            manager.refresh(aparelho);
-            manager.getTransaction().commit();
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            return true;
-        } catch (Exception e) {
-            Logger.getLogger(AparelhoDao.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return false;
+        return resultado;
     }
 
     @Override
     public boolean deleteAparelho(int nroAparelho) throws SQLException {
-//        sql = "DELETE FROM \"Aparelho\" "
-//                + "WHERE nro_aparelho='" + nroAparelho + "'";
+        sql = "DELETE FROM \"Aparelho\" "
+                + "WHERE nro_aparelho='" + nroAparelho + "'";
 
-        try {
-            manager.getTransaction().begin();
-            manager.remove(aparelho);
-            manager.getTransaction().commit();
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            return true;
-        } catch (Exception e) {
-            Logger.getLogger(AparelhoDao.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return false;
+        return resultado;
     }
 
     @Override

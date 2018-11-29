@@ -48,18 +48,12 @@ public class AtividadeDao implements IAtividadeDao {
 
     @Override
     public boolean postAtividade(Atividade atividade) throws SQLException {
-//        sql = "INSERT INTO \"TreinoExercicio\" VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        sql = "INSERT INTO \"TreinoExercicio\" VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
-        try {
-            manager.getTransaction().begin();
-            manager.persist(atividade);
-            manager.getTransaction().commit();
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            return true;
-        } catch (Exception e) {
-            Logger.getLogger(AtividadeDao.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return false;
+        return resultado;
     }
 
     @Override
@@ -87,21 +81,15 @@ public class AtividadeDao implements IAtividadeDao {
 
     @Override
     public boolean deleteAtividade(String cpf, int nroTreino, int codExercicio, int nroAparelho, int nroFicha) throws SQLException {
-//        sql = "DELETE FROM \"TreinoExercicio\" "
-//                + "WHERE cod_cpf='" + cpf + "' AND nro_treino = '" + nroTreino + "'"
-//                + "AND cod_exercicio = '" + codExercicio + "'AND nro_aparelho='" + nroAparelho + "' "
-//                + "AND nro_ficha='" + nroFicha + "'";
+        sql = "DELETE FROM \"TreinoExercicio\" "
+                + "WHERE cod_cpf='" + cpf + "' AND nro_treino = '" + nroTreino + "'"
+                + "AND cod_exercicio = '" + codExercicio + "'AND nro_aparelho='" + nroAparelho + "' "
+                + "AND nro_ficha='" + nroFicha + "'";
 
-        try {
-            manager.getTransaction().begin();
-            manager.remove(atividade);
-            manager.getTransaction().commit();
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            return true;
-        } catch (Exception e) {
-            Logger.getLogger(AtividadeDao.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return false;
+        return resultado;
     }
 
     @Override

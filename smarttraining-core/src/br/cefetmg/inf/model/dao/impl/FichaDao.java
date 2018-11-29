@@ -8,10 +8,13 @@ import br.cefetmg.inf.model.domain.Ficha;
 import br.cefetmg.inf.model.domain.Treino;
 import br.cefetmg.inf.model.services.IManterTreino;
 import br.cefetmg.inf.model.services.impl.ManterTreino;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class FichaDao implements IFichaDao {
 
@@ -20,6 +23,9 @@ public class FichaDao implements IFichaDao {
     private String sql;
     private final Gson gson;
     private final TreinoDao treinoDao;
+
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
+    EntityManager manager = factory.createEntityManager();
 
     public FichaDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
@@ -33,67 +39,31 @@ public class FichaDao implements IFichaDao {
                 + "FROM \"Ficha\" "
                 + "WHERE cod_cpf = '" + cpf + "' AND nro_ficha = '" + nroFicha + "'";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        if (resultado.next()) {
-            ficha = new Ficha(cpf,
-                    nroFicha,
-                    resultado.getString("cod_cpf_instrutor"),
-                    resultado.getDate("dat_ficha").toLocalDate(),
-                    resultado.getDate("dat_prevista_troca").toLocalDate(),
-                    treinoDao.getFichaTreinos(cpf, nroFicha));
-        } else {
-
-            return null;
-        }
+        Query query = manager.createNativeQuery(sql);
+        ficha = (Ficha) query.getSingleResult();
 
         return ficha;
     }
 
     @Override
     public ArrayList<Ficha> getListaFicha(String cpf) throws SQLException {
-        ArrayList<Ficha> listaFicha = new ArrayList<>();
         sql = "SELECT * "
                 + "FROM \"Ficha\" "
                 + "WHERE cod_cpf = '" + cpf + "'";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        while (resultado.next()) {
-            ficha = new Ficha(cpf,
-                    resultado.getInt("nro_ficha"),
-                    resultado.getString("cod_cpf_instrutor"),
-                    resultado.getDate("dat_ficha").toLocalDate(),
-                    resultado.getDate("dat_prevista_troca").toLocalDate(),
-                    treinoDao.getFichaTreinos(cpf, resultado.getInt("nro_ficha")));
-            listaFicha.add(ficha);
-        }
+        Query query = manager.createNativeQuery(sql);
 
-        return listaFicha;
+        return (ArrayList<Ficha>) query.getResultList();
     }
 
     @Override
     public boolean postFicha(Ficha ficha) throws SQLException {
         sql = "INSERT INTO \"Ficha\" VALUES (?,?,?,CAST(? as date),CAST(? as date))";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Aluno\" WHERE \"cod_cpf\"='" + ficha.getCpfAluno() + "')");
-            stmt.setString(2, String.valueOf(ficha.getNumero()));
-            stmt.setString(3, "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + ficha.getCpfInstrutor() + "')");
-            stmt.setString(4, ficha.getData().toString());
-            stmt.setString(5, ficha.getDataTroca().toString());
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            stmt.executeQuery(sql);
-            
-            IManterTreino manterTreino = new ManterTreino();
-            for (Treino treino : ficha.getListaTreino()) {
-                manterTreino.cadastrar(treino);
-            }
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -105,19 +75,10 @@ public class FichaDao implements IFichaDao {
                 + "WHERE cod_cpf=?"
                 + "AND nro_ficha=?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, "(SELECT \"cod_cpf\" FROM \"Instrutor\" WHERE \"cod_cpf\"='" + ficha.getCpfInstrutor() + "')");
-            stmt.setString(2, ficha.getData().toString());
-            stmt.setString(3, ficha.getDataTroca().toString());
-            stmt.setString(4, ficha.getCpfAluno());
-            stmt.setString(5, String.valueOf(ficha.getNumero()));
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            stmt.executeQuery(sql);
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -125,13 +86,10 @@ public class FichaDao implements IFichaDao {
         sql = "DELETE FROM \"Ficha\" "
                 + "WHERE cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "'";
 
-        try (Statement stmt = conn.createStatement()) {
-            stmt.executeQuery(sql);
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
