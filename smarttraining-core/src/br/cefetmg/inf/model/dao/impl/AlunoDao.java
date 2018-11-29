@@ -131,8 +131,7 @@ public class AlunoDao implements IUsuarioDao {
             conn.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(AlunoDao.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
