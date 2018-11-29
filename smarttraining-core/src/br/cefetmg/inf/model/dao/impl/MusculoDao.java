@@ -9,6 +9,10 @@ import br.cefetmg.inf.model.domain.Musculo;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class MusculoDao implements IMusculoDao {
 
@@ -17,6 +21,9 @@ public class MusculoDao implements IMusculoDao {
     private String sql;
     private final Gson gson;
 
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
+    EntityManager manager = factory.createEntityManager();
+
     public MusculoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
         gson = new Gson();
@@ -24,18 +31,10 @@ public class MusculoDao implements IMusculoDao {
 
     @Override
     public Musculo getMusculo(int codMusculo) throws SQLException {
-        IExercicioDao exercicioDao = new ExercicioDao();
         sql = "SELECT * FROM \"Musculo\" WHERE cod_musculo = '" + codMusculo + "'";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        if (resultado.next()) {
-            musculo = new Musculo(resultado.getInt("cod_musculo"),
-                    resultado.getInt("cod_regCorp"),
-                    resultado.getString("nom_musculo"),
-                    resultado.getString("img_musculo"),
-                    exercicioDao.getMusculoExercicios(codMusculo));
-        }
+        Query query = manager.createNativeQuery(sql);
+        musculo = (Musculo) query.getSingleResult();
 
         return musculo;
     }
@@ -47,19 +46,9 @@ public class MusculoDao implements IMusculoDao {
 
         sql = "SELECT * FROM \"Musculo\" order by nom_musculo";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        while (resultado.next()) {
-            musculo = new Musculo(resultado.getInt("cod_musculo"),
-                    resultado.getInt("cod_regCorp"),
-                    resultado.getString("nom_musculo"),
-                    resultado.getString("img_musculo"),
-                    exercicioDao.getMusculoExercicios(resultado.getInt("cod_musculo")));
-            listaMusculos.add(musculo);
-        }
+        Query query = manager.createNativeQuery(sql);
 
-        return listaMusculos;
-
+        return (ArrayList<Musculo>) query.getResultList();
     }
 
     @Override
@@ -68,17 +57,10 @@ public class MusculoDao implements IMusculoDao {
 
         sql = "SELECT * FROM \"Musculo\" WHERE cod_musculo IN("
                 + "SELECT cod_musculo FROM \"MusculoExercicio\" WHERE cod_exercicio = '" + codExercicio + "')";
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet resultado = stmt.executeQuery(sql);
 
-            while (resultado.next()) {
-                listaMusculos.add(new Musculo(resultado.getInt("cod_musculo"), resultado.getInt("cod_regCorp"), resultado.getString("nom_musculo"), resultado.getString("img_musculo"), new ArrayList<>()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(MusculoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listaMusculos;
+        Query query = manager.createNativeQuery(sql);
+
+        return (ArrayList<Musculo>) query.getResultList();
     }
 
     @Override
@@ -86,51 +68,40 @@ public class MusculoDao implements IMusculoDao {
         this.musculo = musculo;
         sql = "INSERT INTO \"Musculo\" VALUES (?,?,?,?)";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, String.valueOf(musculo.getNumero()));
-            stmt.setString(2, "(SELECT \"cod_regCorp\" FROM \"RegiaoCorporal\" WHERE \"cod_regCorp\"='" + musculo.getCodRegiaoCorporal() + "')");
-            stmt.setString(3, musculo.getNome());
-            stmt.setString(4, musculo.getCaminhoImagem());
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            stmt.executeQuery(sql);
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
     public boolean putMusculo(Musculo musculo) throws SQLException {
         this.musculo = musculo;
-        sql = "UPDATE \"Musculo\" "
-                + "SET nom_musculo=?, "
-                + "img_musculo=? "
-                + "WHERE cod_musculo = '" + musculo.getNumero() + "'";
+//        sql = "UPDATE \"Musculo\" "
+//                + "SET nom_musculo=?, "
+//                + "img_musculo=? "
+//                + "WHERE cod_musculo = '" + musculo.getNumero() + "'";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, musculo.getNome());
-            stmt.setString(2, musculo.getCaminhoImagem());
+        try {
+            manager.getTransaction().begin();
+            manager.refresh(musculo);
+            manager.getTransaction().commit();
 
-            stmt.executeQuery(sql);
-
-        } catch (SQLException exception) {
-            return false;
+            return true;
+        } catch (Exception e) {
+            Logger.getLogger(AvaliacaoDao.class.getName()).log(Level.SEVERE, null, e);
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean deleteMusculo(int codMusculo) throws SQLException {
         sql = "DELETE FROM \"Musculo\" WHERE cod_musculo = '" + codMusculo + "'";
 
-        try (Statement stmt = conn.createStatement()) {
-            stmt.executeQuery(sql);
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override

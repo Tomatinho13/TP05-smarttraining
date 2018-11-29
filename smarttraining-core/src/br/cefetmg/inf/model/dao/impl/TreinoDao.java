@@ -10,6 +10,10 @@ import br.cefetmg.inf.model.domain.Treino;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class TreinoDao implements ITreinoDao {
 
@@ -19,6 +23,9 @@ public class TreinoDao implements ITreinoDao {
     private final Gson gson;
     private final AparelhoDao aparelhoDao;
     private final ExercicioDao exercicioDao;
+
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
+    EntityManager manager = factory.createEntityManager();
 
     public TreinoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
@@ -37,26 +44,9 @@ public class TreinoDao implements ITreinoDao {
                 + "GROUP BY cod_cpf, nro_ficha, nro_treino, cod_exercicio, nro_aparelho, nro_series, qtd_peso, nro_repeticoes "
                 + "HAVING cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "' AND nro_treino='" + nroTreino + "'";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
+        Query query = manager.createNativeQuery(sql);
+        treino = (Treino) query.getSingleResult();
 
-        if (resultado.next()) {
-            do {
-                aparelhoExercicio = exercicioDao.getAparelhoExercicio(resultado.getInt("cod_exercicio"), resultado.getInt("nro_aparelho"));
-                listaAtividade.add(new Atividade(aparelhoExercicio,
-                        resultado.getString("cod_cpf"),
-                        resultado.getInt("nro_ficha"),
-                        resultado.getInt("nro_treino"),
-                        resultado.getInt("qtd_peso"),
-                        resultado.getInt("nro_series"),
-                        resultado.getInt("nro_repeticoes")));
-            } while (resultado.next());
-        } else {
-
-            return null;
-        }
-
-        treino = new Treino(cpf, nroFicha, nroTreino, resultado.getString("des_treino"), listaAtividade);
         return treino;
     }
 
@@ -73,46 +63,20 @@ public class TreinoDao implements ITreinoDao {
                     + "GROUP BY cod_cpf, nro_ficha, nro_treino, cod_exercicio, nro_aparelho, nro_series, qtd_peso, nro_repeticoes "
                     + "HAVING cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "' AND nro_treino='" + nroTreino + "'";
 
-            Statement stmt = conn.createStatement();
-            ResultSet resultado = stmt.executeQuery(sql);
+            Query query = manager.createNativeQuery(sql);
 
-            if (resultado.next()) {
-                do {
-                    aparelhoExercicio = exercicioDao.getAparelhoExercicio(resultado.getInt("cod_exercicio"), resultado.getInt("nro_aparelho"));
-                    listaAtividade.add(new Atividade(aparelhoExercicio,
-                            resultado.getString("cod_cpf"),
-                            resultado.getInt("nro_ficha"),
-                            resultado.getInt("nro_treino"),
-                            resultado.getInt("qtd_peso"),
-                            resultado.getInt("nro_series"),
-                            resultado.getInt("nro_repeticoes")));
-                } while (resultado.next());
-            } else {
-                break;
-            }
-            treino = new Treino(cpf, nroFicha, nroTreino, resultado.getString("des_treino"), listaAtividade);
-            listaTreino.add(treino);
-            nroTreino++;
+            return (ArrayList<Treino>) query.getSingleResult();
         }
-        return listaTreino;
     }
 
     @Override
     public boolean postTreino(Treino treino) throws SQLException {
         sql = "INSERT INTO \"Treino\" VALUES (?,?,?,?)";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, "SELECT \"cod_cpf\" FROM \"Ficha\" WHERE \"cod_cpf\"='" + treino.getCpfAluno() + "'");
-            stmt.setString(2, "SELECT \"nro_ficha\" FROM \"Ficha\" WHERE \"nro_ficha\"='" + treino.getNroFicha() + "'");
-            stmt.setString(3, String.valueOf(treino.getNroTreino()));
-            stmt.setString(4, treino.getDescricao());
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            stmt.executeQuery(sql);
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -120,14 +84,10 @@ public class TreinoDao implements ITreinoDao {
         sql = "UPDATE \"Treino\" "
                 + "SET des_treino=?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, treino.getDescricao());
-            stmt.executeQuery(sql);
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -135,13 +95,10 @@ public class TreinoDao implements ITreinoDao {
         sql = "DELETE FROM \"Treino\" "
                 + "WHERE cod_cpf='" + cpf + "' AND nro_ficha='" + nroFicha + "' AND nro_treino='" + nroTreino + "'";
 
-        try (Statement stmt = conn.createStatement()) {
-            stmt.executeQuery(sql);
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -149,7 +106,7 @@ public class TreinoDao implements ITreinoDao {
         try {
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TreinoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

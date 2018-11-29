@@ -9,6 +9,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class ObjetivoDao implements IObjetivoDao {
 
@@ -16,6 +20,9 @@ public class ObjetivoDao implements IObjetivoDao {
     private final Connection conn;
     private String sql;
     private final Gson gson;
+
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
+    EntityManager manager = factory.createEntityManager();
 
     public ObjetivoDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
@@ -26,17 +33,9 @@ public class ObjetivoDao implements IObjetivoDao {
     public Objetivo getObjetivo(int codObjetivo) throws SQLException {
         sql = "SELECT * FROM \"Objetivo\" "
                 + "WHERE cod_objetivo='" + codObjetivo + "'";
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
 
-        if (resultado.next()) {
-            objetivo = new Objetivo(resultado.getInt("cod_objetivo"),
-                    resultado.getString("nom_objetivo"),
-                    resultado.getString("des_objetivo"));
-        } else {
-
-            return null;
-        }
+        Query query = manager.createNativeQuery(sql);
+        objetivo = (Objetivo) query.getSingleResult();
 
         return objetivo;
     }
@@ -51,21 +50,9 @@ public class ObjetivoDao implements IObjetivoDao {
                 + "AND dat_avaliacao IN("
                 + "SELECT dat_avaliacao FROM \"Avaliacao\" WHERE dat_avaliacao='" + dataAvaliacao.toString() + "'))";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        if (resultado.next()) {
-            do {
-                objetivo = new Objetivo(resultado.getInt("cod_objetivo"),
-                        resultado.getString("nom_objetivo"),
-                        resultado.getString("des_objetivo"));
-                listaObjetivos.add(objetivo);
-            } while (resultado.next());
-        } else {
+        Query query = manager.createNativeQuery(sql);
 
-            return null;
-        }
-
-        return listaObjetivos;
+        return (ArrayList<Objetivo>) query.getResultList();
     }
 
     @Override
@@ -74,32 +61,19 @@ public class ObjetivoDao implements IObjetivoDao {
         sql = "SELECT * "
                 + "FROM \"Objetivo\" ";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-        while (resultado.next()) {
-            listaObjetivos.add(new Objetivo(resultado.getInt("cod_objetivo"),
-                    resultado.getString("nom_objetivo"),
-                    resultado.getString("des_objetivo")));
-        }
+        Query query = manager.createNativeQuery(sql);
 
-        return listaObjetivos;
+        return (ArrayList<Objetivo>) query.getResultList();
     }
 
     @Override
     public boolean postObjetivo(Objetivo objetivo) throws SQLException {
         sql = "INSERT INTO \"Objetivo\" VALUES (?,?,?);";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, String.valueOf(objetivo.getCodigo()));
-            stmt.setString(2, objetivo.getNome());
-            stmt.setString(3, objetivo.getDescricao());
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            stmt.executeQuery(sql);
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -109,17 +83,10 @@ public class ObjetivoDao implements IObjetivoDao {
                 + "des_objetivo=?"
                 + "WHERE cod_objetivo=?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, objetivo.getNome());
-            stmt.setString(2, objetivo.getDescricao());
-            stmt.setString(3, String.valueOf(objetivo.getCodigo()));
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            stmt.executeQuery(sql);
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -127,29 +94,20 @@ public class ObjetivoDao implements IObjetivoDao {
         sql = "DELETE FROM \"Objetivo\" "
                 + "WHERE cod_objetivo='" + codObjetivo + "'";
 
-        try (Statement stmt = conn.createStatement()) {
-            stmt.executeQuery(sql);
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
     public Objetivo getObjetivo(String nome) throws SQLException {
         sql = "SELECT * FROM \"Objetivo\" "
                 + "WHERE nom_objetivo='" + nome + "'";
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
 
-        if (resultado.next()) {
-            objetivo = new Objetivo(resultado.getInt("cod_objetivo"),
-                    nome,
-                    resultado.getString("des_objetivo"));
-        } else {
-            return null;
-        }
+        Query query = manager.createNativeQuery(sql);
+        objetivo = (Objetivo) query.getSingleResult();
+
         return objetivo;
     }
 

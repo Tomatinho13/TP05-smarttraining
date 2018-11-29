@@ -9,6 +9,10 @@ import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.domain.RegiaoCorporal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class RegiaoCorporalDao implements IRegiaoCorporalDao {
 
@@ -16,6 +20,9 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
     private final Connection conn;
     private String sql;
     private final Gson gson;
+
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("SmartTrainingPU");
+    EntityManager manager = factory.createEntityManager();
 
     public RegiaoCorporalDao() {
         conn = ConectaBd.obterInstancia().obterConexao();
@@ -30,13 +37,8 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
                 + "GROUP BY \"cod_regCorp\", cod_musculo "
                 + "HAVING \"cod_regCorp\"='" + codRegiao + "'";
 
-        Statement stmt = conn.createStatement();
-        ResultSet resultado = stmt.executeQuery(sql);
-
-        while (resultado.next()) {
-            listaMusculos.add(new Musculo(resultado.getInt("cod_musculo"), resultado.getInt("cod_regCorp"), resultado.getString("nom_musculo"), resultado.getString("img_musculo"), null));
-            regiao = new RegiaoCorporal(codRegiao, resultado.getString("nom_regCorp"), listaMusculos);
-        }
+        Query query = manager.createNativeQuery(sql);
+        regiao = (RegiaoCorporal) query.getSingleResult();
 
         return regiao;
     }
@@ -46,15 +48,10 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
         this.regiao = regiao;
         sql = "INSERT INTO \"RegiaoCorporal\" (nom_regiao) VALUES (?);";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, regiao.getNome());
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            stmt.executeQuery(sql);
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -63,15 +60,10 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
         sql = "UPDATE \"RegiaoCorporal\" "
                 + "SET nom_regiao=?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, regiao.getNome());
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
 
-            stmt.executeQuery(sql);
-
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        return resultado;
     }
 
     @Override
@@ -79,14 +71,10 @@ public class RegiaoCorporalDao implements IRegiaoCorporalDao {
         sql = "DELETE FROM \"RegiaoCorporal\" "
                 + "WHERE cod_regiao=?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, String.valueOf(cod_regiao));
-            stmt.executeQuery(sql);
-            
-        } catch (SQLException exception) {
-            return false;
-        }
-        return true;
+        Query query = manager.createNativeQuery(sql);
+        boolean resultado = (boolean) query.getSingleResult();
+
+        return resultado;
     }
 
     @Override
