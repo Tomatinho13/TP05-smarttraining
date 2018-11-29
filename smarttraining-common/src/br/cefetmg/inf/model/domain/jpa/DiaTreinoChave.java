@@ -1,4 +1,4 @@
-package br.cefetmg.inf.model.domain;
+package br.cefetmg.inf.model.domain.jpa;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,13 +1,24 @@
-package br.cefetmg.inf.model.domain;
+package br.cefetmg.inf.model.domain.jpa;
+
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Tomatinho
  */
-
-public class Objetivo {
+@Entity
+public class Objetivo implements Serializable {
+    @Id
+    @Column(name="cod_objetivo")
     private int codigo;
+    
+    @Column(name="nom_objetivo")
     private String nome;
+    
+    @Column(name="des_objetivo")
     private String descricao;
 
     public Objetivo() {

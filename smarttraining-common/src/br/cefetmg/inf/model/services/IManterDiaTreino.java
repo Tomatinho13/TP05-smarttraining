@@ -1,7 +1,6 @@
 package br.cefetmg.inf.model.services;
 
 import br.cefetmg.inf.model.domain.DiaTreino;
-import br.cefetmg.inf.model.domain.Ficha;
 import java.sql.SQLException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -6,11 +6,15 @@ import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.model.services.impl.ManterAparelho;
-import br.cefetmg.inf.model.services.impl.ManterExercicio;
-import br.cefetmg.inf.model.services.impl.ManterMusculo;
+import br.cefetmg.inf.proxy.ManterAparelhoProxy;
+import br.cefetmg.inf.proxy.ManterExercicioProxy;
+import br.cefetmg.inf.proxy.ManterMusculoProxy;
+import java.rmi.RemoteException;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class TelaAlterarExercicio extends Controller{
@@ -20,7 +24,7 @@ public class TelaAlterarExercicio extends Controller{
         String jsp="AlterarExercicio";
         try {
             int codExercicio = Integer.parseInt(request.getParameter("codExercicio"));
-            IManterExercicio manterExercicio = new ManterExercicio();
+            IManterExercicio manterExercicio = new ManterExercicioProxy();
             Exercicio exercicio = manterExercicio.pesquisarPorCodigo(codExercicio);
             if(exercicio!=null){
                 request.setAttribute("exercicio", exercicio);
@@ -31,7 +35,7 @@ public class TelaAlterarExercicio extends Controller{
                 request.setAttribute("erro", erro);
             }
             
-            IManterAparelho manterAparelho = new ManterAparelho();
+            IManterAparelho manterAparelho = new ManterAparelhoProxy();
             ArrayList<Aparelho> listaAparelhos = manterAparelho.pesquisarTodos();
             if(!listaAparelhos.isEmpty()){
                 request.setAttribute("aparelhos", listaAparelhos);
@@ -42,7 +46,7 @@ public class TelaAlterarExercicio extends Controller{
                 request.setAttribute("erro", erro);
             }
             
-            IManterMusculo manterMusculo = new ManterMusculo();
+            IManterMusculo manterMusculo = new ManterMusculoProxy();
             ArrayList<Musculo> listaMusculos = manterMusculo.pesquisarTodos();
             if(!listaMusculos.isEmpty()){
                 request.setAttribute("musculos", listaMusculos);
@@ -57,6 +61,8 @@ public class TelaAlterarExercicio extends Controller{
             String erro = "Erro ao carregar exercicio!";
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
+        } catch (RemoteException ex) {
+            Logger.getLogger(TelaAlterarExercicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }

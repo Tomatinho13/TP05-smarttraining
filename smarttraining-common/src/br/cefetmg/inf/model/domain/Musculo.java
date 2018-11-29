@@ -1,52 +1,45 @@
 package br.cefetmg.inf.model.domain;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.util.ArrayList;
 
-@Entity
-public class Musculo implements Serializable {
-    @Id
-    @Column(name = "cod_musculo")
-    private int codigo;
-    
-    @ManyToOne(targetEntity = RegiaoCorporal.class)
-    @JoinColumn(name = "cod_regCorp")
-    private RegiaoCorporal regiaoCorporal;
-    
-    @Column(name = "nom_musculo")
+/**
+ *
+ * @author Tomatinho
+ */
+
+public class Musculo {
+    private int numero;
+    private int codRegiaoCorporal;
     private String nome;
-    
-    @Column(name = "img_musculo")
-    private String caminhoImagem;
+    private String caminhoImagem; 
+    private ArrayList<Exercicio> listaExercicios;
 
     public Musculo() {
     }
 
-    public Musculo(int codigo, RegiaoCorporal regiaoCorporal, String nome, String caminhoImagem) {
-        this.codigo = codigo;
-        this.regiaoCorporal = regiaoCorporal;
+    
+    public Musculo(int numero, int codRegiaoCorporal, String nome, String caminhoImagem, ArrayList<Exercicio> listaExercicios) {
+        this.numero = numero;
+        this.codRegiaoCorporal = codRegiaoCorporal;
         this.nome = nome;
         this.caminhoImagem = caminhoImagem;
+        this.listaExercicios = new ArrayList<>(listaExercicios);
+    }
+    
+    public int getNumero() {
+        return numero;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public int getCodRegiaoCorporal() {
+        return codRegiaoCorporal;
     }
 
-    public RegiaoCorporal getRegiaoCorporal() {
-        return regiaoCorporal;
-    }
-
-    public void setRegiaoCorporal(RegiaoCorporal regiaoCorporal) {
-        this.regiaoCorporal = regiaoCorporal;
+    public void setCodRegiaoCorporal(int codRegiaoCorporal) {
+        this.codRegiaoCorporal = codRegiaoCorporal;
     }
 
     public String getNome() {
@@ -64,6 +57,12 @@ public class Musculo implements Serializable {
     public void setCaminhoImagem(String caminhoImagem) {
         this.caminhoImagem = caminhoImagem;
     }
-    
-    
+
+    public ArrayList<Exercicio> getListaExercicios() {
+        return listaExercicios;
+    }
+
+    public void setListaExercicios(ArrayList<Exercicio> listaExercicios) {
+        this.listaExercicios = listaExercicios;
+    }
 }

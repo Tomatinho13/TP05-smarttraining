@@ -1,57 +1,54 @@
 package br.cefetmg.inf.model.domain;
-
-import java.io.Serializable;
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.util.ArrayList;
 
 /**
  *
  * @author Tomatinho
  */
-@Entity
-public class Ficha implements Serializable {
 
-    @EmbeddedId
-    private FichaChave fichaChave;
-
-    @ManyToOne
-    @JoinColumn(name="cod_cpf_instrutor", referencedColumnName = "cod_cpf")
-    private Instrutor instrutor;
-
-    @Column(name = "dat_ficha")
+public class Ficha {
+    private String cpfAluno;
+    private int numero;
+    private String cpfInstrutor;
     private LocalDate data;
-
-    @Column(name = "dat_prevista_troca")
     private LocalDate dataTroca;
+    ArrayList<Treino> listaTreino;
 
     public Ficha() {
     }
 
-    public Ficha(FichaChave fichaChave, Instrutor instrutor, LocalDate data, LocalDate dataTroca) {
-        this.fichaChave = fichaChave;
-        this.instrutor = instrutor;
+    public Ficha(String cpfAluno, int numero, String cpfInstrutor, LocalDate data, LocalDate dataTroca, ArrayList<Treino> listaTreino) {
+        this.cpfAluno = cpfAluno;
+        this.numero = numero;
+        this.cpfInstrutor = cpfInstrutor;
         this.data = data;
         this.dataTroca = dataTroca;
+        this.listaTreino = new ArrayList<>(listaTreino);
+    }
+    
+    public String getCpfAluno() {
+        return cpfAluno;
     }
 
-    public FichaChave getFichaChave() {
-        return fichaChave;
+    public void setCpfAluno(String cpfAluno) {
+        this.cpfAluno = cpfAluno;
     }
 
-    public void setFichaChave(FichaChave fichaChave) {
-        this.fichaChave = fichaChave;
+    public int getNumero() {
+        return numero;
     }
 
-    public Instrutor getInstrutor() {
-        return instrutor;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public void setInstrutor(Instrutor instrutor) {
-        this.instrutor = instrutor;
+    public String getCpfInstrutor() {
+        return cpfInstrutor;
+    }
+
+    public void setCpfInstrutor(String cpfInstrutor) {
+        this.cpfInstrutor = cpfInstrutor;
     }
 
     public LocalDate getData() {
@@ -68,5 +65,13 @@ public class Ficha implements Serializable {
 
     public void setDataTroca(LocalDate dataTroca) {
         this.dataTroca = dataTroca;
+    }
+    
+    public ArrayList<Treino> getListaTreino() {
+        return listaTreino;
+    }
+
+    public void setListaTreino(ArrayList<Treino> listaTreino) {
+        this.listaTreino = new ArrayList<>(listaTreino);
     }
 }

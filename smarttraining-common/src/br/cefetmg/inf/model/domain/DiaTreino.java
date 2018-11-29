@@ -1,26 +1,35 @@
 package br.cefetmg.inf.model.domain;
 
-import java.io.Serializable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import java.time.LocalDate;
 
-@Entity
-public class DiaTreino implements Serializable {
-    @EmbeddedId
-    private DiaTreinoChave diaTreinoChave;
+/**
+ *
+ * @author Jamalz
+ */
 
-    public DiaTreino() {
+public class DiaTreino {
+    private Atividade atividade;
+    private LocalDate data;
+
+    public DiaTreino(Atividade atividade, LocalDate dataTreino) {
+        this.atividade = atividade;
+        this.data = dataTreino;
     }
 
-    public DiaTreino(DiaTreinoChave diaTreinoChave) {
-        this.diaTreinoChave = diaTreinoChave;
+    public Atividade getAtividade() {
+        return atividade;
     }
 
-    public DiaTreinoChave getDiaTreinoChave() {
-        return diaTreinoChave;
+    public void setAtividade(Atividade atividade) {
+        this.atividade = atividade;
     }
 
-    public void setDiaTreinoChave(DiaTreinoChave diaTreinoChave) {
-        this.diaTreinoChave = diaTreinoChave;
+    public LocalDate getDataTreino() {
+        return data;
     }
+
+    public void setDataTreino(LocalDate dataTreino) {
+        this.data = dataTreino;
+    }
+     
 }

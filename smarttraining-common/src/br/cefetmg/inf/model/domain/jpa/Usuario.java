@@ -1,46 +1,63 @@
-package br.cefetmg.inf.model.domain;
+package br.cefetmg.inf.model.domain.jpa;
+
+import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-/**
- *
- * @author Tomatinho
- */
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Usuario implements Serializable {
 
-public class Usuario {
+    @Id
+    @Column(name = "cod_cpf")
     protected String cpf;
-    protected String nome;
+
+    @Column(name = "nom_usuario")
+    protected String usuario;
+
+    @Column(name = "idt_tipo")
     protected char tipo;
+
+    @Column(name = "txt_senha")
     protected String senha;
+
+    @Column(name = "des_email")
     protected String email;
+
+    @Column(name = "dat_nascimento")
     protected LocalDate dataNascimento;
 
-    public Usuario(){
-            
+    public Usuario() {
+
     }
-    
-    public Usuario(String cpf, String nome, char tipo, String senha, String email, LocalDate dataNascimento){
+
+    public Usuario(String cpf, String nome, char tipo, String senha, String email, LocalDate dataNascimento) {
         this.cpf = cpf;
-        this.nome = nome;
+        this.usuario = nome;
         this.tipo = tipo;
         this.senha = senha;
         this.email = email;
         this.dataNascimento = dataNascimento;
     }
-    
+
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
+
     public String getCpf() {
         return cpf;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.usuario = nome;
     }
-    
+
     public String getNome() {
-        return nome;
+        return usuario;
     }
 
     public void setTipo(char tipo) {
@@ -73,5 +90,5 @@ public class Usuario {
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
-    }   
+    }
 }

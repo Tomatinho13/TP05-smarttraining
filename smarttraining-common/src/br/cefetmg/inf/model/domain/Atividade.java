@@ -1,41 +1,62 @@
 package br.cefetmg.inf.model.domain;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+/**
+ *
+ * @author Felipe
+ */
 
-@Entity
-public class Atividade implements Serializable {
-
-    @EmbeddedId
-    private AtividadeChave atividadeChave;
-    
-    @Column(name = "qtd_peso", nullable = false)
+public class Atividade {
+    private AparelhoExercicio aparelhoExercicio;
+    private String cpf;
+    private int nroFicha;
+    private int nroTreino;
     private int qtdPeso;
-    
-    @Column(name = "nro_series", nullable = false)
     private int nroSeries;
-    
-    @Column(name = "nro_repeticoes", nullable = false)
     private int nroRepeticoes;
 
     public Atividade() {
     }
 
-    public Atividade(AtividadeChave atividadeChave, int qtdPeso, int nroSeries, int nroRepeticoes) {
-        this.atividadeChave = atividadeChave;
-        this.qtdPeso = qtdPeso;
-        this.nroSeries = nroSeries;
-        this.nroRepeticoes = nroRepeticoes;
+    public Atividade(AparelhoExercicio aparelhoExercicio, String cpf, int nroFicha, int nroTreino, int peso, int series, int repeticoes) {
+        this.aparelhoExercicio = aparelhoExercicio;
+        this.cpf = cpf;
+        this.nroFicha = nroFicha;
+        this.nroTreino = nroTreino;
+        this.qtdPeso = peso;
+        this.nroSeries = series;
+        this.nroRepeticoes = repeticoes;
     }
 
-    public AtividadeChave getAtividadeChave() {
-        return atividadeChave;
+    public AparelhoExercicio getAparelhoExercicio() {
+        return aparelhoExercicio;
     }
 
-    public void setAtividadeChave(AtividadeChave atividadeChave) {
-        this.atividadeChave = atividadeChave;
+    public void setAparelhoExercicio(AparelhoExercicio aparelhoExercicio) {
+        this.aparelhoExercicio = aparelhoExercicio;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String codCpf) {
+        this.cpf = codCpf;
+    }
+
+    public int getNroFicha() {
+        return nroFicha;
+    }
+
+    public void setNroFicha(int nroFicha) {
+        this.nroFicha = nroFicha;
+    }
+
+    public int getNroTreino() {
+        return nroTreino;
+    }
+
+    public void setNroTreino(int nroTreino) {
+        this.nroTreino = nroTreino;
     }
 
     public int getQtdPeso() {

@@ -1,9 +1,12 @@
 package br.cefetmg.inf.controller;
 
+import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.Exercicio;
 import br.cefetmg.inf.model.domain.Musculo;
+import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.model.services.IManterExercicio;
 import br.cefetmg.inf.model.services.IManterMusculo;
+import br.cefetmg.inf.proxy.ManterAparelhoProxy;
 import br.cefetmg.inf.proxy.ManterExercicioProxy;
 import br.cefetmg.inf.proxy.ManterMusculoProxy;
 import com.google.gson.Gson;
@@ -45,6 +48,7 @@ public class CadastrarExercicio extends Controller {
             try {
                 IManterExercicio manterExercicio = new ManterExercicioProxy();
                 IManterMusculo manterMusculo = new ManterMusculoProxy();
+                IManterAparelho manterAparelho = new ManterAparelhoProxy();
 
                 String nomeExercicio = request.getParameter("nomeExercicio");
                 String descricaoExercicio = request.getParameter("descExercicio");
@@ -57,8 +61,14 @@ public class CadastrarExercicio extends Controller {
                 for (String codMusculo : codMusculos) {
                     listaMusculos.add(manterMusculo.pesquisarPorCodigo(Integer.parseInt(codMusculo)));
                 }
+                
+                ArrayList<Aparelho> listaAparelhos = new ArrayList<>();
 
-                Exercicio exercicio = new Exercicio(0, nomeExercicio, descricaoExercicio, listaMusculos);
+                for (String codAparelho : codAparelhos) {
+                    listaAparelhos.add(manterAparelho.pesquisar(Integer.parseInt(codAparelho)));
+                }
+
+                Exercicio exercicio = new Exercicio(0, nomeExercicio, descricaoExercicio, listaMusculos, listaAparelhos);
 
                 manterExercicio.cadastrar(exercicio);
 

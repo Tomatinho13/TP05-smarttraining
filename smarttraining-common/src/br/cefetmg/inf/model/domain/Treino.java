@@ -1,32 +1,52 @@
 package br.cefetmg.inf.model.domain;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import java.util.ArrayList;
 
-@Entity
-public class Treino implements Serializable {
-    @EmbeddedId
-    private TreinoChave treinoChave;
-    
-    @Column(name="des_treino")
+/**
+ *
+ * @author Tomatinho
+ */
+
+public class Treino {
+    private String cpfAluno;
+    private int nroFicha;
+    private int nroTreino;
     private String descricao;
+    private ArrayList<Atividade> atividades;
 
     public Treino() {
     }
 
-    public Treino(TreinoChave treinoChave, String descricao) {
-        this.treinoChave = treinoChave;
+    public Treino(String cpfAluno, int nroFicha, int nroTreino, String descricao, ArrayList<Atividade> atividades) {
+        this.cpfAluno = cpfAluno;
+        this.nroFicha = nroFicha;
+        this.nroTreino = nroTreino;
         this.descricao = descricao;
+        this.atividades = new ArrayList<>(atividades);
     }
 
-    public TreinoChave getTreinoChave() {
-        return treinoChave;
+    public String getCpfAluno() {
+        return cpfAluno;
     }
 
-    public void setTreinoChave(TreinoChave treinoChave) {
-        this.treinoChave = treinoChave;
+    public void setCpfAluno(String cpfAluno) {
+        this.cpfAluno = cpfAluno;
+    }
+
+    public int getNroFicha() {
+        return nroFicha;
+    }
+
+    public void setNroFicha(int nroFicha) {
+        this.nroFicha = nroFicha;
+    }
+
+    public int getNroTreino() {
+        return nroTreino;
+    }
+
+    public void setNroTreino(int nroTreino) {
+        this.nroTreino = nroTreino;
     }
 
     public String getDescricao() {
@@ -35,5 +55,13 @@ public class Treino implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public ArrayList<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(ArrayList<Atividade> atividades) {
+        this.atividades = new ArrayList<>(atividades);
     }
 }

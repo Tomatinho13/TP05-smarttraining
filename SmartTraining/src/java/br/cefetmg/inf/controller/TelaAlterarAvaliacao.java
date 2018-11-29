@@ -11,23 +11,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterAvaliacao;
-import br.cefetmg.inf.model.services.impl.ManterObjetivo;
+import br.cefetmg.inf.proxy.ManterAlunoProxy;
+import br.cefetmg.inf.proxy.ManterAvaliacaoProxy;
+import br.cefetmg.inf.proxy.ManterObjetivoProxy;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class TelaAlterarAvaliacao extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp;
+        String jsp = "";
         try {
             jsp = "AlterarAvaliacao";
             String codCpfAluno = request.getParameter("codCpfAluno").trim();
             LocalDate dataAvaliacao = Date.valueOf(request.getParameter("dataAvaliacao")).toLocalDate();
 
-            IManterUsuario manterAluno = new ManterAluno();
-            IManterAvaliacao manterAvaliacao = new ManterAvaliacao();
-            IManterObjetivo manterObjetivo = new ManterObjetivo();
+            IManterUsuario manterAluno = new ManterAlunoProxy();
+            IManterAvaliacao manterAvaliacao = new ManterAvaliacaoProxy();
+            IManterObjetivo manterObjetivo = new ManterObjetivoProxy();
 
             Usuario aluno = manterAluno.pesquisarPorCpf(codCpfAluno);
 
@@ -55,6 +59,8 @@ public class TelaAlterarAvaliacao extends Controller {
             String erro = "Erro ao encontrar avaliacao no sistema!";
             request.setAttribute("erro", erro);
             jsp = "erro.jsp";
+        } catch (RemoteException ex) {
+            Logger.getLogger(TelaAlterarAvaliacao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }

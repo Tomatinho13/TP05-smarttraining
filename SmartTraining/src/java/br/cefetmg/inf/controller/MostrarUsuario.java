@@ -5,9 +5,11 @@ import br.cefetmg.inf.model.domain.Usuario;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import br.cefetmg.inf.model.services.IManterUsuario;
-import br.cefetmg.inf.model.services.impl.ManterAluno;
-import br.cefetmg.inf.model.services.impl.ManterInstrutor;
-import br.cefetmg.inf.model.services.impl.ManterUsuario;
+import br.cefetmg.inf.proxy.ManterUsuarioProxy;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class MostrarUsuario extends Controller {
 
@@ -17,7 +19,7 @@ public class MostrarUsuario extends Controller {
         try {
             String cpfUsuario = request.getParameter("codCpf").replaceAll("[^0-9]", "");
 
-            IManterUsuario manterUsuario = new ManterUsuario();
+            IManterUsuario manterUsuario = new ManterUsuarioProxy();
 
             Usuario usuario = (Instrutor)manterUsuario.pesquisarPorCpf(cpfUsuario);
             if (usuario != null) {
@@ -35,6 +37,8 @@ public class MostrarUsuario extends Controller {
             String erro = "Erro ao carregar perfil!";
             request.setAttribute("erro", erro);
             jsp = "erro";
+        } catch (RemoteException ex) {
+            Logger.getLogger(MostrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }

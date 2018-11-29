@@ -1,33 +1,32 @@
 package br.cefetmg.inf.model.domain;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.ArrayList;
 
-@Entity
-public class RegiaoCorporal implements Serializable {
-    @Id
-    @Column(name = "cod_regCorp")
-    private int codigo;
+/**
+ *
+ * @author Tomatinho
+ */
 
-    @Column(name = "nom_regCorp")
+public class RegiaoCorporal {
+    private int numero;
     private String nome;
+    private ArrayList<Musculo> listaMusculos;
 
     public RegiaoCorporal() {
     }
 
-    public RegiaoCorporal(int numero, String nome) {
-        this.codigo = numero;
+    public RegiaoCorporal(int numero, String nome, ArrayList<Musculo> listaMusculos) {
+        this.numero = numero;
         this.nome = nome;
+        this.listaMusculos=new ArrayList<>(listaMusculos);
     }
 
     public int getNumero() {
-        return codigo;
+        return numero;
     }
 
     public void setNumero(int numero) {
-        this.codigo = numero;
+        this.numero = numero;
     }
 
     public String getNome() {
@@ -36,5 +35,13 @@ public class RegiaoCorporal implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public ArrayList<Musculo> getListaMusculos() {
+        return listaMusculos;
+    }
+
+    public void setListaMusculos(ArrayList<Musculo> listaMusculos) {
+        this.listaMusculos = new ArrayList<>(listaMusculos);
     }
 }

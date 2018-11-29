@@ -21,7 +21,7 @@ public class AlterarExercicio extends Controller {
             String nomeExercicio = request.getParameter("nomeExercicio");
             String descricaoExercicio = request.getParameter("descExercicio");
 
-            Exercicio exercicio = new Exercicio(codExercicio, nomeExercicio, descricaoExercicio, new ArrayList<>());
+            Exercicio exercicio = new Exercicio(codExercicio, nomeExercicio, descricaoExercicio, new ArrayList<>(), new ArrayList<>());
 
             IManterExercicio manterExercicio = new ManterExercicioProxy();
 

@@ -1,42 +1,49 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.cefetmg.inf.model.domain;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+/**
+ *
+ * @author gabriel
+ */
+public class AparelhoExercicio {
+    private Aparelho aparelho;
+    private Exercicio exercicio;
+    private String caminhoImagem;
 
-
-@Entity
-public class AparelhoExercicio implements Serializable {
-
-    @EmbeddedId
-    private AparelhoExercicioChave chaveApEx;
+    public AparelhoExercicio(Aparelho aparelho, Exercicio exercicio, String caminhoImagem) {
+        this.aparelho = aparelho;
+        this.exercicio = exercicio;
+        this.caminhoImagem = caminhoImagem;
+    }
     
-    @Column(name = "img_execucao", nullable = false)
-    private String imgExecucao;
-
     public AparelhoExercicio() {
     }
 
-    public AparelhoExercicio(AparelhoExercicioChave chaveApEx, String imgExecucao) {
-        this.chaveApEx = chaveApEx;
-        this.imgExecucao = imgExecucao;
+    public Aparelho getAparelho() {
+        return aparelho;
     }
 
-    public AparelhoExercicioChave getChaveApEx() {
-        return chaveApEx;
+    public void setAparelho(Aparelho aparelho) {
+        this.aparelho = aparelho;
     }
 
-    public void setChaveApEx(AparelhoExercicioChave chaveApEx) {
-        this.chaveApEx = chaveApEx;
+    public Exercicio getExercicio() {
+        return exercicio;
     }
 
-    public String getImgExecucao() {
-        return imgExecucao;
+    public void setExercicio(Exercicio exercicio) {
+        this.exercicio = exercicio;
     }
 
-    public void setImgExecucao(String imgExecucao) {
-        this.imgExecucao = imgExecucao;
+    public String getCaminhoImagem() {
+        return caminhoImagem;
     }
 
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
+    }
 }

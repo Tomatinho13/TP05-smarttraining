@@ -4,22 +4,25 @@ import br.cefetmg.inf.model.domain.Aparelho;
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterAparelho;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.model.services.impl.ManterAparelho;
-import br.cefetmg.inf.model.services.impl.ManterMusculo;
+import br.cefetmg.inf.proxy.ManterAparelhoProxy;
+import br.cefetmg.inf.proxy.ManterMusculoProxy;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class TelaCadastrarExercicio extends Controller {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String jsp;
+        String jsp = "";
         try {
             jsp = "CadastrarExercicio";
 
-            IManterAparelho manterAparelho = new ManterAparelho();
-            IManterMusculo manterMusculo = new ManterMusculo();
+            IManterAparelho manterAparelho = new ManterAparelhoProxy();
+            IManterMusculo manterMusculo = new ManterMusculoProxy();
 
             ArrayList<Aparelho> listaAparelhos = manterAparelho.pesquisarTodos();
             ArrayList<Musculo> listaMusculos = manterMusculo.pesquisarTodos();
@@ -44,6 +47,8 @@ public class TelaCadastrarExercicio extends Controller {
             String erro = "Erro ao cadastrar exercicio!";
             request.setAttribute("erro", erro);
             jsp = "erro";
+        } catch (RemoteException ex) {
+            Logger.getLogger(TelaCadastrarExercicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }

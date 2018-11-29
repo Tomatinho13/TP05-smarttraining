@@ -2,8 +2,11 @@ package br.cefetmg.inf.controller;
 
 import br.cefetmg.inf.model.domain.Musculo;
 import br.cefetmg.inf.model.services.IManterMusculo;
-import br.cefetmg.inf.model.services.impl.ManterMusculo;
+import br.cefetmg.inf.proxy.ManterMusculoProxy;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class MostrarMusculo extends Controller{
@@ -14,7 +17,7 @@ public class MostrarMusculo extends Controller{
         try {
             int nroMusculo = Integer.parseInt(request.getParameter("numero"));
             
-            IManterMusculo manterMusculo = new ManterMusculo();
+            IManterMusculo manterMusculo = new ManterMusculoProxy();
             
             Musculo musculo = manterMusculo.pesquisarPorCodigo(nroMusculo);
             
@@ -31,6 +34,8 @@ public class MostrarMusculo extends Controller{
             String erro = "Erro ao carregar musculo!";
             request.setAttribute("erro", erro);
             jsp = "erro";
+        } catch (RemoteException ex) {
+            Logger.getLogger(MostrarMusculo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return defineView(request, jsp);
     }
